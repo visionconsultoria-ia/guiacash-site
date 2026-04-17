@@ -78,13 +78,20 @@
             opacity: 0.35;
             pointer-events: none;
         }
-        .hero-content { position: relative; z-index: 3; }
+        .hero-content { 
+    position: relative; 
+    z-index: 3; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente os filhos */
+}
 
-        .logo-img {
-            max-width: 180px;
-            margin-bottom: 24px;
-            filter: drop-shadow(0 10px 20px rgba(15, 214, 170, 0.3));
-        }
+.logo-img {
+    max-width: 180px;
+    margin: 0 auto 24px auto; /* Adicionado auto nas laterais */
+    display: block; /* Garante que respeite o margin auto */
+    filter: drop-shadow(0 10px 20px rgba(15, 214, 170, 0.3));
+}
 
         .hero-badge {
             display: inline-block;
@@ -839,53 +846,57 @@
     </div>
 
     <!-- ==================== HERO ==================== -->
-    <section class="hero">
-        <canvas id="particles-canvas"></canvas>
-        <div class="container hero-content">
-            <img src="guia-cash-logo.png" alt="Guia Cash Logo" class="logo-img">
-            <div class="hero-badge">✦ MÉTODO APROVADO POR +1.200 ALUNOS</div>
-            <h1>Organize suas finanças <span class="highlight">pelo WhatsApp</span><br>em menos de 7 dias</h1>
-            <p class="subheadline">
-                Pare de usar planilhas que você abandona em 2 semanas. Com o <strong>GuiaCash®</strong> você registra seus gastos mandando uma mensagem comum — e uma IA cuida do resto.
-            </p>
-            <a href="https://pay.herospark.com/guiacash-sistema-integrado-de-controle-financeiro-515826" class="cta-btn">
-                QUERO ORGANIZAR MINHAS FINANÇAS
-                <i class="fas fa-arrow-right"></i>
-            </a>
-            <div class="hero-sub-cta">
-                <i class="fas fa-shield-alt"></i> Garantia de 7 dias &nbsp;·&nbsp;
-                <i class="fas fa-bolt"></i> Acesso imediato
-            </div>
+<section class="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="container hero-content">
+        <img src="guia-cash-logo.png" alt="Guia Cash Logo" class="logo-img">
+        
+        <div class="hero-badge">✦ MÉTODO APROVADO POR +1.200 ALUNOS</div>
+        
+        <h1>Organize suas finanças <span class="highlight">pelo WhatsApp</span><br>em menos de 7 dias</h1>
+        
+        <p class="subheadline">
+            Pare de usar planilhas que você abandona em 2 semanas. Com o <strong>GuiaCash®</strong> você registra seus gastos mandando uma mensagem comum — e uma IA cuida do resto.
+        </p>
+        
+        <a href="https://pay.herospark.com/guiacash-sistema-integrado-de-controle-financeiro-515826" class="cta-btn">
+            QUERO ORGANIZAR MINHAS FINANÇAS
+            <i class="fas fa-arrow-right"></i>
+        </a>
 
-            <!-- MOCKUP WHATSAPP (prova visual do produto) -->
-            <div class="whatsapp-demo">
-                <div class="whatsapp-header">
-                    <div class="wa-avatar">GC</div>
-                    <div>
-                        <div class="wa-name">GuiaCash®</div>
-                        <div class="wa-status">● online</div>
-                    </div>
+        <div class="hero-sub-cta">
+            <i class="fas fa-shield-alt"></i> Garantia de 7 dias &nbsp;·&nbsp;
+            <i class="fas fa-bolt"></i> Acesso imediato
+        </div>
+
+        <div class="whatsapp-demo">
+            <div class="whatsapp-header">
+                <div class="wa-avatar">GC</div>
+                <div>
+                    <div class="wa-name">GuiaCash®</div>
+                    <div class="wa-status">● online</div>
                 </div>
-                <div class="wa-msg sent">
-                    Gastei 47,90 no mercado
-                    <small>14:32 ✓✓</small>
-                </div>
-                <div class="wa-msg received">
-                    ✅ Registrado em <strong>Alimentação</strong><br>
-                    Você já gastou <strong>R$ 312 de R$ 600</strong> nessa categoria este mês.
-                    <small>14:32</small>
-                </div>
-                <div class="wa-msg sent">
-                    Quanto sobrou do salário?
-                    <small>14:33 ✓✓</small>
-                </div>
-                <div class="wa-msg received">
-                    💰 Você ainda tem <strong>R$ 1.847</strong> disponíveis até o fim do mês. Posso te mostrar onde economizar?
-                    <small>14:33</small>
-                </div>
+            </div>
+            <div class="wa-msg sent">
+                Gastei 47,90 no mercado
+                <small>14:32 ✓✓</small>
+            </div>
+            <div class="wa-msg received">
+                ✅ Registrado em <strong>Alimentação</strong><br>
+                Você já gastou <strong>R$ 312 de R$ 600</strong> nessa categoria este mês.
+                <small>14:32</small>
+            </div>
+            <div class="wa-msg sent">
+                Quanto sobrou do salário?
+                <small>14:33 ✓✓</small>
+            </div>
+            <div class="wa-msg received">
+                💰 Você ainda tem <strong>R$ 1.847</strong> disponíveis até o fim do mês. Posso te mostrar onde economizar?
+                <small>14:33</small>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- TRUST BAR -->
     <div class="trust-bar">
