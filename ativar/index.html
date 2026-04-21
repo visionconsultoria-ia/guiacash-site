@@ -103,9 +103,8 @@
     .status-title { color: var(--dark); font-size: 20px; font-weight: 700; margin-bottom: 8px; margin-top: 5px; }
     .status-desc { color: #64748b; font-size: 14px; max-width: 90%; margin: 0 auto; line-height: 1.6; }
 
-    .info-card { background: #f1f5f9; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; border-left: 5px solid var(--purple); }
-    .info-card p { font-size: 13px; margin-bottom: 5px; color: var(--dark); }
-    .info-card strong { color: var(--purple); font-size: 10px; }
+    .info-card { background: #f1f5f9; padding: 15px; border-radius: 12px; margin: 20px 0; text-align: left; border-left: 5px solid #1abc9c; }
+    .info-card p { font-size: 13px; margin-bottom: 4px; color: var(--dark); }
 
     .success-btn {
         display: inline-block; width: 100%; padding: 18px; background: var(--gradient); color: white !important;
@@ -117,7 +116,7 @@
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(26, 188, 156, 0); } 100% { box-shadow: 0 0 0 0 rgba(26, 188, 156, 0); } }
 
     footer { text-align: center; margin-top: 20px; color: #94a3b8; font-size: 12px; }
-</style>
+    </style>
 </head>
 <body>
     <div class="top-bar"></div>
@@ -178,8 +177,8 @@
         <div id="loading-state">
             <div id="status-container">
                 <div class="spinner"></div>
-                <h3 class="status-title" id="status-title">Processando...</h3>
-                <p class="status-desc" id="status-desc">Estamos montando seu sistema. Isso leva cerca de 10 segundos.</p>
+                <h3 class="status-title">Processando...</h3>
+                <p class="status-desc">Estamos montando seu sistema. Isso leva cerca de 10 segundos.</p>
             </div>
         </div>
 
@@ -256,22 +255,40 @@
         `;
     }
 
-    function renderizarSucesso(titulo, desc, link, e1, e2, isExistente) {
+    function renderizarSucesso(primeiroAcessoUrl, e1, e2, isExistente) {
         document.getElementById('setup-content').style.display = 'none';
         document.getElementById('loading-state').style.display = 'block';
-        let corTitulo = isExistente ? "var(--purple)" : "var(--teal)";
-        let infoEmails = `
-            <div class="info-card">
-                <p><strong>E-MAIL PRINCIPAL:</strong> ${e1}</p>
-                ${e2 ? `<p><strong>E-MAIL BÔNUS:</strong> ${e2}</p>` : '<p><strong>E-MAIL BÔNUS:</strong> Nenhum cadastrado</p>'}
-            </div>`;
-        document.getElementById('status-container').innerHTML = `
-            <div style="font-size: 50px; margin-top: 5px;">${isExistente ? '🚀' : '✅'}</div>
-            <h2 class="status-title" style="color: ${corTitulo}">${titulo}</h2>
-            <p class="status-desc">${desc}</p>
-            ${infoEmails}
-            <a href="${link}" target="_blank" class="success-btn">ACESSAR MEU SISTEMA GUIACASH®</a>
-            <p style="margin-top:25px; font-size:12px; color:#94a3b8; font-weight:600;">O acesso também foi enviado para seu WhatsApp, se você o informou na compra.</p>`;
+
+        if (isExistente) {
+            document.getElementById('status-container').innerHTML = `
+                <div style="font-size: 50px; margin-top: 5px;">🚀</div>
+                <h2 class="status-title" style="color: var(--purple)">Acesso Já Ativado</h2>
+                <p class="status-desc">Identificamos que você já possui um acesso ativo.</p>
+                <div class="info-card">
+                    <p><strong>📧 E-mail principal:</strong> ${e1}</p>
+                    ${e2 ? `<p><strong>📧 E-mail bônus:</strong> ${e2}</p>` : ''}
+                </div>
+                <p style="margin-top:20px; font-size:13px; color:#64748b;">O link do seu sistema foi enviado novamente para seu <strong>e-mail e WhatsApp</strong>.</p>
+            `;
+        } else {
+            document.getElementById('status-container').innerHTML = `
+                <div style="font-size: 50px; margin-top: 5px;">✅</div>
+                <h2 class="status-title" style="color: var(--teal)">Tudo Pronto!</h2>
+                <p class="status-desc">Seu sistema foi gerado com sucesso. O link de acesso ao <strong>Sistema GuiaCash®</strong> foi enviado para seu <strong>e-mail e WhatsApp</strong>.</p>
+
+                <div class="info-card">
+                    <p>📧 Enviado para: <strong>${e1}</strong></p>
+                    ${e2 ? `<p>📧 Bônus enviado para: <strong>${e2}</strong></p>` : ''}
+                </div>
+
+                <p style="margin: 20px 0 8px; font-size: 14px; font-weight: 700; color: var(--dark);">🎓 Acesso à Plataforma de Cursos Vision</p>
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 4px;">Clique abaixo para criar sua senha e acessar as aulas do GuiaCash®:</p>
+
+                <a href="${primeiroAcessoUrl}" class="success-btn">CRIAR MINHA SENHA DE ACESSO</a>
+
+                <p style="margin-top: 16px; font-size: 11px; color: #94a3b8;">Este link é exclusivo para você. Não compartilhe.</p>
+            `;
+        }
     }
 
     async function ativarSistema() {
@@ -333,12 +350,13 @@
                 })
             });
             const data = await response.json();
+
             if (data.status === "existente") {
-                renderizarSucesso("Acesso Já Ativado", data.message, data.link_planilha, data.email1, data.email2, true);
-            } else if (response.ok) {
-                renderizarSucesso("🎉 Tudo Pronto!", "Seu sistema foi personalizado e já está disponível.", data.link_planilha, e1, e2, false);
+                renderizarSucesso(null, data.email1, data.email2, true);
+            } else if (response.ok && data.status === "success") {
+                renderizarSucesso(data.primeiro_acesso_url, e1, e2, false);
             } else {
-                renderizarErro("Acesso Negado", data.message || "Acesso não liberado ou chave inválida. Se você realizou o pagamento via Boleto, aguarde a compensação. Caso tenha usado PIX ou Cartão, fale com nosso suporte.");
+                renderizarErro("Acesso Negado", data.message || "Acesso não liberado. Fale com nosso suporte.");
             }
         } catch (e) {
             renderizarErro("Erro de Conexão", "Não conseguimos contactar o servidor.");
