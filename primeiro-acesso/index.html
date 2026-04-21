@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Senha | Plataforma Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --teal: #1abc9c;
+            --purple: #6b46c1;
+            --dark: #0f172a;
+            --gradient: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .top-bar { height: 6px; width: 100%; background: var(--gradient); position: fixed; top: 0; left: 0; }
+        .container { max-width: 440px; width: 100%; background: white; border-radius: 16px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        .logo { text-align: center; margin-bottom: 28px; }
+        .logo img { max-width: 150px; }
+        h1 { color: var(--dark); font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+        .subtitle { text-align: center; color: #64748b; font-size: 13px; margin-bottom: 28px; }
+        .email-badge { background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #334155; margin-bottom: 24px; text-align: center; border: 1px solid #e2e8f0; }
+        .email-badge strong { color: var(--purple); display: block; font-size: 14px; margin-top: 2px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; outline: none; transition: 0.2s; }
+        .form-group input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(107,70,193,0.1); }
+        .strength-bar { height: 4px; border-radius: 2px; background: #e2e8f0; margin-top: 6px; overflow: hidden; }
+        .strength-fill { height: 100%; border-radius: 2px; transition: all 0.3s; width: 0; }
+        .strength-text { font-size: 11px; margin-top: 4px; font-weight: 600; }
+        .btn { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; margin-top: 8px; }
+        .btn:hover { background: #1e293b; transform: translateY(-1px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .error { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 14px; display: none; }
+        .success-state { display: none; text-align: center; padding: 20px 0; }
+        .success-state .icon { font-size: 52px; margin-bottom: 16px; }
+        .success-state h2 { color: var(--dark); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+        .success-state p { color: #64748b; font-size: 14px; margin-bottom: 24px; }
+        .btn-access { display: block; width: 100%; padding: 16px; background: var(--gradient); color: white; text-decoration: none; border-radius: 10px; font-size: 15px; font-weight: 800; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <div class="container">
+        <div class="logo">
+            <img src="https://visioncapacita.com.br/guiacash/guia-cash-logo.png" alt="GuiaCash">
+        </div>
+
+        <div id="form-state">
+            <h1>Criar sua senha</h1>
+            <p class="subtitle">Defina uma senha para acessar a Plataforma Vision</p>
+
+            <div class="email-badge">
+                Sua conta será criada com o e-mail:
+                <strong id="email-display">—</strong>
+            </div>
+
+            <div id="error-msg" class="error"></div>
+
+            <div class="form-group">
+                <label>Nova senha</label>
+                <input type="password" id="senha" placeholder="Mínimo 8 caracteres" oninput="checkStrength()">
+                <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
+                <div class="strength-text" id="strength-text"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Confirmar senha</label>
+                <input type="password" id="senha-conf" placeholder="Repita a senha">
+            </div>
+
+            <button class="btn" id="btn-criar" onclick="criarSenha()">Criar senha e acessar</button>
+        </div>
+
+        <div id="success-state" class="success-state">
+            <div class="icon">🎉</div>
+            <h2>Senha criada com sucesso!</h2>
+            <p>Sua conta na Plataforma Vision está pronta. Clique abaixo para entrar e assistir às aulas do GuiaCash®.</p>
+            <a href="https://membros.visioncapacita.com.br/login" class="btn-access">Acessar a Plataforma</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        const email = params.get('email');
+
+        if (!token || !email) {
+            document.getElementById('error-msg').innerText = 'Link inválido ou expirado.';
+            document.getElementById('error-msg').style.display = 'block';
+            document.getElementById('btn-criar').disabled = true;
+        } else {
+            document.getElementById('email-display').innerText = email;
+        }
+
+        function checkStrength() {
+            const val = document.getElementById('senha').value;
+            const fill = document.getElementById('strength-fill');
+            const text = document.getElementById('strength-text');
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const colors = ['', '#ef4444', '#f59e0b', '#3b82f6', '#10b981'];
+            const labels = ['', 'Fraca', 'Razoável', 'Boa', 'Forte'];
+            fill.style.width = (score * 25) + '%';
+            fill.style.background = colors[score] || '#e2e8f0';
+            text.innerText = score > 0 ? labels[score] : '';
+            text.style.color = colors[score] || '';
+        }
+
+        async function criarSenha() {
+            const senha = document.getElementById('senha').value;
+            const conf = document.getElementById('senha-conf').value;
+            const errDiv = document.getElementById('error-msg');
+            errDiv.style.display = 'none';
+
+            if (senha.length < 8) { errDiv.innerText = 'A senha deve ter pelo menos 8 caracteres.'; errDiv.style.display = 'block'; return; }
+            if (senha !== conf) { errDiv.innerText = 'As senhas não coincidem.'; errDiv.style.display = 'block'; return; }
+
+            const btn = document.getElementById('btn-criar');
+            btn.disabled = true;
+            btn.innerText = 'CRIANDO CONTA...';
+
+            try {
+                const res = await fetch('https://n8nwebhook.visioncapacita.com.br/webhook/definir-senha', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token, email, senha })
+                });
+                const data = await res.json();
+                if (res.ok && data.ok) {
+                    document.getElementById('form-state').style.display = 'none';
+                    document.getElementById('success-state').style.display = 'block';
+                } else {
+                    errDiv.innerText = data.error || 'Erro ao criar conta. Tente novamente.';
+                    errDiv.style.display = 'block';
+                    btn.disabled = false;
+                    btn.innerText = 'Criar senha e acessar';
+                }
+            } catch(e) {
+                errDiv.innerText = 'Erro de conexão. Tente novamente.';
+                errDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.innerText = 'Criar senha e acessar';
+            }
+        }
+    </script>
+</body>
+</html>
