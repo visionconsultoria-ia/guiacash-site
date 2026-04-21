@@ -14,25 +14,52 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         body { font-family: 'Inter', sans-serif; background: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        
         .top-bar { height: 6px; width: 100%; background: var(--gradient); position: fixed; top: 0; left: 0; }
         .container { max-width: 440px; width: 100%; background: white; border-radius: 16px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+        
         .logo { text-align: center; margin-bottom: 28px; }
         .logo img { max-width: 150px; }
+        
         h1 { color: var(--dark); font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 6px; }
         .subtitle { text-align: center; color: #64748b; font-size: 13px; margin-bottom: 28px; }
+        
         .email-badge { background: #f1f5f9; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #334155; margin-bottom: 24px; text-align: center; border: 1px solid #e2e8f0; }
         .email-badge strong { color: var(--purple); display: block; font-size: 14px; margin-top: 2px; }
+        
         .form-group { margin-bottom: 16px; }
         .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
-        .form-group input { width: 100%; padding: 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; outline: none; transition: 0.2s; }
+        
+        /* Ajustes para o Olhinho */
+        .password-container { position: relative; }
+        .form-group input { width: 100%; padding: 12px 45px 12px 14px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 14px; outline: none; transition: 0.2s; }
         .form-group input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(107,70,193,0.1); }
-        .strength-bar { height: 4px; border-radius: 2px; background: #e2e8f0; margin-top: 6px; overflow: hidden; }
+        
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #64748b;
+            font-size: 18px;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-password:hover { color: var(--purple); }
+
+        .strength-bar { height: 4px; border-radius: 2px; background: #e2e8f0; margin-top: 8px; overflow: hidden; }
         .strength-fill { height: 100%; border-radius: 2px; transition: all 0.3s; width: 0; }
         .strength-text { font-size: 11px; margin-top: 4px; font-weight: 600; }
+        
         .btn { width: 100%; padding: 14px; background: var(--dark); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.2s; margin-top: 8px; }
         .btn:hover { background: #1e293b; transform: translateY(-1px); }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        
         .error { background: #fff1f2; color: #e11d48; border: 1px solid #fecdd3; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 14px; display: none; }
+        
         .success-state { display: none; text-align: center; padding: 20px 0; }
         .success-state .icon { font-size: 52px; margin-bottom: 16px; }
         .success-state h2 { color: var(--dark); font-size: 20px; font-weight: 800; margin-bottom: 8px; }
@@ -60,14 +87,20 @@
 
             <div class="form-group">
                 <label>Nova senha</label>
-                <input type="password" id="senha" placeholder="Mínimo 8 caracteres" oninput="checkStrength()">
+                <div class="password-container">
+                    <input type="password" id="senha" placeholder="Mínimo 8 caracteres" oninput="checkStrength()">
+                    <span class="toggle-password" onclick="toggleVisibility('senha')">👁️</span>
+                </div>
                 <div class="strength-bar"><div class="strength-fill" id="strength-fill"></div></div>
                 <div class="strength-text" id="strength-text"></div>
             </div>
 
             <div class="form-group">
                 <label>Confirmar senha</label>
-                <input type="password" id="senha-conf" placeholder="Repita a senha">
+                <div class="password-container">
+                    <input type="password" id="senha-conf" placeholder="Repita a senha">
+                    <span class="toggle-password" onclick="toggleVisibility('senha-conf')">👁️</span>
+                </div>
             </div>
 
             <button class="btn" id="btn-criar" onclick="criarSenha()">Criar senha e acessar</button>
@@ -92,6 +125,20 @@
             document.getElementById('btn-criar').disabled = true;
         } else {
             document.getElementById('email-display').innerText = email;
+        }
+
+        // Função para mostrar/esconder senha
+        function toggleVisibility(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling;
+            
+            if (input.type === "password") {
+                input.type = "text";
+                icon.innerText = "🔒"; // Muda o ícone se quiser (opcional)
+            } else {
+                input.type = "password";
+                icon.innerText = "👁️";
+            }
         }
 
         function checkStrength() {
