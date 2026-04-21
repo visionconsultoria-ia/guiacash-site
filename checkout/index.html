@@ -12,7 +12,6 @@
         body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
         .loader { border-top-color: #ffffff; animation: spinner 1s linear infinite; }
         @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .success-bg { background-color: #f0fdf4; border-color: #bbf7d0; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -26,7 +25,7 @@
                     <input type="email" id="email" placeholder="E-mail principal" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input type="text" id="cpf" placeholder="CPF ou CNPJ" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                        <input type="text" id="whatsapp" placeholder="WhatsApp" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="text" id="whatsapp" placeholder="WhatsApp (com DDD)" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                     </div>
                 </div>
             </div>
@@ -41,15 +40,9 @@
                 <div id="sessao-cartao" class="space-y-4">
                     <input type="text" id="card-number" placeholder="0000 0000 0000 0000" class="w-full p-3 border border-gray-300 rounded-lg outline-none">
                     <input type="text" id="card-holder" placeholder="Nome impresso no cartão" class="w-full p-3 border border-gray-300 rounded-lg outline-none uppercase">
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="flex gap-2 col-span-1">
-                            <input type="text" id="card-expiry" placeholder="MM/AA" class="w-full p-3 border border-gray-300 rounded-lg outline-none">
-                        </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="card-expiry" placeholder="MM/AA" class="p-3 border border-gray-300 rounded-lg outline-none">
                         <input type="text" id="card-cvv" placeholder="CVV" class="p-3 border border-gray-300 rounded-lg outline-none">
-                        <select id="parcelas" class="p-3 border border-gray-300 rounded-lg outline-none bg-white">
-                            <option value="1">1x de R$ 297,00</option>
-                            <option value="12">12x de R$ 29,70</option>
-                        </select>
                     </div>
                 </div>
 
@@ -77,12 +70,12 @@
                 <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">Resumo do Pedido</h3>
                 <div class="space-y-3 text-sm">
                     <div class="flex justify-between">
-                        <span>GuiaCash - Plano Anual</span>
+                        <span>GuiaCash® - Plano Anual</span>
                         <span class="font-bold">R$ 297,00</span>
                     </div>
                 </div>
                 <div class="mt-6 pt-4 border-t border-gray-700 flex justify-between items-end">
-                    <span class="text-xs text-gray-400 italic">Pagamento anual recorrente</span>
+                    <span class="text-xs text-gray-400 italic">Assinatura anual recorrente</span>
                     <span class="text-3xl font-bold">R$ 297,00</span>
                 </div>
             </div>
@@ -94,12 +87,18 @@
     </div>
 
     <script>
-        // Configuração de Máscaras
+        // Máscaras
         IMask(document.getElementById('cpf'), { mask: [{ mask: '000.000.000-00' }, { mask: '00.000.000/0000-00' }] });
         IMask(document.getElementById('whatsapp'), { mask: '(00) 00000-0000' });
         IMask(document.getElementById('card-number'), { mask: '0000 0000 0000 0000' });
         IMask(document.getElementById('card-expiry'), { mask: '00/00' });
-        IMask(document.getElementById('card-cvv'), { mask: '0000' });
+        IMask(document.getElementById('card-cvv'), { mask: '000[0]' });
+
+        // ⚠️ CHAVE PÚBLICA do Asaas (não a privada) — encontra em API → Chave pública no painel
+        const ASAAS_PUBLIC_KEY = '$aact_hmlg_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmYwZGM4MzYxLWU0NjQtNDUzMC04MjI0LWUyMzZiNzZhMWUyMzo6JGFhY2hfOTI5ZDMwNjktYmUxNC00ZWM2LTkwZTItMmY0NzNlNDhiNGRl';
+
+        // URL do seu N8N
+        const N8N_WEBHOOK_URL = 'https://n8neditor.visioncapacita.com.br/webhook/checkout';
 
         let metodoSelecionado = 'cartao';
 
@@ -124,43 +123,39 @@
         }
 
         async function processarCheckout() {
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
+            const whatsapp = document.getElementById('whatsapp').value.replace(/\D/g, '');
+
+            if (nome.length < 5) { alert('Informe seu nome completo.'); return; }
+            if (!email.includes('@')) { alert('Informe um e-mail válido.'); return; }
+            if (cpf.length < 11) { alert('Informe um CPF válido.'); return; }
+            if (whatsapp.length < 10) { alert('Informe seu WhatsApp com DDD.'); return; }
+
             const btn = document.getElementById('btn-finalizar');
-            const loader = document.getElementById('loader');
-            const btnText = document.getElementById('btn-text');
-            
-            // Validação simples
-            const nome = document.getElementById('nome').value;
-            if (nome.length < 5) { alert("Informe seu nome completo."); return; }
-
             btn.disabled = true;
-            btnText.innerText = "PROCESSANDO...";
-            loader.classList.remove('hidden');
+            document.getElementById('btn-text').innerText = 'PROCESSANDO...';
+            document.getElementById('loader').classList.remove('hidden');
 
-            const userData = {
-                nome: nome,
-                email: document.getElementById('email').value,
-                cpf: document.getElementById('cpf').value.replace(/\D/g,''),
-                whatsapp: document.getElementById('whatsapp').value.replace(/\D/g,''),
-                metodo: metodoSelecionado
-            };
+            const userData = { nome, email, cpf, whatsapp, metodo: metodoSelecionado };
 
             if (metodoSelecionado === 'cartao') {
-                // SUA CHAVE DE SANDBOX AQUI
-                Asaas.setApiKey("aact_hmlg_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmYwZGM4MzYxLWU0NjQtNDUzMC04MjI0LWUyMzZiNzZhMWUyMzo6JGFhY2hfOTI5ZDMwNjktYmUxNC00ZWM2LTkwZTItMmY0NzNlNDhiNGRl"); 
+                Asaas.setApiKey(ASAAS_PUBLIC_KEY);
 
                 const expiry = document.getElementById('card-expiry').value.split('/');
                 const cardData = {
                     holderName: document.getElementById('card-holder').value,
-                    number: document.getElementById('card-number').value.replace(/\s/g,''),
+                    number: document.getElementById('card-number').value.replace(/\s/g, ''),
                     expiryMonth: expiry[0],
-                    expiryYear: "20" + expiry[1],
+                    expiryYear: '20' + expiry[1],
                     cvv: document.getElementById('card-cvv').value,
                 };
 
                 Asaas.CreditCard.tokenize(cardData, function(token) {
                     enviarParaN8N({ ...userData, cardToken: token });
                 }, function(errors) {
-                    alert("Erro: " + errors[0].description);
+                    alert('Erro no cartão: ' + errors[0].description);
                     resetButton();
                 });
             } else {
@@ -170,8 +165,7 @@
 
         async function enviarParaN8N(payload) {
             try {
-                // TROQUE PELA SUA URL DE WEBHOOK DO N8N
-                const response = await fetch('https://n8n.guiacash.com.br/webhook/checkout', {
+                const response = await fetch(N8N_WEBHOOK_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -179,30 +173,29 @@
 
                 const data = await response.json();
 
-                if (response.ok) {
+                if (response.ok && data.success) {
                     if (metodoSelecionado === 'pix') {
                         document.getElementById('pix-container').classList.remove('hidden');
                         document.getElementById('pix-instrucao').classList.add('hidden');
                         document.getElementById('pix-qr').src = `data:image/png;base64,${data.encodedImage}`;
                         document.getElementById('pix-payload').value = data.payload;
                         document.getElementById('btn-finalizar').classList.add('hidden');
-                        alert("Pix Gerado com Sucesso!");
                     } else {
-                        window.location.href = "https://guiacash.com.br/sucesso";
+                        window.location.href = 'https://guiacash.visioncapacita.com.br/sucesso';
                     }
                 } else {
-                    alert("Erro no servidor. Tente novamente.");
+                    alert(data.message || 'Erro no servidor. Tente novamente.');
                     resetButton();
                 }
             } catch (e) {
-                alert("Falha na comunicação com o sistema.");
+                alert('Falha na comunicação. Verifique sua conexão.');
                 resetButton();
             }
         }
 
         function resetButton() {
             document.getElementById('btn-finalizar').disabled = false;
-            document.getElementById('btn-text').innerText = "FINALIZAR PAGAMENTO AGORA";
+            document.getElementById('btn-text').innerText = 'FINALIZAR PAGAMENTO AGORA';
             document.getElementById('loader').classList.add('hidden');
         }
     </script>
