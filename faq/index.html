@@ -1,283 +1,427 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - Central de Ajuda Guia Cash</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --teal: #1abc9c; 
-            --purple: #6b46c1; 
-            --dark: #0f172a;
-            --text: #334155;
-            --bg: #f8fafc;
-            --gradient: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Central de Ajuda e FAQ do Guia Cash com dúvidas frequentes sobre PF, PJ, importações, filtros e indicadores." />
+  <title>FAQ - Central de Ajuda Guia Cash</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #1abc9c;
+      --purple: #6b46c1;
+      --dark: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --line: #e2e8f0;
+      --gradient: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 40px 20px;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 16px 10px 24px;
+    }
 
-        .top-bar {
-            height: 6px;
-            width: 100%;
-            background: var(--gradient);
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+    .top-bar {
+      height: 6px;
+      width: 100%;
+      background: var(--gradient);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 30;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 60px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
-            position: relative;
-        }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 26px 16px;
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+      position: relative;
+      border: 1px solid rgba(107, 70, 193, 0.08);
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 40px;
-        }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+    }
 
-        .logo-wrapper { margin-bottom: 25px; }
-        
-        .logo-img { 
-            max-width: 200px; 
-            height: auto; 
-        }
+    .logo-wrapper { margin-bottom: 14px; }
 
-        h1 {
-            color: var(--dark);
-            font-size: 28px; 
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            margin-top: 15px;
-        }
+    .logo-img {
+      max-width: 150px;
+      height: auto;
+    }
 
-        .subtitle {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            font-size: 16px;
-            margin-top: 8px;
-            letter-spacing: 1px;
-            display: block;
-        }
+    h1 {
+      color: var(--dark);
+      font-size: 21px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.4px;
+      margin-top: 8px;
+    }
 
-        .category-title {
-            font-size: 13px;
-            font-weight: 800;
-            color: var(--purple);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin: 35px 0 15px 5px;
-            display: flex;
-            align-items: center;
-        }
+    .subtitle {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      font-size: 12px;
+      margin-top: 6px;
+      letter-spacing: 0.9px;
+      display: block;
+    }
 
-        .category-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e2e8f0;
-            margin-left: 15px;
-        }
+    .intro {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-        .faq-item {
-            margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #fff;
-            transition: border-color 0.3s ease;
-        }
+    .quick-links {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
 
-        .faq-item:hover { border-color: var(--teal); }
+    .quick-links a {
+      text-decoration: none;
+      color: #553c9a;
+      background: #f3efff;
+      border: 1px solid #e3d9ff;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      font-weight: 700;
+    }
 
-        .faq-question {
-            padding: 18px 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            color: var(--dark);
-            font-size: 15px;
-            user-select: none;
-        }
+    .category-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      margin: 24px 0 10px 2px;
+      display: flex;
+      align-items: center;
+      scroll-margin-top: 20px;
+    }
 
-        .faq-question::after {
-            content: '+';
-            color: var(--purple);
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
+    .category-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+      margin-left: 10px;
+    }
 
-        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+    .faq-item {
+      margin-bottom: 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      transition: border-color 0.25s ease;
+    }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 25px;
-            transition: all 0.3s ease;
-            color: var(--text);
-            font-size: 15px;
-            background: #fcfdfe;
-        }
+    .faq-item:hover { border-color: var(--teal); }
 
-        .faq-item.active .faq-answer {
-            max-height: 1000px; /* Aumentado para evitar corte em textos longos no mobile */
-            padding: 20px 25px;
-            border-top: 1px solid #f1f5f9;
-        }
+    .faq-question {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: var(--dark);
+      font-size: 14px;
+      text-align: left;
+      font-family: inherit;
+    }
 
-        .highlight { color: var(--purple); font-weight: 700; }
-        .tag-pj { background: #134f5c; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 10px; font-weight: 800; }
-        .tag-pf { background: #2e3192; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 10px; font-weight: 800; }
-        .tag-script { background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 10px; font-weight: 800; }
+    .faq-question::after {
+      content: '+';
+      color: var(--purple);
+      font-size: 20px;
+      transition: transform 0.25s ease;
+      line-height: 1;
+      flex-shrink: 0;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 500;
-        }
+    .faq-item.active .faq-question::after { transform: rotate(45deg); }
 
-        footer span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      transition: all 0.25s ease;
+      color: var(--text);
+      font-size: 13px;
+      background: #fcfdfe;
+    }
 
-        /* --- AJUSTES PARA CELULAR --- */
-        @media (max-width: 600px) {
-            body { padding: 20px 10px; }
-            .container { padding: 30px 20px; }
-            h1 { font-size: 22px; }
-            .logo-img { max-width: 160px; }
-            .subtitle { font-size: 13px; }
-            .faq-question { padding: 15px 18px; font-size: 14px; }
-            .faq-answer { font-size: 14px; padding: 0 18px; }
-            .faq-item.active .faq-answer { padding: 15px 18px; }
-            .tag-pj, .tag-pf, .tag-script { margin-left: 5px; display: inline-block; margin-top: 5px; }
-        }
-    </style>
+    .faq-answer p + p { margin-top: 7px; }
+    .faq-answer ul { margin: 8px 0 0 18px; }
+
+    .faq-item.active .faq-answer {
+      max-height: 1200px;
+      padding: 12px 16px 14px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .highlight { color: var(--purple); font-weight: 700; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      margin-left: 6px;
+      font-weight: 800;
+    }
+
+    .tag-pf { background: #e7ddff; color: #4c1d95; }
+    .tag-pj { background: #d1faef; color: #0f766e; }
+    .tag-dev { background: #eceff3; color: #475569; }
+
+    .callout {
+      margin-top: 16px;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid var(--teal);
+      border-radius: 10px;
+      padding: 11px;
+      background: #f8fafc;
+      font-size: 12px;
+      color: #475569;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    footer span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    @media (min-width: 768px) {
+      body { padding: 40px 20px; }
+      .container { padding: 56px; border-radius: 16px; }
+      header { margin-bottom: 36px; padding-bottom: 28px; }
+      .logo-img { max-width: 200px; }
+      h1 { font-size: 28px; }
+      .subtitle { font-size: 16px; letter-spacing: 1px; }
+      .intro { font-size: 14px; }
+      .quick-links a { font-size: 12px; padding: 6px 10px; }
+      .category-title { font-size: 13px; margin: 30px 0 14px 5px; }
+      .faq-question { padding: 18px 24px; font-size: 15px; }
+      .faq-answer { font-size: 15px; padding: 0 24px; }
+      .faq-item.active .faq-answer { padding: 16px 24px 18px; }
+      .callout { font-size: 14px; padding: 14px; }
+      footer { margin-top: 44px; font-size: 14px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="top-bar"></div>
-    <div class="container">
-        <header>
-            <div class="logo-wrapper">
-                <img src="../guia-cash-logo.png" alt="Logo Guia Cash" class="logo-img">
-            </div>
-            <h1>Central de Ajuda & FAQ</h1>
-            <div class="subtitle">VISION EDUCAÇÃO E CAPACITAÇÃO</div>
-        </header>
+  <div class="top-bar"></div>
 
-        <div class="content">
-            <div class="category-title">🚀 Lançamentos e Automação</div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Para que servem os botões de Importação? <span class="tag-script">AUTOMATIZAÇÃO</span></div>
-                <div class="faq-answer">
-                    Nas abas de <span class="tag-pf">Despesas PF</span> ou <span class="tag-pj">Saídas PJ</span>, você possui dois motores de busca: <br><br>
-                    1. <b>Importar Fatura:</b> Upload de arquivos OFX, CSV ou XLSX de faturas de cartão.<br>
-                    2. <b>Importar Extrato:</b> Upload de arquivos OFX, CSV ou XLSX de contas bancárias.<br>
-                    Após clicar, o sistema processa os dados e os importa automaticamente para o sistema.
-                </div>
-            </div>
+  <div class="container">
+    <header>
+      <div class="logo-wrapper">
+        <img src="../guia-cash-logo.png" alt="Logo Guia Cash" class="logo-img">
+      </div>
+      <h1>Central de Ajuda & FAQ</h1>
+      <div class="subtitle">VISION EDUCAÇÃO E CAPACITAÇÃO</div>
+      <p class="intro">Tudo o que você precisa para usar o GuiaCash com segurança no dia a dia.</p>
+    </header>
 
-            <div class="faq-item">
-                <div class="faq-question">O que faz o botão "Organizar Dados"?</div>
-                <div class="faq-answer">
-                    Este botão executa um script que limpa linhas em branco, padroniza a fonte <b>Inter</b> e ordena os lançamentos da <b>data mais recente para a mais antiga</b>, garantindo que os gráficos de Dashboard reflitam a realidade.
-                </div>
-            </div>
+    <nav class="quick-links" aria-label="Seções rápidas">
+      <a href="#acesso">Acesso</a>
+      <a href="#lancamentos">Lançamentos</a>
+      <a href="#importacao">Importação</a>
+      <a href="#filtros">Filtros</a>
+      <a href="#farol">Farol</a>
+      <a href="#resultados">Resultados PJ</a>
+      <a href="#modulos">Módulos</a>
+    </nav>
 
-            <div class="faq-item">
-                <div class="faq-question">Qual a diferença visual entre PF e PJ?</div>
-                <div class="faq-answer">
-                    - <span class="highlight" style="color:#2e3192">Roxo (PF):</span> Custos de vida, rendas pessoais e objetivos familiares.<br>
-                    - <span class="highlight" style="color:#134f5c">Verde (PJ):</span> Operação empresarial, impostos, fornecedores e DRE.
-                </div>
-            </div>
+    <main>
+      <h2 id="acesso" class="category-title">🔐 Acesso e Conta</h2>
 
-            <div class="category-title">🧠 Inteligência e Diagnóstico</div>
-
-            <div class="faq-item">
-                <div class="faq-question">Como a "Nazaré" calcula o meu risco financeiro?</div>
-                <div class="faq-answer">
-                    A Nazaré cruza dados de Renda Bruta vs. Custo Fixo para gerar indicadores como <b>Poder de Reação</b> e <b>Liquidez de Sobrevivência</b>. Tudo isso alimenta a "Bússola" visual de risco no Exame Financeiro.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Como ler a aba de Resultados PJ?</div>
-                <div class="faq-answer">
-                    Diferente de um simples fluxo de caixa, apresentamos um <b>DRE detalhado</b>. Ele foca em KPIs como o <span class="highlight">EBIT</span>, <span class="highlight">Ticket Médio</span> e o <b>Ponto de Equilíbrio</b> da sua empresa.
-                </div>
-            </div>
-
-            <div class="category-title">🎯 Dívidas e Objetivos</div>
-
-            <div class="faq-item">
-                <div class="faq-question">Como o Mapa de Dívidas se conecta aos Objetivos?</div>
-                <div class="faq-answer">
-                    Ao listar suas dívidas, o sistema calcula o saldo devedor real e alimenta automaticamente a aba <span class="highlight">Objetivos</span>, criando uma meta de "Quitação Total" com barras de progresso.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Como funciona a meta do Fundo de Reserva?</div>
-                <div class="faq-answer">
-                    O Guia Cash projeta o valor ideal para sua segurança (ex: 6 meses de custo fixo). Você insere o valor investido e o sistema mostra quanto falta para atingir sua <b>Paz Financeira</b>.
-                </div>
-            </div>
-
-            <div class="category-title">⚙️ Manutenção do Sistema</div>
-
-            <div class="faq-item">
-                <div class="faq-question">A planilha parou de atualizar. O que fazer?</div>
-                <div class="faq-answer">
-                    Acesse o menu <span class="highlight">🧭 Guia Cash</span> e selecione <span class="highlight">🔄 Sincronizar Sistema</span>. Isso reinicia os gatilhos do Apps Script e a conexão com o WhatsApp.
-                </div>
-            </div>
+      <article class="faq-item">
+        <button class="faq-question">Como faço login no GuiaCash?</button>
+        <div class="faq-answer">
+          <p>Na tela de login, informe seu <span class="highlight">e-mail e senha</span> e clique em entrar.</p>
+          <p>Se houver erro de credenciais, revise os dados e tente novamente.</p>
         </div>
+      </article>
 
-        <footer>
-            © 2026 Vision Educação e Capacitação - Sistema <span>Guia Cash</span><br>
-            Todos os direitos reservados.
-        </footer>
-    </div>
+      <article class="faq-item">
+        <button class="faq-question">Posso alterar idioma e ajustes da conta?</button>
+        <div class="faq-answer">
+          <p>Sim. Na aba <span class="highlight">Perfil</span> você configura idioma e preferências de cálculo do app.</p>
+        </div>
+      </article>
 
-    <script>
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const parent = item.parentElement;
-                if (parent.classList.contains('active')) {
-                    parent.classList.remove('active');
-                } else {
-                    document.querySelectorAll('.faq-item').forEach(child => child.classList.remove('active'));
-                    parent.classList.add('active');
-                }
-            });
-        });
-    </script>
+      <h2 id="lancamentos" class="category-title">🧾 Lançamentos PF e PJ</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">Qual a diferença entre PF e PJ? <span class="tag tag-pf">PF</span> <span class="tag tag-pj">PJ</span></button>
+        <div class="faq-answer">
+          <ul>
+            <li><b>PF:</b> vida pessoal/familiar (rendas e despesas pessoais).</li>
+            <li><b>PJ:</b> empresa (entradas, saídas e indicadores de negócio).</li>
+          </ul>
+          <p>Essa separação deixa os relatórios mais reais e evita confusão de caixa.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Onde registro cada tipo de movimentação?</button>
+        <div class="faq-answer">
+          <ul>
+            <li><b>Rendas PF:</b> salário, aposentadoria/pensão e renda extra.</li>
+            <li><b>Despesas PF:</b> gastos pessoais e familiares.</li>
+            <li><b>Entradas PJ:</b> recebimentos da empresa.</li>
+            <li><b>Saídas PJ:</b> custos, despesas e impostos da empresa.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Como lançar várias linhas de uma vez?</button>
+        <div class="faq-answer">
+          <p>Use o modo de <span class="highlight">lançamento em lote (planilha)</span>. Você pode colar dados do Excel/Sheets e salvar em bloco.</p>
+        </div>
+      </article>
+
+      <h2 id="importacao" class="category-title">📥 Importação e Automação</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">Quais formatos de importação são aceitos?</button>
+        <div class="faq-answer">
+          <p>O fluxo de importação aceita arquivos como <b>CSV, XLS/XLSX e OFX</b> (dependendo da origem dos dados).</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Qual a diferença entre Importar Fatura e Importar Extrato?</button>
+        <div class="faq-answer">
+          <ul>
+            <li><b>Importar Fatura:</b> foco em gastos de cartão.</li>
+            <li><b>Importar Extrato:</b> foco em movimentações bancárias/extrato.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">A importação classifica automaticamente?</button>
+        <div class="faq-answer">
+          <p>Em muitos casos sim, usando memória e regras. Mesmo assim, sempre revise antes de concluir para garantir precisão.</p>
+        </div>
+      </article>
+
+      <h2 id="filtros" class="category-title">🔎 Filtros, Busca e Edição</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">Como filtrar por mês, ano e categoria?</button>
+        <div class="faq-answer">
+          <p>Use os filtros no topo das telas para refinar por período, tipo/categoria e busca por descrição.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Consigo editar ou excluir lançamentos?</button>
+        <div class="faq-answer">
+          <p>Sim. Você pode editar linha a linha e também excluir itens em lote usando seleção múltipla.</p>
+        </div>
+      </article>
+
+      <h2 id="farol" class="category-title">📊 Farol Familiar</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">O que o Farol Familiar mostra?</button>
+        <div class="faq-answer">
+          <p>Uma visão consolidada PF + PJ com indicadores como resultado da família, rendas totais, despesas e composição de gastos fixos/variáveis.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Posso comparar períodos no Farol?</button>
+        <div class="faq-answer">
+          <p>Sim. Você pode definir período inicial e final para analisar tendência e evolução financeira.</p>
+        </div>
+      </article>
+
+      <h2 id="resultados" class="category-title">🏢 Resultados PJ (DRE)</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">Quais métricas aparecem em Resultados PJ?</button>
+        <div class="faq-answer">
+          <p>Receita Bruta, Receita Líquida, Lucro Operacional (EBIT), Lucro Líquido, Lucro Real, Ticket Médio, Ponto de Equilíbrio e quantidade mínima de vendas.</p>
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question">Qual a diferença entre Lucro Líquido e Lucro Real?</button>
+        <div class="faq-answer">
+          <p>O <b>Lucro Real</b> considera interferências PF↔PJ (como retiradas e aportes), trazendo uma leitura mais fiel do caixa da empresa.</p>
+        </div>
+      </article>
+
+      <h2 id="modulos" class="category-title">🧭 Módulos em Desenvolvimento</h2>
+
+      <article class="faq-item">
+        <button class="faq-question">Mapa de Dívidas, Exame Financeiro e Objetivos já estão ativos? <span class="tag tag-dev">EM DESENVOLVIMENTO</span></button>
+        <div class="faq-answer">
+          <p>Essas telas já aparecem no menu, mas no app web atual ainda estão em construção.</p>
+        </div>
+      </article>
+
+      <div class="callout">
+        <b>Dica:</b> manter uma rotina semanal de lançamentos e revisão de categorias melhora muito a qualidade dos seus indicadores.
+      </div>
+    </main>
+
+    <footer>
+      © 2026 Vision Educação e Capacitação - Sistema <span>Guia Cash</span><br>
+      Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <script>
+    const items = document.querySelectorAll('.faq-item')
+
+    items.forEach((item) => {
+      const question = item.querySelector('.faq-question')
+      question.addEventListener('click', () => {
+        const active = item.classList.contains('active')
+        items.forEach((it) => it.classList.remove('active'))
+        if (!active) item.classList.add('active')
+      })
+    })
+  </script>
 </body>
 </html>
