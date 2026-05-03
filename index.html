@@ -2,7 +2,6 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport estrita para Mobile: evita zoom indesejado e trava a largura -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guia Cash | Controle Financeiro Inteligente</title>
     
@@ -50,7 +49,7 @@
         html, body {
             width: 100%;
             max-width: 100vw;
-            overflow-x: hidden; /* TRAVA ROLAGEM HORIZONTAL */
+            overflow-x: hidden; 
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
@@ -106,7 +105,7 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Estrutura Avançada)
+           1. HERO SECTION
         ========================================= */
         .hero { 
             text-align: center; 
@@ -130,45 +129,45 @@
         }
 
         /* -----------------------------------------
-           COMPONENTE QUEBRA-CABEÇA CSS
+           COMPONENTE QUEBRA-CABEÇA (Tamanho Corrigido)
            ----------------------------------------- */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: stretch; /* Essencial: faz o SVG cortar do topo até a base sem sobras */
-            /* Degradê: PF(Violeta) -> PJ(Cyan) -> Dívidas(Amarelo predominante no final) */
-            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
+            align-items: stretch; /* Garante que o SVG preencha 100% da altura */
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 45%, var(--div-base) 100%);
             border-radius: 12px;
-            overflow: hidden; /* Mantém os cantos arredondados limpos */
+            overflow: hidden;
             margin: 0 8px;
             vertical-align: middle;
-            transform: translateY(-4px); /* Alinhamento óptico com a fonte */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-4px); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .puzzle-text {
             display: flex;
             align-items: center;
-            padding: 4px 12px;
+            padding: 4px 10px; /* Padding reduzido para manter o tamanho compacto */
             color: #FFFFFF;
             font-weight: 900;
         }
 
-        /* O SVG de Corte Elástico */
+        /* SVG de Corte */
         .puzzle-joint {
-            width: 16px;
-            height: auto; /* Cresce junto com o texto */
-            margin: 0 -4px; /* Junta as palavras */
+            width: 14px; /* Mais fino e discreto */
+            height: auto; 
+            margin: 0 -2px; /* Cola as peças sem sobrar espaço */
             flex-shrink: 0;
             z-index: 2;
         }
 
-        /* Subheadline */
+        /* -----------------------------------------
+           SUBHEADLINE
+           ----------------------------------------- */
         .hero .subheadline { 
             max-width: 900px; 
             margin: 0 auto 20px; 
             color: #555555;
-            font-weight: 700; /* Solicitado: Negrito */
-            line-height: 1.5;
+            font-weight: 700;
         }
 
         .hero .video-hook { max-width: 700px; margin: 0 auto 40px; font-size: 1rem; color: #777777; font-weight: 400; }
@@ -189,45 +188,46 @@
         }
 
         /* -----------------------------------------
-           CONTROLE ESTRITO DE RESPONSIVIDADE (DESKTOP vs MOBILE)
+           CONTROLE ESTRITO DE RESPONSIVIDADE
            ----------------------------------------- */
         
-        /* Padrão = Desktop */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
         
+        /* Fontes Desktop */
         .main-headline { font-size: 3.2rem; }
-        .puzzle-text { font-size: 3rem; }
-        .hero .subheadline { font-size: 1.25rem; }
+        .puzzle-text { font-size: 2.5rem; } /* Reduzido para não inflar a caixa */
+        .hero .subheadline { font-size: 1.15rem; line-height: 1.4; }
 
         @media (max-width: 768px) {
-            /* Alterna visibilidade estrutural */
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
             
-            /* Ajustes finos de iPhone para a Headline */
+            /* Ajustes Finos iPhone */
             .main-headline { 
-                font-size: 1.95rem; /* Ajustado para caber perfeitamente no iPhone */
-                line-height: 1.4;
+                font-size: 1.95rem; 
+                line-height: 1.35;
             }
             .puzzle-wrapper {
-                margin: 6px auto; /* Centraliza a caixa na sua própria linha */
+                margin: 6px auto; 
                 transform: none; 
             }
             .puzzle-text { 
-                font-size: 2rem; 
-                padding: 4px 10px;
+                font-size: 1.8rem; /* Menor no mobile */
+                padding: 4px 8px;
             }
             .puzzle-joint {
-                width: 12px; /* Corte proporcionalmente menor */
-                margin: 0 -3px;
+                width: 12px; 
+                margin: 0 -2px;
             }
 
-            /* Subheadline Mobile (Max 5 linhas) */
-            .hero .subheadline { 
-                font-size: 1.05rem; 
-                padding: 0 5px;
-                line-height: 1.45;
+            /* Subheadline Mobile - Forçando max 5 linhas */
+            .hero .subheadline.mobile-only { 
+                font-size: 0.95rem; /* Fonte ligeiramente menor */
+                line-height: 1.4;
+                padding: 0 12px;
+                max-width: 340px; /* Restringe a largura para forçar a quebra correta */
+                margin: 0 auto 20px;
             }
         }
 
@@ -342,10 +342,7 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
-        /* RESPONSIVIDADE ADICIONAL (Para telas menores) */
         @media (max-width: 768px) {
-            .hero { padding-top: 30px; }
-            .hero-logo { max-width: 80px; }
             h2 { font-size: 1.8rem; }
             section { padding: 50px 0; }
             .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
@@ -377,16 +374,16 @@
                 Assuma o controle total das suas <br>
                 finanças 
                 
-                <!-- O Quebra-cabeça -->
+                <!-- O Quebra-cabeça (Tamanho Corrigido) -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Corte Perfeito do SVG: stretch natural vertical, sem bordas -->
-                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
-                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    <!-- Corte Perfeito do SVG usando preserveAspectRatio="none" -->
+                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
+                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
-                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
+                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -396,7 +393,7 @@
             </span>
 
             <!-- ==============================
-                 VERSÃO MOBILE (IPHONE NÃO-MAX)
+                 VERSÃO MOBILE
                  ============================== -->
             <span class="mobile-only">
                 Assuma o controle <br>
@@ -404,12 +401,12 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
-                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
+                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
-                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
+                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -420,15 +417,16 @@
 
         </h1>
         
-        <!-- SUBHEADLINE SEPARADA -->
-        <p class="subheadline">
-            <span class="desktop-only">
-                Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar,<br>
-                automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
-            </span>
-            <span class="mobile-only">
-                Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
-            </span>
+        <!-- SUBHEADLINE DESKTOP (Exatamente 3 linhas) -->
+        <p class="subheadline desktop-only">
+            Organização que se adapta à vida corrida,<br>
+            com finanças da família e negócio integrado num só lugar, automático e simples.<br>
+            Antes que mais uma decisão no escuro te prenda ao banco por anos.
+        </p>
+
+        <!-- SUBHEADLINE MOBILE (Max 5 linhas) -->
+        <p class="subheadline mobile-only">
+            Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
         
         <p class="video-hook">
