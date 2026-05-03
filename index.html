@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport estrita para Mobile: evita zoom indesejado e trava a largura -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guia Cash | Controle Financeiro Inteligente</title>
     
@@ -39,7 +40,7 @@
             --div-base: #f5a722;
             --div-light: #fbbb4f;
 
-            /* Gradients */
+            /* Gradients CTA */
             --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
         }
 
@@ -49,7 +50,7 @@
         html, body {
             width: 100%;
             max-width: 100vw;
-            overflow-x: hidden;
+            overflow-x: hidden; /* TRAVA ROLAGEM HORIZONTAL */
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
@@ -58,7 +59,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* LINHA SUPERIOR FINA */
+        /* LINHA SUPERIOR DEGRADÊ */
         .top-gradient-line {
             position: absolute;
             top: 0;
@@ -90,13 +91,8 @@
             text-transform: uppercase; text-decoration: none; border-radius: 12px;
             transition: all 0.3s ease; text-align: center; color: #FFF; border: none; cursor: pointer;
         }
-        
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
-
-        .btn-dark-pj { background: var(--pj-dark); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
-        .btn-dark-pj:hover { background: #004d55; transform: translateY(-2px); }
-
         .btn-dark-pf { background: var(--pf-dark); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
         .btn-dark-pf:hover { background: #3c2bb3; transform: translateY(-2px); }
 
@@ -110,78 +106,73 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Atualizada com Quebra-cabeça)
+           1. HERO SECTION (Estrutura Avançada)
         ========================================= */
         .hero { 
             text-align: center; 
-            padding-top: 25px; /* Reduzido drasticamente para mover o logo para cima */
+            padding-top: 40px; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
         }
         
         .hero-logo { 
-            max-width: 98px; /* Reduzido em 30% do original (140px) */
+            max-width: 98px; 
             margin-bottom: 24px; 
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
         }
 
         .main-headline { 
-            font-size: 3rem; 
             max-width: 1000px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
         }
 
-        /* Container do Quebra-Cabeça CSS */
+        /* -----------------------------------------
+           COMPONENTE QUEBRA-CABEÇA CSS
+           ----------------------------------------- */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            /* Degradê exato: Violeta -> Cyan -> Amarelo (Forte) */
-            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 45%, var(--div-base) 100%);
-            border-radius: 16px;
-            color: #FFF;
-            padding: 4px 12px;
+            align-items: stretch; /* Essencial: faz o SVG cortar do topo até a base sem sobras */
+            /* Degradê: PF(Violeta) -> PJ(Cyan) -> Dívidas(Amarelo predominante no final) */
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
+            border-radius: 12px;
+            overflow: hidden; /* Mantém os cantos arredondados limpos */
             margin: 0 8px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transform: translateY(-4px); /* Ajuste óptico com a linha do texto */
+            vertical-align: middle;
+            transform: translateY(-4px); /* Alinhamento óptico com a fonte */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .puzzle-text {
-            font-size: 2.8rem;
+            display: flex;
+            align-items: center;
+            padding: 4px 12px;
+            color: #FFFFFF;
             font-weight: 900;
-            padding: 0 8px;
-            letter-spacing: -1px;
         }
 
-        /* SVG de Corte (Simula o encaixe do quebra-cabeça na cor do fundo branco) */
+        /* O SVG de Corte Elástico */
         .puzzle-joint {
-            height: 48px;
-            width: 24px;
+            width: 16px;
+            height: auto; /* Cresce junto com o texto */
+            margin: 0 -4px; /* Junta as palavras */
             flex-shrink: 0;
-            margin: 0 -4px; /* Aproxima os textos */
+            z-index: 2;
         }
 
+        /* Subheadline */
         .hero .subheadline { 
-            max-width: 800px; 
+            max-width: 900px; 
             margin: 0 auto 20px; 
-            font-size: 1.1rem; /* Reduzido */
-            font-weight: 400; /* Letra não em negrito */
             color: #555555;
-            line-height: 1.6;
+            font-weight: 700; /* Solicitado: Negrito */
+            line-height: 1.5;
         }
 
-        .hero .video-hook {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1rem;
-            color: #777777;
-        }
+        .hero .video-hook { max-width: 700px; margin: 0 auto 40px; font-size: 1rem; color: #777777; font-weight: 400; }
         
-        /* Video Mockup */
         .video-container {
             width: 100%; max-width: 800px; aspect-ratio: 16/9; margin: 0 auto 40px;
             background: #0F172A; border-radius: 16px;
@@ -197,52 +188,71 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
+        /* -----------------------------------------
+           CONTROLE ESTRITO DE RESPONSIVIDADE (DESKTOP vs MOBILE)
+           ----------------------------------------- */
+        
+        /* Padrão = Desktop */
+        .mobile-only { display: none !important; }
+        .desktop-only { display: block !important; }
+        
+        .main-headline { font-size: 3.2rem; }
+        .puzzle-text { font-size: 3rem; }
+        .hero .subheadline { font-size: 1.25rem; }
+
+        @media (max-width: 768px) {
+            /* Alterna visibilidade estrutural */
+            .mobile-only { display: block !important; }
+            .desktop-only { display: none !important; }
+            
+            /* Ajustes finos de iPhone para a Headline */
+            .main-headline { 
+                font-size: 1.95rem; /* Ajustado para caber perfeitamente no iPhone */
+                line-height: 1.4;
+            }
+            .puzzle-wrapper {
+                margin: 6px auto; /* Centraliza a caixa na sua própria linha */
+                transform: none; 
+            }
+            .puzzle-text { 
+                font-size: 2rem; 
+                padding: 4px 10px;
+            }
+            .puzzle-joint {
+                width: 12px; /* Corte proporcionalmente menor */
+                margin: 0 -3px;
+            }
+
+            /* Subheadline Mobile (Max 5 linhas) */
+            .hero .subheadline { 
+                font-size: 1.05rem; 
+                padding: 0 5px;
+                line-height: 1.45;
+            }
+        }
+
         /* =========================================
-           SEÇÕES REMANESCENTES (Mantidas intactas)
+           SEÇÕES REMANESCENTES
         ========================================= */
 
         /* 2. AUDIÊNCIA */
-        .audience-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px; margin: 40px 0;
-        }
-        .role-card {
-            background: var(--bg-white); padding: 18px; border-radius: 12px;
-            border: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px;
-            font-weight: 600; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: transform 0.3s, border-color 0.3s;
-        }
+        .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
+        .role-card { background: var(--bg-white); padding: 18px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.3s, border-color 0.3s; }
         .role-card:hover { transform: translateY(-3px); border-color: var(--pf-base); }
         .role-card i { color: var(--pf-base); font-size: 1.2rem; background: rgba(92, 75, 223, 0.1); padding: 10px; border-radius: 8px; }
         
         .pain-list { list-style: none; max-width: 800px; margin: 0 auto; }
-        .pain-list li {
-            display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;
-            background: var(--bg-white); padding: 20px; border-radius: 12px;
-            border-left: 4px solid var(--div-base); color: var(--text-gray); font-size: 1.05rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border-top: 1px solid var(--border-light); border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
-        }
+        .pain-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; background: var(--bg-white); padding: 20px; border-radius: 12px; border-left: 4px solid var(--div-base); color: var(--text-gray); font-size: 1.05rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-light); }
         .pain-list i { color: var(--div-base); margin-top: 4px; font-size: 1.2rem; }
 
         /* 3. VERDADES SECRETAS */
-        .container-box {
-            background: var(--bg-white); border: 1px solid var(--border-light);
-            border-radius: 20px; padding: 50px; margin-top: 40px; text-align: left;
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); position: relative; overflow: hidden;
-        }
+        .container-box { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 20px; padding: 50px; margin-top: 40px; text-align: left; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
         .container-box::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--brand-gradient); }
-        .pill-title {
-            display: inline-block; padding: 6px 16px; background: rgba(245, 167, 34, 0.15);
-            color: #b06f0a; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px;
-        }
+        .pill-title { display: inline-block; padding: 6px 16px; background: rgba(245, 167, 34, 0.15); color: #b06f0a; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
         
         .bubble-illustration { margin: 60px 0; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 40px 20px; background: var(--bg-light); border-radius: 24px; }
         .bubble-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 800px; }
-        .bubble {
-            background: var(--bg-white); padding: 20px; border-radius: 16px;
-            border: 1px solid var(--border-light); color: var(--text-dark); font-size: 1rem; font-weight: 500;
-            text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); position: relative;
-        }
+        .bubble { background: var(--bg-white); padding: 20px; border-radius: 16px; border: 1px solid var(--border-light); color: var(--text-dark); font-size: 1rem; font-weight: 500; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         .avatar-icon { width: 80px; height: 80px; background: var(--brand-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #FFF; box-shadow: 0 10px 20px rgba(92, 75, 223, 0.2); margin: 20px 0; }
         .micro-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .micro-tag { background: #FFF; border: 1px solid var(--border-light); color: var(--text-gray); padding: 6px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; }
@@ -265,7 +275,7 @@
         .fake-line { height: 12px; background: var(--bg-light); border-radius: 6px; margin-bottom: 10px; width: 100%; }
         .fake-line.short { width: 60%; }
 
-        /* 6. COMO FUNCIONA (Círculo Mestre & Venn Diagram) */
+        /* 6. COMO FUNCIONA */
         .step-box { margin-bottom: 40px; padding: 40px; background: var(--bg-white); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-left: 5px solid; }
         .step-box.s1 { border-color: var(--pf-base); }
         .step-box.s2 { border-color: var(--pj-base); }
@@ -294,7 +304,7 @@
         .bar { width: 50px; background: var(--pj-base); border-radius: 6px 6px 0 0; opacity: 0.6; }
         .bar.highlight { background: var(--pf-base); opacity: 1; }
 
-        /* 7. O QUE TEM (Bento Grid) */
+        /* 7. BENTO GRID */
         .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
         .bento-item { background: var(--bg-white); padding: 30px; border-radius: 20px; border: 1px solid var(--border-light); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .bento-full { grid-column: 1 / -1; }
@@ -305,21 +315,18 @@
         .bonus-items { list-style: none; max-width: 800px; margin: 0 auto; text-align: left; }
         .bonus-items li { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(255,255,255,0.2); }
         .bonus-items i { font-size: 1.5rem; color: #FFF; margin-top: 4px; }
-        
         .devices-row { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
         .device-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 25px; border-radius: 16px; width: 200px; text-align: center; }
         .device-card i { font-size: 3rem; margin-bottom: 15px; color: #FFF; }
         .device-card span { font-weight: 600; font-size: 0.95rem; display: block; line-height: 1.4; }
 
-        /* 9. OFERTA / PRICING */
+        /* 9. OFERTA */
         .offer-wrapper { background: var(--bg-white); border: 2px solid var(--pj-base); border-radius: 24px; padding: 50px; margin-top: 50px; box-shadow: 0 20px 50px rgba(0, 145, 150, 0.1); }
         .check-list { list-style: none; margin-bottom: 30px; text-align: left; }
         .check-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text-dark); font-weight: 500; }
         .check-list i { color: var(--pj-base); margin-top: 4px; font-size: 1.2rem; }
-        
         .price-tag { text-align: center; font-size: 3.5rem; font-weight: 900; margin: 40px 0; color: var(--text-dark); letter-spacing: -2px; }
         .price-tag span { font-size: 1.2rem; color: var(--text-gray); font-weight: 500; display: block; letter-spacing: normal; margin-bottom: 5px; }
-        
         .guarantee-box { margin-top: 40px; background: rgba(245, 167, 34, 0.1); border: 1px dashed var(--div-base); padding: 25px; border-radius: 16px; text-align: left; }
 
         /* 10. GABRIELA VIEIRA */
@@ -335,26 +342,10 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
-        /* RESPONSIVIDADE (Ajustes rigorosos para Mobile) */
+        /* RESPONSIVIDADE ADICIONAL (Para telas menores) */
         @media (max-width: 768px) {
             .hero { padding-top: 30px; }
             .hero-logo { max-width: 80px; }
-            .main-headline { font-size: 2.1rem; line-height: 1.3; }
-            
-            /* COMPORTAMENTO DO QUEBRA-CABEÇA NO MOBILE */
-            .hl-top, .hl-bottom { display: block; } /* Força os textos cinzas para linhas isoladas */
-            .puzzle-wrapper {
-                display: flex;
-                margin: 16px auto;
-                width: max-content;
-                justify-content: center;
-                transform: none; /* Remove o ajuste visual do desktop */
-            }
-            .puzzle-text { font-size: 1.8rem; padding: 0 6px; }
-            .puzzle-joint { height: 32px; width: 18px; margin: 0 -2px; } /* Proporção do SVG de corte reduzida */
-
-            .hero .subheadline { font-size: 1rem; padding: 0 10px; } /* Fonte ajustada para caber mais caracteres */
-
             h2 { font-size: 1.8rem; }
             section { padding: 50px 0; }
             .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
@@ -378,29 +369,66 @@
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            <span class="hl-top">Assuma o controle total das suas finanças</span> 
             
-            <!-- CONTÊINER QUEBRA-CABEÇA CSS ART -->
-            <span class="puzzle-wrapper">
-                <span class="puzzle-text">PF</span>
-                <!-- SVG Corte 1 (Linha Branca que recorta o gradiente) -->
-                <svg class="puzzle-joint" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 12,0 L 12,14 A 8 8 0 1 1 12,34 L 12,48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                <span class="puzzle-text">PJ</span>
-                <!-- SVG Corte 2 (Linha Branca que recorta o gradiente) -->
-                <svg class="puzzle-joint" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M 12,0 L 12,14 A 8 8 0 1 1 12,34 L 12,48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                <span class="puzzle-text">Dívidas</span>
-            </span> 
-            
-            <span class="hl-bottom">e tenha dinheiro sobrando todo mês</span>
+            <!-- ==============================
+                 VERSÃO DESKTOP
+                 ============================== -->
+            <span class="desktop-only">
+                Assuma o controle total das suas <br>
+                finanças 
+                
+                <!-- O Quebra-cabeça -->
+                <span class="puzzle-wrapper">
+                    <span class="puzzle-text">PF</span>
+                    <!-- Corte Perfeito do SVG: stretch natural vertical, sem bordas -->
+                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
+                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    </svg>
+                    <span class="puzzle-text">PJ</span>
+                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
+                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    </svg>
+                    <span class="puzzle-text">Dívidas</span>
+                </span> 
+                
+                e tenha <br>
+                dinheiro sobrando todo mês
+            </span>
+
+            <!-- ==============================
+                 VERSÃO MOBILE (IPHONE NÃO-MAX)
+                 ============================== -->
+            <span class="mobile-only">
+                Assuma o controle <br>
+                total das suas finanças <br>
+                
+                <span class="puzzle-wrapper">
+                    <span class="puzzle-text">PF</span>
+                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
+                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    </svg>
+                    <span class="puzzle-text">PJ</span>
+                    <svg class="puzzle-joint" viewBox="0 0 10 100" preserveAspectRatio="none">
+                        <path d="M 5,0 L 5,30 A 15,15 0 1 1 5,70 L 5,100" stroke="#FFFFFF" stroke-width="3" fill="none"/>
+                    </svg>
+                    <span class="puzzle-text">Dívidas</span>
+                </span> <br>
+                
+                e tenha dinheiro <br>
+                sobrando todo mês
+            </span>
+
         </h1>
         
-        <!-- Subheadline Ajustada -->
+        <!-- SUBHEADLINE SEPARADA -->
         <p class="subheadline">
-            Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            <span class="desktop-only">
+                Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar,<br>
+                automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            </span>
+            <span class="mobile-only">
+                Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            </span>
         </p>
         
         <p class="video-hook">
