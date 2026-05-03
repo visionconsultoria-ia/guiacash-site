@@ -21,21 +21,21 @@
             /* Fundo e Textos (Light Theme) */
             --bg-white: #FFFFFF;
             --bg-light: #F8FAFC;
-            --text-dark: #363636; /* Cinza escuro exigido para leitura */
+            --text-dark: #363636;
             --text-gray: #555555;
             --border-light: #E2E8F0;
 
-            /* Paleta: Dark Cyan (PJ) */
+            /* Paleta: Dark Cyan */
             --pj-dark: #006974;
             --pj-base: #009196;
             --pj-light: #18b6b5;
 
-            /* Paleta: Violeta-azulado (PF) */
+            /* Paleta: Violeta-azulado */
             --pf-dark: #5242d7;
             --pf-base: #5c4bdf;
             --pf-light: #8670ff;
 
-            /* Paleta: Amarelo-alaranjado (Dívidas) */
+            /* Paleta: Amarelo-alaranjado */
             --div-dark: #d68910; 
             --div-base: #f5a722;
             --div-light: #fbbb4f;
@@ -100,46 +100,48 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Foco da Atualização)
+           1. HERO SECTION (Atualizada)
         ========================================= */
         .hero { 
             text-align: center; 
-            padding-top: 100px; 
+            padding-top: 40px; /* Reduzido drasticamente para remover o espaço em branco */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
         }
         
         .hero-logo { 
-            max-width: 200px; 
-            margin-bottom: 35px; 
+            max-width: 98px; /* Reduzido em exatos 30% (antes era 140px) */
+            margin-bottom: 24px; 
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
         }
 
         .main-headline { 
             font-size: 3.2rem; 
             max-width: 980px; 
             margin: 0 auto 24px; 
-            color: #363636; /* Cinza escuro exigido */
+            color: #363636; 
             letter-spacing: -0.04em;
         }
 
-        /* Gradiente contínuo e fluido estilo VTSD (Referência) */
-        .gradient-areas {
-            /* O gradiente vai do PF (Violeta) -> Mistura -> PJ (Cyan) -> Mistura -> Dívidas (Amarelo) */
-            background: linear-gradient(
-                90deg, 
-                var(--pf-base) 0%, 
-                #3b6fc8 25%,   /* Transição suave Violeta > Cyan */
-                var(--pj-base) 50%, 
-                #64b067 75%,   /* Transição suave Cyan > Amarelo */
-                var(--div-base) 100%
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block; /* Garante que o gradiente se aplique ao tamanho do texto */
-            font-weight: 900; /* Mais pesado para a cor brilhar mais */
-            padding: 0 4px;
+        /* Efeito de Sublinhado em Degradê */
+        .gradient-underline {
+            position: relative;
+            color: #363636; /* Mantém a fonte cinza escuro */
+            display: inline-block;
+            white-space: nowrap; /* Evita que as palavras quebrem de linha separando o traço */
+        }
+
+        .gradient-underline::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px; /* Distância da linha para o texto */
+            width: 100%;
+            height: 5px; /* Espessura do traço */
+            border-radius: 4px;
+            /* Degradê: PF(Roxo) -> PJ(Cyan) -> Dívidas(Amarelo) */
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
         }
 
         .hero .subheadline { 
@@ -310,6 +312,8 @@
 
         /* RESPONSIVIDADE */
         @media (max-width: 768px) {
+            .hero { padding-top: 30px; }
+            .hero-logo { max-width: 80px; }
             .main-headline { font-size: 2.2rem; }
             h2 { font-size: 1.8rem; }
             section { padding: 50px 0; }
@@ -331,11 +335,11 @@
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            Assuma o controle total das suas finanças <span class="gradient-areas">PF - PJ - dívidas</span> e tenha dinheiro sobrando todo mês.
+            Assuma o controle total das suas finanças <span class="gradient-underline">PF - PJ - Dívidas</span> e tenha dinheiro sobrando todo mês
         </h1>
         
         <p class="subheadline">
-            1ª e única ferramenta que se adapta à vida corrida e revela o desempenho real da — família, negócio e dívidas — num lugar só de forma simplificada e automática. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Organização que se adapta à vida corrida da família e negócio, num só lugar. Simples e automático. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
         
         <p class="video-hook">
