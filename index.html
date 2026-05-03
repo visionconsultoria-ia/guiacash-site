@@ -18,7 +18,6 @@
            SISTEMA DE CORES E VARIÁVEIS GLOBAIS
         ========================================= */
         :root {
-            /* Fundo e Textos (Light Theme) */
             --bg-white: #FFFFFF;
             --bg-light: #F8FAFC;
             --text-dark: #363636;
@@ -57,6 +56,17 @@
             line-height: 1.6;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* LINHA SUPERIOR FINA */
+        .top-gradient-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--pf-base), var(--pj-base));
+            z-index: 1000;
         }
 
         .container {
@@ -100,57 +110,68 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Atualizada)
+           1. HERO SECTION (Atualizada com Quebra-cabeça)
         ========================================= */
         .hero { 
             text-align: center; 
-            padding-top: 40px; /* Reduzido drasticamente para remover o espaço em branco */
+            padding-top: 25px; /* Reduzido drasticamente para mover o logo para cima */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
         }
         
         .hero-logo { 
-            max-width: 98px; /* Reduzido em exatos 30% (antes era 140px) */
+            max-width: 98px; /* Reduzido em 30% do original (140px) */
             margin-bottom: 24px; 
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
         }
 
         .main-headline { 
-            font-size: 3.2rem; 
-            max-width: 980px; 
+            font-size: 3rem; 
+            max-width: 1000px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
         }
 
-        /* Efeito de Sublinhado em Degradê */
-        .gradient-underline {
+        /* Container do Quebra-Cabeça CSS */
+        .puzzle-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            /* Degradê exato: Violeta -> Cyan -> Amarelo (Forte) */
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 45%, var(--div-base) 100%);
+            border-radius: 16px;
+            color: #FFF;
+            padding: 4px 12px;
+            margin: 0 8px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
             position: relative;
-            color: #363636; /* Mantém a fonte cinza escuro */
-            display: inline-block;
-            white-space: nowrap; /* Evita que as palavras quebrem de linha separando o traço */
+            transform: translateY(-4px); /* Ajuste óptico com a linha do texto */
         }
 
-        .gradient-underline::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -6px; /* Distância da linha para o texto */
-            width: 100%;
-            height: 5px; /* Espessura do traço */
-            border-radius: 4px;
-            /* Degradê: PF(Roxo) -> PJ(Cyan) -> Dívidas(Amarelo) */
-            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
+        .puzzle-text {
+            font-size: 2.8rem;
+            font-weight: 900;
+            padding: 0 8px;
+            letter-spacing: -1px;
+        }
+
+        /* SVG de Corte (Simula o encaixe do quebra-cabeça na cor do fundo branco) */
+        .puzzle-joint {
+            height: 48px;
+            width: 24px;
+            flex-shrink: 0;
+            margin: 0 -4px; /* Aproxima os textos */
         }
 
         .hero .subheadline { 
-            max-width: 850px; 
+            max-width: 800px; 
             margin: 0 auto 20px; 
-            font-size: 1.25rem; 
+            font-size: 1.1rem; /* Reduzido */
+            font-weight: 400; /* Letra não em negrito */
             color: #555555;
-            font-weight: 500;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .hero .video-hook {
@@ -175,6 +196,10 @@
             font-weight: 700; display: flex; align-items: center; gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
+
+        /* =========================================
+           SEÇÕES REMANESCENTES (Mantidas intactas)
+        ========================================= */
 
         /* 2. AUDIÊNCIA */
         .audience-grid {
@@ -310,11 +335,26 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE (Ajustes rigorosos para Mobile) */
         @media (max-width: 768px) {
             .hero { padding-top: 30px; }
             .hero-logo { max-width: 80px; }
-            .main-headline { font-size: 2.2rem; }
+            .main-headline { font-size: 2.1rem; line-height: 1.3; }
+            
+            /* COMPORTAMENTO DO QUEBRA-CABEÇA NO MOBILE */
+            .hl-top, .hl-bottom { display: block; } /* Força os textos cinzas para linhas isoladas */
+            .puzzle-wrapper {
+                display: flex;
+                margin: 16px auto;
+                width: max-content;
+                justify-content: center;
+                transform: none; /* Remove o ajuste visual do desktop */
+            }
+            .puzzle-text { font-size: 1.8rem; padding: 0 6px; }
+            .puzzle-joint { height: 32px; width: 18px; margin: 0 -2px; } /* Proporção do SVG de corte reduzida */
+
+            .hero .subheadline { font-size: 1rem; padding: 0 10px; } /* Fonte ajustada para caber mais caracteres */
+
             h2 { font-size: 1.8rem; }
             section { padding: 50px 0; }
             .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
@@ -329,17 +369,38 @@
 </head>
 <body>
 
+    <!-- LINHA DE TOPO -->
+    <div class="top-gradient-line"></div>
+
     <!-- 1. HERO SECTION -->
     <section class="hero container">
         
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            Assuma o controle total das suas finanças <span class="gradient-underline">PF - PJ - Dívidas</span> e tenha dinheiro sobrando todo mês
+            <span class="hl-top">Assuma o controle total das suas finanças</span> 
+            
+            <!-- CONTÊINER QUEBRA-CABEÇA CSS ART -->
+            <span class="puzzle-wrapper">
+                <span class="puzzle-text">PF</span>
+                <!-- SVG Corte 1 (Linha Branca que recorta o gradiente) -->
+                <svg class="puzzle-joint" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 12,0 L 12,14 A 8 8 0 1 1 12,34 L 12,48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                <span class="puzzle-text">PJ</span>
+                <!-- SVG Corte 2 (Linha Branca que recorta o gradiente) -->
+                <svg class="puzzle-joint" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 12,0 L 12,14 A 8 8 0 1 1 12,34 L 12,48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                <span class="puzzle-text">Dívidas</span>
+            </span> 
+            
+            <span class="hl-bottom">e tenha dinheiro sobrando todo mês</span>
         </h1>
         
+        <!-- Subheadline Ajustada -->
         <p class="subheadline">
-            Organização que se adapta à vida corrida da família e negócio, num só lugar. Simples e automático. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
         
         <p class="video-hook">
