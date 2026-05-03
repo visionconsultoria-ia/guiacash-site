@@ -105,7 +105,7 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION
+           1. HERO SECTION (Estrutura Avançada)
         ========================================= */
         .hero { 
             text-align: center; 
@@ -129,45 +129,43 @@
         }
 
         /* -----------------------------------------
-           COMPONENTE QUEBRA-CABEÇA (Tamanho Corrigido)
+           COMPONENTE QUEBRA-CABEÇA CSS
            ----------------------------------------- */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: stretch; /* Garante que o SVG preencha 100% da altura */
-            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 45%, var(--div-base) 100%);
+            align-items: center; 
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
             border-radius: 12px;
-            overflow: hidden;
             margin: 0 8px;
             vertical-align: middle;
-            transform: translateY(-4px); 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .puzzle-text {
             display: flex;
             align-items: center;
-            padding: 4px 10px; /* Padding reduzido para manter o tamanho compacto */
+            padding: 4px 8px; /* Padding ideal */
             color: #FFFFFF;
             font-weight: 900;
         }
 
-        /* SVG de Corte */
+        /* O SVG de Corte Perfeito sem achatar */
         .puzzle-joint {
-            width: 14px; /* Mais fino e discreto */
-            height: auto; 
-            margin: 0 -2px; /* Cola as peças sem sobrar espaço */
+            width: 16px; /* Mais espaço para desenhar a curva perfeitamente */
+            height: 48px; /* Altura fixa baseada na fonte, permite o círculo manter a proporção */
+            margin: 0 -3px; 
             flex-shrink: 0;
             z-index: 2;
         }
 
-        /* -----------------------------------------
-           SUBHEADLINE
-           ----------------------------------------- */
+        /* Subheadline */
         .hero .subheadline { 
             max-width: 900px; 
             margin: 0 auto 20px; 
             color: #555555;
-            font-weight: 700;
+            font-weight: 700; 
+            line-height: 1.5;
         }
 
         .hero .video-hook { max-width: 700px; margin: 0 auto 40px; font-size: 1rem; color: #777777; font-weight: 400; }
@@ -188,46 +186,53 @@
         }
 
         /* -----------------------------------------
-           CONTROLE ESTRITO DE RESPONSIVIDADE
+           CONTROLE ESTRITO DE RESPONSIVIDADE (DESKTOP vs MOBILE)
            ----------------------------------------- */
         
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
         
-        /* Fontes Desktop */
         .main-headline { font-size: 3.2rem; }
-        .puzzle-text { font-size: 2.5rem; } /* Reduzido para não inflar a caixa */
-        .hero .subheadline { font-size: 1.15rem; line-height: 1.4; }
+        .puzzle-text { font-size: 2.8rem; } 
 
         @media (max-width: 768px) {
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
             
-            /* Ajustes Finos iPhone */
+            .hero { padding-top: 30px; }
+            
+            /* Headline Mobile */
             .main-headline { 
                 font-size: 1.95rem; 
-                line-height: 1.35;
+                line-height: 1.4;
             }
             .puzzle-wrapper {
                 margin: 6px auto; 
                 transform: none; 
             }
             .puzzle-text { 
-                font-size: 1.8rem; /* Menor no mobile */
+                font-size: 2rem; 
                 padding: 4px 8px;
             }
+            
+            /* Ajusta a altura da linha do SVG para a fonte menor do celular sem perder a proporção */
             .puzzle-joint {
-                width: 12px; 
+                width: 14px; 
+                height: 38px;
                 margin: 0 -2px;
             }
 
-            /* Subheadline Mobile - Forçando max 5 linhas */
+            /* -----------------------------------------
+               O SEGREDO DA OPÇÃO 4: BORDAS MENORES (Negative Margins)
+               ----------------------------------------- */
             .hero .subheadline.mobile-only { 
-                font-size: 0.95rem; /* Fonte ligeiramente menor */
+                font-size: 1.05rem; /* Fonte MAIOR, de leitura confortável */
                 line-height: 1.4;
-                padding: 0 12px;
-                max-width: 340px; /* Restringe a largura para forçar a quebra correta */
-                margin: 0 auto 20px;
+                /* As margens negativas fazem o texto avançar além da área central */
+                margin-left: -12px;
+                margin-right: -12px;
+                max-width: none; 
+                margin-bottom: 20px;
             }
         }
 
@@ -374,16 +379,16 @@
                 Assuma o controle total das suas <br>
                 finanças 
                 
-                <!-- O Quebra-cabeça (Tamanho Corrigido) -->
+                <!-- O Quebra-cabeça com Matemática Exata da Curva -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Corte Perfeito do SVG usando preserveAspectRatio="none" -->
-                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
-                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    <!-- Curva desenhada pixel a pixel para encostar nas bordas sem achatar -->
+                    <svg class="puzzle-joint" viewBox="0 0 16 48" fill="none">
+                        <path d="M 8,0 L 8,16 A 8,8 0 1 1 8,32 L 8,48" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
-                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    <svg class="puzzle-joint" viewBox="0 0 16 48" fill="none">
+                        <path d="M 8,0 L 8,16 A 8,8 0 1 1 8,32 L 8,48" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -399,14 +404,15 @@
                 Assuma o controle <br>
                 total das suas finanças <br>
                 
+                <!-- Quebra-cabeça adaptado para o mobile com a mesma curva vetorizada -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
-                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    <svg class="puzzle-joint" viewBox="0 0 14 38" fill="none">
+                        <path d="M 7,0 L 7,12 A 7,7 0 1 1 7,26 L 7,38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 12 40" preserveAspectRatio="none">
-                        <path d="M 6,0 L 6,12 A 8,8 0 1 1 6,28 L 6,40" stroke="#FFFFFF" stroke-width="2.5" fill="none" vector-effect="non-scaling-stroke"/>
+                    <svg class="puzzle-joint" viewBox="0 0 14 38" fill="none">
+                        <path d="M 7,0 L 7,12 A 7,7 0 1 1 7,26 L 7,38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -424,7 +430,7 @@
             Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
 
-        <!-- SUBHEADLINE MOBILE (Max 5 linhas) -->
+        <!-- SUBHEADLINE MOBILE (Max 5 linhas, Avança as bordas laterais com o Negative Margin) -->
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
