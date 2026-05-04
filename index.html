@@ -105,7 +105,7 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Atualizada e Perfeita)
+           1. HERO SECTION (Atualizada - Quebra-Cabeça Fixo)
         ========================================= */
         .hero { 
             text-align: center; 
@@ -129,13 +129,15 @@
         }
 
         /* -----------------------------------------
-           COMPONENTE QUEBRA-CABEÇA CSS
+           COMPONENTE QUEBRA-CABEÇA CSS (Matemática Perfeita)
            ----------------------------------------- */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: center; 
+            align-items: flex-start; /* Alinhamento ao topo para não haver sobra */
+            height: 56px; /* ALTURA MATEMATICAMENTE TRAVADA */
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
             border-radius: 12px;
+            overflow: hidden; /* Corta qualquer excesso indesejado */
             margin: 0 8px;
             vertical-align: middle;
             transform: translateY(-4px);
@@ -145,15 +147,16 @@
         .puzzle-text {
             display: flex;
             align-items: center;
-            padding: 4px 10px; 
+            height: 100%; /* Ocupa exatamente a altura travada do contêiner */
+            padding: 0 12px; 
             color: #FFFFFF;
             font-weight: 900;
         }
 
-        /* O SVG de Corte Perfeito sem cortes nas bordas (ViewBox estendido) */
+        /* O SVG de Corte: Agora com a mesma altura do contêiner */
         .puzzle-joint {
-            width: 20px; 
-            height: 52px; 
+            width: 24px; 
+            height: 56px; /* EXATAMENTE OS MESMOS 56px DO CONTÊINER */
             margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
@@ -164,20 +167,21 @@
            ----------------------------------------- */
         .hero .subheadline { 
             max-width: 900px; 
-            margin: 0 auto 16px; 
+            /* Espaço MAIOR (32px) entre a subheadline 1 e a subheadline 2 */
+            margin: 0 auto 32px; 
             color: #555555;
             font-weight: 700; 
             line-height: 1.5;
         }
 
-        /* Segunda subheadline (Video hook) com line-height apertado */
+        /* Segunda subheadline (Video hook) */
         .hero .video-hook { 
             max-width: 700px; 
-            margin: 0 auto 30px; 
+            margin: 0 auto 40px; 
             font-size: 1rem; 
             color: #777777; 
             font-weight: 400; 
-            line-height: 1.3; 
+            line-height: 1.3; /* Entrelinha mais espremida */
         }
         
         .video-container {
@@ -196,7 +200,7 @@
         }
 
         /* -----------------------------------------
-           CONTROLE ESTRITO DE RESPONSIVIDADE (DESKTOP vs MOBILE)
+           CONTROLE ESTRITO DE RESPONSIVIDADE
            ----------------------------------------- */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
@@ -210,36 +214,38 @@
             
             .hero { padding-top: 30px; }
             
-            /* Headline Mobile */
             .main-headline { 
                 font-size: 1.95rem; 
                 line-height: 1.4;
             }
+            
+            /* Ajuste matemático para o Quebra-Cabeça no Mobile */
             .puzzle-wrapper {
+                height: 44px; /* Altura menor travada no celular */
                 margin: 6px auto; 
                 transform: none; 
             }
             .puzzle-text { 
                 font-size: 1.8rem; 
-                padding: 4px 8px;
+                padding: 0 10px;
             }
             .puzzle-joint {
-                width: 16px; 
-                height: 38px;
+                width: 20px; 
+                height: 44px; /* Acompanha a altura do contêiner */
                 margin: 0 -3px;
             }
 
-            /* Subheadline Mobile - Estourando as margens para forçar 4 linhas */
+            /* Subheadline Mobile - Estourando as bordas e forçando máx 5 linhas */
             .hero .subheadline.mobile-only { 
                 font-size: 1.05rem; 
                 line-height: 1.4;
                 margin-left: -15px; 
                 margin-right: -15px;
                 max-width: none; 
-                margin-bottom: 16px;
+                margin-bottom: 24px; /* Mais espaço para o vídeo hook */
             }
 
-            /* Video Hook Mobile - Tamanho de letra e entrelinha reduzidos */
+            /* Video Hook Mobile - Fonte menor e linha espremida */
             .hero .video-hook {
                 font-size: 0.85rem; 
                 line-height: 1.25; 
@@ -247,7 +253,7 @@
                 margin-bottom: 24px;
             }
 
-            /* Demais ajustes globais Mobile */
+            /* Outros ajustes Mobile globais */
             h2 { font-size: 1.8rem; }
             section { padding: 50px 0; }
             .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
@@ -383,7 +389,6 @@
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            
             <!-- ==============================
                  VERSÃO DESKTOP
                  ============================== -->
@@ -391,7 +396,6 @@
                 Assuma o controle total das suas <br>
                 finanças 
                 
-                <!-- O Quebra-cabeça -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
                     <!-- Curva Vetorial Perfeita: ViewBox mais largo garante que nada seja cortado -->
@@ -431,24 +435,23 @@
                 e tenha dinheiro <br>
                 sobrando todo mês
             </span>
-
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP (Exatamente 3 linhas cravadas com <br>) -->
+        <!-- SUBHEADLINE DESKTOP (3 linhas forçadas com <br>) -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida.<br>
-            Clareza sobre como família e negócio se interligam. Automático e simples.<br>
+            Organização que se adapta à vida corrida e clareza em meio às oscilações.<br>
+            Com família e negócio separados, num só lugar, automáticos e simples.<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
 
-        <!-- SUBHEADLINE MOBILE (Estoura as bordas para encaixe natural em 4 linhas) -->
+        <!-- SUBHEADLINE MOBILE (Texto fluido que encaixa nas margens estouradas) -->
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida. Clareza sobre como família e negócio se interligam. Automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Organização que se adapta à vida corrida e clareza em meio às oscilações. Com família e negócio separados, num só lugar, automáticos e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
         
-        <!-- VIDEO HOOK (Segunda Subheadline com line-height apertado) -->
+        <!-- VIDEO HOOK -->
         <p class="video-hook">
-            Assista o vídeo e entenda o método que é tão eficaz que você vai se sentir envergonhado por não ter começado antes.
+            Assista o método mais absurdamente simples para gerir estas 3 áreas financeiras
         </p>
         
         <div class="video-container">
