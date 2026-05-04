@@ -182,13 +182,25 @@
             line-height: 1.3; 
         }
         
+        /* -----------------------------------------
+           VIDEO CONTAINER (DESKTOP: 30% maior | 16:9)
+           ----------------------------------------- */
         .video-container {
-            width: 100%; max-width: 800px; aspect-ratio: 16/9; margin: 0 auto 40px;
-            background: #0F172A; border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; position: relative; overflow: hidden;
+            width: 100%; 
+            max-width: 1040px; /* Aumentado 30% (antes era 800px) */
+            aspect-ratio: 16/9; 
+            margin: 0 auto 40px;
+            background: #0F172A; 
+            border-radius: 16px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer; 
+            position: relative; 
+            overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 4px solid #FFF; outline: 1px solid var(--border-light);
+            border: 4px solid #FFF; 
+            outline: 1px solid var(--border-light);
         }
         
         .unmute-btn {
@@ -232,13 +244,12 @@
                 margin: 0 -3px;
             }
 
-            /* Subheadline Mobile - Travada matematicamente em 5 linhas */
+            /* Subheadline Mobile - 5 Linhas exatas */
             .hero .subheadline.mobile-only { 
                 font-size: 1.05rem; 
                 line-height: 1.4;
-                /* As margens estouradas garantem que o navegador não quebre antes da hora */
-                margin-left: -20px; 
-                margin-right: -20px;
+                margin-left: -15px; 
+                margin-right: -15px;
                 max-width: none; 
                 margin-bottom: 24px;
             }
@@ -249,6 +260,13 @@
                 line-height: 1.25; 
                 padding: 0 10px;
                 margin-bottom: 12px;
+            }
+
+            /* VIDEO CONTAINER (MOBILE: Formato Stories Vertical 9:16) */
+            .video-container {
+                aspect-ratio: 9/16; /* Formato vertical estilo Reels/Stories */
+                max-width: 380px; /* Largura máxima controlada para não ficar gigante na tela */
+                border-radius: 24px; /* Bordas um pouco mais arredondadas no celular */
             }
 
             /* Outros ajustes globais */
@@ -385,7 +403,7 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- O Vetor começa acima (-5) e termina abaixo (61) para ser cortado reto pelas bordas do container -->
+                    <!-- Corte Perfeito do SVG estendendo a linha matemática para fora da caixa (-5 a 61) -->
                     <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
                         <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -409,6 +427,7 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
+                    <!-- Corte Perfeito no celular estendendo a linha matemática (-5 a 49) -->
                     <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
                         <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -424,20 +443,20 @@
             </span>
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP (3 linhas cravadas, sem ponto final) -->
+        <!-- SUBHEADLINE DESKTOP (3 linhas forçadas) -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
+            Organização que se adapta à vida corrida e clareza em meio às oscilações.<br>
             Com família e negócio separados, num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
-        <!-- SUBHEADLINE MOBILE (5 linhas cravadas manualmente com as palavras distribuídas, sem ponto no escuro) -->
+        <!-- SUBHEADLINE MOBILE (5 linhas cravadas com <br> e pontuação alterada) -->
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
             clareza em meio às oscilações. Com família e<br>
             negócio separados, num só lugar, automático<br>
-            e simples Antes que mais uma decisão no escuro<br>
-            te prenda ao banco por anos.
+            e simples. Antes que mais uma decisão no<br>
+            escuro te prenda ao banco por anos
         </p>
         
         <!-- VIDEO HOOK (Colado ao vídeo) -->
@@ -445,6 +464,7 @@
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
+        <!-- VIDEO CONTAINER (Desktop Expandido | Mobile Vertical 9:16) -->
         <div class="video-container">
             <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
         </div>
