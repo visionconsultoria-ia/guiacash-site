@@ -137,7 +137,7 @@
             height: 56px; /* ALTURA MATEMATICAMENTE TRAVADA */
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
             border-radius: 12px;
-            overflow: hidden; /* Corta qualquer excesso indesejado */
+            overflow: hidden; /* Corta a linha do SVG exatamente na borda */
             margin: 0 8px;
             vertical-align: middle;
             transform: translateY(-4px);
@@ -167,7 +167,6 @@
            ----------------------------------------- */
         .hero .subheadline { 
             max-width: 900px; 
-            /* Espaço MAIOR (32px) entre a subheadline 1 e a subheadline 2 */
             margin: 0 auto 32px; 
             color: #555555;
             font-weight: 700; 
@@ -177,11 +176,12 @@
         /* Segunda subheadline (Video hook) */
         .hero .video-hook { 
             max-width: 700px; 
-            margin: 0 auto 40px; 
+            /* Margem inferior espremida (12px) para ficar rente ao vídeo */
+            margin: 0 auto 12px; 
             font-size: 1rem; 
             color: #777777; 
             font-weight: 400; 
-            line-height: 1.3; /* Entrelinha mais espremida */
+            line-height: 1.3; 
         }
         
         .video-container {
@@ -235,34 +235,23 @@
                 margin: 0 -3px;
             }
 
-            /* Subheadline Mobile - Estourando as bordas e forçando máx 5 linhas */
+            /* Subheadline Mobile - Estourando as bordas e forçando exatas 5 linhas */
             .hero .subheadline.mobile-only { 
-                font-size: 1.05rem; 
-                line-height: 1.4;
-                margin-left: -15px; 
-                margin-right: -15px;
+                font-size: 1rem; 
+                line-height: 1.45;
+                margin-left: -10px; 
+                margin-right: -10px;
                 max-width: none; 
-                margin-bottom: 24px; /* Mais espaço para o vídeo hook */
+                margin-bottom: 24px;
             }
 
-            /* Video Hook Mobile - Fonte menor e linha espremida */
+            /* Video Hook Mobile - Fonte menor e espaço reduzido colado ao vídeo */
             .hero .video-hook {
                 font-size: 0.85rem; 
                 line-height: 1.25; 
                 padding: 0 10px;
-                margin-bottom: 24px;
+                margin-bottom: 12px;
             }
-
-            /* Outros ajustes Mobile globais */
-            h2 { font-size: 1.8rem; }
-            section { padding: 50px 0; }
-            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
-            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
-            .v-pf { left: 10px; } .v-pj { right: 10px; }
-            .venn-wrapper { height: 300px; }
-            .v-center { width: 90px; height: 180px; }
-            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
-            .price-tag { font-size: 2.8rem; }
         }
 
         /* =========================================
@@ -376,6 +365,17 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
+        @media (max-width: 768px) {
+            h2 { font-size: 1.8rem; }
+            section { padding: 50px 0; }
+            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
+            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
+            .v-pf { left: 10px; } .v-pj { right: 10px; }
+            .venn-wrapper { height: 300px; }
+            .v-center { width: 90px; height: 180px; }
+            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
+            .price-tag { font-size: 2.8rem; }
+        }
     </style>
 </head>
 <body>
@@ -398,13 +398,13 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Curva Vetorial Perfeita: ViewBox mais largo garante que nada seja cortado -->
-                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
-                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <!-- Linha desenhada do y: -5 ao y: 61 para ser CORTADA pela guilhotina do container -->
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
-                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -422,12 +422,13 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
-                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <!-- Linha desenhada do y: -5 ao y: 49 para ser CORTADA no mobile -->
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
-                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -440,13 +441,17 @@
         <!-- SUBHEADLINE DESKTOP (3 linhas forçadas com <br>) -->
         <p class="subheadline desktop-only">
             Organização que se adapta à vida corrida e clareza em meio às oscilações.<br>
-            Com família e negócio separados, num só lugar, automáticos e simples.<br>
+            Com família e negócio separados, num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
 
-        <!-- SUBHEADLINE MOBILE (Texto fluido que encaixa nas margens estouradas) -->
+        <!-- SUBHEADLINE MOBILE (Quebras cravadas forçadas em 5 linhas exatas) -->
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações. Com família e negócio separados, num só lugar, automáticos e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Organização que se adapta à vida corrida<br>
+            e clareza em meio às oscilações. Com família<br>
+            e negócio separados, num só lugar, automático<br>
+            e simples Antes que mais uma decisão no escuro<br>
+            te prenda ao banco por anos.
         </p>
         
         <!-- VIDEO HOOK -->
