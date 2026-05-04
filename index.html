@@ -105,7 +105,7 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Estrutura Avançada)
+           1. HERO SECTION (Atualizada e Perfeita)
         ========================================= */
         .hero { 
             text-align: center; 
@@ -145,30 +145,40 @@
         .puzzle-text {
             display: flex;
             align-items: center;
-            padding: 4px 8px; /* Padding ideal */
+            padding: 4px 10px; 
             color: #FFFFFF;
             font-weight: 900;
         }
 
-        /* O SVG de Corte Perfeito sem achatar */
+        /* O SVG de Corte Perfeito sem cortes nas bordas (ViewBox estendido) */
         .puzzle-joint {
-            width: 16px; /* Mais espaço para desenhar a curva perfeitamente */
-            height: 48px; /* Altura fixa baseada na fonte, permite o círculo manter a proporção */
-            margin: 0 -3px; 
+            width: 20px; 
+            height: 52px; 
+            margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
         }
 
-        /* Subheadline */
+        /* -----------------------------------------
+           SUBHEADLINES
+           ----------------------------------------- */
         .hero .subheadline { 
             max-width: 900px; 
-            margin: 0 auto 20px; 
+            margin: 0 auto 16px; 
             color: #555555;
             font-weight: 700; 
             line-height: 1.5;
         }
 
-        .hero .video-hook { max-width: 700px; margin: 0 auto 40px; font-size: 1rem; color: #777777; font-weight: 400; }
+        /* Segunda subheadline (Video hook) com line-height apertado */
+        .hero .video-hook { 
+            max-width: 700px; 
+            margin: 0 auto 30px; 
+            font-size: 1rem; 
+            color: #777777; 
+            font-weight: 400; 
+            line-height: 1.3; 
+        }
         
         .video-container {
             width: 100%; max-width: 800px; aspect-ratio: 16/9; margin: 0 auto 40px;
@@ -188,7 +198,6 @@
         /* -----------------------------------------
            CONTROLE ESTRITO DE RESPONSIVIDADE (DESKTOP vs MOBILE)
            ----------------------------------------- */
-        
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
         
@@ -211,33 +220,47 @@
                 transform: none; 
             }
             .puzzle-text { 
-                font-size: 2rem; 
+                font-size: 1.8rem; 
                 padding: 4px 8px;
             }
-            
-            /* Ajusta a altura da linha do SVG para a fonte menor do celular sem perder a proporção */
             .puzzle-joint {
-                width: 14px; 
+                width: 16px; 
                 height: 38px;
-                margin: 0 -2px;
+                margin: 0 -3px;
             }
 
-            /* -----------------------------------------
-               O SEGREDO DA OPÇÃO 4: BORDAS MENORES (Negative Margins)
-               ----------------------------------------- */
+            /* Subheadline Mobile - Estourando as margens para forçar 4 linhas */
             .hero .subheadline.mobile-only { 
-                font-size: 1.05rem; /* Fonte MAIOR, de leitura confortável */
+                font-size: 1.05rem; 
                 line-height: 1.4;
-                /* As margens negativas fazem o texto avançar além da área central */
-                margin-left: -12px;
-                margin-right: -12px;
+                margin-left: -15px; 
+                margin-right: -15px;
                 max-width: none; 
-                margin-bottom: 20px;
+                margin-bottom: 16px;
             }
+
+            /* Video Hook Mobile - Tamanho de letra e entrelinha reduzidos */
+            .hero .video-hook {
+                font-size: 0.85rem; 
+                line-height: 1.25; 
+                padding: 0 10px;
+                margin-bottom: 24px;
+            }
+
+            /* Demais ajustes globais Mobile */
+            h2 { font-size: 1.8rem; }
+            section { padding: 50px 0; }
+            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
+            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
+            .v-pf { left: 10px; } .v-pj { right: 10px; }
+            .venn-wrapper { height: 300px; }
+            .v-center { width: 90px; height: 180px; }
+            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
+            .price-tag { font-size: 2.8rem; }
         }
 
         /* =========================================
-           SEÇÕES REMANESCENTES
+           SEÇÕES REMANESCENTES (Mantidas intactas)
         ========================================= */
 
         /* 2. AUDIÊNCIA */
@@ -347,17 +370,6 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
-        @media (max-width: 768px) {
-            h2 { font-size: 1.8rem; }
-            section { padding: 50px 0; }
-            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
-            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
-            .v-pf { left: 10px; } .v-pj { right: 10px; }
-            .venn-wrapper { height: 300px; }
-            .v-center { width: 90px; height: 180px; }
-            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
-            .price-tag { font-size: 2.8rem; }
-        }
     </style>
 </head>
 <body>
@@ -379,16 +391,16 @@
                 Assuma o controle total das suas <br>
                 finanças 
                 
-                <!-- O Quebra-cabeça com Matemática Exata da Curva -->
+                <!-- O Quebra-cabeça -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Curva desenhada pixel a pixel para encostar nas bordas sem achatar -->
-                    <svg class="puzzle-joint" viewBox="0 0 16 48" fill="none">
-                        <path d="M 8,0 L 8,16 A 8,8 0 1 1 8,32 L 8,48" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+                    <!-- Curva Vetorial Perfeita: ViewBox mais largo garante que nada seja cortado -->
+                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
+                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 16 48" fill="none">
-                        <path d="M 8,0 L 8,16 A 8,8 0 1 1 8,32 L 8,48" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
+                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -404,15 +416,14 @@
                 Assuma o controle <br>
                 total das suas finanças <br>
                 
-                <!-- Quebra-cabeça adaptado para o mobile com a mesma curva vetorizada -->
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 14 38" fill="none">
-                        <path d="M 7,0 L 7,12 A 7,7 0 1 1 7,26 L 7,38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
+                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 14 38" fill="none">
-                        <path d="M 7,0 L 7,12 A 7,7 0 1 1 7,26 L 7,38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                    <svg class="puzzle-joint" viewBox="0 -2 24 52" fill="none">
+                        <path d="M 12,0 L 12,18 A 8,8 0 1 1 12,34 L 12,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -423,18 +434,19 @@
 
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP (Exatamente 3 linhas) -->
+        <!-- SUBHEADLINE DESKTOP (Exatamente 3 linhas cravadas com <br>) -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida,<br>
-            com finanças da família e negócio integrado num só lugar, automático e simples.<br>
+            Organização que se adapta à vida corrida.<br>
+            Clareza sobre como família e negócio se interligam. Automático e simples.<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
 
-        <!-- SUBHEADLINE MOBILE (Max 5 linhas, Avança as bordas laterais com o Negative Margin) -->
+        <!-- SUBHEADLINE MOBILE (Estoura as bordas para encaixe natural em 4 linhas) -->
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida, com finanças da família e negócio integrado num só lugar, automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Organização que se adapta à vida corrida. Clareza sobre como família e negócio se interligam. Automático e simples. Antes que mais uma decisão no escuro te prenda ao banco por anos.
         </p>
         
+        <!-- VIDEO HOOK (Segunda Subheadline com line-height apertado) -->
         <p class="video-hook">
             Assista o vídeo e entenda o método que é tão eficaz que você vai se sentir envergonhado por não ter começado antes.
         </p>
