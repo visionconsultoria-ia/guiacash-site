@@ -105,7 +105,7 @@
         .bg-pj h3, .bg-pf h3 { opacity: 0.9; }
 
         /* =========================================
-           1. HERO SECTION (Atualizada - Quebra-Cabeça Fixo)
+           1. HERO SECTION 
         ========================================= */
         .hero { 
             text-align: center; 
@@ -129,15 +129,15 @@
         }
 
         /* -----------------------------------------
-           COMPONENTE QUEBRA-CABEÇA CSS (Matemática Perfeita)
+           COMPONENTE QUEBRA-CABEÇA CSS 
            ----------------------------------------- */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: flex-start; /* Alinhamento ao topo para não haver sobra */
-            height: 56px; /* ALTURA MATEMATICAMENTE TRAVADA */
+            align-items: flex-start; 
+            height: 56px; 
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
             border-radius: 12px;
-            overflow: hidden; /* Corta a linha do SVG exatamente na borda */
+            overflow: hidden; 
             margin: 0 8px;
             vertical-align: middle;
             transform: translateY(-4px);
@@ -147,16 +147,15 @@
         .puzzle-text {
             display: flex;
             align-items: center;
-            height: 100%; /* Ocupa exatamente a altura travada do contêiner */
+            height: 100%; 
             padding: 0 12px; 
             color: #FFFFFF;
             font-weight: 900;
         }
 
-        /* O SVG de Corte: Agora com a mesma altura do contêiner */
         .puzzle-joint {
             width: 24px; 
-            height: 56px; /* EXATAMENTE OS MESMOS 56px DO CONTÊINER */
+            height: 56px; 
             margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
@@ -176,7 +175,6 @@
         /* Segunda subheadline (Video hook) */
         .hero .video-hook { 
             max-width: 700px; 
-            /* Margem inferior espremida (12px) para ficar rente ao vídeo */
             margin: 0 auto 12px; 
             font-size: 1rem; 
             color: #777777; 
@@ -219,9 +217,8 @@
                 line-height: 1.4;
             }
             
-            /* Ajuste matemático para o Quebra-Cabeça no Mobile */
             .puzzle-wrapper {
-                height: 44px; /* Altura menor travada no celular */
+                height: 44px; 
                 margin: 6px auto; 
                 transform: none; 
             }
@@ -231,34 +228,44 @@
             }
             .puzzle-joint {
                 width: 20px; 
-                height: 44px; /* Acompanha a altura do contêiner */
+                height: 44px; 
                 margin: 0 -3px;
             }
 
-            /* Subheadline Mobile - Estourando as bordas e forçando exatas 5 linhas */
+            /* Subheadline Mobile - Travada matematicamente em 5 linhas */
             .hero .subheadline.mobile-only { 
-                font-size: 1rem; 
-                line-height: 1.45;
-                margin-left: -10px; 
-                margin-right: -10px;
+                font-size: 1.05rem; 
+                line-height: 1.4;
+                /* As margens estouradas garantem que o navegador não quebre antes da hora */
+                margin-left: -20px; 
+                margin-right: -20px;
                 max-width: none; 
                 margin-bottom: 24px;
             }
 
-            /* Video Hook Mobile - Fonte menor e espaço reduzido colado ao vídeo */
+            /* Video Hook Mobile */
             .hero .video-hook {
                 font-size: 0.85rem; 
                 line-height: 1.25; 
                 padding: 0 10px;
                 margin-bottom: 12px;
             }
+
+            /* Outros ajustes globais */
+            h2 { font-size: 1.8rem; }
+            section { padding: 50px 0; }
+            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
+            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
+            .v-pf { left: 10px; } .v-pj { right: 10px; }
+            .venn-wrapper { height: 300px; }
+            .v-center { width: 90px; height: 180px; }
+            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
+            .price-tag { font-size: 2.8rem; }
         }
 
         /* =========================================
-           SEÇÕES REMANESCENTES (Mantidas intactas)
+           SEÇÕES REMANESCENTES
         ========================================= */
-
-        /* 2. AUDIÊNCIA */
         .audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 40px 0; }
         .role-card { background: var(--bg-white); padding: 18px; border-radius: 12px; border: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.3s, border-color 0.3s; }
         .role-card:hover { transform: translateY(-3px); border-color: var(--pf-base); }
@@ -268,7 +275,6 @@
         .pain-list li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; background: var(--bg-white); padding: 20px; border-radius: 12px; border-left: 4px solid var(--div-base); color: var(--text-gray); font-size: 1.05rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-light); }
         .pain-list i { color: var(--div-base); margin-top: 4px; font-size: 1.2rem; }
 
-        /* 3. VERDADES SECRETAS */
         .container-box { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: 20px; padding: 50px; margin-top: 40px; text-align: left; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
         .container-box::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--brand-gradient); }
         .pill-title { display: inline-block; padding: 6px 16px; background: rgba(245, 167, 34, 0.15); color: #b06f0a; border-radius: 50px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 20px; }
@@ -280,7 +286,6 @@
         .micro-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .micro-tag { background: #FFF; border: 1px solid var(--border-light); color: var(--text-gray); padding: 6px 14px; border-radius: 50px; font-size: 0.85rem; font-weight: 700; }
 
-        /* 4. COMPARATIVO */
         .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
         .col-card { background: var(--bg-white); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
         .col-bad { border: 1px solid var(--border-light); border-top: 5px solid #ef4444; }
@@ -291,14 +296,12 @@
         .col-bad li i { color: #ef4444; margin-top: 5px; }
         .col-good li i { color: var(--pj-base); margin-top: 5px; }
 
-        /* 5. TESTEMUNHOS */
         .masonry { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
         .testimonial { background: var(--bg-white); padding: 30px; border-radius: 16px; border: 1px solid var(--border-light); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .stars { color: var(--div-base); margin-bottom: 15px; font-size: 1.2rem; }
         .fake-line { height: 12px; background: var(--bg-light); border-radius: 6px; margin-bottom: 10px; width: 100%; }
         .fake-line.short { width: 60%; }
 
-        /* 6. COMO FUNCIONA */
         .step-box { margin-bottom: 40px; padding: 40px; background: var(--bg-white); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border-left: 5px solid; }
         .step-box.s1 { border-color: var(--pf-base); }
         .step-box.s2 { border-color: var(--pj-base); }
@@ -327,14 +330,12 @@
         .bar { width: 50px; background: var(--pj-base); border-radius: 6px 6px 0 0; opacity: 0.6; }
         .bar.highlight { background: var(--pf-base); opacity: 1; }
 
-        /* 7. BENTO GRID */
         .bento-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px; }
         .bento-item { background: var(--bg-white); padding: 30px; border-radius: 20px; border: 1px solid var(--border-light); box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .bento-full { grid-column: 1 / -1; }
         .bento-item h4 { margin-bottom: 10px; font-size: 1.15rem; }
         .bento-item p { margin: 0; font-size: 0.95rem; }
 
-        /* 8. BÔNUS */
         .bonus-items { list-style: none; max-width: 800px; margin: 0 auto; text-align: left; }
         .bonus-items li { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(255,255,255,0.2); }
         .bonus-items i { font-size: 1.5rem; color: #FFF; margin-top: 4px; }
@@ -343,7 +344,6 @@
         .device-card i { font-size: 3rem; margin-bottom: 15px; color: #FFF; }
         .device-card span { font-weight: 600; font-size: 0.95rem; display: block; line-height: 1.4; }
 
-        /* 9. OFERTA */
         .offer-wrapper { background: var(--bg-white); border: 2px solid var(--pj-base); border-radius: 24px; padding: 50px; margin-top: 50px; box-shadow: 0 20px 50px rgba(0, 145, 150, 0.1); }
         .check-list { list-style: none; margin-bottom: 30px; text-align: left; }
         .check-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; font-size: 1.05rem; color: var(--text-dark); font-weight: 500; }
@@ -352,11 +352,9 @@
         .price-tag span { font-size: 1.2rem; color: var(--text-gray); font-weight: 500; display: block; letter-spacing: normal; margin-bottom: 5px; }
         .guarantee-box { margin-top: 40px; background: rgba(245, 167, 34, 0.1); border: 1px dashed var(--div-base); padding: 25px; border-radius: 16px; text-align: left; }
 
-        /* 10. GABRIELA VIEIRA */
         .bio-wrapper { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center; background: var(--bg-white); padding: 50px; border-radius: 24px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
         .bio-photo { width: 100%; aspect-ratio: 1; background: var(--bg-light); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: var(--border-light); font-size: 4rem; border: 1px solid var(--border-light); }
 
-        /* 11. FAQ */
         .faq-accordion details { background: var(--bg-white); margin-bottom: 16px; border-radius: 12px; border: 1px solid var(--border-light); overflow: hidden; transition: box-shadow 0.3s; }
         .faq-accordion details:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
         .faq-accordion summary { padding: 24px; font-weight: 700; font-size: 1.05rem; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
@@ -365,17 +363,6 @@
         .faq-accordion details[open] summary::after { content: '−'; }
         .faq-accordion p { padding: 0 24px 24px; font-size: 1rem; margin: 0; color: var(--text-gray); }
 
-        @media (max-width: 768px) {
-            h2 { font-size: 1.8rem; }
-            section { padding: 50px 0; }
-            .compare-grid, .bio-wrapper, .bento-grid, .bubble-grid, .matrix-grid { grid-template-columns: 1fr; }
-            .v-circle { width: 180px; height: 180px; font-size: 0.95rem; padding: 15px; }
-            .v-pf { left: 10px; } .v-pj { right: 10px; }
-            .venn-wrapper { height: 300px; }
-            .v-center { width: 90px; height: 180px; }
-            .container-box, .offer-wrapper, .bio-wrapper { padding: 30px 20px; }
-            .price-tag { font-size: 2.8rem; }
-        }
     </style>
 </head>
 <body>
@@ -398,7 +385,7 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Linha desenhada do y: -5 ao y: 61 para ser CORTADA pela guilhotina do container -->
+                    <!-- O Vetor começa acima (-5) e termina abaixo (61) para ser cortado reto pelas bordas do container -->
                     <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
                         <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -422,7 +409,6 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Linha desenhada do y: -5 ao y: 49 para ser CORTADA no mobile -->
                     <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
                         <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -438,25 +424,25 @@
             </span>
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP (3 linhas forçadas com <br>) -->
+        <!-- SUBHEADLINE DESKTOP (3 linhas cravadas, sem ponto final) -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações.<br>
+            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
             Com família e negócio separados, num só lugar, automático e simples<br>
-            Antes que mais uma decisão no escuro te prenda ao banco por anos.
+            Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
-        <!-- SUBHEADLINE MOBILE (Quebras cravadas forçadas em 5 linhas exatas) -->
+        <!-- SUBHEADLINE MOBILE (5 linhas cravadas manualmente com as palavras distribuídas, sem ponto no escuro) -->
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida<br>
-            e clareza em meio às oscilações. Com família<br>
-            e negócio separados, num só lugar, automático<br>
+            Organização que se adapta à vida corrida e<br>
+            clareza em meio às oscilações. Com família e<br>
+            negócio separados, num só lugar, automático<br>
             e simples Antes que mais uma decisão no escuro<br>
             te prenda ao banco por anos.
         </p>
         
-        <!-- VIDEO HOOK -->
+        <!-- VIDEO HOOK (Colado ao vídeo) -->
         <p class="video-hook">
-            Assista o método mais absurdamente simples para gerir estas 3 áreas financeiras
+            Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
         <div class="video-container">
