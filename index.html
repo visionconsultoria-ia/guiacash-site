@@ -90,17 +90,21 @@
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
         /* Estrutura das Seções Padrão */
-        section { position: relative; }
+        section { padding: 80px 0; position: relative; }
         .bg-light { background-color: var(--bg-light); }
 
         /* =========================================
-           1. HERO SECTION 
+           1. HERO SECTION (100% INTACTA ORIGINAL)
         ========================================= */
-        /* Reduzido o branco inferior para a transição ficar suave */
         .hero { 
-            text-align: center; padding-top: 40px; padding-bottom: 20px; 
-            display: flex; flex-direction: column; align-items: center; background-color: var(--bg-white);
+            text-align: center; 
+            padding-top: 40px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background-color: var(--bg-white);
         }
+        
         .hero-logo { max-width: 98px; margin-bottom: 24px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03)); }
         .main-headline { max-width: 1000px; margin: 0 auto 24px; color: #363636; letter-spacing: -0.04em; }
 
@@ -122,6 +126,7 @@
             position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             border: 4px solid #FFF; outline: 1px solid var(--border-light);
         }
+        
         .unmute-btn {
             background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
             font-weight: 700; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -130,19 +135,19 @@
         /* =========================================
            2. SESSÃO: TYPEWRITER SLIDER & AUDIENCE 
         ========================================= */
-        /* Aumentado o topo para luxo visual e o bottom para "abraçar" os cards */
-        #sessao-audiencia { padding-top: 100px; padding-bottom: 100px; }
+        /* Aumentando o respiro interno superior e inferior */
+        #sessao-audiencia { padding-top: 100px; padding-bottom: 120px; }
 
-        .section-title { text-align: center; margin-bottom: 30px; }
+        .section-title { text-align: center; margin-bottom: 40px; }
         
         .slider-wrapper { 
-            position: relative; max-width: 900px; margin: 0 auto 20px; 
-            display: flex; align-items: center; justify-content: center; min-height: 120px; 
-            touch-action: pan-y; /* Libera rolagem vertical, prende horizontal para o swipe */
+            position: relative; max-width: 900px; margin: 0 auto 40px; 
+            display: flex; align-items: center; justify-content: center; min-height: 100px; 
+            touch-action: pan-y; /* Permite scroll vertical livre, prende horizontal para o swipe */
         }
-        .typewriter-container { flex: 1; text-align: center; padding: 0 40px; } 
+        .typewriter-container { flex: 1; text-align: center; padding: 0 50px; } 
         
-        /* Classes Dinâmicas de Cores (Texto e Ícones das Setas) */
+        /* Classes Dinâmicas de Cores */
         .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .color-pf-only { color: var(--pf-base); }
         .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -154,9 +159,9 @@
         .cursor { display: inline-block; width: 3px; background-color: currentColor; margin-left: 3px; animation: blink 0.7s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        /* Setas do slider: Fundo invisível, cor aplicada apenas no ícone interior */
+        /* Setas do slider: Fundo limpo, classe injetada apenas no ícone interior */
         .slider-btn { 
-            background: none; border: none; font-size: 1.5rem; cursor: pointer; 
+            background: none; border: none; font-size: 1.6rem; cursor: pointer; 
             transition: 0.3s; padding: 10px; z-index: 10; position: absolute; 
             top: 50%; transform: translateY(-50%); 
         }
@@ -169,25 +174,38 @@
         .active { opacity: 1; transform: translateY(0); }
 
         /* -----------------------------------------
-           GRID E CARDS: A SOLUÇÃO BLINDADA
+           GRID BLINDADO (Com MARGENS em vez de Gap)
            ----------------------------------------- */
-        .audience-grid { 
-            display: flex; 
+        
+        /* DESKTOP WRAPPER */
+        .audience-wrapper-desktop {
+            display: flex;
             justify-content: center;
-            flex-wrap: wrap; 
-            gap: 24px; /* O Gap físico horizontal/vertical */
-            margin: 40px auto 0; 
             max-width: 1000px;
+            margin: 0 auto;
         }
-        
-        .audience-col { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 24px; 
-            flex: 1; /* Divide as colunas perfeitamente iguais */
+
+        .audience-col {
+            display: flex;
+            flex-direction: column;
+            flex: 1; /* Divisão exata em 3 colunas */
         }
-        
-        /* Cards: Altura idêntica travada e borda dupla dinâmica */
+        /* Parede invisível à direita da coluna 1 e 2 */
+        .audience-col:not(:last-child) {
+            margin-right: 24px;
+        }
+
+        /* MOBILE WRAPPER */
+        .audience-wrapper-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 380px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Cards: Altura idêntica, borda dupla em degradê */
         .role-card { 
             background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
                         var(--pf-pj-gradient) border-box;
@@ -197,45 +215,54 @@
             display: flex; align-items: center; gap: 12px; 
             font-weight: 600; font-size: 0.95rem; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
-            transition: transform 0.3s; 
-            height: 85px; /* Altura SIMÉTRICA forçada */
+            transition: transform 0.3s, box-shadow 0.3s; 
+            height: 85px; /* Altura 100% simétrica */
             width: 100%;
         }
+        
+        /* Margem Inferior para afastar os cards um do outro */
+        .audience-col .role-card:not(:last-child) { margin-bottom: 24px; }
+        .audience-wrapper-mobile .role-card { margin-bottom: 20px; }
+        .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
+
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
         
         /* Box de fundo sutil para o ícone */
         .icon-bg {
             background: rgba(92, 75, 223, 0.1); 
-            padding: 10px; 
+            width: 44px; height: 44px; 
             border-radius: 8px;
-            display: inline-flex; 
+            display: flex; 
             align-items: center; 
             justify-content: center;
-            flex-shrink: 0; /* Evita que o box amasse */
+            flex-shrink: 0; 
         }
 
-        /* Ícone em degradê (com Line-Height para não cortar a cabeça) */
+        /* Ícone em degradê (com fix de linha p/ não cortar) */
         .role-card i { 
             background: var(--pf-pj-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-size: 1.2rem; 
-            line-height: 1.5; /* Salva a integridade visual da imagem */
-            padding: 2px;
-            display: inline-block;
+            font-size: 1.25rem; 
+            line-height: 1.5; /* Salva a cabeça do ícone no iPhone */
+            padding-top: 2px; /* Respiro interno de segurança */
         }
 
         /* -----------------------------------------
            CONTROLE ESTRITO DE RESPONSIVIDADE
            ----------------------------------------- */
         .mobile-only { display: none !important; }
-        .desktop-only { display: block !important; }
+        .desktop-only { display: flex !important; } /* Altera display para flex no grid */
+
+        .main-headline { font-size: 3.2rem; }
+        .puzzle-text { font-size: 2.8rem; } 
 
         @media (max-width: 768px) {
-            .mobile-only { display: block !important; }
+            .mobile-only { display: flex !important; } /* Exibe wrapper mobile como flex */
             .desktop-only { display: none !important; }
             
-            .hero { padding-top: 30px; padding-bottom: 15px; } /* Ajuste delicado de CTA no mobile */
+            .hero { padding-top: 30px; } 
+            
             .main-headline { font-size: 1.95rem; line-height: 1.4; }
             .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; }
             .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
@@ -249,27 +276,20 @@
             .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
 
             /* Ajustes Sessão 2 Mobile */
-            #sessao-audiencia { padding-top: 60px; padding-bottom: 80px; } /* Respiros proporcionais */
+            #sessao-audiencia { padding-top: 70px; padding-bottom: 80px; } 
             
-            .slider-wrapper { min-height: 90px; margin-bottom: 10px; }
+            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
             .typewriter-container { padding: 0 25px; } 
             
-            /* Setinhas recuadas p/ aproveitar a tela toda */
-            .slider-btn { font-size: 1.2rem; padding: 5px; }
-            .slider-btn.prev { left: -15px; } 
-            .slider-btn.next { right: -15px; } 
+            /* Setinhas coladas na borda */
+            .slider-btn { font-size: 1.4rem; padding: 5px; }
+            .slider-btn.prev { left: -10px; } 
+            .slider-btn.next { right: -10px; } 
             
             #typewriter-text { font-size: 1.15rem; }
             
-            /* Mobile Grid: Coluna única, com Gap Perfeito Ativado */
-            .audience-grid { 
-                flex-direction: column; 
-                gap: 20px; 
-                max-width: 380px; 
-            }
-            .audience-col { gap: 20px; } 
-            
             h2 { font-size: 1.8rem; }
+            section { padding: 50px 0; }
         }
     </style>
 </head>
@@ -278,13 +298,13 @@
     <!-- LINHA DE TOPO -->
     <div class="top-gradient-line"></div>
 
-    <!-- 1. HERO SECTION -->
+    <!-- 1. HERO SECTION (Rollback: Intacta como a original aprovada) -->
     <section class="hero container">
         
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            <span class="desktop-only">
+            <span class="desktop-only" style="display: inline!important;">
                 Assuma o controle total das suas <br>
                 finanças 
                 
@@ -304,7 +324,7 @@
                 dinheiro sobrando todo mês
             </span>
 
-            <span class="mobile-only">
+            <span class="mobile-only" style="display: inline!important;">
                 Assuma o controle <br>
                 total das suas finanças <br>
                 
@@ -325,13 +345,13 @@
             </span>
         </h1>
         
-        <p class="subheadline desktop-only">
+        <p class="subheadline desktop-only" style="display: block!important;">
             Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
             Com família e negócio separados, num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
-        <p class="subheadline mobile-only">
+        <p class="subheadline mobile-only" style="display: block!important;">
             Organização que se adapta à vida corrida e<br>
             clareza em meio às oscilações. Com família e<br>
             negócio separados, num só lugar, automático<br>
@@ -350,7 +370,7 @@
         <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
-    <!-- 2. AUDIÊNCIA DINÂMICA -->
+    <!-- 2. AUDIÊNCIA DINÂMICA (Com Respiros e Margens Seguras) -->
     <section id="sessao-audiencia" class="bg-light">
         <div class="container">
             <h2 class="section-title">O Guia Cash é para quem?</h2>
@@ -368,40 +388,41 @@
                 <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
             </div>
 
-            <!-- GRID DE AUDIÊNCIA -->
-            <div class="audience-grid">
-                <!-- Coluna Esquerda (Desktop) -->
-                <div class="audience-col desktop-only">
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-briefcase"></i></span> Prestador de serviço</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-building"></i></span> Empresário</div>
+            <!-- GRID DE AUDIÊNCIA - DESKTOP (Com Margens) -->
+            <div class="audience-wrapper-desktop desktop-only">
+                <!-- Coluna Esquerda -->
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
                 </div>
-                <!-- Coluna Centro (Desktop) -->
-                <div class="audience-col desktop-only">
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-user-doctor"></i></span> Profissional liberal</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-user-tie"></i></span> Autônomo</div>
+                <!-- Coluna Centro -->
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
                 </div>
-                <!-- Coluna Direita (Desktop) -->
-                <div class="audience-col desktop-only">
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-store"></i></span> Loja virtual ou física</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-laptop"></i></span> Infoprodutor e Influenciador</div>
-                </div>
-
-                <!-- Ordem Mobile Específica -->
-                <div class="audience-col mobile-only">
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-user-doctor"></i></span> Profissional liberal</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-user-tie"></i></span> Autônomo</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-building"></i></span> Empresário</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-briefcase"></i></span> Prestador de serviço</div>
-                    <div class="role-card"><span class="icon-bg"><i class="fa-solid fa-store"></i></span> Loja Física ou Virtual</div>
+                <!-- Coluna Direita -->
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja virtual ou física</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-laptop"></i></div> Infoprodutor e Influenciador</div>
                 </div>
             </div>
+
+            <!-- GRID DE AUDIÊNCIA - MOBILE (Com Margens e Ordem Específica) -->
+            <div class="audience-wrapper-mobile mobile-only">
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja Física ou Virtual</div>
+            </div>
+
         </div>
     </section>
 
     <!-- Lógica de Typewriter, Gatilho de Scroll e Swipe -->
     <script>
         const phrases =[
-            { text: "É um excelente técnico, atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
+            { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
             { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
             { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
             { text: "Precisa separar PJ da PF e ser mais profissional", color: "color-pf-pj" },
@@ -423,7 +444,7 @@
         const iconNext = document.getElementById("icon-next");
 
         function typeEffect() {
-            // "Mata" qualquer escrita anterior se a pessoa clicar p/ avançar rápido
+            // Interrompe execução anterior se houver clique rápido
             clearInterval(typeInterval);
             clearTimeout(waitTimeout);
             isTyping = true;
@@ -433,7 +454,7 @@
             // Aplica a cor na frase
             textEl.className = "fade-up active " + phrase.color;
             
-            // Aplica a cor estritamente nos ÍCONES das setas para que nunca sumam
+            // Aplica a cor estritamente nos ÍCONES (<i>) das setas
             iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
             iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
 
@@ -446,7 +467,7 @@
                 if (charIdx >= phrase.text.length) {
                     clearInterval(typeInterval);
                     isTyping = false;
-                    waitTimeout = setTimeout(nextSlide, 5000); // Exatos 5 segundos parada
+                    waitTimeout = setTimeout(nextSlide, 5000); // Exatos 5 segundos de leitura
                 }
             }, 40);
         }
@@ -485,13 +506,13 @@
             if (touchendX - touchstartX > 50) prevSlide(); // Arrastar p/ Direita = Anterior
         }, {passive: true});
 
-        // --- GATILHO DE ROLAGEM MÁGICO ---
+        // --- GATILHO DE ROLAGEM (Intersection Observer) ---
         const observer = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasStarted) {
                 hasStarted = true;
                 typeEffect();
             }
-        }, { threshold: 0.5 }); 
+        }, { threshold: 0.3 }); 
 
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
