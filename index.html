@@ -137,23 +137,26 @@
             position: relative; max-width: 900px; margin: 0 auto 20px; 
             display: flex; align-items: center; justify-content: center; min-height: 120px; 
         }
-        .typewriter-container { flex: 1; text-align: center; padding: 0 40px; } 
+        .typewriter-container { flex: 1; text-align: center; padding: 0 40px; touch-action: pan-y; } /* Permite scroll vertical livre e detecta horizontal */
         
-        /* Classes Dinâmicas de Cores */
+        /* Classes Dinâmicas de Cores (Texto e Setas) */
         .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .color-pf-only { color: var(--pf-base); }
         .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .color-pj-only { background: var(--pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        #typewriter-text { font-size: 1.4rem; font-weight: 800; line-height: 1.4; display: inline-block; position: relative; transition: all 0.5s ease; }
+        #typewriter-text { font-size: 1.4rem; font-weight: 800; line-height: 1.4; display: inline-block; position: relative; transition: all 0.3s ease; }
         
         /* Cursor piscando */
         .cursor { display: inline-block; width: 3px; background-color: currentColor; margin-left: 3px; animation: blink 0.7s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* Setas do slider */
-        .slider-btn { background: none; border: none; color: var(--border-light); font-size: 1.5rem; cursor: pointer; transition: 0.3s; padding: 10px; z-index: 10; position: absolute; top: 50%; transform: translateY(-50%); }
-        .slider-btn:hover { color: var(--pf-base); }
+        .slider-btn { 
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; 
+            transition: 0.3s; padding: 10px; z-index: 10; position: absolute; 
+            top: 50%; transform: translateY(-50%); 
+        }
         .slider-btn.prev { left: 0; }
         .slider-btn.next { right: 0; }
 
@@ -161,26 +164,34 @@
         .fade-up { opacity: 0; transform: translateY(20px); }
         .active { opacity: 1; transform: translateY(0); }
 
-        /* Audience Grid com espaçamento perfeitamente simétrico e comprimento menor */
+        /* Grid de Audiência (Simetria Perfeita) */
         .audience-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 24px; 
+            gap: 24px; /* Espaço horizontal E vertical uniforme */
             margin: 40px auto 0; 
-            max-width: 900px; /* Garante que os cards fiquem mais curtos horizontalmente */
+            max-width: 1000px;
         }
         
-        .audience-col { display: flex; flex-direction: column; gap: 24px; } /* Mantém espaçamento vertical idêntico ao horizontal */
+        .audience-col { display: flex; flex-direction: column; gap: 24px; }
         
+        /* Cards de altura fixa e borda degradê */
         .role-card { 
-            background: var(--bg-white); padding: 18px; border-radius: 12px; border: 1px solid var(--border-light); 
-            display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1rem; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.3s, border-color 0.3s; 
+            background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                        var(--pf-pj-gradient) border-box;
+            border: 2px solid transparent; /* Garante que a borda degradê apareça */
+            border-radius: 12px; 
+            padding: 10px 16px; 
+            display: flex; align-items: center; gap: 12px; 
+            font-weight: 600; font-size: 0.95rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+            transition: transform 0.3s; 
+            height: 85px; /* TODOS ficam idênticos */
             width: 100%;
         }
-        .role-card:hover { transform: translateY(-3px); border-color: var(--pf-base); }
+        .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
         
-        /* Box de fundo e ícone em degradê */
+        /* Box de fundo sutil para o ícone */
         .icon-bg {
             background: rgba(92, 75, 223, 0.1); 
             padding: 10px; 
@@ -189,11 +200,16 @@
             align-items: center; 
             justify-content: center;
         }
+
+        /* Ícone em degradê (com fix de linha p/ não cortar) */
         .role-card i { 
             background: var(--pf-pj-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-size: 1.2rem; 
+            line-height: 1.5; /* Evita que o degradê corte a cabeça do ícone */
+            padding: 2px 0;   /* Respiro interno */
+            display: inline-block;
         }
 
         /* -----------------------------------------
@@ -201,9 +217,6 @@
            ----------------------------------------- */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
-        
-        .main-headline { font-size: 3.2rem; }
-        .puzzle-text { font-size: 2.8rem; } 
 
         @media (max-width: 768px) {
             .mobile-only { display: block !important; }
@@ -227,15 +240,23 @@
             
             .slider-wrapper { min-height: 90px; margin-bottom: 10px; }
             .typewriter-container { padding: 0 25px; } 
-            .slider-btn { font-size: 1.1rem; padding: 5px; }
-            .slider-btn.prev { left: -10px; } 
-            .slider-btn.next { right: -10px; } 
+            
+            /* Setinhas coladas na borda */
+            .slider-btn { font-size: 1.2rem; padding: 5px; }
+            .slider-btn.prev { left: -15px; } 
+            .slider-btn.next { right: -15px; } 
             
             #typewriter-text { font-size: 1.15rem; }
             
-            /* Restrição de largura no celular para padronizar comprimento curto */
-            .audience-grid { grid-template-columns: 1fr; gap: 0; max-width: 360px; margin: 20px auto 0; }
+            /* Restrição do Grid Mobile */
+            .audience-grid { 
+                grid-template-columns: 1fr; 
+                gap: 16px; 
+                max-width: 380px; 
+                margin: 20px auto 0; 
+            }
             .audience-col { gap: 16px; } 
+            .role-card { height: 85px; } /* Mantém a simetria de altura */
             
             h2 { font-size: 1.8rem; }
         }
@@ -364,10 +385,10 @@
         </div>
     </section>
 
-    <!-- Typewriter & Gatilho de Scroll Script -->
+    <!-- Typewriter, Touch & Gatilho de Scroll Script -->
     <script>
         const phrases =[
-            { text: "É um excelente técnico, atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
+            { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
             { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
             { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
             { text: "Precisa separar PJ da PF e ser mais profissional", color: "color-pf-pj" },
@@ -380,48 +401,77 @@
         let currentIdx = 0;
         let isTyping = false;
         let hasStarted = false;
+        let typeInterval;
+        let waitTimeout;
         
         const textEl = document.getElementById("typewriter-text");
         const typingEl = textEl.querySelector(".typing-text");
+        const sliderBtns = document.querySelectorAll('.slider-btn');
 
         function typeEffect() {
-            if (isTyping) return;
+            // Limpa intervalos antigos caso a pessoa pule a frase rapidamente
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
             isTyping = true;
             
             const phrase = phrases[currentIdx];
             textEl.className = "fade-up active " + phrase.color;
+            
+            // Colore as setinhas com o degradê dinâmico da frase atual
+            sliderBtns.forEach(btn => {
+                const dirClass = btn.classList.contains('prev') ? 'prev' : 'next';
+                btn.className = `slider-btn ${dirClass} ${phrase.color}`;
+            });
+
             typingEl.textContent = "";
             
             let charIdx = 0;
-            const interval = setInterval(() => {
+            typeInterval = setInterval(() => {
                 typingEl.textContent += phrase.text[charIdx];
                 charIdx++;
                 if (charIdx >= phrase.text.length) {
-                    clearInterval(interval);
+                    clearInterval(typeInterval);
                     isTyping = false;
-                    setTimeout(nextSlide, 6000); 
+                    waitTimeout = setTimeout(nextSlide, 5000); // Exatos 5 segundos
                 }
             }, 40);
         }
 
         function nextSlide() {
-            if (isTyping) return;
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
             textEl.classList.remove("active");
             setTimeout(() => {
                 currentIdx = (currentIdx + 1) % phrases.length;
                 typeEffect();
-            }, 500);
+            }, 300); // Transição rápida para ser responsivo ao clique
         }
 
         function prevSlide() {
-            if (isTyping) return;
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
             textEl.classList.remove("active");
             setTimeout(() => {
                 currentIdx = (currentIdx - 1 + phrases.length) % phrases.length;
                 typeEffect();
-            }, 500);
+            }, 300);
         }
 
+        // --- LÓGICA DE SWIPE (Arrastar com dedo) ---
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        let touchstartX = 0;
+        
+        sliderWrapper.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        sliderWrapper.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide(); // Swipe esquerda -> Próximo
+            if (touchendX - touchstartX > 50) prevSlide(); // Swipe direita -> Anterior
+        }, {passive: true});
+
+        // --- GATILHO DE ROLAGEM ---
         const observer = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasStarted) {
                 hasStarted = true;
