@@ -116,12 +116,12 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E OVERLAY - ALTERAÇÕES FEITAS AQUI */
+        /* IMAGEM E OVERLAY - ALTERAÇÕES APLICADAS AQUI */
         .secret-image-wrapper {
-            margin: 80px auto 60px auto; /* Top margin aumentado de 60 para 80px para o tornado tocar o texto sem invadir as letras */
+            margin: 100px auto 60px auto; /* Aumentado para 100px para acomodar o tornado vindo de cima */
             position: relative;
             z-index: 15;
-            max-width: 600px; /* Trava o container no tamanho exato da img base para ancoragem perfeita */
+            max-width: 600px; 
         }
 
         .secret-img {
@@ -132,16 +132,16 @@
             margin: 0 auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             position: relative;
-            z-index: 1; /* Fica por baixo do tornado */
+            z-index: 1; 
         }
 
         .tornado-overlay {
             position: absolute;
             z-index: 2;
-            top: -24%; /* Esticado para cima para alcançar o texto */
-            right: 20%; /* Puxado para a esquerda para a base mirar no cérebro */
-            width: 38%; /* Ajuste fino do tamanho para encaixe perfeito */
-            transform: rotate(-6deg); /* Tornado deixado quase reto, idêntico à foto alvo */
+            top: -28%; /* Sobe para tocar o texto 'desnecessário' */
+            right: 22%; /* Centraliza sobre o cérebro */
+            width: 42%; /* Ajuste de escala para preencher a área visual */
+            transform: rotate(-18deg); /* Rotação calculada para compensar a imagem original reta */
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
             pointer-events: none; 
         }
@@ -174,12 +174,11 @@
             .normal-text { font-size: 1rem; }
             .highlight-text { font-size: 1.25rem; margin: 24px 0; }
 
-            /* VAZAMENTO CONTROLADO DA IMAGEM NO MOBILE */
             .secret-image-wrapper {
                 width: auto;
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 64px; /* Mais respiro para o mobile */
+                margin-top: 100px; /* Mantido em 100px para o tornado mobile */
                 margin-bottom: 32px;
             }
 
@@ -190,10 +189,10 @@
 
             /* AJUSTE FINO DO TORNADO NO MOBILE */
             .tornado-overlay {
-                width: 35%; 
-                top: -20%; /* Sobe proporcionalmente */
-                right: 22%; /* Trava sobre a "Fatura/Empréstimo" */
-                transform: rotate(-6deg);
+                width: 55%; /* Mais largo no mobile para impacto visual */
+                top: -32%; /* Sobe proporcionalmente à tela menor */
+                right: 12%; /* Alinhamento centralizado com o perfil branco */
+                transform: rotate(-15deg); /* Rotação levemente menor para mobile */
             }
         }
     </style>
