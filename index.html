@@ -278,7 +278,7 @@
         
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
         
-        /* Nova redução de margem (de 11px para 10px) - somentemobile */
+        /* Nova redução de margem (10px) - somentemobile */
         .audience-wrapper-mobile .role-card { margin-bottom: 10px; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
@@ -315,6 +315,9 @@
         @media (max-width: 768px) {
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
+            
+            /* CORREÇÃO DO BUG AQUI: Força o grid desktop a ficar oculto no mobile, sobrepondo qualquer flex anterior */
+            .audience-wrapper-desktop.desktop-only { display: none !important; }
 
             /* Proteção específica para a estrutura do grid mobile da seção de audiência */
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
