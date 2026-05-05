@@ -116,7 +116,7 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E OVERLAY - AJUSTES DE POSIÇÃO E ROTAÇÃO */
+        /* IMAGEM E OVERLAY - PNG TORNADO AJUSTADO */
         .secret-image-wrapper {
             margin: 100px auto 60px auto; 
             position: relative;
@@ -138,10 +138,10 @@
         .tornado-overlay {
             position: absolute;
             z-index: 2;
-            top: -18%; /* Baixado conforme solicitado para desktop */
-            right: 18%; /* Ajustado para alinhar com o lado esquerdo visual */
+            top: -18%; /* Mantido altura conforme instrução */
+            right: 22%; /* Deslocado 20% para a esquerda no eixo horizontal */
             width: 42%; 
-            transform: rotate(12deg); /* Rotação positiva (sentido horário) para a direita */
+            transform: rotate(14.5deg); /* Aumentado 20% no sentido horário */
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
             pointer-events: none; 
         }
@@ -187,12 +187,12 @@
                 box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             }
 
-            /* AJUSTE FINO DO TORNADO NO MOBILE */
+            /* AJUSTE DO TORNADO NO MOBILE CONFORME INSTRUÇÕES */
             .tornado-overlay {
                 width: 55%; 
-                top: -26%; /* Baixado conforme solicitado para mobile */
-                right: 10%; 
-                transform: rotate(10deg); /* Rotação positiva (sentido horário) */
+                top: -34%; /* 30% mais para cima que o anterior */
+                right: 13%; /* 30% mais para a esquerda no eixo horizontal */
+                transform: rotate(12deg); /* 20% mais rotacionado no sentido horário */
             }
         }
     </style>
