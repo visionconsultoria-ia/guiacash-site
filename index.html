@@ -116,9 +116,9 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E OVERLAY */
+        /* IMAGEM E OVERLAY - ALTERAÇÕES FEITAS AQUI */
         .secret-image-wrapper {
-            margin: 60px auto; /* Aumentado o top margin para dar espaço ao tornado */
+            margin: 80px auto 60px auto; /* Top margin aumentado de 60 para 80px para o tornado tocar o texto sem invadir as letras */
             position: relative;
             z-index: 15;
             max-width: 600px; /* Trava o container no tamanho exato da img base para ancoragem perfeita */
@@ -138,12 +138,12 @@
         .tornado-overlay {
             position: absolute;
             z-index: 2;
-            top: -12%; /* Vaza pelo topo usando proporção do container */
-            right: -8%; /* Vaza pela direita usando proporção do container */
-            width: 45%; /* Tamanho relativo à imagem base */
-            transform: rotate(-27deg);
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); /* Sombra suave para profundidade */
-            pointer-events: none; /* Evita bloquear interações/seleções na imagem de baixo */
+            top: -24%; /* Esticado para cima para alcançar o texto */
+            right: 20%; /* Puxado para a esquerda para a base mirar no cérebro */
+            width: 38%; /* Ajuste fino do tamanho para encaixe perfeito */
+            transform: rotate(-6deg); /* Tornado deixado quase reto, idêntico à foto alvo */
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
+            pointer-events: none; 
         }
 
         /* TEXTO DESTAQUE */
@@ -179,7 +179,7 @@
                 width: auto;
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 48px; /* Aumentado um pouco o respiro superior para o tornado */
+                margin-top: 64px; /* Mais respiro para o mobile */
                 margin-bottom: 32px;
             }
 
@@ -190,9 +190,10 @@
 
             /* AJUSTE FINO DO TORNADO NO MOBILE */
             .tornado-overlay {
-                width: 40%; /* Reduz proporcionalmente o tamanho do tornado */
-                top: -30px; /* Trava o vazamento superior em px para nunca invadir o texto */
-                right: 0px; /* Reduz o vazamento à direita para não sair da tela do celular */
+                width: 35%; 
+                top: -20%; /* Sobe proporcionalmente */
+                right: 22%; /* Trava sobre a "Fatura/Empréstimo" */
+                transform: rotate(-6deg);
             }
         }
     </style>
