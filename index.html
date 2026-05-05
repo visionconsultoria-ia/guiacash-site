@@ -69,6 +69,7 @@
         /* =========================================
            SESSÃO: TYPEWRITER SLIDER & AUDIENCE 
         ========================================= */
+        /* Ajuste 1: Padding Desktop (-10% topo, -40% fundo) */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
         .section-title { text-align: center; margin-bottom: 40px; }
@@ -80,10 +81,11 @@
         }
         .typewriter-container { flex: 1; text-align: center; padding: 0 50px; } 
         
-        .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* ALTERAÇÃO 2: Adicionada a propriedade "color" nas classes de gradient para o cursor capturar o currentColor corretamente */
+        .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--pf-base); }
         .color-pf-only { color: var(--pf-base); }
-        .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .color-pj-only { background: var(--pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--div-base); }
+        .color-pj-only { background: var(--pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--pj-base); }
 
         #typewriter-text { font-size: 1.4rem; font-weight: 800; line-height: 1.4; display: inline-block; position: relative; transition: all 0.3s ease; }
         
@@ -116,6 +118,7 @@
             flex: 1; 
         }
         
+        /* Ajuste 3: Espaço entre colunas no desktop (-30%) */
         .audience-col:not(:last-child) {
             margin-right: 16px;
         }
@@ -129,10 +132,10 @@
             width: 100%;
         }
 
-        /* Ajuste: Borda cinza claro no lugar do degradê */
         .role-card { 
-            background: var(--bg-white);
-            border: 2px solid var(--border-light); /* Borda cinza claro */
+            background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                        var(--pf-pj-gradient) border-box;
+            border: 2px solid transparent; 
             border-radius: 12px; 
             padding: 10px 16px; 
             display: flex; align-items: center; gap: 12px; 
@@ -143,9 +146,10 @@
             width: 100%;
         }
         
+        /* Ajuste 2: Espaço entre os cards empilhados (-40%) */
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
         
-        /* Ajuste: Espaçamento no mobile reduzido para 11px (era 12px) */
+        /* ALTERAÇÃO 1: Reduzido o espaço entre os cards no mobile em ~10% (de 12px para 11px) */
         .audience-wrapper-mobile .role-card { margin-bottom: 11px; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
@@ -180,6 +184,7 @@
             .mobile-only { display: flex !important; } 
             .desktop-only { display: none !important; }
             
+            /* Ajuste 1: Padding Mobile (-10% topo, -40% fundo) */
             #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
             
             .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
