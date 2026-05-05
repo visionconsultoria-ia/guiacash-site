@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Guia Cash | Audiência</title>
+    <title>Guia Cash | Controle Financeiro Inteligente</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,13 +39,16 @@
             --div-base: #f5a722;
             --div-light: #fbbb4f;
 
-            /* Gradients */
+            /* Gradients Globais */
             --pf-pj-gradient: linear-gradient(90deg, var(--pf-base), var(--pj-base));
             --debt-gradient: linear-gradient(90deg, #db941b, #f5a722, #fbbb4f);
             --pj-gradient: linear-gradient(90deg, #006974, #009196, #18b6b5);
+            --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
         }
 
-        /* RESET & ANTI-SCROLL HORIZONTAL */
+        /* =========================================
+           RESET E ESTILOS BASE
+        ========================================= */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
@@ -59,17 +62,147 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
 
         /* Tipografia Base */
+        h1, p { color: var(--text-dark); }
         h2 { font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; color: var(--text-dark); font-size: 2.2rem; margin-bottom: 1rem; }
+        p { color: var(--text-gray); font-size: 1.125rem; margin-bottom: 1rem; }
 
         .bg-light { background-color: var(--bg-light); }
+        section { padding: 80px 0; position: relative; }
+
+        /* Botões CTA */
+        .btn-cta {
+            display: flex; align-items: center; justify-content: center; width: 100%; max-width: 420px;
+            margin: 0 auto; padding: 18px 24px; font-weight: 800; font-size: 1.05rem;
+            text-transform: uppercase; text-decoration: none; border-radius: 12px;
+            transition: all 0.3s ease; text-align: center; color: #FFF; border: none; cursor: pointer;
+        }
+        .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
+        .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
         /* =========================================
-           SESSÃO: TYPEWRITER SLIDER & AUDIENCE 
+           1. HERO SECTION 
         ========================================= */
-        /* Ajuste 1: Padding Desktop (-10% topo, -40% fundo) */
+        .top-gradient-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--pf-base), var(--pj-base));
+            z-index: 1000;
+        }
+
+        .hero { 
+            text-align: center; 
+            padding-top: 40px; 
+            padding-bottom: 75px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        
+        .hero-logo { 
+            max-width: 98px; 
+            margin-bottom: 24px; 
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
+        }
+
+        .main-headline { 
+            max-width: 1000px; 
+            margin: 0 auto 24px; 
+            color: #363636; 
+            letter-spacing: -0.04em;
+            font-weight: 800; 
+            line-height: 1.2;
+            font-size: 3.2rem;
+        }
+
+        /* Puzzle Component */
+        .puzzle-wrapper {
+            display: inline-flex;
+            align-items: flex-start; 
+            height: 56px; 
+            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
+            border-radius: 12px;
+            overflow: hidden; 
+            margin: 0 8px;
+            vertical-align: middle;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .puzzle-text {
+            display: flex;
+            align-items: center;
+            height: 100%; 
+            padding: 0 12px; 
+            color: #FFFFFF;
+            font-weight: 900;
+            font-size: 2.8rem;
+        }
+
+        .puzzle-joint {
+            width: 24px; 
+            height: 56px; 
+            margin: 0 -4px; 
+            flex-shrink: 0;
+            z-index: 2;
+        }
+
+        /* Subheadlines e Hook */
+        .hero .subheadline { 
+            max-width: 900px; 
+            margin: 0 auto 32px; 
+            color: #555555;
+            font-weight: 700; 
+            line-height: 1.5;
+        }
+
+        .hero .video-hook { 
+            max-width: 700px; 
+            margin: 0 auto 12px; 
+            font-size: 1rem; 
+            color: #777777; 
+            font-weight: 400; 
+            line-height: 1.3; 
+        }
+        
+        /* Video Container */
+        .video-container {
+            width: 100%; 
+            max-width: 1144px; 
+            aspect-ratio: 16/9; 
+            margin: 0 auto 40px;
+            background: #0F172A; 
+            border-radius: 16px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            cursor: pointer; 
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 4px solid #FFF; 
+            outline: 1px solid var(--border-light);
+        }
+        
+        .unmute-btn {
+            background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
+            font-weight: 700; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* =========================================
+           2. SESSÃO: AUDIÊNCIA
+        ========================================= */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
         .section-title { text-align: center; margin-bottom: 40px; }
@@ -81,7 +214,6 @@
         }
         .typewriter-container { flex: 1; text-align: center; padding: 0 50px; } 
         
-        /* ALTERAÇÃO 2: Adicionada a propriedade "color" nas classes de gradient para o cursor capturar o currentColor corretamente */
         .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--pf-base); }
         .color-pf-only { color: var(--pf-base); }
         .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; color: var(--div-base); }
@@ -104,7 +236,7 @@
         .fade-up { opacity: 0; transform: translateY(20px); }
         .active { opacity: 1; transform: translateY(0); }
 
-        /* GRID BLINDADO */
+        /* Grid Desktop */
         .audience-wrapper-desktop {
             display: flex;
             justify-content: center;
@@ -118,11 +250,9 @@
             flex: 1; 
         }
         
-        /* Ajuste 3: Espaço entre colunas no desktop (-30%) */
-        .audience-col:not(:last-child) {
-            margin-right: 16px;
-        }
+        .audience-col:not(:last-child) { margin-right: 16px; }
 
+        /* Grid Mobile */
         .audience-wrapper-mobile {
             display: flex;
             flex-direction: column;
@@ -146,11 +276,10 @@
             width: 100%;
         }
         
-        /* Ajuste 2: Espaço entre os cards empilhados (-40%) */
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
         
-        /* ALTERAÇÃO 1: Reduzido o espaço entre os cards no mobile em ~10% (de 12px para 11px) */
-        .audience-wrapper-mobile .role-card { margin-bottom: 11px; }
+        /* Nova redução de margem (de 11px para 10px) - somentemobile */
+        .audience-wrapper-mobile .role-card { margin-bottom: 10px; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
@@ -174,17 +303,52 @@
             padding-top: 2px; 
         }
 
-        /* -----------------------------------------
-           CONTROLE ESTRITO DE RESPONSIVIDADE
-           ----------------------------------------- */
+        /* =========================================
+           CONTROLE DE RESPONSIVIDADE CONSOLIDADO
+        ========================================= */
         .mobile-only { display: none !important; }
-        .desktop-only { display: flex !important; } 
+        .desktop-only { display: block !important; }
+        
+        /* Proteção específica para grids que precisam de flex no desktop */
+        .audience-wrapper-desktop.desktop-only { display: flex !important; }
 
         @media (max-width: 768px) {
-            .mobile-only { display: flex !important; } 
+            .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
+
+            /* Proteção específica para a estrutura do grid mobile da seção de audiência */
+            .audience-wrapper-mobile.mobile-only { display: flex !important; }
             
-            /* Ajuste 1: Padding Mobile (-10% topo, -40% fundo) */
+            /* Ajustes Hero */
+            section { padding: 50px 0; }
+            
+            .hero { padding-top: 30px; padding-bottom: 60px; }
+            
+            .main-headline { font-size: 1.95rem; line-height: 1.4; }
+            
+            .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; }
+            .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
+            .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
+
+            .hero .subheadline.mobile-only { 
+                font-size: 1.0rem; 
+                line-height: 1.4;
+                margin-left: -15px; 
+                margin-right: -15px;
+                max-width: none; 
+                margin-bottom: 24px;
+            }
+
+            .hero .video-hook {
+                font-size: 0.85rem; 
+                line-height: 1.25; 
+                padding: 0 10px;
+                margin-bottom: 12px;
+            }
+
+            .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
+
+            /* Ajustes Audiência */
             #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
             
             .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
@@ -200,6 +364,87 @@
     </style>
 </head>
 <body>
+
+    <!-- LINHA DE TOPO -->
+    <div class="top-gradient-line"></div>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero container">
+        
+        <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
+        
+        <h1 class="main-headline">
+            <!-- VERSÃO DESKTOP -->
+            <span class="desktop-only">
+                Assuma o controle total das suas <br>
+                finanças 
+                
+                <span class="puzzle-wrapper">
+                    <span class="puzzle-text">PF</span>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    </svg>
+                    <span class="puzzle-text">PJ</span>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    </svg>
+                    <span class="puzzle-text">Dívidas</span>
+                </span> 
+                
+                e tenha <br>
+                dinheiro sobrando todo mês
+            </span>
+
+            <!-- VERSÃO MOBILE -->
+            <span class="mobile-only">
+                Assuma o controle <br>
+                total das suas finanças <br>
+                
+                <span class="puzzle-wrapper">
+                    <span class="puzzle-text">PF</span>
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    </svg>
+                    <span class="puzzle-text">PJ</span>
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    </svg>
+                    <span class="puzzle-text">Dívidas</span>
+                </span> <br>
+                
+                e tenha dinheiro <br>
+                sobrando todo mês
+            </span>
+        </h1>
+        
+        <!-- SUBHEADLINE DESKTOP -->
+        <p class="subheadline desktop-only">
+            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
+            Com família e negócio separados, num só lugar, automático e simples<br>
+            Antes que mais uma decisão no escuro te prenda ao banco por anos
+        </p>
+
+        <!-- SUBHEADLINE MOBILE -->
+        <p class="subheadline mobile-only">
+            Organização que se adapta à vida corrida e<br>
+            clareza em meio às oscilações. Com família e<br>
+            negócio separados, num só lugar, automático<br>
+            e simples. Antes que mais uma decisão no<br>
+            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
+        </p>
+        
+        <!-- VIDEO HOOK -->
+        <p class="video-hook">
+            Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
+        </p>
+        
+        <!-- VIDEO CONTAINER -->
+        <div class="video-container">
+            <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
+        </div>
+
+        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
+    </section>
 
     <!-- 2. AUDIÊNCIA DINÂMICA -->
     <section id="sessao-audiencia" class="bg-light">
@@ -247,7 +492,7 @@
         </div>
     </section>
 
-    <!-- SCRIPTS DO SLIDER -->
+    <!-- SCRIPTS DO SLIDER DA AUDIÊNCIA -->
     <script>
         const phrases =[
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
