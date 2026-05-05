@@ -69,7 +69,6 @@
         /* =========================================
            SESSÃO: TYPEWRITER SLIDER & AUDIENCE 
         ========================================= */
-        /* Ajuste 1: Padding Desktop (-10% topo, -40% fundo) */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
         .section-title { text-align: center; margin-bottom: 40px; }
@@ -117,7 +116,6 @@
             flex: 1; 
         }
         
-        /* Ajuste 3: Espaço entre colunas no desktop (-30%) */
         .audience-col:not(:last-child) {
             margin-right: 16px;
         }
@@ -131,10 +129,10 @@
             width: 100%;
         }
 
+        /* Ajuste: Borda cinza claro no lugar do degradê */
         .role-card { 
-            background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
-                        var(--pf-pj-gradient) border-box;
-            border: 2px solid transparent; 
+            background: var(--bg-white);
+            border: 2px solid var(--border-light); /* Borda cinza claro */
             border-radius: 12px; 
             padding: 10px 16px; 
             display: flex; align-items: center; gap: 12px; 
@@ -145,9 +143,10 @@
             width: 100%;
         }
         
-        /* Ajuste 2: Espaço entre os cards empilhados (-40%) */
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
-        .audience-wrapper-mobile .role-card { margin-bottom: 12px; }
+        
+        /* Ajuste: Espaçamento no mobile reduzido para 11px (era 12px) */
+        .audience-wrapper-mobile .role-card { margin-bottom: 11px; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
@@ -181,7 +180,6 @@
             .mobile-only { display: flex !important; } 
             .desktop-only { display: none !important; }
             
-            /* Ajuste 1: Padding Mobile (-10% topo, -40% fundo) */
             #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
             
             .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
