@@ -35,7 +35,7 @@
         html, body {
             width: 100%;
             max-width: 100vw;
-            overflow-x: hidden; /* Fundamental para o truque da imagem no mobile não gerar rolagem horizontal */
+            overflow-x: hidden; 
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
@@ -51,14 +51,13 @@
 
         /* =========================================
            SIMULADORES DAS SESSÕES VIZINHAS
-           (Remova quando for unir os HTMLs)
         ========================================= */
         .mock-sessao {
             background-color: var(--bg-light);
             padding: 120px 0;
             text-align: center;
             position: relative;
-            z-index: 1; /* Fica abaixo do cartão branco */
+            z-index: 1; 
         }
         .mock-sessao h2 { color: #ccc; font-weight: 500; }
 
@@ -66,15 +65,13 @@
            SESSÃO 3: VERDADES SECRETAS
         ========================================= */
         #sessao-problema {
-            /* O fundo em degradê desta sessão */
             background: var(--bg-sessao-3);
             position: relative;
             z-index: 5;
-            /* Um pequeno padding só para manter o respiro do fundo amarelo */
             padding: 40px 0; 
         }
 
-        /* O CARTÃO BRANCO (Container Principal) */
+        /* O CARTÃO BRANCO */
         .secret-card {
             background-color: var(--bg-white);
             border: 3px solid var(--div-border);
@@ -85,14 +82,14 @@
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             
-            /* A MÁGICA DO ENCAIXE: Puxa a sessão de cima e a de baixo para trás do cartão */
+            /* Margem Negativa para o Encaixe */
             margin-top: -100px;
             margin-bottom: -100px;
             position: relative;
-            z-index: 10; /* Garante que o cartão fique por cima de tudo */
+            z-index: 10; 
         }
 
-        /* TIPOGRAFIA DA SESSÃO */
+        /* TIPOGRAFIA */
         .kicker {
             display: block;
             text-transform: uppercase;
@@ -119,7 +116,7 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E CONTAINER */
+        /* IMAGEM */
         .secret-image-wrapper {
             margin: 40px 0;
             position: relative;
@@ -130,13 +127,13 @@
             width: 100%;
             max-width: 600px;
             height: auto;
-            border-radius: 16px; /* ← É AQUI QUE ACONTECE A MÁGICA DO ARREDONDAMENTO DA SUA FOTO NO DESKTOP */
+            border-radius: 16px; 
             display: block;
             margin: 0 auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
 
-        /* TEXTO HIGHLIGHT / DESTAQUE */
+        /* TEXTO DESTAQUE */
         .highlight-text {
             font-size: 1.4rem;
             font-weight: 800;
@@ -147,8 +144,6 @@
             margin: 32px 0;
         }
 
-        .spacing-bottom { margin-bottom: 8px; }
-
         /* =========================================
            RESPONSIVIDADE (MOBILE)
         ========================================= */
@@ -157,8 +152,6 @@
                 padding: 40px 24px;
                 border-radius: 20px;
                 border-width: 2px;
-                
-                /* Ajuste de margem negativa menor para mobile */
                 margin-top: -60px;
                 margin-bottom: -60px;
             }
@@ -168,48 +161,50 @@
             .normal-text { font-size: 1rem; }
             .highlight-text { font-size: 1.25rem; margin: 24px 0; }
 
-            /* O TRUQUE DE VAZAMENTO DA IMAGEM NO MOBILE */
+            /* VAZAMENTO CONTROLADO DA IMAGEM NO MOBILE */
             .secret-image-wrapper {
-                /* Força a largura para 100% da tela */
-                width: 100vw;
-                /* Calcula o centro e puxa negativamente para as laterais, cortando as margens do cartão branco */
-                margin-left: calc(-50vw + 50%);
-                margin-right: calc(-50vw + 50%);
+                width: auto;
+                /* O valor -40px faz a imagem passar da borda do cartão branco, 
+                   mas parar antes de encostar na borda da tela do celular */
+                margin-left: -40px; 
+                margin-right: -40px;
                 margin-top: 32px;
                 margin-bottom: 32px;
             }
 
             .secret-img {
-                border-radius: 0; /* Aqui eu removo as bordas arredondadas no celular para a foto encostar na tela */
-                box-shadow: none;
-                border-top: 2px solid var(--div-border);
-                border-bottom: 2px solid var(--div-border);
+                /* Leve borda arredondada já que não encosta mais na beirada da tela */
+                border-radius: 12px; 
+                box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- MOCK SESSÃO 2 (SIMULAÇÃO DE ENCAIXE) -->
+    <!-- MOCK SESSÃO 2 -->
     <section class="mock-sessao">
         <div class="container">
             <h2>Fundo Cinza (Final da Sessão 2)</h2>
         </div>
     </section>
 
-
-    <!-- 3. SESSÃO VERDADES SECRETAS (CÓDIGO OFICIAL) -->
+    <!-- 3. SESSÃO VERDADES SECRETAS -->
     <section id="sessao-problema">
         <div class="container">
             
             <div class="secret-card">
                 <span class="kicker">Verdades secretas:</span>
                 
-                <h2 class="headline">Cada dia que passa sua situação financeira está mais desafiadora… e você sabe disso</h2>
+                <!-- ALTERAÇÃO 1: Quebra de linha adicionada no título -->
+                <h2 class="headline">
+                    Cada dia que passa sua situação financeira está mais desafiadora… <br> 
+                    e você sabe disso
+                </h2>
 
                 <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
-                <!-- IMAGEM COM NOME ATUALIZADO (O %20 substitui o espaço para não quebrar o link) -->
+                <!-- ALTERAÇÃO 3: CSS do Wrapper modificado para respeitar o limite do celular -->
                 <div class="secret-image-wrapper">
                     <img src="Verdades%20secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
@@ -218,16 +213,14 @@
 
                 <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
 
-                <p class="normal-text spacing-bottom">É angustiante, não é?</p>
-
-                <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o seu esforço no trabalho e profissionalismo, você nunca consegue sair do lugar financeiramente.</p>
+                <!-- ALTERAÇÃO 2: Texto final unificado com a nova copy -->
+                <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o seu esforço no trabalho e profissionalismo, você nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
             </div>
 
         </div>
     </section>
 
-
-    <!-- MOCK SESSÃO 4 (SIMULAÇÃO DE ENCAIXE) -->
+    <!-- MOCK SESSÃO 4 -->
     <section class="mock-sessao">
         <div class="container">
             <h2>Fundo Cinza (Início da Sessão 4)</h2>
