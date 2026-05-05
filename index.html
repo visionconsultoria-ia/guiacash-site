@@ -12,7 +12,7 @@
     
     <style>
         /* =========================================
-           VARIÁVEIS DE COR E SISTEMA
+            VARIÁVEIS DE COR E SISTEMA
         ========================================= */
         :root {
             --bg-white: #FFFFFF;
@@ -50,7 +50,7 @@
         }
 
         /* =========================================
-           SIMULADORES DAS SESSÕES VIZINHAS
+            SIMULADORES DAS SESSÕES VIZINHAS
         ========================================= */
         .mock-sessao {
             background-color: var(--bg-light);
@@ -62,7 +62,7 @@
         .mock-sessao h2 { color: #ccc; font-weight: 500; }
 
         /* =========================================
-           SESSÃO 3: VERDADES SECRETAS
+            SESSÃO 3: VERDADES SECRETAS
         ========================================= */
         #sessao-problema {
             background: var(--bg-sessao-3);
@@ -116,9 +116,9 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E OVERLAY - ALTERAÇÕES APLICADAS AQUI */
+        /* IMAGEM E OVERLAY - AJUSTES DE POSIÇÃO E ROTAÇÃO */
         .secret-image-wrapper {
-            margin: 100px auto 60px auto; /* Aumentado para 100px para acomodar o tornado vindo de cima */
+            margin: 100px auto 60px auto; 
             position: relative;
             z-index: 15;
             max-width: 600px; 
@@ -138,10 +138,10 @@
         .tornado-overlay {
             position: absolute;
             z-index: 2;
-            top: -28%; /* Sobe para tocar o texto 'desnecessário' */
-            right: 22%; /* Centraliza sobre o cérebro */
-            width: 42%; /* Ajuste de escala para preencher a área visual */
-            transform: rotate(-18deg); /* Rotação calculada para compensar a imagem original reta */
+            top: -18%; /* Baixado conforme solicitado para desktop */
+            right: 18%; /* Ajustado para alinhar com o lado esquerdo visual */
+            width: 42%; 
+            transform: rotate(12deg); /* Rotação positiva (sentido horário) para a direita */
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
             pointer-events: none; 
         }
@@ -158,7 +158,7 @@
         }
 
         /* =========================================
-           RESPONSIVIDADE (MOBILE)
+            RESPONSIVIDADE (MOBILE)
         ========================================= */
         @media (max-width: 768px) {
             .secret-card {
@@ -178,7 +178,7 @@
                 width: auto;
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 100px; /* Mantido em 100px para o tornado mobile */
+                margin-top: 100px; 
                 margin-bottom: 32px;
             }
 
@@ -189,10 +189,10 @@
 
             /* AJUSTE FINO DO TORNADO NO MOBILE */
             .tornado-overlay {
-                width: 55%; /* Mais largo no mobile para impacto visual */
-                top: -32%; /* Sobe proporcionalmente à tela menor */
-                right: 12%; /* Alinhamento centralizado com o perfil branco */
-                transform: rotate(-15deg); /* Rotação levemente menor para mobile */
+                width: 55%; 
+                top: -26%; /* Baixado conforme solicitado para mobile */
+                right: 10%; 
+                transform: rotate(10deg); /* Rotação positiva (sentido horário) */
             }
         }
     </style>
