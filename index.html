@@ -183,11 +183,11 @@
         }
         
         /* -----------------------------------------
-           VIDEO CONTAINER (DESKTOP: 30% maior | 16:9)
+           VIDEO CONTAINER (Aumentado 10% adicional)
            ----------------------------------------- */
         .video-container {
             width: 100%; 
-            max-width: 1040px; /* Aumentado 30% (antes era 800px) */
+            max-width: 1144px; /* Aumentado 10% de 1040px */
             aspect-ratio: 16/9; 
             margin: 0 auto 40px;
             background: #0F172A; 
@@ -244,9 +244,9 @@
                 margin: 0 -3px;
             }
 
-            /* Subheadline Mobile - 5 Linhas exatas */
+            /* Subheadline Mobile - Ajustado para 1rem e 5 linhas */
             .hero .subheadline.mobile-only { 
-                font-size: 1.05rem; 
+                font-size: 1.0rem; 
                 line-height: 1.4;
                 margin-left: -15px; 
                 margin-right: -15px;
@@ -262,11 +262,11 @@
                 margin-bottom: 12px;
             }
 
-            /* VIDEO CONTAINER (MOBILE: Formato Stories Vertical 9:16) */
+            /* VIDEO CONTAINER (Mobile: Aumentado 10% de 380px) */
             .video-container {
-                aspect-ratio: 9/16; /* Formato vertical estilo Reels/Stories */
-                max-width: 380px; /* Largura máxima controlada para não ficar gigante na tela */
-                border-radius: 24px; /* Bordas um pouco mais arredondadas no celular */
+                aspect-ratio: 9/16; 
+                max-width: 418px; 
+                border-radius: 24px; 
             }
 
             /* Outros ajustes globais */
@@ -403,7 +403,6 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Corte Perfeito do SVG estendendo a linha matemática para fora da caixa (-5 a 61) -->
                     <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
                         <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -427,7 +426,6 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <!-- Corte Perfeito no celular estendendo a linha matemática (-5 a 49) -->
                     <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
                         <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
@@ -443,33 +441,33 @@
             </span>
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP (3 linhas forçadas) -->
+        <!-- SUBHEADLINE DESKTOP (Alterado: sem ponto em oscilações) -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações.<br>
+            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
             Com família e negócio separados, num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
-        <!-- SUBHEADLINE MOBILE (5 linhas cravadas com <br> e pontuação alterada) -->
+        <!-- SUBHEADLINE MOBILE (Exatas 5 linhas com agrupamento de frase final) -->
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
             clareza em meio às oscilações. Com família e<br>
             negócio separados, num só lugar, automático<br>
             e simples. Antes que mais uma decisão no<br>
-            escuro te prenda ao banco por anos
+            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
         </p>
         
-        <!-- VIDEO HOOK (Colado ao vídeo) -->
+        <!-- VIDEO HOOK -->
         <p class="video-hook">
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
-        <!-- VIDEO CONTAINER (Desktop Expandido | Mobile Vertical 9:16) -->
+        <!-- VIDEO CONTAINER (Ajustado: +10% de tamanho) -->
         <div class="video-container">
             <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
         </div>
 
-        <a href="#oferta" class="btn-cta btn-gradient">Quero ter controle e paz financeira</a>
+        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
     <!-- 2. AUDIÊNCIA (Fundo Cinza Claro) -->
@@ -563,7 +561,7 @@
             </div>
 
             <div style="margin-top: 50px;">
-                <a href="#oferta" class="btn-cta btn-gradient">Quero ter controle e paz financeira</a>
+                <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
         </div>
     </section>
@@ -659,7 +657,7 @@
             </div>
 
             <div style="margin-top: 50px;">
-                <a href="#oferta" class="btn-cta btn-gradient">Quero isso para mim</a>
+                <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
         </div>
     </section>
@@ -741,7 +739,7 @@
             </div>
 
             <div style="margin-top: 50px;">
-                <a href="#oferta" class="btn-cta btn-dark-pf">Quero ter controle e inteligência financeira</a>
+                <a href="#oferta" class="btn-cta btn-dark-pf">Quero entrar no Guia Cash</a>
             </div>
         </div>
     </section>
