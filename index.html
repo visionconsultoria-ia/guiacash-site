@@ -278,8 +278,8 @@
         
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
         
-        /* Nova redução de margem (10px) - somentemobile */
-        .audience-wrapper-mobile .role-card { margin-bottom: 10px; }
+        /* Nova redução de margem (10px) e comprimento (-20%) - somente mobile */
+        .audience-wrapper-mobile .role-card { margin-bottom: 10px; width: 80%; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
@@ -316,7 +316,7 @@
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
             
-            /* CORREÇÃO DO BUG AQUI: Força o grid desktop a ficar oculto no mobile, sobrepondo qualquer flex anterior */
+            /* Força o grid desktop a ficar oculto no mobile, sobrepondo qualquer flex anterior */
             .audience-wrapper-desktop.desktop-only { display: none !important; }
 
             /* Proteção específica para a estrutura do grid mobile da seção de audiência */
