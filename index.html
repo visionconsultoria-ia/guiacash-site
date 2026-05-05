@@ -116,21 +116,34 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM */
+        /* IMAGEM E OVERLAY */
         .secret-image-wrapper {
-            margin: 40px 0;
+            margin: 60px auto; /* Aumentado o top margin para dar espaço ao tornado */
             position: relative;
             z-index: 15;
+            max-width: 600px; /* Trava o container no tamanho exato da img base para ancoragem perfeita */
         }
 
         .secret-img {
             width: 100%;
-            max-width: 600px;
             height: auto;
             border-radius: 16px; 
             display: block;
             margin: 0 auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1; /* Fica por baixo do tornado */
+        }
+
+        .tornado-overlay {
+            position: absolute;
+            z-index: 2;
+            top: -12%; /* Vaza pelo topo usando proporção do container */
+            right: -8%; /* Vaza pela direita usando proporção do container */
+            width: 45%; /* Tamanho relativo à imagem base */
+            transform: rotate(-27deg);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); /* Sombra suave para profundidade */
+            pointer-events: none; /* Evita bloquear interações/seleções na imagem de baixo */
         }
 
         /* TEXTO DESTAQUE */
@@ -164,18 +177,22 @@
             /* VAZAMENTO CONTROLADO DA IMAGEM NO MOBILE */
             .secret-image-wrapper {
                 width: auto;
-                /* O valor -40px faz a imagem passar da borda do cartão branco, 
-                   mas parar antes de encostar na borda da tela do celular */
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 32px;
+                margin-top: 48px; /* Aumentado um pouco o respiro superior para o tornado */
                 margin-bottom: 32px;
             }
 
             .secret-img {
-                /* Leve borda arredondada já que não encosta mais na beirada da tela */
                 border-radius: 12px; 
                 box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            }
+
+            /* AJUSTE FINO DO TORNADO NO MOBILE */
+            .tornado-overlay {
+                width: 40%; /* Reduz proporcionalmente o tamanho do tornado */
+                top: -30px; /* Trava o vazamento superior em px para nunca invadir o texto */
+                right: 0px; /* Reduz o vazamento à direita para não sair da tela do celular */
             }
         }
     </style>
@@ -196,7 +213,6 @@
             <div class="secret-card">
                 <span class="kicker">Verdades secretas:</span>
                 
-                <!-- ALTERAÇÃO 1: Quebra de linha adicionada no título -->
                 <h2 class="headline">
                     Cada dia que passa sua situação financeira está mais desafiadora… <br> 
                     e você sabe disso
@@ -204,8 +220,9 @@
 
                 <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
-                <!-- ALTERAÇÃO 3: CSS do Wrapper modificado para respeitar o limite do celular -->
+                <!-- WRAPPER COM AS DUAS IMAGENS E POSICIONAMENTO RELATIVO/ABSOLUTO -->
                 <div class="secret-image-wrapper">
+                    <img src="tornado.png" alt="Efeito Tornado" class="tornado-overlay">
                     <img src="Verdades%20secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
 
@@ -213,7 +230,6 @@
 
                 <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
 
-                <!-- ALTERAÇÃO 2: Texto final unificado com a nova copy -->
                 <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o esforço no trabalho, nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
             </div>
 
