@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Guia Cash | Controle Financeiro Inteligente</title>
+    <title>Guia Cash | Audiência</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,6 +19,7 @@
         ========================================= */
         :root {
             --bg-white: #FFFFFF;
+            --bg-light: #F8FAFC;
             --text-dark: #363636;
             --text-gray: #555555;
             --border-light: #E2E8F0;
@@ -26,16 +27,22 @@
             /* Paleta: Dark Cyan */
             --pj-dark: #006974;
             --pj-base: #009196;
+            --pj-light: #18b6b5;
 
             /* Paleta: Violeta-azulado */
             --pf-dark: #5242d7;
             --pf-base: #5c4bdf;
+            --pf-light: #8670ff;
 
             /* Paleta: Amarelo-alaranjado */
+            --div-dark: #d68910; 
             --div-base: #f5a722;
+            --div-light: #fbbb4f;
 
-            /* Gradients CTA */
-            --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
+            /* Gradients */
+            --pf-pj-gradient: linear-gradient(90deg, var(--pf-base), var(--pj-base));
+            --debt-gradient: linear-gradient(90deg, #db941b, #f5a722, #fbbb4f);
+            --pj-gradient: linear-gradient(90deg, #006974, #009196, #18b6b5);
         }
 
         /* RESET & ANTI-SCROLL HORIZONTAL */
@@ -52,297 +59,276 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* LINHA SUPERIOR DEGRADÊ */
-        .top-gradient-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--pf-base), var(--pj-base));
-            z-index: 1000;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
 
         /* Tipografia Base */
-        h1, p { color: var(--text-dark); }
-        p { color: var(--text-gray); font-size: 1.125rem; margin-bottom: 1rem; }
+        h2 { font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; color: var(--text-dark); font-size: 2.2rem; margin-bottom: 1rem; }
 
-        /* Botões CTA */
-        .btn-cta {
-            display: flex; align-items: center; justify-content: center; width: 100%; max-width: 420px;
-            margin: 0 auto; padding: 18px 24px; font-weight: 800; font-size: 1.05rem;
-            text-transform: uppercase; text-decoration: none; border-radius: 12px;
-            transition: all 0.3s ease; text-align: center; color: #FFF; border: none; cursor: pointer;
-        }
-        .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
-        .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
-
-        /* Estrutura das Seções */
-        section { padding: 80px 0; position: relative; }
+        .bg-light { background-color: var(--bg-light); }
 
         /* =========================================
-           1. HERO SECTION 
+           SESSÃO: TYPEWRITER SLIDER & AUDIENCE 
         ========================================= */
-        .hero { 
-            text-align: center; 
-            padding-top: 40px; 
-            padding-bottom: 64px; /* Ajuste reduzindo -15% no Desktop */
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
+        #sessao-audiencia { padding-top: 100px; padding-bottom: 120px; position: relative; }
+
+        .section-title { text-align: center; margin-bottom: 40px; }
         
-        .hero-logo { 
-            max-width: 98px; 
-            margin-bottom: 24px; 
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
+        .slider-wrapper { 
+            position: relative; max-width: 900px; margin: 0 auto 40px; 
+            display: flex; align-items: center; justify-content: center; min-height: 100px; 
+            touch-action: pan-y; 
         }
+        .typewriter-container { flex: 1; text-align: center; padding: 0 50px; } 
+        
+        .color-pf-pj { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .color-pf-only { color: var(--pf-base); }
+        .color-debt-only { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .color-pj-only { background: var(--pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .main-headline { 
-            max-width: 1000px; 
-            margin: 0 auto 24px; 
-            color: #363636; 
-            letter-spacing: -0.04em;
-            font-weight: 800; 
-            line-height: 1.2;
-            font-size: 3.2rem;
+        #typewriter-text { font-size: 1.4rem; font-weight: 800; line-height: 1.4; display: inline-block; position: relative; transition: all 0.3s ease; }
+        
+        .cursor { display: inline-block; width: 3px; background-color: currentColor; margin-left: 3px; animation: blink 0.7s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .slider-btn { 
+            background: none; border: none; font-size: 1.6rem; cursor: pointer; 
+            transition: 0.3s; padding: 10px; z-index: 10; position: absolute; 
+            top: 50%; transform: translateY(-50%); 
         }
+        .slider-btn i { transition: all 0.3s ease; } 
+        .slider-btn.prev { left: 0; }
+        .slider-btn.next { right: 0; }
 
-        /* -----------------------------------------
-           COMPONENTE QUEBRA-CABEÇA CSS 
-           ----------------------------------------- */
-        .puzzle-wrapper {
-            display: inline-flex;
-            align-items: flex-start; 
-            height: 56px; 
-            background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
-            border-radius: 12px;
-            overflow: hidden; 
-            margin: 0 8px;
-            vertical-align: middle;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+        .fade-up { opacity: 0; transform: translateY(20px); }
+        .active { opacity: 1; transform: translateY(0); }
 
-        .puzzle-text {
+        /* GRID BLINDADO (Com MARGENS em vez de Gap) */
+        .audience-wrapper-desktop {
             display: flex;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .audience-col {
+            display: flex;
+            flex-direction: column;
+            flex: 1; 
+        }
+        .audience-col:not(:last-child) {
+            margin-right: 24px;
+        }
+
+        .audience-wrapper-mobile {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            height: 100%; 
-            padding: 0 12px; 
-            color: #FFFFFF;
-            font-weight: 900;
-            font-size: 2.8rem;
+            max-width: 380px;
+            margin: 0 auto;
+            width: 100%;
         }
 
-        .puzzle-joint {
-            width: 24px; 
-            height: 56px; 
-            margin: 0 -4px; 
-            flex-shrink: 0;
-            z-index: 2;
-        }
-
-        /* -----------------------------------------
-           SUBHEADLINES
-           ----------------------------------------- */
-        .hero .subheadline { 
-            max-width: 900px; 
-            margin: 0 auto 32px; 
-            color: #555555;
-            font-weight: 700; 
-            line-height: 1.5;
-        }
-
-        .hero .video-hook { 
-            max-width: 700px; 
-            margin: 0 auto 12px; 
-            font-size: 1rem; 
-            color: #777777; 
-            font-weight: 400; 
-            line-height: 1.3; 
+        .role-card { 
+            background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
+                        var(--pf-pj-gradient) border-box;
+            border: 2px solid transparent; 
+            border-radius: 12px; 
+            padding: 10px 16px; 
+            display: flex; align-items: center; gap: 12px; 
+            font-weight: 600; font-size: 0.95rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            height: 85px; 
+            width: 100%;
         }
         
-        /* -----------------------------------------
-           VIDEO CONTAINER 
-           ----------------------------------------- */
-        .video-container {
-            width: 100%; 
-            max-width: 1144px; 
-            aspect-ratio: 16/9; 
-            margin: 0 auto 40px;
-            background: #0F172A; 
-            border-radius: 16px;
+        .audience-col .role-card:not(:last-child) { margin-bottom: 24px; }
+        .audience-wrapper-mobile .role-card { margin-bottom: 20px; }
+        .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
+
+        .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
+        
+        .icon-bg {
+            background: rgba(92, 75, 223, 0.1); 
+            width: 44px; height: 44px; 
+            border-radius: 8px;
             display: flex; 
             align-items: center; 
             justify-content: center;
-            cursor: pointer; 
-            position: relative; 
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 4px solid #FFF; 
-            outline: 1px solid var(--border-light);
+            flex-shrink: 0; 
         }
-        
-        .unmute-btn {
-            background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
-            font-weight: 700; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        .role-card i { 
+            background: var(--pf-pj-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.25rem; 
+            line-height: 1.5; 
+            padding-top: 2px; 
         }
 
         /* -----------------------------------------
-           CONTROLE DE RESPONSIVIDADE
+           CONTROLE ESTRITO DE RESPONSIVIDADE
            ----------------------------------------- */
         .mobile-only { display: none !important; }
-        .desktop-only { display: block !important; }
+        .desktop-only { display: flex !important; } 
 
         @media (max-width: 768px) {
-            .mobile-only { display: block !important; }
+            .mobile-only { display: flex !important; } 
             .desktop-only { display: none !important; }
             
-            section { padding: 50px 0; }
+            #sessao-audiencia { padding-top: 70px; padding-bottom: 80px; } 
             
-            .hero { 
-                padding-top: 30px; 
-                padding-bottom: 50px; /* Ajuste reduzindo -15% no Mobile */
-            }
+            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
+            .typewriter-container { padding: 0 25px; } 
             
-            .main-headline { 
-                font-size: 1.95rem; 
-                line-height: 1.4;
-            }
+            .slider-btn { font-size: 1.4rem; padding: 5px; }
+            .slider-btn.prev { left: -10px; } 
+            .slider-btn.next { right: -10px; } 
             
-            .puzzle-wrapper {
-                height: 44px; 
-                margin: 6px auto; 
-                transform: none; 
-            }
-            .puzzle-text { 
-                font-size: 1.8rem; 
-                padding: 0 10px;
-            }
-            .puzzle-joint {
-                width: 20px; 
-                height: 44px; 
-                margin: 0 -3px;
-            }
-
-            .hero .subheadline.mobile-only { 
-                font-size: 1.0rem; 
-                line-height: 1.4;
-                margin-left: -15px; 
-                margin-right: -15px;
-                max-width: none; 
-                margin-bottom: 24px;
-            }
-
-            .hero .video-hook {
-                font-size: 0.85rem; 
-                line-height: 1.25; 
-                padding: 0 10px;
-                margin-bottom: 12px;
-            }
-
-            .video-container {
-                aspect-ratio: 9/16; 
-                max-width: 418px; 
-                border-radius: 24px; 
-            }
+            #typewriter-text { font-size: 1.15rem; }
+            h2 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LINHA DE TOPO -->
-    <div class="top-gradient-line"></div>
+    <!-- 2. AUDIÊNCIA DINÂMICA -->
+    <section id="sessao-audiencia" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">O Guia Cash é para quem?</h2>
+            
+            <!-- SLIDER DINÂMICO -->
+            <div class="slider-wrapper">
+                <button class="slider-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
+                
+                <div class="typewriter-container">
+                    <div id="typewriter-text" class="fade-up">
+                        <span class="typing-text"></span><span class="cursor">|</span>
+                    </div>
+                </div>
+                
+                <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
+            </div>
 
-    <!-- 1. HERO SECTION -->
-    <section class="hero container">
-        
-        <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
-        
-        <h1 class="main-headline">
-            <!-- ==============================
-                 VERSÃO DESKTOP
-                 ============================== -->
-            <span class="desktop-only">
-                Assuma o controle total das suas <br>
-                finanças 
-                
-                <span class="puzzle-wrapper">
-                    <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
-                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
-                    </svg>
-                    <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
-                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
-                    </svg>
-                    <span class="puzzle-text">Dívidas</span>
-                </span> 
-                
-                e tenha <br>
-                dinheiro sobrando todo mês
-            </span>
+            <!-- GRID DE AUDIÊNCIA - DESKTOP -->
+            <div class="audience-wrapper-desktop desktop-only">
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
+                </div>
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
+                </div>
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja virtual ou física</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-laptop"></i></div> Infoprodutor e Influenciador</div>
+                </div>
+            </div>
 
-            <!-- ==============================
-                 VERSÃO MOBILE
-                 ============================== -->
-            <span class="mobile-only">
-                Assuma o controle <br>
-                total das suas finanças <br>
-                
-                <span class="puzzle-wrapper">
-                    <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
-                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
-                    </svg>
-                    <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
-                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
-                    </svg>
-                    <span class="puzzle-text">Dívidas</span>
-                </span> <br>
-                
-                e tenha dinheiro <br>
-                sobrando todo mês
-            </span>
-        </h1>
-        
-        <!-- SUBHEADLINE DESKTOP -->
-        <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
-            Com família e negócio separados, num só lugar, automático e simples<br>
-            Antes que mais uma decisão no escuro te prenda ao banco por anos
-        </p>
+            <!-- GRID DE AUDIÊNCIA - MOBILE -->
+            <div class="audience-wrapper-mobile mobile-only">
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja Física ou Virtual</div>
+            </div>
 
-        <!-- SUBHEADLINE MOBILE -->
-        <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida e<br>
-            clareza em meio às oscilações. Com família e<br>
-            negócio separados, num só lugar, automático<br>
-            e simples. Antes que mais uma decisão no<br>
-            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
-        </p>
-        
-        <!-- VIDEO HOOK -->
-        <p class="video-hook">
-            Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
-        </p>
-        
-        <!-- VIDEO CONTAINER -->
-        <div class="video-container">
-            <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
         </div>
-
-        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
+    <!-- SCRIPTS DO SLIDER -->
+    <script>
+        const phrases =[
+            { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
+            { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
+            { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
+            { text: "Precisa separar PJ da PF e ser mais profissional", color: "color-pf-pj" },
+            { text: "Quer evitar dívidas ou viver livre delas", color: "color-debt-only" },
+            { text: "Quer liberdade para realizar sonhos, mas não consegue juntar dinheiro", color: "color-pf-pj" },
+            { text: "Se preocupa com o futuro financeiro, padrão de vida ou aposentadoria", color: "color-pf-only" },
+            { text: "Já tentou usar planilha, sistema, apps mas nada vingou com efeito", color: "color-pj-only" }
+        ];
+
+        let currentIdx = 0;
+        let isTyping = false;
+        let hasStarted = false;
+        let typeInterval;
+        let waitTimeout;
+        
+        const textEl = document.getElementById("typewriter-text");
+        const typingEl = textEl.querySelector(".typing-text");
+        const iconPrev = document.getElementById("icon-prev");
+        const iconNext = document.getElementById("icon-next");
+
+        function typeEffect() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            isTyping = true;
+            
+            const phrase = phrases[currentIdx];
+            
+            textEl.className = "fade-up active " + phrase.color;
+            iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
+            iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
+
+            typingEl.textContent = "";
+            
+            let charIdx = 0;
+            typeInterval = setInterval(() => {
+                typingEl.textContent += phrase.text[charIdx];
+                charIdx++;
+                if (charIdx >= phrase.text.length) {
+                    clearInterval(typeInterval);
+                    isTyping = false;
+                    waitTimeout = setTimeout(nextSlide, 5000); 
+                }
+            }, 40);
+        }
+
+        function nextSlide() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            textEl.classList.remove("active");
+            setTimeout(() => {
+                currentIdx = (currentIdx + 1) % phrases.length;
+                typeEffect();
+            }, 300); 
+        }
+
+        function prevSlide() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            textEl.classList.remove("active");
+            setTimeout(() => {
+                currentIdx = (currentIdx - 1 + phrases.length) % phrases.length;
+                typeEffect();
+            }, 300);
+        }
+
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        let touchstartX = 0;
+        
+        sliderWrapper.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        sliderWrapper.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide(); 
+            if (touchendX - touchstartX > 50) prevSlide(); 
+        }, {passive: true});
+
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting && !hasStarted) {
+                hasStarted = true;
+                typeEffect();
+            }
+        }, { threshold: 0.3 }); 
+
+        observer.observe(document.getElementById('sessao-audiencia'));
+    </script>
 </body>
 </html>
