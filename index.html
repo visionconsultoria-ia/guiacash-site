@@ -53,7 +53,7 @@
             width: 100%;
             max-width: 100vw;
             overflow-x: hidden; 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
             line-height: 1.6;
@@ -114,43 +114,42 @@
         }
 
         .main-headline { 
-            max-width: 1100px; 
+            max-width: 1000px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
             font-weight: 800; 
             line-height: 1.2;
-            font-size: 4.2rem; /* Aumentado de 3.2rem */
+            font-size: 3.2rem;
         }
 
-        /* Puzzle Component Sincronizado */
+        /* Puzzle Component */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: center; 
-            height: 72px; /* Aumentado de 56px */
+            align-items: flex-start; 
+            height: 56px; 
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
-            border-radius: 14px;
+            border-radius: 12px;
             overflow: hidden; 
             margin: 0 8px;
             vertical-align: middle;
-            transform: translateY(-6px); /* Ajustado para centralizar com fonte maior */
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .puzzle-text {
             display: flex;
             align-items: center;
             height: 100%; 
-            padding: 0 15px; 
+            padding: 0 12px; 
             color: #FFFFFF;
             font-weight: 900;
-            font-size: 3.5rem; /* Aumentado de 2.8rem */
-            line-height: 1;
+            font-size: 2.8rem;
         }
 
         .puzzle-joint {
             width: 24px; 
-            height: 72px; /* Sincronizado com wrapper */
+            height: 56px; 
             margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
@@ -158,18 +157,17 @@
 
         /* Subheadlines e Hook */
         .hero .subheadline { 
-            max-width: 950px; 
+            max-width: 900px; 
             margin: 0 auto 32px; 
             color: #555555;
-            font-weight: 600; 
-            line-height: 1.6;
-            font-size: 1.4rem; /* Aumentado para harmonia */
+            font-weight: 700; 
+            line-height: 1.5;
         }
 
         .hero .video-hook { 
             max-width: 700px; 
             margin: 0 auto 12px; 
-            font-size: 1.1rem; 
+            font-size: 1rem; 
             color: #777777; 
             font-weight: 400; 
             line-height: 1.3; 
@@ -233,11 +231,34 @@
         .slider-btn.prev { left: 0; }
         .slider-btn.next { right: 0; }
 
-        /* Grid Audiência */
-        .audience-wrapper-desktop { display: flex; justify-content: center; max-width: 1000px; margin: 0 auto; }
-        .audience-col { display: flex; flex-direction: column; flex: 1; }
+        .fade-up { opacity: 0; transform: translateY(20px); }
+        .active { opacity: 1; transform: translateY(0); }
+
+        /* Grid Desktop */
+        .audience-wrapper-desktop {
+            display: flex;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .audience-col {
+            display: flex;
+            flex-direction: column;
+            flex: 1; 
+        }
+        
         .audience-col:not(:last-child) { margin-right: 16px; }
-        .audience-wrapper-mobile { display: flex; flex-direction: column; align-items: center; max-width: 380px; margin: 0 auto; width: 100%; }
+
+        /* Grid Mobile */
+        .audience-wrapper-mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 380px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
         .role-card { 
             background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
@@ -252,49 +273,92 @@
             height: 85px; 
             width: 100%;
         }
+        
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
+        
+        /* Modificação mantendo apenas margem e width atualizados (mobile) */
         .audience-wrapper-mobile .role-card { margin-bottom: 10px; width: 90%; }
+        .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
+
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
         
         .icon-bg {
             background: rgba(92, 75, 223, 0.1); 
             width: 44px; height: 44px; 
             border-radius: 8px;
-            display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            flex-shrink: 0; 
         }
-        .role-card i { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.25rem; }
+
+        .role-card i { 
+            background: var(--pf-pj-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.25rem; 
+            line-height: 1.5; 
+            padding-top: 2px; 
+        }
 
         /* =========================================
-            CONTROLE DE RESPONSIVIDADE
+            CONTROLE DE RESPONSIVIDADE CONSOLIDADO
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
+        
+        /* Proteção específica para grids que precisam de flex no desktop */
         .audience-wrapper-desktop.desktop-only { display: flex !important; }
 
         @media (max-width: 768px) {
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
+            
+            /* Força o grid desktop a ficar oculto no mobile, sobrepondo qualquer flex anterior */
             .audience-wrapper-desktop.desktop-only { display: none !important; }
+
+            /* Proteção específica para a estrutura do grid mobile da seção de audiência */
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
             
+            /* Ajustes Hero */
             section { padding: 50px 0; }
+            
             .hero { padding-top: 30px; padding-bottom: 60px; }
             
-            /* Headline Mobile Sincronizada */
-            .main-headline { font-size: 2.4rem; line-height: 1.3; }
+            .main-headline { font-size: 1.95rem; line-height: 1.4; }
             
-            .puzzle-wrapper { height: 52px; margin: 8px auto; transform: none; border-radius: 10px; }
-            .puzzle-text { font-size: 2.2rem; padding: 0 12px; }
-            .puzzle-joint { width: 20px; height: 52px; margin: 0 -3px; }
+            .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; }
+            .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
+            .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
 
             .hero .subheadline.mobile-only { 
-                font-size: 1.15rem; 
-                line-height: 1.5;
+                font-size: 1.0rem; 
+                line-height: 1.4;
+                margin-left: -15px; 
+                margin-right: -15px;
+                max-width: none; 
                 margin-bottom: 24px;
+            }
+
+            .hero .video-hook {
+                font-size: 0.85rem; 
+                line-height: 1.25; 
                 padding: 0 10px;
+                margin-bottom: 12px;
             }
 
             .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
+
+            /* Ajustes Audiência */
+            #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
+            
+            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
+            .typewriter-container { padding: 0 25px; } 
+            
+            .slider-btn { font-size: 1.4rem; padding: 5px; }
+            .slider-btn.prev { left: -10px; } 
+            .slider-btn.next { right: -10px; } 
+            
             #typewriter-text { font-size: 1.15rem; }
             h2 { font-size: 1.8rem; }
         }
@@ -306,7 +370,7 @@
 
     <section class="hero container">
         
-        <img src="./guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
+        <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
             <span class="desktop-only">
@@ -315,12 +379,12 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none" preserveAspectRatio="none">
-                        <path d="M 12,0 L 12,24 A 12,12 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none" preserveAspectRatio="none">
-                        <path d="M 12,0 L 12,24 A 12,12 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -335,12 +399,12 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 52" fill="none" preserveAspectRatio="none">
-                        <path d="M 10,0 L 10,18 A 9,9 0 1 1 10,36 L 10,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 52" fill="none" preserveAspectRatio="none">
-                        <path d="M 10,0 L 10,18 A 9,9 0 1 1 10,36 L 10,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
+                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -381,11 +445,13 @@
             
             <div class="slider-wrapper">
                 <button class="slider-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
+                
                 <div class="typewriter-container">
                     <div id="typewriter-text" class="fade-up">
                         <span class="typing-text"></span><span class="cursor">|</span>
                     </div>
                 </div>
+                
                 <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
             </div>
 
@@ -411,6 +477,7 @@
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja Física ou Virtual</div>
             </div>
+
         </div>
     </section>
 
@@ -441,11 +508,15 @@
             clearInterval(typeInterval);
             clearTimeout(waitTimeout);
             isTyping = true;
+            
             const phrase = phrases[currentIdx];
+            
             textEl.className = "fade-up active " + phrase.color;
-            if(iconPrev) iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
-            if(iconNext) iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
+            iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
+            iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
+
             typingEl.textContent = "";
+            
             let charIdx = 0;
             typeInterval = setInterval(() => {
                 typingEl.textContent += phrase.text[charIdx];
@@ -478,12 +549,26 @@
             }, 300);
         }
 
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        let touchstartX = 0;
+        
+        sliderWrapper.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        sliderWrapper.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide(); 
+            if (touchendX - touchstartX > 50) prevSlide(); 
+        }, {passive: true});
+
         const observer = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasStarted) {
                 hasStarted = true;
                 typeEffect();
             }
         }, { threshold: 0.3 }); 
+
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
 </body>
