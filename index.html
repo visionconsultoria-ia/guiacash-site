@@ -113,36 +113,19 @@
         }
 
         /* =========================================
-            ANIMAÇÃO CONTEXTUAL DO TORNADO (Otimizada)
+            ANIMAÇÃO TRUQUE DE CAMADAS (VOLUME)
         ========================================= */
-        @keyframes tornado-motion {
-            0% {
-                transform: rotate(29.29deg) translateX(0) scale(1) skew(0deg);
-            }
-            33% {
-                transform: rotate(31deg) translateX(8px) scale(1.02) skew(2deg);
-            }
-            66% {
-                transform: rotate(27deg) translateX(-5px) scale(0.99) skew(-1deg);
-            }
-            100% {
-                transform: rotate(29.29deg) translateX(0) scale(1) skew(0deg);
-            }
+        @keyframes tornado-base-motion {
+            0% { transform: rotate(29.29deg) scale(1) translate(0, 0); opacity: 0.5; }
+            50% { transform: rotate(32deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
+            100% { transform: rotate(29.29deg) scale(1) translate(0, 0); opacity: 0.5; }
         }
 
-        @keyframes tornado-motion-mobile {
-            0% {
-                transform: rotate(24.23deg) translateX(0) scale(1) skew(0deg);
-            }
-            33% {
-                transform: rotate(26deg) translateX(5px) scale(1.02) skew(1.5deg);
-            }
-            66% {
-                transform: rotate(22deg) translateX(-3px) scale(0.99) skew(-1deg);
-            }
-            100% {
-                transform: rotate(24.23deg) translateX(0) scale(1) skew(0deg);
-            }
+        @keyframes tornado-core-motion {
+            0% { transform: rotate(29.29deg) scale(1) skew(0deg); }
+            33% { transform: rotate(31deg) scale(1.02) skew(2deg); }
+            66% { transform: rotate(27deg) scale(0.98) skew(-1deg); }
+            100% { transform: rotate(29.29deg) scale(1) skew(0deg); }
         }
 
         .secret-image-wrapper {
@@ -165,16 +148,26 @@
 
         .tornado-overlay {
             position: absolute;
-            z-index: 2;
             top: -18%; 
             right: 18.27%; 
-            /* Reduzido em 10% (de 39.06% para 35.15%) */
-            width: 35.15%; 
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
+            width: 35.15%; /* Reduzido 10% */
             pointer-events: none; 
-            animation: tornado-motion 4s ease-in-out infinite;
             transform-origin: center center;
-            will-change: transform; /* Melhora a performance mobile */
+            will-change: transform, opacity;
+        }
+
+        /* Camada de Fundo (Vento/Poeira) */
+        .tornado-base {
+            z-index: 2;
+            filter: blur(3px) brightness(1.2);
+            animation: tornado-base-motion 6s ease-in-out infinite;
+        }
+
+        /* Camada de Frente (Núcleo) */
+        .tornado-core {
+            z-index: 3;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+            animation: tornado-core-motion 3.5s ease-in-out infinite;
         }
 
         .highlight-text {
@@ -208,11 +201,9 @@
             }
 
             .tornado-overlay {
-                /* Reduzido em 10% (de 48.55% para 43.70%) */
-                width: 43.70%; 
+                width: 43.70%; /* Reduzido 10% */
                 top: -30.6%; 
                 right: 15.72%; 
-                animation: tornado-motion-mobile 4s ease-in-out infinite;
             }
         }
     </style>
@@ -236,7 +227,10 @@
                 <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
                 <div class="secret-image-wrapper">
-                    <img src="tornado.png" alt="Efeito Tornado" class="tornado-overlay">
+                    <!-- TRUQUE DE CAMADAS APLICADO AQUI -->
+                    <img src="tornado.png" alt="Sombra do Tornado" class="tornado-overlay tornado-base">
+                    <img src="tornado.png" alt="Núcleo do Tornado" class="tornado-overlay tornado-core">
+                    
                     <img src="Verdades%20secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
 
