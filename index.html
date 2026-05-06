@@ -49,18 +49,6 @@
         }
 
         /* =========================================
-            SIMULADORES DAS SESSÕES VIZINHAS
-        ========================================= */
-        .mock-sessao {
-            background-color: var(--bg-light);
-            padding: 120px 0;
-            text-align: center;
-            position: relative;
-            z-index: 1; 
-        }
-        .mock-sessao h2 { color: #ccc; font-weight: 500; }
-
-        /* =========================================
             SESSÃO 3: VERDADES SECRETAS
         ========================================= */
         #sessao-problema {
@@ -79,8 +67,8 @@
             padding: 35px 64px; 
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-top: -74px; /* Ajuste final calculado: borda + raio + respiro da seção */
-            margin-bottom: -74px; /* Ajuste final calculado: borda + raio + respiro da seção */
+            margin-top: -74px; 
+            margin-bottom: -74px; 
             position: relative;
             z-index: 10; 
         }
@@ -178,7 +166,7 @@
         }
 
         /* =========================================
-            RESPONSIVIDADE (MOBILE) - MANTIDO INTACTO
+            RESPONSIVIDADE (MOBILE) 
         ========================================= */
         @media (max-width: 768px) {
             .secret-card {
@@ -211,12 +199,7 @@
 </head>
 <body>
 
-    <section class="mock-sessao">
-        <div class="container">
-            <h2>Fundo Cinza (Final da Sessão 2)</h2>
-        </div>
-    </section>
-
+    <!-- Os fundos cinzas foram removidos para integração final -->
     <section id="sessao-problema">
         <div class="container">
             <div class="secret-card">
@@ -238,12 +221,6 @@
                 <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
                 <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o esforço no trabalho, nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
             </div>
-        </div>
-    </section>
-
-    <section class="mock-sessao">
-        <div class="container">
-            <h2>Fundo Cinza (Início da Sessão 4)</h2>
         </div>
     </section>
 
