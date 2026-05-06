@@ -71,7 +71,6 @@
             padding: 40px 0; 
         }
 
-        /* O CARTÃO BRANCO */
         .secret-card {
             background-color: var(--bg-white);
             border: 3px solid var(--div-border);
@@ -81,15 +80,12 @@
             padding: 56px 64px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            
-            /* Margem Negativa para o Encaixe */
             margin-top: -100px;
             margin-bottom: -100px;
             position: relative;
             z-index: 10; 
         }
 
-        /* TIPOGRAFIA */
         .kicker {
             display: block;
             text-transform: uppercase;
@@ -116,7 +112,39 @@
             line-height: 1.6;
         }
 
-        /* IMAGEM E OVERLAY - PNG TORNADO ATUALIZADO */
+        /* =========================================
+            ANIMAÇÃO CONTEXTUAL DO TORNADO
+        ========================================= */
+        @keyframes tornado-motion {
+            0% {
+                transform: rotate(29.29deg) translateX(0) scale(1);
+            }
+            33% {
+                transform: rotate(31deg) translateX(8px) scale(1.02);
+            }
+            66% {
+                transform: rotate(27deg) translateX(-5px) scale(0.99);
+            }
+            100% {
+                transform: rotate(29.29deg) translateX(0) scale(1);
+            }
+        }
+
+        @keyframes tornado-motion-mobile {
+            0% {
+                transform: rotate(24.23deg) translateX(0) scale(1);
+            }
+            33% {
+                transform: rotate(26deg) translateX(5px) scale(1.02);
+            }
+            66% {
+                transform: rotate(22deg) translateX(-3px) scale(0.99);
+            }
+            100% {
+                transform: rotate(24.23deg) translateX(0) scale(1);
+            }
+        }
+
         .secret-image-wrapper {
             margin: 100px auto 60px auto; 
             position: relative;
@@ -139,14 +167,15 @@
             position: absolute;
             z-index: 2;
             top: -18%; 
-            right: 18.27%; /* Movido 15% para a direita (redução de right) */
+            right: 18.27%; 
             width: 39.06%; 
-            transform: rotate(29.29deg); /* Aumentado 10% no sentido horário */
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
             pointer-events: none; 
+            /* Aplicação da Animação */
+            animation: tornado-motion 4s ease-in-out infinite;
+            transform-origin: center center;
         }
 
-        /* TEXTO DESTAQUE */
         .highlight-text {
             font-size: 1.4rem;
             font-weight: 800;
@@ -164,79 +193,59 @@
             .secret-card {
                 padding: 40px 24px;
                 border-radius: 20px;
-                border-width: 2px;
                 margin-top: -60px;
                 margin-bottom: -60px;
             }
 
-            .kicker { font-size: 0.8rem; }
             .headline { font-size: 1.6rem; }
             .normal-text { font-size: 1rem; }
-            .highlight-text { font-size: 1.25rem; margin: 24px 0; }
 
             .secret-image-wrapper {
-                width: auto;
                 margin-left: -40px; 
                 margin-right: -40px;
                 margin-top: 100px; 
-                margin-bottom: 32px;
             }
 
-            .secret-img {
-                border-radius: 12px; 
-                box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            }
-
-            /* AJUSTE DO TORNADO NO MOBILE */
             .tornado-overlay {
                 width: 48.55%; 
                 top: -30.6%; 
-                right: 15.72%; /* Movido 15% para a direita no mobile */
-                transform: rotate(24.23deg); /* Rotação +10% no mobile */
+                right: 15.72%; 
+                /* Animação específica para os ângulos do mobile */
+                animation: tornado-motion-mobile 4s ease-in-out infinite;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- MOCK SESSÃO 2 -->
     <section class="mock-sessao">
         <div class="container">
             <h2>Fundo Cinza (Final da Sessão 2)</h2>
         </div>
     </section>
 
-    <!-- 3. SESSÃO VERDADES SECRETAS -->
     <section id="sessao-problema">
         <div class="container">
-            
             <div class="secret-card">
                 <span class="kicker">Verdades secretas:</span>
-                
                 <h2 class="headline">
                     Cada dia que passa sua situação financeira está mais desafiadora… <br> 
                     e você sabe disso
                 </h2>
-
                 <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
-                <!-- WRAPPER COM AS DUAS IMAGENS -->
                 <div class="secret-image-wrapper">
                     <img src="tornado.png" alt="Efeito Tornado" class="tornado-overlay">
                     <img src="Verdades%20secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
 
                 <p class="normal-text">Mas aí chega no final da semana, você está cansado, focado no próximo trabalho e dinheiro para entrar e pensa: “vou dar um jeito, semana que vem vai” E o ciclo vicioso se repete. Semana pós-semana, mês após mês.</p>
-
                 <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
-
                 <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o esforço no trabalho, nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
             </div>
-
         </div>
     </section>
 
-    <!-- MOCK SESSÃO 4 -->
     <section class="mock-sessao">
         <div class="container">
             <h2>Fundo Cinza (Início da Sessão 4)</h2>
