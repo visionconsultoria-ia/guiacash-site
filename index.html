@@ -256,7 +256,7 @@
         .audience-wrapper-mobile {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            flex-align: center;
             max-width: 380px;
             margin: 0 auto;
             width: 100%;
@@ -303,7 +303,7 @@
         }
 
         /* =========================================
-           CONTROLE DE RESPONSIVIDADE CONSOLIDADO
+            CONTROLE DE RESPONSIVIDADE CONSOLIDADO
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
@@ -320,7 +320,7 @@
             section { padding: 50px 0; }
             .hero { padding-top: 30px; padding-bottom: 60px; }
             
-            /* Headline Mobile (Mantida nos tamanhos originais conforme solicitado) */
+            /* Headline Mobile */
             .main-headline { font-size: 1.95rem; line-height: 1.4; }
             
             .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; border-radius: 12px; }
@@ -356,6 +356,21 @@
             
             #typewriter-text { font-size: 1.15rem; }
             h2 { font-size: 1.8rem; }
+        }
+
+        /* NOVOS AJUSTES EXCLUSIVOS PARA DESKTOP (Aumento Proporcional) */
+        @media (min-width: 769px) {
+            .hero .main-headline { 
+                margin-bottom: 40px !important; /* Espaço entre Headline e Subheadline 1 */
+            }
+            .hero .subheadline.desktop-only { 
+                font-size: 1.5rem !important; /* ~24px */
+                margin-bottom: 32px !important; /* Espaço entre Sub 1 e Sub 2 (Video Hook) */
+            }
+            .hero .video-hook { 
+                font-size: 1.33rem !important; /* ~21px (Mantendo a proporção de 12.5% menor) */
+                margin-bottom: 12px !important; /* Mantém a proximidade com o vídeo */
+            }
         }
     </style>
 </head>
