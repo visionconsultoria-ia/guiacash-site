@@ -256,7 +256,7 @@
         .audience-wrapper-mobile {
             display: flex;
             flex-direction: column;
-            flex-align: center;
+            align-items: center;
             max-width: 380px;
             margin: 0 auto;
             width: 100%;
@@ -358,18 +358,20 @@
             h2 { font-size: 1.8rem; }
         }
 
-        /* NOVOS AJUSTES EXCLUSIVOS PARA DESKTOP (Aumento Proporcional) */
+        /* AJUSTES EXCLUSIVOS PARA DESKTOP */
         @media (min-width: 769px) {
             .hero .main-headline { 
-                margin-bottom: 40px !important; /* Espaço entre Headline e Subheadline 1 */
+                margin-bottom: 40px !important;
             }
             .hero .subheadline.desktop-only { 
-                font-size: 1.5rem !important; /* ~24px */
-                margin-bottom: 32px !important; /* Espaço entre Sub 1 e Sub 2 (Video Hook) */
+                font-size: 1.5rem !important;
+                margin-bottom: 32px !important;
             }
             .hero .video-hook { 
-                font-size: 1.33rem !important; /* ~21px (Mantendo a proporção de 12.5% menor) */
-                margin-bottom: 12px !important; /* Mantém a proximidade com o vídeo */
+                font-size: 1.33rem !important;
+                margin-bottom: 12px !important; /* Espaço mínimo rente ao vídeo */
+                white-space: nowrap !important; /* Mantém em uma única linha */
+                max-width: none !important;
             }
         }
     </style>
