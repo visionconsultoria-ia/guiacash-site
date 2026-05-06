@@ -55,7 +55,7 @@
             width: 100%;
             max-width: 100vw;
             overflow-x: hidden; 
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
             line-height: 1.6;
@@ -201,7 +201,7 @@
         }
 
         /* =========================================
-           2. SESSÃO: AUDIÊNCIA
+            2. SESSÃO: AUDIÊNCIA
         ========================================= */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
@@ -304,7 +304,7 @@
         }
 
         /* =========================================
-           CONTROLE DE RESPONSIVIDADE CONSOLIDADO
+            CONTROLE DE RESPONSIVIDADE CONSOLIDADO
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
@@ -374,7 +374,8 @@
     <!-- 1. HERO SECTION -->
     <section class="hero container">
         
-        <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
+        <!-- Ajuste de caminho para GitHub Pages (relativo ao root) -->
+        <img src="./guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
             <!-- VERSÃO DESKTOP -->
@@ -456,7 +457,7 @@
             
             <!-- SLIDER DINÂMICO -->
             <div class="slider-wrapper">
-                <button class="slider-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
+                <button class="slider-btn prev" aria-label="Anterior" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
                 
                 <div class="typewriter-container">
                     <div id="typewriter-text" class="fade-up">
@@ -464,7 +465,7 @@
                     </div>
                 </div>
                 
-                <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
+                <button class="slider-btn next" aria-label="Próximo" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
             </div>
 
             <!-- GRID DE AUDIÊNCIA - DESKTOP -->
@@ -527,8 +528,8 @@
             const phrase = phrases[currentIdx];
             
             textEl.className = "fade-up active " + phrase.color;
-            iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
-            iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
+            if(iconPrev) iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
+            if(iconNext) iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
 
             typingEl.textContent = "";
             
@@ -564,6 +565,7 @@
             }, 300);
         }
 
+        // Touch Navigation
         const sliderWrapper = document.querySelector('.slider-wrapper');
         let touchstartX = 0;
         
@@ -577,6 +579,7 @@
             if (touchendX - touchstartX > 50) prevSlide(); 
         }, {passive: true});
 
+        // Start only when visible
         const observer = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasStarted) {
                 hasStarted = true;
