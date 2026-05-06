@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guia Cash | Controle Financeiro Inteligente</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -116,42 +114,43 @@
         }
 
         .main-headline { 
-            max-width: 1000px; 
+            max-width: 1100px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
             font-weight: 800; 
             line-height: 1.2;
-            font-size: 3.2rem;
+            font-size: 4.2rem; /* Aumentado de 3.2rem */
         }
 
-        /* Puzzle Component */
+        /* Puzzle Component Sincronizado */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: flex-start; 
-            height: 56px; 
+            align-items: center; 
+            height: 72px; /* Aumentado de 56px */
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden; 
             margin: 0 8px;
             vertical-align: middle;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transform: translateY(-6px); /* Ajustado para centralizar com fonte maior */
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
 
         .puzzle-text {
             display: flex;
             align-items: center;
             height: 100%; 
-            padding: 0 12px; 
+            padding: 0 15px; 
             color: #FFFFFF;
             font-weight: 900;
-            font-size: 2.8rem;
+            font-size: 3.5rem; /* Aumentado de 2.8rem */
+            line-height: 1;
         }
 
         .puzzle-joint {
             width: 24px; 
-            height: 56px; 
+            height: 72px; /* Sincronizado com wrapper */
             margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
@@ -159,17 +158,18 @@
 
         /* Subheadlines e Hook */
         .hero .subheadline { 
-            max-width: 900px; 
+            max-width: 950px; 
             margin: 0 auto 32px; 
             color: #555555;
-            font-weight: 700; 
-            line-height: 1.5;
+            font-weight: 600; 
+            line-height: 1.6;
+            font-size: 1.4rem; /* Aumentado para harmonia */
         }
 
         .hero .video-hook { 
             max-width: 700px; 
             margin: 0 auto 12px; 
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             color: #777777; 
             font-weight: 400; 
             line-height: 1.3; 
@@ -233,34 +233,11 @@
         .slider-btn.prev { left: 0; }
         .slider-btn.next { right: 0; }
 
-        .fade-up { opacity: 0; transform: translateY(20px); }
-        .active { opacity: 1; transform: translateY(0); }
-
-        /* Grid Desktop */
-        .audience-wrapper-desktop {
-            display: flex;
-            justify-content: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .audience-col {
-            display: flex;
-            flex-direction: column;
-            flex: 1; 
-        }
-        
+        /* Grid Audiência */
+        .audience-wrapper-desktop { display: flex; justify-content: center; max-width: 1000px; margin: 0 auto; }
+        .audience-col { display: flex; flex-direction: column; flex: 1; }
         .audience-col:not(:last-child) { margin-right: 16px; }
-
-        /* Grid Mobile */
-        .audience-wrapper-mobile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 380px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        .audience-wrapper-mobile { display: flex; flex-direction: column; align-items: center; max-width: 380px; margin: 0 auto; width: 100%; }
 
         .role-card { 
             background: linear-gradient(var(--bg-white), var(--bg-white)) padding-box,
@@ -275,92 +252,49 @@
             height: 85px; 
             width: 100%;
         }
-        
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
-        
-        /* Modificação mantendo apenas margem e width atualizados (mobile) */
         .audience-wrapper-mobile .role-card { margin-bottom: 10px; width: 90%; }
-        .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
-
         .role-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(92, 75, 223, 0.15); }
         
         .icon-bg {
             background: rgba(92, 75, 223, 0.1); 
             width: 44px; height: 44px; 
             border-radius: 8px;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            flex-shrink: 0; 
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
         }
-
-        .role-card i { 
-            background: var(--pf-pj-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.25rem; 
-            line-height: 1.5; 
-            padding-top: 2px; 
-        }
+        .role-card i { background: var(--pf-pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.25rem; }
 
         /* =========================================
-            CONTROLE DE RESPONSIVIDADE CONSOLIDADO
+            CONTROLE DE RESPONSIVIDADE
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
-        
-        /* Proteção específica para grids que precisam de flex no desktop */
         .audience-wrapper-desktop.desktop-only { display: flex !important; }
 
         @media (max-width: 768px) {
             .mobile-only { display: block !important; }
             .desktop-only { display: none !important; }
-            
-            /* Força o grid desktop a ficar oculto no mobile, sobrepondo qualquer flex anterior */
             .audience-wrapper-desktop.desktop-only { display: none !important; }
-
-            /* Proteção específica para a estrutura do grid mobile da seção de audiência */
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
             
-            /* Ajustes Hero */
             section { padding: 50px 0; }
-            
             .hero { padding-top: 30px; padding-bottom: 60px; }
             
-            .main-headline { font-size: 1.95rem; line-height: 1.4; }
+            /* Headline Mobile Sincronizada */
+            .main-headline { font-size: 2.4rem; line-height: 1.3; }
             
-            .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; }
-            .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
-            .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
+            .puzzle-wrapper { height: 52px; margin: 8px auto; transform: none; border-radius: 10px; }
+            .puzzle-text { font-size: 2.2rem; padding: 0 12px; }
+            .puzzle-joint { width: 20px; height: 52px; margin: 0 -3px; }
 
             .hero .subheadline.mobile-only { 
-                font-size: 1.0rem; 
-                line-height: 1.4;
-                margin-left: -15px; 
-                margin-right: -15px;
-                max-width: none; 
+                font-size: 1.15rem; 
+                line-height: 1.5;
                 margin-bottom: 24px;
-            }
-
-            .hero .video-hook {
-                font-size: 0.85rem; 
-                line-height: 1.25; 
                 padding: 0 10px;
-                margin-bottom: 12px;
             }
 
             .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
-
-            /* Ajustes Audiência */
-            #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
-            
-            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
-            .typewriter-container { padding: 0 25px; } 
-            
-            .slider-btn { font-size: 1.4rem; padding: 5px; }
-            .slider-btn.prev { left: -10px; } 
-            .slider-btn.next { right: -10px; } 
-            
             #typewriter-text { font-size: 1.15rem; }
             h2 { font-size: 1.8rem; }
         }
@@ -368,29 +302,25 @@
 </head>
 <body>
 
-    <!-- LINHA DE TOPO -->
     <div class="top-gradient-line"></div>
 
-    <!-- 1. HERO SECTION -->
     <section class="hero container">
         
-        <!-- Ajuste de caminho para GitHub Pages (relativo ao root) -->
         <img src="./guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
-            <!-- VERSÃO DESKTOP -->
             <span class="desktop-only">
                 Assuma o controle total das suas <br>
                 finanças 
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
-                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none" preserveAspectRatio="none">
+                        <path d="M 12,0 L 12,24 A 12,12 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
-                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none" preserveAspectRatio="none">
+                        <path d="M 12,0 L 12,24 A 12,12 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -399,19 +329,18 @@
                 dinheiro sobrando todo mês
             </span>
 
-            <!-- VERSÃO MOBILE -->
             <span class="mobile-only">
                 Assuma o controle <br>
                 total das suas finanças <br>
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
-                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 20 52" fill="none" preserveAspectRatio="none">
+                        <path d="M 10,0 L 10,18 A 9,9 0 1 1 10,36 L 10,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 20 44" fill="none">
-                        <path d="M 10,-5 L 10,14 A 8,8 0 1 1 10,30 L 10,49" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 20 52" fill="none" preserveAspectRatio="none">
+                        <path d="M 10,0 L 10,18 A 9,9 0 1 1 10,36 L 10,52" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> <br>
@@ -421,14 +350,12 @@
             </span>
         </h1>
         
-        <!-- SUBHEADLINE DESKTOP -->
         <p class="subheadline desktop-only">
             Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
             Como família e negócio se impactam num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
-        <!-- SUBHEADLINE MOBILE -->
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
             clareza em meio às oscilações. Como família e<br>
@@ -437,12 +364,10 @@
             <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
         </p>
         
-        <!-- VIDEO HOOK -->
         <p class="video-hook">
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
-        <!-- VIDEO CONTAINER -->
         <div class="video-container">
             <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
         </div>
@@ -450,25 +375,20 @@
         <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
-    <!-- 2. AUDIÊNCIA DINÂMICA -->
     <section id="sessao-audiencia" class="bg-light">
         <div class="container">
             <h2 class="section-title">O Guia Cash é para quem?</h2>
             
-            <!-- SLIDER DINÂMICO -->
             <div class="slider-wrapper">
-                <button class="slider-btn prev" aria-label="Anterior" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
-                
+                <button class="slider-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
                 <div class="typewriter-container">
                     <div id="typewriter-text" class="fade-up">
                         <span class="typing-text"></span><span class="cursor">|</span>
                     </div>
                 </div>
-                
-                <button class="slider-btn next" aria-label="Próximo" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
+                <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
             </div>
 
-            <!-- GRID DE AUDIÊNCIA - DESKTOP -->
             <div class="audience-wrapper-desktop desktop-only">
                 <div class="audience-col">
                     <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
@@ -484,7 +404,6 @@
                 </div>
             </div>
 
-            <!-- GRID DE AUDIÊNCIA - MOBILE -->
             <div class="audience-wrapper-mobile mobile-only">
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
@@ -492,11 +411,9 @@
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
                 <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja Física ou Virtual</div>
             </div>
-
         </div>
     </section>
 
-    <!-- SCRIPTS DO SLIDER DA AUDIÊNCIA -->
     <script>
         const phrases =[
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
@@ -524,15 +441,11 @@
             clearInterval(typeInterval);
             clearTimeout(waitTimeout);
             isTyping = true;
-            
             const phrase = phrases[currentIdx];
-            
             textEl.className = "fade-up active " + phrase.color;
             if(iconPrev) iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
             if(iconNext) iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
-
             typingEl.textContent = "";
-            
             let charIdx = 0;
             typeInterval = setInterval(() => {
                 typingEl.textContent += phrase.text[charIdx];
@@ -565,28 +478,12 @@
             }, 300);
         }
 
-        // Touch Navigation
-        const sliderWrapper = document.querySelector('.slider-wrapper');
-        let touchstartX = 0;
-        
-        sliderWrapper.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-        
-        sliderWrapper.addEventListener('touchend', e => {
-            let touchendX = e.changedTouches[0].screenX;
-            if (touchstartX - touchendX > 50) nextSlide(); 
-            if (touchendX - touchstartX > 50) prevSlide(); 
-        }, {passive: true});
-
-        // Start only when visible
         const observer = new IntersectionObserver((entries) => {
             if(entries[0].isIntersecting && !hasStarted) {
                 hasStarted = true;
                 typeEffect();
             }
         }, { threshold: 0.3 }); 
-
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
 </body>
