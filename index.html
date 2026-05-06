@@ -20,7 +20,6 @@
             --text-dark: #363636;
             --text-gray: #555555;
             
-            /* Paleta Dívidas (Amarelos) */
             --div-dark: #db941b;
             --div-base: #f5a722;
             --div-light: #fbbb4f;
@@ -77,7 +76,7 @@
             border-radius: 24px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 56px 64px;
+            padding: 40px 64px; /* Reduzido padding vertical para 40px */
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             margin-top: -100px;
@@ -113,7 +112,7 @@
         }
 
         /* =========================================
-            ANIMAÇÃO TRUQUE DE CAMADAS (VOLUME)
+            ANIMAÇÃO TRUQUE DE CAMADAS
         ========================================= */
         @keyframes tornado-base-motion {
             0% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
@@ -129,7 +128,7 @@
         }
 
         .secret-image-wrapper {
-            margin: 100px auto 60px auto; 
+            margin: 40px auto 30px auto; /* Reduzido de 100px para 40px (superior) e de 60px para 30px (inferior) */
             position: relative;
             z-index: 15;
             max-width: 600px; 
@@ -148,22 +147,20 @@
 
         .tornado-overlay {
             position: absolute;
-            top: -10%; /* 5% mais para baixo em relação aos -15% */
-            right: 18.27%; /* 10% mais para a direita em relação aos 28.27% */
+            top: -10%; 
+            right: 18.27%; 
             width: 31.63%; 
             pointer-events: none; 
             transform-origin: center center;
             will-change: transform, opacity;
         }
 
-        /* Camada de Fundo (Vento/Poeira) */
         .tornado-base {
             z-index: 2;
             filter: blur(3px) brightness(1.2);
             animation: tornado-base-motion 6s ease-in-out infinite;
         }
 
-        /* Camada de Frente (Núcleo) */
         .tornado-core {
             z-index: 3;
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
@@ -185,7 +182,7 @@
         ========================================= */
         @media (max-width: 768px) {
             .secret-card {
-                padding: 40px 24px;
+                padding: 32px 24px; /* Padding vertical mobile levemente menor */
                 border-radius: 20px;
                 margin-top: -60px;
                 margin-bottom: -60px;
@@ -197,13 +194,14 @@
             .secret-image-wrapper {
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 100px; 
+                margin-top: 60px; /* Reduzido de 100px para 60px no mobile */
+                margin-bottom: 30px;
             }
 
             .tornado-overlay {
                 width: 39.33%; 
-                top: -17.6%; /* 5% mais para baixo em relação aos -22.6% */
-                right: 15.72%; /* 10% mais para a direita em relação aos 25.72% */
+                top: -17.6%; 
+                right: 15.72%; 
             }
         }
     </style>
