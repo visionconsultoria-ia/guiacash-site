@@ -116,16 +116,16 @@
             ANIMAÇÃO TRUQUE DE CAMADAS (VOLUME)
         ========================================= */
         @keyframes tornado-base-motion {
-            0% { transform: rotate(29.29deg) scale(1) translate(0, 0); opacity: 0.5; }
-            50% { transform: rotate(32deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
-            100% { transform: rotate(29.29deg) scale(1) translate(0, 0); opacity: 0.5; }
+            0% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
+            50% { transform: rotate(34deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
+            100% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
         }
 
         @keyframes tornado-core-motion {
-            0% { transform: rotate(29.29deg) scale(1) skew(0deg); }
-            33% { transform: rotate(31deg) scale(1.02) skew(2deg); }
-            66% { transform: rotate(27deg) scale(0.98) skew(-1deg); }
-            100% { transform: rotate(29.29deg) scale(1) skew(0deg); }
+            0% { transform: rotate(31.34deg) scale(1) skew(0deg); }
+            33% { transform: rotate(33deg) scale(1.02) skew(2deg); }
+            66% { transform: rotate(29deg) scale(0.98) skew(-1deg); }
+            100% { transform: rotate(31.34deg) scale(1) skew(0deg); }
         }
 
         .secret-image-wrapper {
@@ -148,9 +148,9 @@
 
         .tornado-overlay {
             position: absolute;
-            top: -3%; /* Movido 15% para baixo (-18% + 15%) */
-            right: 18.27%; 
-            width: 31.63%; /* Reduzido 10% (35.15% * 0.9) */
+            top: -15%; /* 12% para cima em relação ao anterior (-3% - 12%) */
+            right: 28.27%; /* 10% para a esquerda em relação ao anterior (18.27% + 10%) */
+            width: 31.63%; 
             pointer-events: none; 
             transform-origin: center center;
             will-change: transform, opacity;
@@ -201,9 +201,9 @@
             }
 
             .tornado-overlay {
-                width: 39.33%; /* Reduzido 10% (43.70% * 0.9) */
-                top: -15.6%; /* Movido 15% para baixo (-30.6% + 15%) */
-                right: 15.72%; 
+                width: 39.33%; 
+                top: -22.6%; /* 7% para cima em relação ao anterior (-15.6% - 7%) */
+                right: 25.72%; /* 10% para a esquerda em relação ao anterior (15.72% + 10%) */
             }
         }
     </style>
@@ -227,7 +227,6 @@
                 <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
                 <div class="secret-image-wrapper">
-                    <!-- TRUQUE DE CAMADAS APLICADO AQUI -->
                     <img src="tornado.png" alt="Sombra do Tornado" class="tornado-overlay tornado-base">
                     <img src="tornado.png" alt="Núcleo do Tornado" class="tornado-overlay tornado-core">
                     
