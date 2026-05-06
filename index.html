@@ -429,4 +429,155 @@
         </p>
 
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida e
+            Organização que se adapta à vida corrida e<br>
+            clareza em meio às oscilações. Como família e<br>
+            negócio se impactam num só lugar, automático<br>
+            e simples. Antes que mais uma decisão no<br>
+            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
+        </p>
+        
+        <p class="video-hook">
+            Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
+        </p>
+        
+        <div class="video-container">
+            <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
+        </div>
+
+        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
+    </section>
+
+    <section id="sessao-audiencia" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">O Guia Cash é para quem?</h2>
+            
+            <div class="slider-wrapper">
+                <button class="slider-btn prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left" id="icon-prev"></i></button>
+                
+                <div class="typewriter-container">
+                    <div id="typewriter-text" class="fade-up">
+                        <span class="typing-text"></span><span class="cursor">|</span>
+                    </div>
+                </div>
+                
+                <button class="slider-btn next" onclick="nextSlide()"><i class="fa-solid fa-chevron-right" id="icon-next"></i></button>
+            </div>
+
+            <div class="audience-wrapper-desktop desktop-only">
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
+                </div>
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
+                </div>
+                <div class="audience-col">
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja virtual ou física</div>
+                    <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-laptop"></i></div> Infoprodutor e Influenciador</div>
+                </div>
+            </div>
+
+            <div class="audience-wrapper-mobile mobile-only">
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-doctor"></i></div> Profissional liberal</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-user-tie"></i></div> Autônomo</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-building"></i></div> Empresário</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-briefcase"></i></div> Prestador de serviço</div>
+                <div class="role-card"><div class="icon-bg"><i class="fa-solid fa-store"></i></div> Loja Física ou Virtual</div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const phrases =[
+            { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
+            { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
+            { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
+            { text: "Precisa separar PJ da PF e ser mais profissional", color: "color-pf-pj" },
+            { text: "Quer evitar dívidas ou viver livre delas", color: "color-debt-only" },
+            { text: "Quer liberdade para realizar sonhos, mas não consegue juntar dinheiro", color: "color-pf-pj" },
+            { text: "Se preocupa com o futuro financeiro, padrão de vida ou aposentadoria", color: "color-pf-only" },
+            { text: "Já tentou usar planilha, sistema, apps mas nada vingou com efeito", color: "color-pj-only" }
+        ];
+
+        let currentIdx = 0;
+        let isTyping = false;
+        let hasStarted = false;
+        let typeInterval;
+        let waitTimeout;
+        
+        const textEl = document.getElementById("typewriter-text");
+        const typingEl = textEl.querySelector(".typing-text");
+        const iconPrev = document.getElementById("icon-prev");
+        const iconNext = document.getElementById("icon-next");
+
+        function typeEffect() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            isTyping = true;
+            
+            const phrase = phrases[currentIdx];
+            
+            textEl.className = "fade-up active " + phrase.color;
+            iconPrev.className = `fa-solid fa-chevron-left ${phrase.color}`;
+            iconNext.className = `fa-solid fa-chevron-right ${phrase.color}`;
+
+            typingEl.textContent = "";
+            
+            let charIdx = 0;
+            typeInterval = setInterval(() => {
+                typingEl.textContent += phrase.text[charIdx];
+                charIdx++;
+                if (charIdx >= phrase.text.length) {
+                    clearInterval(typeInterval);
+                    isTyping = false;
+                    waitTimeout = setTimeout(nextSlide, 5000); 
+                }
+            }, 40);
+        }
+
+        function nextSlide() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            textEl.classList.remove("active");
+            setTimeout(() => {
+                currentIdx = (currentIdx + 1) % phrases.length;
+                typeEffect();
+            }, 300); 
+        }
+
+        function prevSlide() {
+            clearInterval(typeInterval);
+            clearTimeout(waitTimeout);
+            textEl.classList.remove("active");
+            setTimeout(() => {
+                currentIdx = (currentIdx - 1 + phrases.length) % phrases.length;
+                typeEffect();
+            }, 300);
+        }
+
+        const sliderWrapper = document.querySelector('.slider-wrapper');
+        let touchstartX = 0;
+        
+        sliderWrapper.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        sliderWrapper.addEventListener('touchend', e => {
+            let touchendX = e.changedTouches[0].screenX;
+            if (touchstartX - touchendX > 50) nextSlide(); 
+            if (touchendX - touchstartX > 50) prevSlide(); 
+        }, {passive: true});
+
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting && !hasStarted) {
+                hasStarted = true;
+                typeEffect();
+            }
+        }, { threshold: 0.3 }); 
+
+        observer.observe(document.getElementById('sessao-audiencia'));
+    </script>
+</body>
+</html>
