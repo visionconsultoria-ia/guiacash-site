@@ -114,7 +114,7 @@
         }
 
         .main-headline { 
-            max-width: 1100px; 
+            max-width: 1200px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
@@ -123,15 +123,15 @@
             font-size: 4.2rem;
         }
 
-        /* Puzzle Component */
+        /* Puzzle Component Atualizado (+5% escala e stroke) */
         .puzzle-wrapper {
             display: inline-flex;
             align-items: center; 
-            height: 72px; 
+            height: 76px; /* Aumentado levemente */
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
             border-radius: 14px;
             overflow: visible; 
-            margin: 0 10px;
+            margin: 0 12px;
             vertical-align: middle;
             transform: translateY(-6px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.12);
@@ -141,7 +141,7 @@
             display: flex;
             align-items: center;
             height: 100%; 
-            padding: 0 14px; 
+            padding: 0 16px; 
             color: #FFFFFF;
             font-weight: 900;
             font-size: 3.5rem;
@@ -149,55 +149,58 @@
         }
 
         .puzzle-joint {
-            width: 28px; 
-            height: 72px; 
-            margin: 0 -4px; 
+            width: 32px; /* Aumentado para escala de 5% */
+            height: 76px; 
+            margin: 0 -6px; 
             flex-shrink: 0;
             z-index: 2;
             overflow: visible;
         }
 
-        /* Subheadlines e Hook */
+        /* Subheadlines e Hook (Aumentadas proporcionalmente) */
         .hero .subheadline { 
-            max-width: 900px; 
-            margin: 0 auto 32px; 
+            max-width: 1000px; 
+            margin: 0 auto 36px; 
             color: #555555;
             font-weight: 700; 
-            line-height: 1.5;
+            line-height: 1.4;
+            font-size: 1.45rem; /* Aumento solicitado */
         }
 
         .hero .video-hook { 
-            max-width: 700px; 
-            margin: 0 auto 12px; 
-            font-size: 1rem; 
-            color: #777777; 
-            font-weight: 400; 
+            max-width: 800px; 
+            margin: 0 auto 16px; 
+            font-size: 1.15rem; /* Aumento solicitado */
+            color: #666666; 
+            font-weight: 500; 
             line-height: 1.3; 
+            letter-spacing: 0.01em;
         }
         
-        /* Video Container */
+        /* Video Container (Aumentado 30% - Imersão Total) */
         .video-container {
-            width: 100%; 
-            max-width: 1144px; 
+            width: 95vw; 
+            max-width: 1400px; /* Expansão significativa */
             aspect-ratio: 16/9; 
-            margin: 0 auto 40px;
+            margin: 20px auto 50px;
             background: #0F172A; 
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex; 
             align-items: center; 
             justify-content: center;
             cursor: pointer; 
             position: relative; 
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 4px solid #FFF; 
+            box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.3);
+            border: 6px solid #FFF; 
             outline: 1px solid var(--border-light);
         }
         
         .unmute-btn {
-            background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
+            background: var(--bg-white); color: var(--pj-dark); padding: 14px 28px; border-radius: 50px;
             font-weight: 700; display: flex; align-items: center; gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
         }
 
         /* =========================================
@@ -303,7 +306,7 @@
         }
 
         /* =========================================
-           CONTROLE DE RESPONSIVIDADE CONSOLIDADO
+            CONTROLE DE RESPONSIVIDADE CONSOLIDADO
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
@@ -320,11 +323,12 @@
             section { padding: 50px 0; }
             .hero { padding-top: 30px; padding-bottom: 60px; }
             
-            /* Headline Mobile (Mantida nos tamanhos originais conforme solicitado) */
+            /* Headline Mobile (Preservada conforme solicitado) */
             .main-headline { font-size: 1.95rem; line-height: 1.4; }
             
             .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; border-radius: 12px; }
             .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
+            /* No Mobile o Joint volta ao tamanho original para não quebrar o fluxo do texto menor */
             .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
 
             .hero .subheadline.mobile-only { 
@@ -343,7 +347,7 @@
                 margin-bottom: 12px;
             }
 
-            .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
+            .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; width: 100%; border: 4px solid #FFF; }
 
             #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
             
@@ -374,12 +378,12 @@
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none">
-                        <path d="M 12,0 L 12,26 A 10,10 0 1 1 12,46 L 12,72" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="-2 0 28 72" fill="none">
+                        <path d="M 12,0 L 12,24 A 11,11 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none">
-                        <path d="M 12,0 L 12,26 A 10,10 0 1 1 12,46 L 12,72" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="-2 0 28 72" fill="none">
+                        <path d="M 12,0 L 12,24 A 11,11 0 1 1 12,48 L 12,72" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -418,7 +422,7 @@
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
             clareza em meio às oscilações. Como família e<br>
-            negócio se impactam num só lugar, automático<br>
+             negócio se impactam num só lugar, automático<br>
             e simples. Antes que mais uma decisão no<br>
             <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
         </p>
