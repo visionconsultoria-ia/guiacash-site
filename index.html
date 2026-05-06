@@ -113,35 +113,35 @@
         }
 
         /* =========================================
-            ANIMAÇÃO CONTEXTUAL DO TORNADO
+            ANIMAÇÃO CONTEXTUAL DO TORNADO (Otimizada)
         ========================================= */
         @keyframes tornado-motion {
             0% {
-                transform: rotate(29.29deg) translateX(0) scale(1);
+                transform: rotate(29.29deg) translateX(0) scale(1) skew(0deg);
             }
             33% {
-                transform: rotate(31deg) translateX(8px) scale(1.02);
+                transform: rotate(31deg) translateX(8px) scale(1.02) skew(2deg);
             }
             66% {
-                transform: rotate(27deg) translateX(-5px) scale(0.99);
+                transform: rotate(27deg) translateX(-5px) scale(0.99) skew(-1deg);
             }
             100% {
-                transform: rotate(29.29deg) translateX(0) scale(1);
+                transform: rotate(29.29deg) translateX(0) scale(1) skew(0deg);
             }
         }
 
         @keyframes tornado-motion-mobile {
             0% {
-                transform: rotate(24.23deg) translateX(0) scale(1);
+                transform: rotate(24.23deg) translateX(0) scale(1) skew(0deg);
             }
             33% {
-                transform: rotate(26deg) translateX(5px) scale(1.02);
+                transform: rotate(26deg) translateX(5px) scale(1.02) skew(1.5deg);
             }
             66% {
-                transform: rotate(22deg) translateX(-3px) scale(0.99);
+                transform: rotate(22deg) translateX(-3px) scale(0.99) skew(-1deg);
             }
             100% {
-                transform: rotate(24.23deg) translateX(0) scale(1);
+                transform: rotate(24.23deg) translateX(0) scale(1) skew(0deg);
             }
         }
 
@@ -168,12 +168,13 @@
             z-index: 2;
             top: -18%; 
             right: 18.27%; 
-            width: 39.06%; 
+            /* Reduzido em 10% (de 39.06% para 35.15%) */
+            width: 35.15%; 
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3)); 
             pointer-events: none; 
-            /* Aplicação da Animação */
             animation: tornado-motion 4s ease-in-out infinite;
             transform-origin: center center;
+            will-change: transform; /* Melhora a performance mobile */
         }
 
         .highlight-text {
@@ -207,10 +208,10 @@
             }
 
             .tornado-overlay {
-                width: 48.55%; 
+                /* Reduzido em 10% (de 48.55% para 43.70%) */
+                width: 43.70%; 
                 top: -30.6%; 
                 right: 15.72%; 
-                /* Animação específica para os ângulos do mobile */
                 animation: tornado-motion-mobile 4s ease-in-out infinite;
             }
         }
