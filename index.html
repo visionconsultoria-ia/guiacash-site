@@ -76,7 +76,7 @@
             border-radius: 24px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 64px; /* Reduzido padding vertical para 40px */
+            padding: 35px 64px; /* Ajustado padding vertical conforme lógica nova */
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             margin-top: -100px;
@@ -128,7 +128,7 @@
         }
 
         .secret-image-wrapper {
-            margin: 40px auto 30px auto; /* Reduzido de 100px para 40px (superior) e de 60px para 30px (inferior) */
+            margin: 65px auto 35px auto; /* Alterado para 65px (5% mais baixo no computador) */
             position: relative;
             z-index: 15;
             max-width: 600px; 
@@ -182,20 +182,23 @@
         ========================================= */
         @media (max-width: 768px) {
             .secret-card {
-                padding: 32px 24px; /* Padding vertical mobile levemente menor */
+                padding: 35px 20px; /* Padding lateral alterado para 20px para ganhar largura */
                 border-radius: 20px;
                 margin-top: -60px;
                 margin-bottom: -60px;
             }
 
             .headline { font-size: 1.6rem; }
-            .normal-text { font-size: 1rem; }
+            .normal-text { 
+                font-size: 1rem; 
+                letter-spacing: -0.01em; /* Ajuste fino para encaixar as 6 linhas no mobile */
+            }
 
             .secret-image-wrapper {
                 margin-left: -40px; 
                 margin-right: -40px;
-                margin-top: 60px; /* Reduzido de 100px para 60px no mobile */
-                margin-bottom: 30px;
+                margin-top: 85px; /* Ajuste para não sufocar o tornado no mobile */
+                margin-bottom: 35px;
             }
 
             .tornado-overlay {
