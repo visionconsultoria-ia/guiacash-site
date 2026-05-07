@@ -108,8 +108,8 @@
         }
         
         .hero-logo { 
-            max-width: 113px; /* Aumento de 15% */
-            margin-bottom: 9px; /* Compensação para manter a Headline no lugar */
+            max-width: 113px; 
+            margin-bottom: 9px; 
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
         }
 
@@ -236,7 +236,6 @@
         .fade-up { opacity: 0; transform: translateY(20px); }
         .active { opacity: 1; transform: translateY(0); }
 
-        /* Grid Desktop */
         .audience-wrapper-desktop {
             display: flex;
             justify-content: center;
@@ -252,7 +251,6 @@
         
         .audience-col:not(:last-child) { margin-right: 16px; }
 
-        /* Grid Mobile */
         .audience-wrapper-mobile {
             display: flex;
             flex-direction: column;
@@ -318,11 +316,9 @@
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
             
             section { padding: 50px 0; }
-            #sessao-audiencia { padding-bottom: 76px !important; } /* Aumento de +20% (63px -> 76px) */
+            #sessao-audiencia { padding-bottom: 76px !important; } 
             
             .hero { padding-top: 30px; padding-bottom: 60px; }
-            
-            /* Headline Mobile */
             .main-headline { font-size: 1.95rem; line-height: 1.4; }
             
             .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; border-radius: 12px; }
@@ -361,8 +357,14 @@
 
         /* AJUSTES EXCLUSIVOS PARA DESKTOP */
         @media (min-width: 769px) {
-            #sessao-audiencia { padding-bottom: 120px !important; } /* Aumento de +20% (100px -> 120px) */
+            #sessao-audiencia { padding-bottom: 120px !important; } 
             
+            /* Logo aumentada 20% sobre 113px = 136px */
+            .hero-logo { 
+                max-width: 136px !important; 
+                margin-bottom: -10px !important; /* Margem negativa para manter Headline estática */
+            }
+
             .hero .main-headline { 
                 margin-bottom: 40px !important;
             }
@@ -430,17 +432,17 @@
         </h1>
         
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
-            Como família e negócio se impactam num só lugar, automático e simples<br>
+            Organização que se adapta à vida corrida<br>
+            Clareza em como família e negócio se impactam num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
-            clareza em meio às oscilações. Como família e<br>
-            negócio se impactam num só lugar, automático<br>
-            e simples. Antes que mais uma decisão no<br>
-            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
+            clareza em como família e negócio se impactam<br>
+            num só lugar, automático e simples.<br> 
+            Antes que mais uma decisão no escuro<br> 
+            te prenda ao banco por anos 
         </p>
         
         <p class="video-hook">
