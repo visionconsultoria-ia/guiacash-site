@@ -98,7 +98,7 @@
             z-index: 1000;
         }
 
-        .hero { 
+        #sessao-hero { 
             text-align: center; 
             padding-top: 40px; 
             padding-bottom: 75px; 
@@ -236,7 +236,6 @@
         .fade-up { opacity: 0; transform: translateY(20px); }
         .active { opacity: 1; transform: translateY(0); }
 
-        /* Grid Desktop */
         .audience-wrapper-desktop {
             display: flex;
             justify-content: center;
@@ -252,7 +251,6 @@
         
         .audience-col:not(:last-child) { margin-right: 16px; }
 
-        /* Grid Mobile */
         .audience-wrapper-mobile {
             display: flex;
             flex-direction: column;
@@ -320,26 +318,25 @@
             section { padding: 50px 0; }
             #sessao-audiencia { padding-bottom: 76px !important; } 
             
-            .hero { padding-top: 30px; padding-bottom: 60px; }
+            #sessao-hero { padding-top: 30px; padding-bottom: 60px; }
 
-            /* Headline Mobile: Aumento de 3% e Entrelinha -3% */
-            .main-headline { 
-                font-size: 2.01rem !important; 
-                line-height: 1.35 !important; 
+            /* AUMENTO DE PRIORIDADE VIA ID PARA MOBILE */
+            #sessao-hero .main-headline { 
+                font-size: 2.01rem !important; /* +3% (~1px) */
+                line-height: 1.35 !important; /* -3% */
             }
             
-            /* Puzzle Wrapper Mobile: Aumento proporcional para evitar cortes */
-            .puzzle-wrapper { 
-                height: 46px !important; 
+            #sessao-hero .puzzle-wrapper { 
+                height: 46px !important; /* +2px para acomodar fonte e SVG */
                 margin: 6px auto; 
                 transform: none; 
                 border-radius: 12px; 
             }
-            .puzzle-text { 
-                font-size: 1.85rem !important; 
-                padding: 0 10px; 
+            #sessao-hero .puzzle-text { 
+                font-size: 1.86rem !important; /* +3% */
+                padding: 0 9px !important; /* Reduzido 1px para manter largura total */
             }
-            .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
+            #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
 
             .hero .subheadline.mobile-only { 
                 font-size: 1.0rem; 
@@ -401,7 +398,7 @@
 
     <div class="top-gradient-line"></div>
 
-    <section class="hero container">
+    <section id="sessao-hero" class="hero container">
         
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
