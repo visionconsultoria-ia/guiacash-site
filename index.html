@@ -54,14 +54,8 @@
         ========================================= */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html {
-            overflow-x: hidden;
-        }
-
-        body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden; 
+        html, body {
+            overflow-x: clip;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
