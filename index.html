@@ -36,12 +36,17 @@
             --div-dark: #d68910; 
             --div-base: #f5a722;
             --div-light: #fbbb4f;
+            --div-border: #fdb438;
 
             /* Gradients Globais */
             --pf-pj-gradient: linear-gradient(90deg, var(--pf-base), var(--pj-base));
             --debt-gradient: linear-gradient(90deg, #db941b, #f5a722, #fbbb4f);
             --pj-gradient: linear-gradient(90deg, #006974, #009196, #18b6b5);
             --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
+
+            /* Sessão 3 */
+            --bg-sessao-3: linear-gradient(135deg, var(--div-dark), var(--div-base), var(--div-light));
+            --text-highlight: linear-gradient(90deg, #d68910, #f5a722, #fbbb4f);
         }
 
         /* =========================================
@@ -86,7 +91,7 @@
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
         /* =========================================
-           1. HERO SECTION 
+           SEÇÃO 1: HERO SECTION 
         ========================================= */
         .top-gradient-line {
             position: absolute;
@@ -201,7 +206,7 @@
         }
 
         /* =========================================
-            2. SESSÃO: AUDIÊNCIA
+            SEÇÃO 2: AUDIÊNCIA
         ========================================= */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
@@ -301,6 +306,121 @@
         }
 
         /* =========================================
+            SEÇÃO 3: VERDADES SECRETAS
+        ========================================= */
+        #sessao-problema {
+            background: var(--bg-sessao-3);
+            position: relative;
+            z-index: 5;
+            padding: 40px 0; 
+        }
+
+        .secret-card {
+            background-color: var(--bg-white);
+            border: 3px solid var(--div-border);
+            border-radius: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 35px 64px; 
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-top: -74px; 
+            margin-bottom: -74px; 
+            position: relative;
+            z-index: 10; 
+        }
+
+        .kicker {
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+
+        .headline {
+            font-size: 2.1rem;
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .normal-text {
+            font-size: 1.125rem;
+            color: var(--text-gray);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* Animação Truque de Camadas */
+        @keyframes tornado-base-motion {
+            0% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
+            50% { transform: rotate(34deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
+            100% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
+        }
+
+        @keyframes tornado-core-motion {
+            0% { transform: rotate(31.34deg) scale(1) skew(0deg); }
+            33% { transform: rotate(33deg) scale(1.02) skew(2deg); }
+            66% { transform: rotate(29deg) scale(0.98) skew(-1deg); }
+            100% { transform: rotate(31.34deg) scale(1) skew(0deg); }
+        }
+
+        .secret-image-wrapper {
+            margin: 82px auto 35px auto; 
+            position: relative;
+            z-index: 15;
+            max-width: 600px; 
+        }
+
+        .secret-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px; 
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1; 
+        }
+
+        .tornado-overlay {
+            position: absolute;
+            top: -10%; 
+            right: 18.27%; 
+            width: 31.63%; 
+            pointer-events: none; 
+            transform-origin: center center;
+            will-change: transform, opacity;
+        }
+
+        .tornado-base {
+            z-index: 2;
+            filter: blur(3px) brightness(1.2);
+            animation: tornado-base-motion 6s ease-in-out infinite;
+        }
+
+        .tornado-core {
+            z-index: 3;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.3));
+            animation: tornado-core-motion 3.5s ease-in-out infinite;
+        }
+
+        .highlight-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            line-height: 1.4;
+            background: var(--text-highlight);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 32px 0;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE
         ========================================= */
         .mobile-only { display: none !important; }
@@ -317,12 +437,10 @@
             
             section { padding: 50px 0; }
             
-            /* Ajuste Final: Padding Bottom aumentado em 15% (de 76px para 88px) */
             #sessao-audiencia { padding-bottom: 88px !important; } 
             
             #sessao-hero { padding-top: 27px !important; padding-bottom: 60px; }
 
-            /* Ajustes Mobile Headline e Espaçamentos */
             #sessao-hero .main-headline { 
                 font-size: 2.01rem !important; 
                 line-height: 1.07 !important; 
@@ -373,6 +491,33 @@
             
             #typewriter-text { font-size: 1.15rem; }
             h2 { font-size: 1.8rem; }
+
+            /* Seção 3 mobile */
+            .secret-card {
+                padding: 35px 20px; 
+                border-radius: 20px;
+                margin-top: -60px;
+                margin-bottom: -60px;
+            }
+
+            .headline { font-size: 1.6rem; }
+            .normal-text { 
+                font-size: 1rem; 
+                letter-spacing: -0.01em; 
+            }
+
+            .secret-image-wrapper {
+                margin-left: -40px; 
+                margin-right: -40px;
+                margin-top: 85px; 
+                margin-bottom: 35px;
+            }
+
+            .tornado-overlay {
+                width: 39.33%; 
+                top: -17.6%; 
+                right: 15.72%; 
+            }
         }
 
         /* AJUSTES EXCLUSIVOS PARA DESKTOP */
@@ -405,6 +550,9 @@
 
     <div class="top-gradient-line"></div>
 
+    <!-- ==========================================
+         SEÇÃO 1: HERO
+    =========================================== -->
     <section id="sessao-hero" class="hero container">
         
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
@@ -476,6 +624,9 @@
         <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
+    <!-- ==========================================
+         SEÇÃO 2: AUDIÊNCIA
+    =========================================== -->
     <section id="sessao-audiencia" class="bg-light">
         <div class="container">
             <h2 class="section-title">O Guia Cash é para quem?</h2>
@@ -518,8 +669,35 @@
         </div>
     </section>
 
+    <!-- ==========================================
+         SEÇÃO 3: VERDADES SECRETAS
+    =========================================== -->
+    <section id="sessao-problema">
+        <div class="container">
+            <div class="secret-card">
+                <span class="kicker">Verdades secretas:</span>
+                <h2 class="headline">
+                    Cada dia que passa sua situação financeira está mais desafiadora… <br> 
+                    e você sabe disso
+                </h2>
+                <p class="normal-text">Toda semana você diz para si mesmo: "vou me organizar financeiramente", até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
+
+                <div class="secret-image-wrapper">
+                    <img src="tornado.png" alt="Sombra do Tornado" class="tornado-overlay tornado-base">
+                    <img src="tornado.png" alt="Núcleo do Tornado" class="tornado-overlay tornado-core">
+                    
+                    <img src="Verdades%20secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
+                </div>
+
+                <p class="normal-text">Mas aí chega no final da semana, você está cansado, focado no próximo trabalho e dinheiro para entrar e pensa: "vou dar um jeito, semana que vem vai" E o ciclo vicioso se repete. Semana pós-semana, mês após mês.</p>
+                <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
+                <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o esforço no trabalho, nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
+            </div>
+        </div>
+    </section>
+
     <script>
-        const phrases =[
+        const phrases = [
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
             { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
             { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
