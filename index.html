@@ -320,21 +320,21 @@
             
             #sessao-hero { padding-top: 30px; padding-bottom: 60px; }
 
-            /* APLICANDO PRIORIDADE MÁXIMA PARA MUDANÇAS NÍTIDAS NO MOBILE */
+            /* AJUSTES MOBILE COM ALTA PRIORIDADE */
             #sessao-hero .main-headline { 
-                font-size: 2.08rem !important; /* +1px adicional (~33.3px) */
-                line-height: 1.21 !important; /* -10% de redução (era 1.35) */
+                font-size: 2.01rem !important; /* Retorno ao tamanho de segurança para não estourar */
+                line-height: 0.97 !important; /* Redução drástica de 20% para efeito nítido */
             }
             
             #sessao-hero .puzzle-wrapper { 
-                height: 48px !important; /* Aumento para 48px proporcional à letra maior */
+                height: 48px !important; /* Mantido ganho de altura para acomodar fonte branca */
                 margin: 6px auto; 
                 transform: none; 
                 border-radius: 12px; 
             }
             #sessao-hero .puzzle-text { 
-                font-size: 1.92rem !important; /* Acompanha o aumento da fonte cinza */
-                padding: 0 8px !important; /* Reduzido mais 1px para manter largura total */
+                font-size: 1.92rem !important; /* Mantido ganho de legibilidade interna */
+                padding: 0 8px !important; 
             }
             #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
 
