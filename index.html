@@ -692,6 +692,148 @@
                 height: auto;
             }
         }
+        /* =========================================
+            SEÇÃO 6: TESTEMUNHOS
+        ========================================= */
+        #sessao-testemunhos {
+            background-color: #009196;
+            padding: 80px 0 60px;
+        }
+
+        .testemunhos-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .testemunhos-titulo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        .testemunhos-subtitulo {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 0;
+        }
+
+        /* Label acima de cada item */
+        .testemunho-label {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 10px;
+            padding-left: 2px;
+        }
+
+        /* Imagens */
+        .testemunho-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+        }
+
+        /* Wrapper do vídeo */
+        .testemunho-video-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+            background: #000;
+            /* aspect-ratio vertical mobile-first */
+            aspect-ratio: 9/16;
+        }
+
+        .testemunho-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Overlay mudo */
+        .video-mute-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,145,150,0.78);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            cursor: pointer;
+            border-radius: 16px;
+            transition: opacity 0.3s;
+        }
+
+        .video-mute-overlay.hidden { display: none; }
+
+        .mute-icon {
+            width: 72px;
+            height: 72px;
+        }
+
+        .video-mute-overlay p {
+            color: #FFFFFF;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 0;
+            line-height: 1.3;
+        }
+
+        /* ---- GRID MOBILE (1 coluna) ---- */
+        .testemunhos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .testemunho-item { width: 100%; }
+
+        /* CTA seção 6 */
+        .testemunhos-cta-wrapper {
+            margin-top: 48px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ---- GRID DESKTOP (2x2) ---- */
+        @media (min-width: 769px) {
+            #sessao-testemunhos { padding: 90px 0 80px; }
+
+            .testemunhos-titulo { font-size: 2.6rem; }
+
+            .testemunhos-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto auto;
+                gap: 32px;
+                max-width: 100%;
+                /* Ordem desktop: img1 top-left, video top-right, img2 bot-left, img3 bot-right */
+            }
+
+            /* Reordenação desktop via order */
+            .testemunho-item-video  { order: 2; }
+            .testemunho-item-img1   { order: 1; }
+            .testemunho-item-img2   { order: 3; }
+            .testemunho-item-img3   { order: 4; }
+
+            /* Vídeo: aspecto horizontal no desktop */
+            .testemunho-video-wrapper {
+                aspect-ratio: 9/16;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1012,6 +1154,82 @@
         }, { threshold: 0.3 }); 
 
         observer.observe(document.getElementById('sessao-audiencia'));
+
+        /* ---- Autoplay vídeo testemunho ao entrar na seção ---- */
+        const videoTestemunho = document.getElementById('video-testemunho');
+        const videoOverlay    = document.getElementById('video-overlay');
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                videoTestemunho.play().catch(() => {});
+            } else {
+                videoTestemunho.pause();
+            }
+        }, { threshold: 0.4 });
+
+        videoObserver.observe(videoTestemunho);
+
+        function ativarSom() {
+            videoTestemunho.muted = false;
+            videoTestemunho.play().catch(() => {});
+            videoOverlay.classList.add('hidden');
+        }
     </script>
+    <!-- ==========================================
+         SEÇÃO 6: TESTEMUNHOS
+    =========================================== -->
+    <section id="sessao-testemunhos">
+        <div class="container">
+
+            <div class="testemunhos-header">
+                <h2 class="testemunhos-titulo">Será que o Guia Cash funciona?</h2>
+                <p class="testemunhos-subtitulo">Veja com seus próprios olhos e tire suas conclusões</p>
+            </div>
+
+            <div class="testemunhos-grid">
+
+                <!-- Vídeo — top-right no desktop, primeiro no mobile -->
+                <div class="testemunho-item testemunho-item-video">
+                    <p class="testemunho-label">Antonio Fagnani - Empresário</p>
+                    <div class="testemunho-video-wrapper">
+                        <video id="video-testemunho" src="video-testemunho-um.mp4" muted playsinline loop></video>
+                        <div class="video-mute-overlay" id="video-overlay" onclick="ativarSom()">
+                            <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                                <line x1="48" y1="24" x2="64" y2="48" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                                <line x1="64" y1="24" x2="48" y2="48" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                            <p>Seu vídeo já começou<br>Clique para ouvir</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Imagem 1 — top-left no desktop, segunda no mobile -->
+                <div class="testemunho-item testemunho-item-img1">
+                    <p class="testemunho-label">Fernanda Cunha - Loja virtual</p>
+                    <img src="imagem-testemunho-um.jpeg" alt="Testemunho Fernanda Cunha" class="testemunho-img">
+                </div>
+
+                <!-- Imagem 2 — bot-left no desktop, terceira no mobile -->
+                <div class="testemunho-item testemunho-item-img2">
+                    <p class="testemunho-label">Andreia Stankiewicz - Dentista</p>
+                    <img src="imagem-testemunho-dois.jpeg" alt="Testemunho Andreia Stankiewicz" class="testemunho-img">
+                </div>
+
+                <!-- Imagem 3 — bot-right no desktop, quarta no mobile -->
+                <div class="testemunho-item testemunho-item-img3">
+                    <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
+                    <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
+                </div>
+
+            </div>
+
+            <div class="testemunhos-cta-wrapper">
+                <a href="#oferta" class="btn-cta btn-gradient">Quero ter controle</a>
+            </div>
+
+        </div>
+    </section>
+
 </body>
 </html>
