@@ -124,20 +124,20 @@
         .comp-icon i { font-size: 0.85rem; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; background: none !important; -webkit-background-clip: unset !important; }
         .comp-item-text { font-size: 1rem; font-weight: 600; line-height: 1.5; color: #FFFFFF; margin-bottom: 0; }
 
-        /* SEÇÃO 5: TESTE IMAGEM (REFINADA) */
+        /* SEÇÃO 5: TESTE IMAGEM (FINAL) */
         #sessao-teste-imagem {
-            background-color: #f5f5f5;
-            padding: 100px 0; /* Aumento do respiro para elegância no PC */
+            background-color: #FFFFFF; /* Fundo alterado para Branco */
+            padding: 100px 0; /* Respiro vertical elegante no PC */
             text-align: center;
         }
         #sessao-teste-imagem .img-container {
             width: 100%;
-            max-width: 720px; /* Zoom reduzido no PC para 720px */
+            max-width: 640px; /* Tamanho reduzido para telas de computador */
             margin: 0 auto;
         }
         #sessao-teste-imagem img {
             display: block;
-            width: 100%;
+            width: 100%; /* Ocupa o total do container (640px no PC, 100% no Mobile) */
             height: auto;
             margin: 0 auto;
         }
@@ -182,9 +182,9 @@
             .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
             .comp-item-text { font-size: 0.95rem; }
 
-            /* Refinamento da imagem no Mobile */
-            #sessao-teste-imagem { padding: 50px 0; }
-            #sessao-teste-imagem .container { padding: 0; } /* Remove margens do container no mobile */
+            /* Garantia de Borda a Borda no Mobile */
+            #sessao-teste-imagem { padding: 40px 0; }
+            #sessao-teste-imagem .container { padding: 0; } /* Zera padding para tocar as bordas */
             #sessao-teste-imagem .img-container { max-width: 100%; }
         }
 
