@@ -771,29 +771,26 @@
             display: block;
         }
 
-        /* Overlay mudo — caixa pequena centralizada, glassmorphism */
+        /* Overlay mudo — caixa pequena centralizada, cor cyan 90% */
         .video-mute-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* NÃO ocupa 100% — é uma caixa flutuante */
             width: auto;
-            max-width: 220px;
-            padding: 18px 24px;
-            background: rgba(0, 0, 0, 0.42);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.22);
+            min-width: 200px;
+            max-width: 260px;
+            padding: 20px 28px;
+            background: rgba(0, 145, 150, 0.90);
             border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             cursor: pointer;
-            transition: opacity 0.3s;
             z-index: 10;
+            /* sem backdrop-filter para não depender de suporte */
         }
 
         .video-mute-overlay.hidden { display: none; }
@@ -831,6 +828,9 @@
         .btn-violet:hover {
             box-shadow: 0 15px 35px rgba(134, 112, 255, 0.45) !important;
         }
+
+        /* CTA wrapper — espaçamento fixo em relação à última imagem */
+        .testemunhos-cta-wrapper {
             margin-top: 48px;
             display: flex;
             justify-content: center;
@@ -855,7 +855,7 @@
             .testemunho-item-img2   { order: 3; }
             .testemunho-item-img3   { order: 4; }
 
-            /* Todos os 4 itens a 60% da coluna = redução de 40%, sem cortar */
+            /* Redução 40% — só no desktop, sem afetar mobile */
             .testemunho-item {
                 max-width: 60%;
                 margin: 0 auto;
@@ -1182,45 +1182,6 @@
         }, { threshold: 0.3 }); 
 
         observer.observe(document.getElementById('sessao-audiencia'));
-
-        /* ---- Autoplay vídeo testemunho ao entrar na seção ---- */
-        const videoTestemunho = document.getElementById('video-testemunho');
-        const videoOverlay    = document.getElementById('video-overlay');
-
-        // Tenta play assim que o elemento estiver pronto
-        videoTestemunho.addEventListener('canplay', function onCanPlay() {
-            videoTestemunho.play().catch(() => {});
-            videoTestemunho.removeEventListener('canplay', onCanPlay);
-        });
-
-        const videoObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                videoTestemunho.play().catch(() => {});
-            } else {
-                videoTestemunho.pause();
-            }
-        }, { threshold: 0.3 });
-
-        videoObserver.observe(videoTestemunho);
-
-        function ativarSom() {
-            // Remove mudo, volta ao início e toca
-            videoTestemunho.muted = false;
-            videoTestemunho.currentTime = 0;
-            const playPromise = videoTestemunho.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    videoOverlay.classList.add('hidden');
-                }).catch(() => {
-                    // Fallback: força muted=false e tenta de novo
-                    videoTestemunho.muted = false;
-                    videoTestemunho.play();
-                    videoOverlay.classList.add('hidden');
-                });
-            } else {
-                videoOverlay.classList.add('hidden');
-            }
-        }
     </script>
     <!-- ==========================================
          SEÇÃO 6: TESTEMUNHOS
@@ -1240,7 +1201,7 @@
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
                     <div class="testemunho-video-wrapper">
                         <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline></video>
-                        <div class="video-mute-overlay" id="video-overlay" onclick="ativarSom()">
+                        <div class="video-mute-overlay" id="video-overlay">
                             <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
                                 <line x1="48" y1="24" x2="64" y2="48" stroke="white" stroke-width="5" stroke-linecap="round"/>
@@ -1277,6 +1238,34 @@
 
         </div>
     </section>
+
+    <!-- JS do vídeo: colocado APÓS o elemento existir no DOM -->
+    <script>
+        (function() {
+            var vid = document.getElementById('video-testemunho');
+            var overlay = document.getElementById('video-overlay');
+
+            if (!vid || !overlay) return;
+
+            // Autoplay mudo via IntersectionObserver
+            var vObs = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    vid.play().catch(function(){});
+                } else {
+                    vid.pause();
+                }
+            }, { threshold: 0.3 });
+            vObs.observe(vid);
+
+            // Clique na overlay: ativa som, volta ao início, esconde overlay
+            overlay.addEventListener('click', function() {
+                vid.muted = false;
+                vid.currentTime = 0;
+                vid.play().catch(function(){});
+                overlay.style.display = 'none';
+            });
+        })();
+    </script>
 
 </body>
 </html>
