@@ -127,7 +127,7 @@
         /* SEÇÃO 5: TESTE IMAGEM */
         #sessao-teste-imagem {
             background-color: #FFFFFF; 
-            padding: 100px 0; 
+            padding: 40px 0 100px 0; /* Reduzido padding superior para 40px no Desktop */
             text-align: center;
         }
         #sessao-teste-imagem .img-container {
@@ -153,7 +153,6 @@
             .audience-wrapper-desktop.desktop-only { display: none !important; }
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
             section { padding: 50px 0; }
-            #sessao-audiencia { padding-bottom: 88px !important; } 
             #sessao-hero { padding-top: 27px !important; padding-bottom: 60px; }
             #sessao-hero .main-headline { font-size: 2.01rem !important; line-height: 1.07 !important; margin-bottom: 32px !important; }
             #sessao-hero .hero-logo { margin-bottom: 15px !important; }
@@ -162,33 +161,17 @@
             #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
             .hero .subheadline.mobile-only { font-size: 1.0rem; line-height: 1.4; margin-left: -15px; margin-right: -15px; max-width: none; margin-bottom: 24px; }
             .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
-            #sessao-audiencia-content { padding-top: 63px; } 
-            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
-            .typewriter-container { padding: 0 25px; } 
-            .slider-btn { font-size: 1.4rem; padding: 5px; }
-            .slider-btn.prev { left: -10px; } 
-            .slider-btn.next { right: -10px; } 
-            #typewriter-text { font-size: 1.15rem; }
-            h2 { font-size: 1.8rem; }
-            .secret-card { padding: 35px 20px; border-radius: 20px; margin-top: -60px; margin-bottom: -60px; }
-            .headline { font-size: 1.6rem; }
-            .normal-text { font-size: 1rem; letter-spacing: -0.01em; }
-            .secret-image-wrapper { margin-left: -40px; margin-right: -40px; margin-top: 85px; margin-bottom: 35px; }
-            .tornado-overlay { width: 39.33%; top: -17.6%; right: 15.72%; }
+            
+            #sessao-audiencia { padding-bottom: 88px !important; }
             #sessao-comparativo { padding-top: 100px; padding-bottom: 40px; }
-            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; }
-            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; }
-            .comp-card { padding: 30px 24px 34px; }
-            .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
-            .comp-item-text { font-size: 0.95rem; }
 
-            /* Ajuste Seção Teste Mobile */
-            #sessao-teste-imagem { padding: 50px 0; }
+            /* Ajuste Seção Teste Mobile para Proximidade */
+            #sessao-teste-imagem { padding: 20px 0 60px 0 !important; } /* Apenas 20px de respiro superior no Mobile */
             #sessao-teste-imagem .container { padding: 0; } 
             #sessao-teste-imagem .img-container { max-width: 100%; }
         }
 
-        /* AJUSTES EXCLUSIVOS PARA DESKTOP */
+        /* AJUSTES DESKTOP */
         @media (min-width: 769px) {
             #sessao-audiencia { padding-bottom: 120px !important; } 
             .hero-logo { max-width: 150px !important; margin-bottom: 32px !important; }
@@ -337,7 +320,7 @@
                 </div>
             </div>
 
-            <div style="margin-top: 48px; text-align: center;">
+            <div style="margin-top: 32px; text-align: center;">
                 <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
         </div>
