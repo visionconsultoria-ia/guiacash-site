@@ -110,7 +110,7 @@
         .highlight-text { font-size: 1.4rem; font-weight: 800; line-height: 1.4; background: var(--text-highlight); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 32px 0; }
 
         /* SEÇÃO 4: COMPARATIVO */
-        #sessao-comparativo { background-color: var(--bg-white); padding-top: 120px; padding-bottom: 80px; }
+        #sessao-comparativo { background-color: var(--bg-white); padding-top: 120px; padding-bottom: 60px; }
         .comparativo-headline { text-align: center; font-size: 2.2rem; font-weight: 800; line-height: 1.25; letter-spacing: -0.03em; color: var(--text-dark); max-width: 820px; margin: 0 auto 56px; }
         .comparativo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 960px; margin: 0 auto; }
         .comp-card { border-radius: 24px; padding: 40px 40px 44px; display: flex; flex-direction: column; }
@@ -124,20 +124,20 @@
         .comp-icon i { font-size: 0.85rem; color: #FFFFFF !important; -webkit-text-fill-color: #FFFFFF !important; background: none !important; -webkit-background-clip: unset !important; }
         .comp-item-text { font-size: 1rem; font-weight: 600; line-height: 1.5; color: #FFFFFF; margin-bottom: 0; }
 
-        /* SEÇÃO 5: TESTE IMAGEM (FINAL) */
+        /* SEÇÃO 5: TESTE IMAGEM */
         #sessao-teste-imagem {
-            background-color: #FFFFFF; /* Fundo alterado para Branco */
-            padding: 100px 0; /* Respiro vertical elegante no PC */
+            background-color: #FFFFFF; 
+            padding: 100px 0; 
             text-align: center;
         }
         #sessao-teste-imagem .img-container {
             width: 100%;
-            max-width: 640px; /* Tamanho reduzido para telas de computador */
+            max-width: 640px; 
             margin: 0 auto;
         }
         #sessao-teste-imagem img {
             display: block;
-            width: 100%; /* Ocupa o total do container (640px no PC, 100% no Mobile) */
+            width: 100%; 
             height: auto;
             margin: 0 auto;
         }
@@ -175,16 +175,16 @@
             .normal-text { font-size: 1rem; letter-spacing: -0.01em; }
             .secret-image-wrapper { margin-left: -40px; margin-right: -40px; margin-top: 85px; margin-bottom: 35px; }
             .tornado-overlay { width: 39.33%; top: -17.6%; right: 15.72%; }
-            #sessao-comparativo { padding-top: 100px; padding-bottom: 50px; }
+            #sessao-comparativo { padding-top: 100px; padding-bottom: 40px; }
             .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; }
             .comparativo-grid { grid-template-columns: 1fr; gap: 16px; }
             .comp-card { padding: 30px 24px 34px; }
             .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
             .comp-item-text { font-size: 0.95rem; }
 
-            /* Garantia de Borda a Borda no Mobile */
-            #sessao-teste-imagem { padding: 40px 0; }
-            #sessao-teste-imagem .container { padding: 0; } /* Zera padding para tocar as bordas */
+            /* Ajuste Seção Teste Mobile */
+            #sessao-teste-imagem { padding: 50px 0; }
+            #sessao-teste-imagem .container { padding: 0; } 
             #sessao-teste-imagem .img-container { max-width: 100%; }
         }
 
@@ -258,7 +258,7 @@
         <div class="video-container">
             <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
         </div>
-        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
+        <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
     <section id="sessao-audiencia" class="bg-light">
@@ -335,6 +335,10 @@
                     <div class="comp-item"><div class="comp-icon"><i class="fa-solid fa-check"></i></div><p class="comp-item-text">Desenvolvido especificamente para empreendedores e autônomos</p></div>
                     <div class="comp-item"><div class="comp-icon"><i class="fa-solid fa-check"></i></div><p class="comp-item-text">Clareza real para tomar decisões que trazem lucro de verdade</p></div>
                 </div>
+            </div>
+
+            <div style="margin-top: 48px; text-align: center;">
+                <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
         </div>
     </section>
