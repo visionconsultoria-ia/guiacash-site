@@ -721,33 +721,46 @@
             margin-bottom: 0;
         }
 
-        /* Label acima de cada item */
+        /* Label acima de cada item — traço vertical + sombra esfumada + fonte 20% maior */
         .testemunho-label {
-            font-size: 0.95rem;
+            font-size: 1.14rem; /* +20% de 0.95rem */
             font-weight: 700;
-            color: rgba(255,255,255,0.9);
+            color: #FFFFFF;
             margin-bottom: 10px;
-            padding-left: 2px;
+            padding-left: 14px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px 12px rgba(0,0,0,0.18), 0 0 32px rgba(0,0,0,0.10);
         }
 
-        /* Imagens */
+        .testemunho-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            border-radius: 2px;
+            background: linear-gradient(to bottom, #FFFFFF 60%, rgba(255,255,255,0));
+        }
+
+        /* Imagens — border-radius 30% mais arredondado: 16px → ~21px */
         .testemunho-img {
             width: 100%;
             height: auto;
             display: block;
-            border-radius: 16px;
+            border-radius: 21px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
         }
 
-        /* Wrapper do vídeo */
+        /* Wrapper do vídeo — border-radius igual às imagens */
         .testemunho-video-wrapper {
             position: relative;
             width: 100%;
-            border-radius: 16px;
+            border-radius: 21px;
             overflow: hidden;
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
             background: #000;
-            /* aspect-ratio vertical mobile-first */
             aspect-ratio: 9/16;
         }
 
@@ -819,7 +832,6 @@
                 grid-template-rows: auto auto;
                 gap: 32px;
                 max-width: 100%;
-                /* Ordem desktop: img1 top-left, video top-right, img2 bot-left, img3 bot-right */
             }
 
             /* Reordenação desktop via order */
@@ -828,9 +840,17 @@
             .testemunho-item-img2   { order: 3; }
             .testemunho-item-img3   { order: 4; }
 
-            /* Vídeo: aspecto horizontal no desktop */
-            .testemunho-video-wrapper {
-                aspect-ratio: 9/16;
+            /* Limitar altura dos itens superiores para vídeo e img1
+               aparecerem por inteiro + títulos das inferiores visíveis */
+            .testemunho-item-video .testemunho-video-wrapper,
+            .testemunho-item-img1  .testemunho-img {
+                max-height: 52vh;
+                object-fit: cover;
+            }
+
+            .testemunho-item-video .testemunho-video-wrapper {
+                aspect-ratio: unset;
+                height: 52vh;
             }
         }
 
@@ -1171,6 +1191,7 @@
 
         function ativarSom() {
             videoTestemunho.muted = false;
+            videoTestemunho.currentTime = 0;
             videoTestemunho.play().catch(() => {});
             videoOverlay.classList.add('hidden');
         }
@@ -1192,7 +1213,7 @@
                 <div class="testemunho-item testemunho-item-video">
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
                     <div class="testemunho-video-wrapper">
-                        <video id="video-testemunho" src="video-testemunho-um.mp4" muted playsinline loop></video>
+                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline></video>
                         <div class="video-mute-overlay" id="video-overlay" onclick="ativarSom()">
                             <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
