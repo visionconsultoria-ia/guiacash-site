@@ -636,13 +636,16 @@
 
         @media (max-width: 768px) {
             #sessao-comparativo { padding-top: 70px; padding-bottom: 50px; }
-            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; }
-            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; }
+            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; white-space: normal; }
+            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; margin-left: -2px; margin-right: -2px; }
             .comp-card { padding: 30px 24px 34px; }
             .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
-            /* mobile: +1px → 0.96rem */
             .comp-item-text { font-size: 0.96rem; }
             .comp-item { padding: 16px 0; gap: 8px; }
+        }
+
+        @media (min-width: 769px) {
+            .comparativo-headline .comp-headline-line1 { white-space: nowrap; }
         }
     </style>
 </head>
@@ -801,7 +804,7 @@
     =========================================== -->
     <section id="sessao-comparativo">
         <div class="container">
-            <h2 class="comparativo-headline"><span style="white-space:nowrap;">Porque você ainda não tem controle financeiro real</span><br>(vida pessoal e negócio)</h2>
+            <h2 class="comparativo-headline"><span class="comp-headline-line1">Porque você ainda não tem controle financeiro real</span><br>(vida pessoal e negócio)</h2>
 
             <div class="comparativo-grid">
 
