@@ -783,6 +783,8 @@
             width: 70%;
             padding: 18px 22px 20px;
             background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             border-radius: 14px;
             display: flex;
             flex-direction: column;
@@ -791,9 +793,16 @@
             cursor: pointer;
             z-index: 20;
             pointer-events: auto;
+            transition: opacity 0.3s ease;
         }
 
         .video-mute-overlay.hidden { display: none; }
+
+        /* Vídeo sem fundo preto enquanto carrega */
+        #video-testemunho {
+            object-fit: cover;
+            background-color: transparent;
+        }
 
         .overlay-text-top {
             color: #FFFFFF;
@@ -1334,95 +1343,97 @@
 
             if (!vid) return;
 
-            var isPlaying = false;
-            var soundOn   = false;
+            /* Mudo absoluto — garante autoplay em iOS */
+            vid.muted = true;
+            vid.defaultMuted = true;
 
-            /* ---- Fallback: força o browser a iniciar download imediatamente ---- */
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
+                }
+            }
+
+            /* Tenta play agressivamente com retry a cada 500ms */
+            function forceAutoplay() {
+                vid.play().then(function() {
+                    atualizarInterface(true);
+                }).catch(function() {
+                    setTimeout(forceAutoplay, 500);
+                });
+            }
+
+            /* Inicia carregamento e play */
             vid.load();
-
-            /* ---- Funções utilitárias ---- */
-            function startPlay() {
-                var p = vid.play();
-                if (p !== undefined) {
-                    p.then(function() {
-                        isPlaying = true;
-                        iconPause.style.display = '';
-                        iconPlay.style.display  = 'none';
-                    }).catch(function() {
-                        isPlaying = false;
-                    });
-                } else {
-                    isPlaying = true;
-                    iconPause.style.display = '';
-                    iconPlay.style.display  = 'none';
-                }
-            }
-
-            function togglePlayPause() {
-                if (vid.paused) {
-                    startPlay();
-                } else {
-                    vid.pause();
-                    isPlaying = false;
-                    iconPause.style.display = 'none';
-                    iconPlay.style.display  = '';
-                }
-            }
+            forceAutoplay();
 
             /* ---- Barra de progresso ---- */
             vid.addEventListener('timeupdate', function() {
-                if (vid.duration) {
+                if (vid.duration && fill) {
                     fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
                 }
             });
 
-            progressBar.addEventListener('click', function(e) {
-                e.stopPropagation();
-                var rect = progressBar.getBoundingClientRect();
-                var ratio = (e.clientX - rect.left) / rect.width;
-                vid.currentTime = ratio * vid.duration;
-            });
-
-            /* ---- Botão play/pause ---- */
-            playBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                togglePlayPause();
-            });
-
-            /* ---- Clicar em qualquer área do wrapper ---- */
-            wrapper.addEventListener('click', function(e) {
-                if (overlay && !overlay.classList.contains('hidden') && overlay.contains(e.target)) return;
-                if (e.target === playBtn || playBtn.contains(e.target)) return;
-                if (e.target === progressBar || progressBar.contains(e.target)) return;
-                togglePlayPause();
-            });
-
-            /* ---- Overlay: ativa som + play (obrigatório para iOS) ---- */
-            if (overlay) {
-                overlay.addEventListener('click', function(e) {
+            if (progressBar) {
+                progressBar.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    soundOn = true;
-                    vid.muted = false;
-                    vid.currentTime = 0;
-                    startPlay();
-                    overlay.classList.add('hidden');
+                    var rect = progressBar.getBoundingClientRect();
+                    var ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
                 });
             }
 
-            /* ---- IntersectionObserver: autoplay mudo universal ---- */
+            /* ---- Botão play/pause ---- */
+            if (playBtn) {
+                playBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (vid.paused) {
+                        vid.play();
+                        atualizarInterface(true);
+                    } else {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                });
+            }
+
+            /* ---- Clicar em qualquer área do wrapper ---- */
+            if (wrapper) {
+                wrapper.addEventListener('click', function(e) {
+                    if (overlay && overlay.style.display !== 'none' && overlay.contains(e.target)) return;
+                    if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+                    if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
+                    if (vid.paused) {
+                        vid.play();
+                        atualizarInterface(true);
+                    } else {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                });
+            }
+
+            /* ---- Overlay: ativa som ao clicar ---- */
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    vid.muted = false;
+                    vid.currentTime = 0;
+                    vid.play();
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                });
+            }
+
+            /* ---- IntersectionObserver: pausa ao sair da tela ---- */
             var vObs = new IntersectionObserver(function(entries) {
                 if (entries[0].isIntersecting) {
-                    vid.muted = soundOn ? false : true;
-                    startPlay();
+                    forceAutoplay();
                 } else {
-                    if (!vid.paused) {
-                        vid.pause();
-                        isPlaying = false;
-                        iconPause.style.display = 'none';
-                        iconPlay.style.display  = '';
-                    }
+                    vid.pause();
+                    atualizarInterface(false);
                 }
-            }, { threshold: 0.3 });
+            }, { threshold: 0.2 });
 
             vObs.observe(vid);
 
