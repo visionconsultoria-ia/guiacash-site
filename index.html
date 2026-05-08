@@ -1264,7 +1264,7 @@
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
                     <div class="testemunho-video-wrapper" id="video-wrapper">
 
-                        <video id="video-testemunho" src="video-testemunho-um.mp4" muted loop playsinline webkit-playsinline></video>
+                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
 
                         <!-- Overlay: só aparece antes do som ser ativado -->
                         <div class="video-mute-overlay" id="video-overlay">
@@ -1337,18 +1337,8 @@
             var isPlaying = false;
             var soundOn   = false;
 
-            /* Detecta iOS (Safari mobile bloqueia autoplay) */
-            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-            /* ---- Forçar carregamento do primeiro frame no iOS ---- */
-            if (isIOS) {
-                vid.setAttribute('preload', 'metadata');
-                vid.load();
-                /* currentTime=0.001 força o browser a decodificar o primeiro frame */
-                vid.addEventListener('loadedmetadata', function() {
-                    vid.currentTime = 0.001;
-                }, { once: true });
-            }
+            /* ---- Fallback: força o browser a iniciar download imediatamente ---- */
+            vid.load();
 
             /* ---- Funções utilitárias ---- */
             function startPlay() {
@@ -1419,15 +1409,11 @@
                 });
             }
 
-            /* ---- IntersectionObserver: autoplay mudo no desktop/Android ---- */
+            /* ---- IntersectionObserver: autoplay mudo universal ---- */
             var vObs = new IntersectionObserver(function(entries) {
                 if (entries[0].isIntersecting) {
-                    if (!isIOS) {
-                        /* Desktop e Android: autoplay mudo funciona */
-                        vid.muted = soundOn ? false : true;
-                        startPlay();
-                    }
-                    /* iOS: não tenta play automático — mostra overlay para o usuário iniciar */
+                    vid.muted = soundOn ? false : true;
+                    startPlay();
                 } else {
                     if (!vid.paused) {
                         vid.pause();
