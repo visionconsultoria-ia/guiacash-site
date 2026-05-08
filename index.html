@@ -753,7 +753,7 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
         }
 
-        /* Wrapper do vídeo — border-radius igual às imagens */
+        /* Wrapper do vídeo */
         .testemunho-video-wrapper {
             position: relative;
             width: 100%;
@@ -762,6 +762,7 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
             background: #000;
             aspect-ratio: 9/16;
+            cursor: pointer;
         }
 
         .testemunho-video-wrapper video {
@@ -771,42 +772,104 @@
             display: block;
         }
 
-        /* Overlay mudo — caixa pequena centralizada, cor cyan 90% */
+        /* ---- Overlay "Seu vídeo já começou" ---- */
         .video-mute-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: auto;
-            min-width: 200px;
-            max-width: 260px;
-            padding: 20px 28px;
-            background: rgba(0, 145, 150, 0.90);
-            border-radius: 16px;
+            min-width: 210px;
+            max-width: 270px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            border-radius: 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
-            z-index: 10;
-            /* sem backdrop-filter para não depender de suporte */
+            z-index: 20;
+            pointer-events: auto;
         }
 
         .video-mute-overlay.hidden { display: none; }
 
-        .mute-icon {
-            width: 44px;
-            height: 44px;
+        .overlay-text-top {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
         }
 
-        .video-mute-overlay p {
+        .overlay-text-bottom {
             color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             text-align: center;
-            margin-bottom: 0;
-            line-height: 1.35;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon {
+            width: 52px;
+            height: 52px;
+        }
+
+        /* ---- Controles inferiores do vídeo ---- */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 12px 12px;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* Botão play/pause */
+        .video-play-btn {
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 145, 150, 0.60);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .video-play-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #FFFFFF;
+        }
+
+        /* Barra de progresso */
+        .video-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 145, 150, 0.40);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .video-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: rgba(0, 145, 150, 0.80);
+            border-radius: 2px;
+            transition: width 0.25s linear;
         }
 
         /* ---- GRID MOBILE (1 coluna) ---- */
@@ -820,9 +883,9 @@
 
         .testemunho-item { width: 100%; }
 
-        /* CTA seção 6 — degradê violeta */
+        /* CTA seção 6 — degradê violeta invertido: claro → escuro */
         .btn-violet {
-            background: linear-gradient(135deg, #5242d7, #5c4bdf, #8670ff) !important;
+            background: linear-gradient(90deg, #8670ff, #5c4bdf, #5242d7) !important;
             box-shadow: 0 10px 25px rgba(82, 66, 215, 0.35) !important;
         }
         .btn-violet:hover {
@@ -1199,16 +1262,34 @@
                 <!-- Vídeo — top-right no desktop, primeiro no mobile -->
                 <div class="testemunho-item testemunho-item-video">
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
-                    <div class="testemunho-video-wrapper">
-                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline></video>
+                    <div class="testemunho-video-wrapper" id="video-wrapper">
+
+                        <video id="video-testemunho" src="video-testemunho-um.mp4" muted loop playsinline webkit-playsinline></video>
+
+                        <!-- Overlay: só aparece antes do som ser ativado -->
                         <div class="video-mute-overlay" id="video-overlay">
+                            <p class="overlay-text-top">Seu vídeo já começou</p>
                             <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
-                                <line x1="48" y1="24" x2="64" y2="48" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                                <line x1="64" y1="24" x2="48" y2="48" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                                <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                                <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
                             </svg>
-                            <p>Seu vídeo já começou<br>Clique para ouvir</p>
+                            <p class="overlay-text-bottom">Clique para ouvir</p>
                         </div>
+
+                        <!-- Controles inferiores -->
+                        <div class="video-controls" id="video-controls">
+                            <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
+                                <!-- Ícone pause (default quando rodando) -->
+                                <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                                <!-- Ícone play (quando pausado) -->
+                                <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                            </button>
+                            <div class="video-progress-bar" id="video-progress-bar">
+                                <div class="video-progress-fill" id="video-progress-fill"></div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1239,31 +1320,105 @@
         </div>
     </section>
 
-    <!-- JS do vídeo: colocado APÓS o elemento existir no DOM -->
+    <!-- JS do vídeo: após o elemento no DOM -->
     <script>
         (function() {
-            var vid = document.getElementById('video-testemunho');
-            var overlay = document.getElementById('video-overlay');
+            var vid        = document.getElementById('video-testemunho');
+            var overlay    = document.getElementById('video-overlay');
+            var wrapper    = document.getElementById('video-wrapper');
+            var playBtn    = document.getElementById('video-play-btn');
+            var fill       = document.getElementById('video-progress-fill');
+            var progressBar= document.getElementById('video-progress-bar');
+            var iconPause  = document.getElementById('icon-pause');
+            var iconPlay   = document.getElementById('icon-play');
 
-            if (!vid || !overlay) return;
+            if (!vid) return;
 
-            // Autoplay mudo via IntersectionObserver
-            var vObs = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    vid.play().catch(function(){});
+            var isPlaying  = false;
+            var soundOn    = false;
+
+            /* ---- Funções utilitárias ---- */
+            function startPlay() {
+                vid.play().then(function() {
+                    isPlaying = true;
+                    iconPause.style.display = '';
+                    iconPlay.style.display  = 'none';
+                }).catch(function() {});
+            }
+
+            function togglePlayPause() {
+                if (vid.paused) {
+                    startPlay();
                 } else {
                     vid.pause();
+                    isPlaying = false;
+                    iconPause.style.display = 'none';
+                    iconPlay.style.display  = '';
+                }
+            }
+
+            /* ---- Atualizar barra de progresso ---- */
+            vid.addEventListener('timeupdate', function() {
+                if (vid.duration) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
+            });
+
+            /* ---- Clicar na barra de progresso para scrubbing ---- */
+            progressBar.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var rect = progressBar.getBoundingClientRect();
+                var ratio = (e.clientX - rect.left) / rect.width;
+                vid.currentTime = ratio * vid.duration;
+            });
+
+            /* ---- Botão play/pause ---- */
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlayPause();
+            });
+
+            /* ---- Clicar em qualquer lugar do wrapper pausa/retoma ---- */
+            wrapper.addEventListener('click', function(e) {
+                // Ignora se clicou na overlay ou nos controles
+                if (overlay && !overlay.classList.contains('hidden') && overlay.contains(e.target)) return;
+                if (e.target === playBtn || playBtn.contains(e.target)) return;
+                if (e.target === progressBar || progressBar.contains(e.target)) return;
+                togglePlayPause();
+            });
+
+            /* ---- Clicar na overlay: ativa som ---- */
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    soundOn = true;
+                    vid.muted = false;
+                    vid.currentTime = 0;
+                    startPlay();
+                    overlay.classList.add('hidden');
+                });
+            }
+
+            /* ---- Autoplay silencioso via IntersectionObserver ---- */
+            /* Funciona em desktop. Em iOS mobile, play() só ocorre após
+               interação do usuário — por isso o overlay serve de gate.
+               Ao tocar na overlay, o som + play são ativados juntos,
+               respeitando a política de autoplay do Safari iOS. */
+            var vObs = new IntersectionObserver(function(entries) {
+                if (entries[0].isIntersecting) {
+                    // Tenta play mudo (funciona no desktop e Android)
+                    vid.muted = soundOn ? false : true;
+                    startPlay();
+                } else {
+                    vid.pause();
+                    isPlaying = false;
+                    iconPause.style.display = 'none';
+                    iconPlay.style.display  = '';
                 }
             }, { threshold: 0.3 });
+
             vObs.observe(vid);
 
-            // Clique na overlay: ativa som, volta ao início, esconde overlay
-            overlay.addEventListener('click', function() {
-                vid.muted = false;
-                vid.currentTime = 0;
-                vid.play().catch(function(){});
-                overlay.style.display = 'none';
-            });
         })();
     </script>
 
