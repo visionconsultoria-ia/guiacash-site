@@ -657,15 +657,16 @@
             justify-content: center;
         }
 
+        /* Seção 5: base (mobile-first) */
         #sessao-teste-imagem {
             background-color: #FFFFFF;
-            padding-top: 40px;
-            padding-bottom: 100px;
+            padding-top: 20px;
+            padding-bottom: 60px;
         }
 
         #sessao-teste-imagem .container {
-            padding-left: 24px;
-            padding-right: 24px;
+            padding-left: 0;
+            padding-right: 0;
         }
 
         #sessao-teste-imagem .demo-img {
@@ -674,14 +675,21 @@
             display: block;
         }
 
-        @media (max-width: 768px) {
+        /* Seção 5: overrides exclusivos desktop */
+        @media (min-width: 769px) {
             #sessao-teste-imagem {
-                padding-top: 20px;
-                padding-bottom: 60px;
+                padding: 80px 0;
             }
             #sessao-teste-imagem .container {
-                padding-left: 0;
-                padding-right: 0;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            #sessao-teste-imagem .demo-img {
+                display: block;
+                margin: 0 auto;
+                max-width: 640px;
+                width: 90%;
+                height: auto;
             }
         }
     </style>
