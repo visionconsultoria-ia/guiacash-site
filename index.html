@@ -854,12 +854,12 @@
             fill: #FFFFFF;
         }
 
-        /* Barra de progresso */
+        /* Barra de progresso — só o fill aparece, sem track visível */
         .video-progress-bar {
             width: 100%;
-            height: 4px;
-            background: rgba(0, 145, 150, 0.40);
-            border-radius: 2px;
+            height: 6px;
+            background: transparent;
+            border-radius: 3px;
             overflow: hidden;
             cursor: pointer;
         }
@@ -867,8 +867,8 @@
         .video-progress-fill {
             height: 100%;
             width: 0%;
-            background: rgba(0, 145, 150, 0.80);
-            border-radius: 2px;
+            background: rgba(0, 145, 150, 0.85);
+            border-radius: 3px;
             transition: width 0.25s linear;
         }
 
@@ -1323,27 +1323,49 @@
     <!-- JS do vídeo: após o elemento no DOM -->
     <script>
         (function() {
-            var vid        = document.getElementById('video-testemunho');
-            var overlay    = document.getElementById('video-overlay');
-            var wrapper    = document.getElementById('video-wrapper');
-            var playBtn    = document.getElementById('video-play-btn');
-            var fill       = document.getElementById('video-progress-fill');
-            var progressBar= document.getElementById('video-progress-bar');
-            var iconPause  = document.getElementById('icon-pause');
-            var iconPlay   = document.getElementById('icon-play');
+            var vid         = document.getElementById('video-testemunho');
+            var overlay     = document.getElementById('video-overlay');
+            var wrapper     = document.getElementById('video-wrapper');
+            var playBtn     = document.getElementById('video-play-btn');
+            var fill        = document.getElementById('video-progress-fill');
+            var progressBar = document.getElementById('video-progress-bar');
+            var iconPause   = document.getElementById('icon-pause');
+            var iconPlay    = document.getElementById('icon-play');
 
             if (!vid) return;
 
-            var isPlaying  = false;
-            var soundOn    = false;
+            var isPlaying = false;
+            var soundOn   = false;
+
+            /* Detecta iOS (Safari mobile bloqueia autoplay) */
+            var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+            /* ---- Forçar carregamento do primeiro frame no iOS ---- */
+            if (isIOS) {
+                vid.setAttribute('preload', 'metadata');
+                vid.load();
+                /* currentTime=0.001 força o browser a decodificar o primeiro frame */
+                vid.addEventListener('loadedmetadata', function() {
+                    vid.currentTime = 0.001;
+                }, { once: true });
+            }
 
             /* ---- Funções utilitárias ---- */
             function startPlay() {
-                vid.play().then(function() {
+                var p = vid.play();
+                if (p !== undefined) {
+                    p.then(function() {
+                        isPlaying = true;
+                        iconPause.style.display = '';
+                        iconPlay.style.display  = 'none';
+                    }).catch(function() {
+                        isPlaying = false;
+                    });
+                } else {
                     isPlaying = true;
                     iconPause.style.display = '';
                     iconPlay.style.display  = 'none';
-                }).catch(function() {});
+                }
             }
 
             function togglePlayPause() {
@@ -1357,14 +1379,13 @@
                 }
             }
 
-            /* ---- Atualizar barra de progresso ---- */
+            /* ---- Barra de progresso ---- */
             vid.addEventListener('timeupdate', function() {
                 if (vid.duration) {
                     fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
                 }
             });
 
-            /* ---- Clicar na barra de progresso para scrubbing ---- */
             progressBar.addEventListener('click', function(e) {
                 e.stopPropagation();
                 var rect = progressBar.getBoundingClientRect();
@@ -1378,16 +1399,15 @@
                 togglePlayPause();
             });
 
-            /* ---- Clicar em qualquer lugar do wrapper pausa/retoma ---- */
+            /* ---- Clicar em qualquer área do wrapper ---- */
             wrapper.addEventListener('click', function(e) {
-                // Ignora se clicou na overlay ou nos controles
                 if (overlay && !overlay.classList.contains('hidden') && overlay.contains(e.target)) return;
                 if (e.target === playBtn || playBtn.contains(e.target)) return;
                 if (e.target === progressBar || progressBar.contains(e.target)) return;
                 togglePlayPause();
             });
 
-            /* ---- Clicar na overlay: ativa som ---- */
+            /* ---- Overlay: ativa som + play (obrigatório para iOS) ---- */
             if (overlay) {
                 overlay.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -1399,21 +1419,22 @@
                 });
             }
 
-            /* ---- Autoplay silencioso via IntersectionObserver ---- */
-            /* Funciona em desktop. Em iOS mobile, play() só ocorre após
-               interação do usuário — por isso o overlay serve de gate.
-               Ao tocar na overlay, o som + play são ativados juntos,
-               respeitando a política de autoplay do Safari iOS. */
+            /* ---- IntersectionObserver: autoplay mudo no desktop/Android ---- */
             var vObs = new IntersectionObserver(function(entries) {
                 if (entries[0].isIntersecting) {
-                    // Tenta play mudo (funciona no desktop e Android)
-                    vid.muted = soundOn ? false : true;
-                    startPlay();
+                    if (!isIOS) {
+                        /* Desktop e Android: autoplay mudo funciona */
+                        vid.muted = soundOn ? false : true;
+                        startPlay();
+                    }
+                    /* iOS: não tenta play automático — mostra overlay para o usuário iniciar */
                 } else {
-                    vid.pause();
-                    isPlaying = false;
-                    iconPause.style.display = 'none';
-                    iconPlay.style.display  = '';
+                    if (!vid.paused) {
+                        vid.pause();
+                        isPlaying = false;
+                        iconPause.style.display = 'none';
+                        iconPlay.style.display  = '';
+                    }
                 }
             }, { threshold: 0.3 });
 
