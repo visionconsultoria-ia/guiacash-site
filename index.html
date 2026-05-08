@@ -771,35 +771,45 @@
             display: block;
         }
 
-        /* Overlay mudo */
+        /* Overlay mudo — caixa pequena centralizada, glassmorphism */
         .video-mute-overlay {
             position: absolute;
-            inset: 0;
-            background: rgba(0,145,150,0.78);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* NÃO ocupa 100% — é uma caixa flutuante */
+            width: auto;
+            max-width: 220px;
+            padding: 18px 24px;
+            background: rgba(0, 0, 0, 0.42);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 8px;
             cursor: pointer;
-            border-radius: 16px;
             transition: opacity 0.3s;
+            z-index: 10;
         }
 
         .video-mute-overlay.hidden { display: none; }
 
         .mute-icon {
-            width: 72px;
-            height: 72px;
+            width: 44px;
+            height: 44px;
         }
 
         .video-mute-overlay p {
             color: #FFFFFF;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             text-align: center;
             margin-bottom: 0;
-            line-height: 1.3;
+            line-height: 1.35;
         }
 
         /* ---- GRID MOBILE (1 coluna) ---- */
@@ -813,8 +823,14 @@
 
         .testemunho-item { width: 100%; }
 
-        /* CTA seção 6 */
-        .testemunhos-cta-wrapper {
+        /* CTA seção 6 — degradê violeta */
+        .btn-violet {
+            background: linear-gradient(135deg, #5242d7, #5c4bdf, #8670ff) !important;
+            box-shadow: 0 10px 25px rgba(82, 66, 215, 0.35) !important;
+        }
+        .btn-violet:hover {
+            box-shadow: 0 15px 35px rgba(134, 112, 255, 0.45) !important;
+        }
             margin-top: 48px;
             display: flex;
             justify-content: center;
@@ -829,8 +845,7 @@
             .testemunhos-grid {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto auto;
-                gap: 32px;
+                gap: 24px;
                 max-width: 100%;
             }
 
@@ -840,17 +855,10 @@
             .testemunho-item-img2   { order: 3; }
             .testemunho-item-img3   { order: 4; }
 
-            /* Limitar altura dos itens superiores para vídeo e img1
-               aparecerem por inteiro + títulos das inferiores visíveis */
-            .testemunho-item-video .testemunho-video-wrapper,
-            .testemunho-item-img1  .testemunho-img {
-                max-height: 52vh;
-                object-fit: cover;
-            }
-
-            .testemunho-item-video .testemunho-video-wrapper {
-                aspect-ratio: unset;
-                height: 52vh;
+            /* Todos os 4 itens a 60% da coluna = redução de 40%, sem cortar */
+            .testemunho-item {
+                max-width: 60%;
+                margin: 0 auto;
             }
         }
 
@@ -1179,21 +1187,39 @@
         const videoTestemunho = document.getElementById('video-testemunho');
         const videoOverlay    = document.getElementById('video-overlay');
 
+        // Tenta play assim que o elemento estiver pronto
+        videoTestemunho.addEventListener('canplay', function onCanPlay() {
+            videoTestemunho.play().catch(() => {});
+            videoTestemunho.removeEventListener('canplay', onCanPlay);
+        });
+
         const videoObserver = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 videoTestemunho.play().catch(() => {});
             } else {
                 videoTestemunho.pause();
             }
-        }, { threshold: 0.4 });
+        }, { threshold: 0.3 });
 
         videoObserver.observe(videoTestemunho);
 
         function ativarSom() {
+            // Remove mudo, volta ao início e toca
             videoTestemunho.muted = false;
             videoTestemunho.currentTime = 0;
-            videoTestemunho.play().catch(() => {});
-            videoOverlay.classList.add('hidden');
+            const playPromise = videoTestemunho.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    videoOverlay.classList.add('hidden');
+                }).catch(() => {
+                    // Fallback: força muted=false e tenta de novo
+                    videoTestemunho.muted = false;
+                    videoTestemunho.play();
+                    videoOverlay.classList.add('hidden');
+                });
+            } else {
+                videoOverlay.classList.add('hidden');
+            }
         }
     </script>
     <!-- ==========================================
@@ -1246,7 +1272,7 @@
             </div>
 
             <div class="testemunhos-cta-wrapper">
-                <a href="#oferta" class="btn-cta btn-gradient">Quero ter controle</a>
+                <a href="#oferta" class="btn-cta btn-gradient btn-violet">Quero ter controle</a>
             </div>
 
         </div>
