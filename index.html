@@ -1372,7 +1372,7 @@
 
                 if (!vid) return;
 
-                /* Mudo absoluto — garante autoplay em iOS */
+                /* Mudo absoluto — garante autoplay em iOS e Android */
                 vid.muted = true;
                 vid.defaultMuted = true;
 
@@ -1437,7 +1437,7 @@
                         if (overlay && overlay.style.display !== 'none') {
                             vid.muted = false;
                             vid.currentTime = 0;
-                            vid.play();
+                            vid.play().catch(function(){}); // Catch para evitar erros no console do Android
                             overlay.style.display = 'none';
                             atualizarInterface(true);
                             
@@ -1465,7 +1465,7 @@
                         e.stopPropagation();
                         vid.muted = false;
                         vid.currentTime = 0;
-                        vid.play();
+                        vid.play().catch(function(){}); // Evita erro se o click vier muito rápido
                         overlay.style.display = 'none';
                         atualizarInterface(true);
                         
@@ -1489,7 +1489,7 @@
 
                 /* ========================================================
                    LÓGICA EXCLUSIVA: ATIVAR SOM NA PRIMEIRA INTERAÇÃO GERAL 
-                   (Ex: clique em qualquer lugar da página, scroll, etc)
+                   Otimizado para o Android Chrome.
                 ======================================================== */
                 var scrollAttempted = false;
 
@@ -1497,6 +1497,7 @@
                     window.removeEventListener('scroll', tryGlobalUnmute);
                     window.removeEventListener('click', tryGlobalUnmute);
                     window.removeEventListener('touchstart', tryGlobalUnmute);
+                    window.removeEventListener('touchend', tryGlobalUnmute); // Adicionado para Android
                     window.removeEventListener('keydown', tryGlobalUnmute);
                 }
 
@@ -1507,35 +1508,41 @@
                         return;
                     }
 
-                    // Se for scroll, tenta apenas uma vez para não travar o vídeo
+                    // Se for scroll, tenta, mas a chance de falhar no Android é alta.
                     if (e.type === 'scroll' && scrollAttempted) return;
                     if (e.type === 'scroll') scrollAttempted = true;
 
-                    var savedTime = vid.currentTime;
+                    // Tenta liberar o som sem mexer no currentTime ainda (crucial para o Android não travar)
                     vid.muted = false;
-                    vid.currentTime = 0; // Volta para o início do vídeo de vendas
-                    
                     var p = vid.play();
+                    
                     if (p !== undefined) {
                         p.then(function() {
-                            // Sucesso! O navegador permitiu áudio via interação
+                            // Sucesso! Navegador permitiu áudio (geralmente via click ou touchend)
+                            vid.currentTime = 0; // Só voltamos o tempo se for aprovado
                             overlay.style.display = 'none';
                             atualizarInterface(true);
                             removeGlobalInteractionListeners();
                         }).catch(function() {
-                            // Falha! (ex: navegador bloqueou áudio no scroll)
-                            // Retorna o vídeo pro mudo e continua rodando, deixa o overlay lá pra pessoa clicar
-                            vid.muted = true;
-                            vid.currentTime = savedTime; 
-                            vid.play();
+                            // Falha! (Navegador bloqueou áudio - quase sempre no scroll do Android)
+                            vid.muted = true; // Devolve o mudo imediatamente para não travar
+                            
+                            // Força um play limpo logo após voltar ao mudo para o vídeo não congelar visualmente
+                            setTimeout(function() {
+                                vid.play().catch(function(){});
+                            }, 50);
+                            
+                            // Não remove os listeners de click e touchend porque o usuário ainda pode tocar na tela para liberar o som!
                         });
                     }
                 }
 
                 if (config.unmuteOnInteraction) {
+                    // Adicionado 'touchend' que é a interação mais confiável no Android
                     window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
                     window.addEventListener('click', tryGlobalUnmute, { passive: true });
                     window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchend', tryGlobalUnmute, { passive: true }); 
                     window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
                 }
             }
