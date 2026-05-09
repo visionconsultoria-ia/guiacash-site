@@ -997,6 +997,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 800;
+            background-clip: text;
         }
 
         .etapa-block {
@@ -1008,26 +1009,29 @@
             margin-bottom: 40px;
         }
 
-        /* Títulos em Degradê Customizados */
+        /* Títulos e Textos em Degradê Customizados */
         .title-gradient-1 {
             background: var(--pj-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .title-gradient-2 {
             background: var(--pf-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .title-gradient-3 {
             background: var(--debt-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Círculos de Progresso com Gradients em Transição */
+        /* Círculos de Progresso com Gradients em Transição Exata (Matemática: 1/3 = 120deg, 2/3 = 240deg) */
         .etapa-circle-container {
             width: 104px;
             height: 104px;
@@ -1039,14 +1043,20 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
-        /* Etapa 1: Só cian */
-        .circle-1 { background: linear-gradient(135deg, var(--pj-light), var(--pj-dark)); }
+        /* Etapa 1: 1/3 Cyan, 2/3 Cinza */
+        .circle-1 { 
+            background: conic-gradient(var(--pj-light) 0deg, var(--pj-dark) 120deg, #E2E8F0 120deg, #E2E8F0 360deg); 
+        }
         
-        /* Etapa 2: Cian transicionando para Violeta */
-        .circle-2 { background: linear-gradient(135deg, var(--pj-base) 0%, var(--pf-base) 100%); }
+        /* Etapa 2: 2/3 Cyan para Violeta, 1/3 Cinza */
+        .circle-2 { 
+            background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 240deg, #E2E8F0 240deg, #E2E8F0 360deg); 
+        }
         
-        /* Etapa 3: Cian transicionando para Violeta e depois para Amarelo */
-        .circle-3 { background: linear-gradient(135deg, var(--pj-base) 0%, var(--pf-base) 50%, var(--div-base) 100%); }
+        /* Etapa 3: 3/3 (Completo) Cyan -> Violeta -> Amarelo -> Cyan */
+        .circle-3 { 
+            background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 120deg, var(--div-base) 240deg, var(--pj-base) 360deg); 
+        }
 
         .etapa-circle-inner {
             width: 92px;
@@ -1058,7 +1068,6 @@
             justify-content: center;
             font-weight: 800;
             font-size: 1.1rem;
-            color: var(--text-dark);
             text-transform: uppercase;
             letter-spacing: -0.02em;
         }
@@ -1102,8 +1111,7 @@
         .list-3 li::before { background: var(--debt-gradient); }
 
         .etapa-list li strong {
-            color: var(--text-dark);
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .etapa-subtitle-center {
@@ -1471,14 +1479,14 @@
             <!-- ETAPA 1 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-1">
-                    <div class="etapa-circle-inner">Etapa 1</div>
+                    <div class="etapa-circle-inner"><span class="title-gradient-1">Etapa 1</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-1">Controle Global</h3>
                 
                 <ul class="etapa-list list-1">
-                    <li><strong>Objetivo:</strong> Saber exatamente quanto você ganha, gasta, usa em dívidas e para onde o dinheiro está indo na (PF, família) e (PJ) separadamente.</li>
-                    <li><strong>Como:</strong> Organizando todas as 3 áreas das finanças em um só lugar automaticamente</li>
-                    <li><strong>Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
+                    <li><strong class="title-gradient-1">Objetivo:</strong> Saber exatamente quanto você ganha, gasta, usa em dívidas e para onde o dinheiro está indo na (PF, família) e (PJ) separadamente.</li>
+                    <li><strong class="title-gradient-1">Como:</strong> Organizando todas as 3 áreas das finanças em um só lugar automaticamente</li>
+                    <li><strong class="title-gradient-1">Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
                 </ul>
 
                 <p class="etapa-subtitle-center">Uma usina tecnológica hipereficiente trabalhando para você</p>
@@ -1493,14 +1501,14 @@
             <!-- ETAPA 2 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-2">
-                    <div class="etapa-circle-inner">Etapa 2</div>
+                    <div class="etapa-circle-inner"><span class="title-gradient-2">Etapa 2</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-2">Inteligência na Gestão</h3>
                 
                 <ul class="etapa-list list-2">
-                    <li><strong>Objetivo:</strong> Usar seu dinheiro de forma estratégica e equilibrada.</li>
-                    <li><strong>Como:</strong> Traçando Objetivos diante dos Insights do Guia Cash. Com a regra 70/20/10, que dá base para você viver bem (70%), quitar dívidas (20%) e investir no futuro (10%) e Se unindo de forma colaborativa aos seus, para usar o cartão de forma inteligente e gerar reserva de emergência</li>
-                    <li><strong>Resultado:</strong> Dinheiro sobrando todo mês</li>
+                    <li><strong class="title-gradient-2">Objetivo:</strong> Usar seu dinheiro de forma estratégica e equilibrada.</li>
+                    <li><strong class="title-gradient-2">Como:</strong> Traçando Objetivos diante dos Insights do Guia Cash. Com a regra 70/20/10, que dá base para você viver bem (70%), quitar dívidas (20%) e investir no futuro (10%) e Se unindo de forma colaborativa aos seus, para usar o cartão de forma inteligente e gerar reserva de emergência</li>
+                    <li><strong class="title-gradient-2">Resultado:</strong> Dinheiro sobrando todo mês</li>
                 </ul>
                 
                 <div class="etapa-img-wrapper">
@@ -1511,14 +1519,14 @@
             <!-- ETAPA 3 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-3">
-                    <div class="etapa-circle-inner">Etapa 3</div>
+                    <div class="etapa-circle-inner"><span class="title-gradient-3">Etapa 3</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-3">Novo comportamento</h3>
                 
                 <ul class="etapa-list list-3">
-                    <li><strong>Objetivo:</strong> Construir patrimônio e realizar seus sonhos sem comprometer sua segurança financeira.</li>
-                    <li><strong>Como:</strong> Gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
-                    <li><strong>Resultado:</strong> Você no volante da sua vida, com liberdade financeira e paz.</li>
+                    <li><strong class="title-gradient-3">Objetivo:</strong> Construir patrimônio e realizar seus sonhos sem comprometer sua segurança financeira.</li>
+                    <li><strong class="title-gradient-3">Como:</strong> Gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
+                    <li><strong class="title-gradient-3">Resultado:</strong> Você no volante da sua vida, com liberdade financeira e paz.</li>
                 </ul>
                 
                 <div class="etapa-img-wrapper">
