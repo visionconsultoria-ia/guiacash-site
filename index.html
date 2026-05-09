@@ -834,26 +834,28 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            padding: 10px 12px 12px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
             z-index: 15;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 10px;
         }
 
         /* Botão play/pause */
         .video-play-btn {
             width: 32px;
             height: 32px;
-            background: rgba(0, 145, 150, 0.60);
+            background: transparent;
             border: none;
-            border-radius: 50%;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             padding: 0;
+            margin-left: 12px;
             flex-shrink: 0;
         }
 
@@ -866,18 +868,23 @@
         /* Barra de progresso — só o fill aparece, sem track visível */
         .video-progress-bar {
             width: 100%;
-            height: 6px;
+            height: 12px;
             background: transparent;
-            border-radius: 3px;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
             cursor: pointer;
+            position: relative;
+            left: 0;
+            bottom: 0;
         }
 
         .video-progress-fill {
             height: 100%;
             width: 0%;
-            background: rgba(0, 145, 150, 0.85);
-            border-radius: 3px;
+            background: #18b6b5;
+            border-radius: 0;
             transition: width 0.25s linear;
         }
 
