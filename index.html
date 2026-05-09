@@ -42,6 +42,7 @@
             --pf-pj-gradient: linear-gradient(90deg, var(--pf-base), var(--pj-base));
             --debt-gradient: linear-gradient(90deg, #db941b, #f5a722, #fbbb4f);
             --pj-gradient: linear-gradient(90deg, #006974, #009196, #18b6b5);
+            --pf-gradient: linear-gradient(90deg, var(--pf-light), var(--pf-base), var(--pf-dark));
             --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
 
             /* Sessão 3 */
@@ -418,142 +419,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin: 32px 0;
-        }
-
-        /* =========================================
-            SEÇÃO 7: COMO FUNCIONA
-        ========================================= */
-        #sessao-como-funciona {
-            background-color: var(--bg-white);
-            padding: 90px 0;
-        }
-
-        .como-funciona-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .como-funciona-subtitulo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-gray);
-            margin-bottom: 10px;
-        }
-
-        .text-gradient-cyan-violet {
-            background: linear-gradient(90deg, var(--pj-base), var(--pf-base));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        .etapa-block {
-            max-width: 800px;
-            margin: 0 auto 70px;
-        }
-
-        .etapa-block:last-of-type {
-            margin-bottom: 40px;
-        }
-
-        /* Círculos com Gradients Cônicos simulando anéis de progresso */
-        .etapa-circle-container {
-            width: 104px;
-            height: 104px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-        }
-
-        .circle-1 { background: conic-gradient(var(--pj-base) 0deg 120deg, #E2E8F0 120deg 360deg); }
-        .circle-2 { background: conic-gradient(var(--pj-base) 0deg 120deg, var(--pf-base) 120deg 240deg, #E2E8F0 240deg 360deg); }
-        .circle-3 { background: conic-gradient(var(--pj-base) 0deg 120deg, var(--pf-base) 120deg 240deg, var(--div-base) 240deg 360deg); }
-
-        .etapa-circle-inner {
-            width: 92px;
-            height: 92px;
-            background: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
-        .etapa-title-main {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 28px;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-        }
-
-        .etapa-list {
-            list-style: none;
-            margin-bottom: 36px;
-            padding: 0;
-        }
-
-        .etapa-list li {
-            font-size: 1.125rem;
-            color: var(--text-gray);
-            margin-bottom: 16px;
-            line-height: 1.6;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .etapa-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 6px;
-            height: 6px;
-            background-color: var(--pj-base);
-            border-radius: 50%;
-        }
-
-        .etapa-list li strong {
-            color: var(--text-dark);
-            font-weight: 700;
-        }
-
-        .etapa-subtitle-center {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-align: center;
-            line-height: 1.4;
-            margin: 40px auto 24px;
-            letter-spacing: -0.02em;
-            max-width: 650px;
-        }
-
-        .etapa-img-wrapper {
-            margin: 0 auto;
-            position: relative;
-            max-width: 800px;
-        }
-
-        .etapa-img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            display: block;
-        }
-
-        .como-funciona-cta {
-            margin-top: 50px;
         }
 
         /* =========================================
@@ -1106,6 +971,169 @@
                 margin: 0 auto;
             }
         }
+        
+        /* =========================================
+            SEÇÃO 7: COMO FUNCIONA
+        ========================================= */
+        #sessao-como-funciona {
+            background-color: var(--bg-white);
+            padding: 90px 0;
+        }
+
+        .como-funciona-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .como-funciona-subtitulo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .text-gradient-cyan-violet {
+            background: linear-gradient(90deg, var(--pj-base), var(--pf-base));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .etapa-block {
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+
+        .etapa-block:last-of-type {
+            margin-bottom: 40px;
+        }
+
+        /* Títulos em Degradê Customizados */
+        .title-gradient-1 {
+            background: var(--pj-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .title-gradient-2 {
+            background: var(--pf-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .title-gradient-3 {
+            background: var(--debt-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Círculos de Progresso com Gradients em Transição */
+        .etapa-circle-container {
+            width: 104px;
+            height: 104px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        /* Etapa 1: Só cian */
+        .circle-1 { background: linear-gradient(135deg, var(--pj-light), var(--pj-dark)); }
+        
+        /* Etapa 2: Cian transicionando para Violeta */
+        .circle-2 { background: linear-gradient(135deg, var(--pj-base) 0%, var(--pf-base) 100%); }
+        
+        /* Etapa 3: Cian transicionando para Violeta e depois para Amarelo */
+        .circle-3 { background: linear-gradient(135deg, var(--pj-base) 0%, var(--pf-base) 50%, var(--div-base) 100%); }
+
+        .etapa-circle-inner {
+            width: 92px;
+            height: 92px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .etapa-title-main {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 28px;
+            letter-spacing: -0.03em;
+        }
+
+        .etapa-list {
+            list-style: none;
+            margin-bottom: 36px;
+            padding: 0;
+        }
+
+        .etapa-list li {
+            font-size: 1.125rem;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        /* Bullets customizados combinando com os títulos */
+        .etapa-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        
+        .list-1 li::before { background: var(--pj-gradient); }
+        .list-2 li::before { background: var(--pf-gradient); }
+        .list-3 li::before { background: var(--debt-gradient); }
+
+        .etapa-list li strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .etapa-subtitle-center {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.4;
+            margin: 40px auto 24px;
+            letter-spacing: -0.02em;
+            max-width: 650px;
+        }
+
+        .etapa-img-wrapper {
+            margin: 0 auto;
+            position: relative;
+            max-width: 800px;
+        }
+
+        .etapa-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .como-funciona-cta {
+            margin-top: 50px;
+        }
 
     </style>
 </head>
@@ -1445,9 +1473,9 @@
                 <div class="etapa-circle-container circle-1">
                     <div class="etapa-circle-inner">Etapa 1</div>
                 </div>
-                <h3 class="etapa-title-main">Controle Global</h3>
+                <h3 class="etapa-title-main title-gradient-1">Controle Global</h3>
                 
-                <ul class="etapa-list">
+                <ul class="etapa-list list-1">
                     <li><strong>Objetivo:</strong> Saber exatamente quanto você ganha, gasta, usa em dívidas e para onde o dinheiro está indo na (PF, família) e (PJ) separadamente.</li>
                     <li><strong>Como:</strong> Organizando todas as 3 áreas das finanças em um só lugar automaticamente</li>
                     <li><strong>Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
@@ -1456,7 +1484,7 @@
                 <p class="etapa-subtitle-center">Uma usina tecnológica hipereficiente trabalhando para você</p>
                 
                 <div class="etapa-img-wrapper">
-                    <img src="sistema-importações.jpeg" alt="Sistema Importações Guia Cash" class="etapa-img">
+                    <img src="sistema-importações.png" alt="Sistema Importações Guia Cash" class="etapa-img">
                 </div>
                 
                 <p class="etapa-subtitle-center">A partir de agora, a velocidade do seu controle financeiro (PJ e PF) vai ser brutal. Não parece IA, não parece sistema. O que demoraria horas para ser feito, você faz em minutos.</p>
@@ -1467,16 +1495,16 @@
                 <div class="etapa-circle-container circle-2">
                     <div class="etapa-circle-inner">Etapa 2</div>
                 </div>
-                <h3 class="etapa-title-main">Inteligência na Gestão</h3>
+                <h3 class="etapa-title-main title-gradient-2">Inteligência na Gestão</h3>
                 
-                <ul class="etapa-list">
+                <ul class="etapa-list list-2">
                     <li><strong>Objetivo:</strong> Usar seu dinheiro de forma estratégica e equilibrada.</li>
                     <li><strong>Como:</strong> Traçando Objetivos diante dos Insights do Guia Cash. Com a regra 70/20/10, que dá base para você viver bem (70%), quitar dívidas (20%) e investir no futuro (10%) e Se unindo de forma colaborativa aos seus, para usar o cartão de forma inteligente e gerar reserva de emergência</li>
                     <li><strong>Resultado:</strong> Dinheiro sobrando todo mês</li>
                 </ul>
                 
                 <div class="etapa-img-wrapper">
-                    <img src="sistema-colaborativo.jpeg" alt="Sistema Colaborativo Guia Cash" class="etapa-img">
+                    <img src="sistema-colaborativo.png" alt="Sistema Colaborativo Guia Cash" class="etapa-img">
                 </div>
             </div>
 
@@ -1485,16 +1513,16 @@
                 <div class="etapa-circle-container circle-3">
                     <div class="etapa-circle-inner">Etapa 3</div>
                 </div>
-                <h3 class="etapa-title-main">Novo comportamento</h3>
+                <h3 class="etapa-title-main title-gradient-3">Novo comportamento</h3>
                 
-                <ul class="etapa-list">
+                <ul class="etapa-list list-3">
                     <li><strong>Objetivo:</strong> Construir patrimônio e realizar seus sonhos sem comprometer sua segurança financeira.</li>
-                    <li><strong>Como:</strong> gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
+                    <li><strong>Como:</strong> Gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
                     <li><strong>Resultado:</strong> Você no volante da sua vida, com liberdade financeira e paz.</li>
                 </ul>
                 
                 <div class="etapa-img-wrapper">
-                    <img src="sistema-progresso.jpeg" alt="Sistema Progresso Guia Cash" class="etapa-img">
+                    <img src="sistema-progresso.png" alt="Sistema Progresso Guia Cash" class="etapa-img">
                 </div>
             </div>
 
