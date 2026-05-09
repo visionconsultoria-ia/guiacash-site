@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -774,29 +774,34 @@
 
         /* ---- Overlay "Seu vídeo já começou" ---- */
         .video-mute-overlay {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            min-width: 210px;
-            max-width: 270px;
-            width: 70%;
-            padding: 18px 22px 20px;
-            background: rgba(0, 145, 150, 0.42);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            z-index: 20;
+            z-index: 100;
+            width: 80%;
+            max-width: 300px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            gap: 0;
+            /* pointer-events auto: recebe cliques e os propaga ao wrapper */
             pointer-events: auto;
             transition: opacity 0.3s ease;
         }
 
-        .video-mute-overlay.hidden { display: none; }
+        .video-mute-overlay.hidden {
+            display: none !important;
+        }
 
         /* Vídeo sem fundo preto enquanto carrega */
         #video-testemunho {
@@ -806,27 +811,36 @@
 
         .overlay-text-top {
             color: #FFFFFF;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 16px;
             text-align: center;
-            line-height: 1.2;
-            margin: 0;
+            line-height: 1.3;
+            margin: 0 0 0 0;
         }
 
         .overlay-text-bottom {
             color: #FFFFFF;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', 'Inter', sans-serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 16px;
             text-align: center;
-            line-height: 1.2;
+            line-height: 1.3;
             margin: 0;
         }
 
+        /* Pulsação suave no ícone de mudo */
+        @keyframes pulsaMudo {
+            0%   { transform: scale(1);    opacity: 1; }
+            50%  { transform: scale(1.1);  opacity: 0.7; }
+            100% { transform: scale(1);    opacity: 1; }
+        }
+
         .mute-icon {
-            width: 52px;
-            height: 52px;
+            width: 50px;
+            height: 50px;
+            margin: 15px 0;
+            animation: pulsaMudo 2s ease-in-out infinite;
         }
 
         /* ---- Controles inferiores do vídeo ---- */
@@ -835,49 +849,58 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 10px 12px 12px;
+            width: 100%;
+            padding: 0;
+            margin: 0;
             z-index: 15;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
         }
 
-        /* Botão play/pause */
+        /* Botão play/pause — absoluto, flutuando acima da barra, só ícone */
         .video-play-btn {
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 145, 150, 0.60);
+            position: absolute;
+            bottom: 16px; /* acima da barra de 12px + 4px de espaço */
+            left: 12px;
+            width: 24px;
+            height: 24px;
+            background: none;
             border: none;
-            border-radius: 50%;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             padding: 0;
-            flex-shrink: 0;
+            margin: 0;
+            z-index: 16;
         }
 
         .video-play-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             fill: #FFFFFF;
+            filter: drop-shadow(0 1px 4px rgba(0,0,0,0.7));
         }
 
-        /* Barra de progresso — só o fill aparece, sem track visível */
+        /* Barra de progresso — 12px, ponta a ponta absoluta, sem nada na frente */
         .video-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 6px;
-            background: transparent;
-            border-radius: 3px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 0;
             overflow: hidden;
             cursor: pointer;
+            margin: 0;
+            padding: 0;
         }
 
         .video-progress-fill {
             height: 100%;
             width: 0%;
-            background: rgba(0, 145, 150, 0.85);
-            border-radius: 3px;
+            background: #18b6b5;
+            border-radius: 0;
             transition: width 0.25s linear;
         }
 
@@ -991,14 +1014,14 @@
         
         <p class="subheadline desktop-only">
             Organização que se adapta à vida corrida e<br>
-            <span style="white-space: nowrap;">Certeza frente oscilações do negócio e família num só lugar, automático e simples</span><br>
+            <span style="white-space: nowrap;">Clareza em como família e negócio se impactam num só lugar, automático e simples</span><br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
         <p class="subheadline mobile-only">
-            Organização que se adapta à vida corrida e<br>
-            certeza frente oscilações do negócio e família<br>
-            num só lugar, automático e simples<br> 
+            Organização que se adapta à vida corrida<br>
+            e clareza em como família e negócio se<br>
+            impactam num só lugar, automático e simples<br> 
             Antes que mais uma decisão no escuro<br> 
             te prenda ao banco por anos 
         </p>
@@ -1127,7 +1150,7 @@
 
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Videografia do todo, com tradução dos números via imagens e escrita descontraída e marcante com IA</p>
+                        <p class="comp-item-text">Videografia do todo, com tradução dos números via imagens e escrita descontraída e marcante com o Cash IA</p>
                     </div>
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
@@ -1135,7 +1158,7 @@
                     </div>
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Se adapta à vida de profissionais ocupados, não o contrário. Controle em 15min por semana e gestão colaborativa</p>
+                        <p class="comp-item-text">Se adapta à vida de profissionais ocupados, não o contrário. Controle em 15 min por semana e gestão compartilhada.</p>
                     </div>
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
@@ -1343,33 +1366,42 @@
 
             if (!vid) return;
 
-            /* Mudo absoluto — garante autoplay em iOS */
+            /* ---- INICIALIZAÇÃO: mudo obrigatório para autoplay funcionar ---- */
             vid.muted = true;
-            vid.defaultMuted = true;
+            vid.play().catch(function(){});
 
-            function atualizarInterface(playing) {
-                if (iconPause && iconPlay) {
-                    iconPause.style.display = playing ? '' : 'none';
-                    iconPlay.style.display  = playing ? 'none' : '';
+            /* ---- Interface play/pause ---- */
+            function ui(playing) {
+                if (!iconPause || !iconPlay) return;
+                iconPause.style.display = playing ? '' : 'none';
+                iconPlay.style.display  = playing ? 'none' : '';
+            }
+
+            /* ---- MOTOR ÚNICO ---- */
+            var ativado = false;
+
+            function ativarExperienciaCompleta() {
+                if (ativado) return;
+                ativado = true;
+                vid.muted       = false;
+                vid.currentTime = 0;
+                /* Esconde overlay — inline style tem prioridade sobre qualquer CSS */
+                if (overlay) {
+                    overlay.style.display   = 'none';
+                    overlay.style.visibility = 'hidden';
                 }
+                vid.play().catch(function(){});
+                ui(true);
             }
 
-            /* Tenta play agressivamente com retry a cada 500ms */
-            function forceAutoplay() {
-                vid.play().then(function() {
-                    atualizarInterface(true);
-                }).catch(function() {
-                    setTimeout(forceAutoplay, 500);
-                });
-            }
-
-            /* Inicia carregamento e play */
-            vid.load();
-            forceAutoplay();
+            /* Listeners na window: auto-destroem após primeira execução */
+            ['click', 'touchstart', 'scroll'].forEach(function(evt) {
+                window.addEventListener(evt, ativarExperienciaCompleta, { once: true, passive: true });
+            });
 
             /* ---- Barra de progresso ---- */
             vid.addEventListener('timeupdate', function() {
-                if (vid.duration && fill) {
+                if (fill && vid.duration) {
                     fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
                 }
             });
@@ -1377,65 +1409,49 @@
             if (progressBar) {
                 progressBar.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    var rect = progressBar.getBoundingClientRect();
-                    var ratio = (e.clientX - rect.left) / rect.width;
-                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                    if (vid.duration) {
+                        var rect = progressBar.getBoundingClientRect();
+                        vid.currentTime = ((e.clientX - rect.left) / rect.width) * vid.duration;
+                    }
                 });
             }
 
-            /* ---- Botão play/pause ---- */
+            /* ---- Botão play/pause manual ---- */
             if (playBtn) {
                 playBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    if (vid.paused) {
-                        vid.play();
-                        atualizarInterface(true);
-                    } else {
-                        vid.pause();
-                        atualizarInterface(false);
-                    }
+                    ativarExperienciaCompleta();
+                    /* Aguarda microtask para o muted=false ter efeito */
+                    setTimeout(function() {
+                        if (vid.paused) { vid.play().catch(function(){}); ui(true); }
+                        else            { vid.pause(); ui(false); }
+                    }, 0);
                 });
             }
 
-            /* ---- Clicar em qualquer área do wrapper ---- */
+            /* ---- Clicar no wrapper: ativa som + pausa/retoma ---- */
             if (wrapper) {
                 wrapper.addEventListener('click', function(e) {
-                    if (overlay && overlay.style.display !== 'none' && overlay.contains(e.target)) return;
                     if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
                     if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
-                    if (vid.paused) {
-                        vid.play();
-                        atualizarInterface(true);
-                    } else {
-                        vid.pause();
-                        atualizarInterface(false);
-                    }
+                    ativarExperienciaCompleta();
+                    setTimeout(function() {
+                        if (vid.paused) { vid.play().catch(function(){}); ui(true); }
+                        else            { vid.pause(); ui(false); }
+                    }, 0);
                 });
             }
 
-            /* ---- Overlay: ativa som ao clicar ---- */
-            if (overlay) {
-                overlay.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    vid.muted = false;
-                    vid.currentTime = 0;
-                    vid.play();
-                    overlay.style.display = 'none';
-                    atualizarInterface(true);
-                });
-            }
-
-            /* ---- IntersectionObserver: pausa ao sair da tela ---- */
-            var vObs = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    forceAutoplay();
-                } else {
+            /* ---- IntersectionObserver: só pausa ao sair da tela ---- */
+            new IntersectionObserver(function(entries) {
+                if (!entries[0].isIntersecting) {
                     vid.pause();
-                    atualizarInterface(false);
+                    ui(false);
+                } else {
+                    vid.play().catch(function(){});
+                    ui(true);
                 }
-            }, { threshold: 0.2 });
-
-            vObs.observe(vid);
+            }, { threshold: 0.2 }).observe(vid);
 
         })();
     </script>
