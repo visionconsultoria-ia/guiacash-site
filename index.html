@@ -421,6 +421,142 @@
         }
 
         /* =========================================
+            SEÇÃO 7: COMO FUNCIONA
+        ========================================= */
+        #sessao-como-funciona {
+            background-color: var(--bg-white);
+            padding: 90px 0;
+        }
+
+        .como-funciona-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .como-funciona-subtitulo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .text-gradient-cyan-violet {
+            background: linear-gradient(90deg, var(--pj-base), var(--pf-base));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .etapa-block {
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+
+        .etapa-block:last-of-type {
+            margin-bottom: 40px;
+        }
+
+        /* Círculos com Gradients Cônicos simulando anéis de progresso */
+        .etapa-circle-container {
+            width: 104px;
+            height: 104px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .circle-1 { background: conic-gradient(var(--pj-base) 0deg 120deg, #E2E8F0 120deg 360deg); }
+        .circle-2 { background: conic-gradient(var(--pj-base) 0deg 120deg, var(--pf-base) 120deg 240deg, #E2E8F0 240deg 360deg); }
+        .circle-3 { background: conic-gradient(var(--pj-base) 0deg 120deg, var(--pf-base) 120deg 240deg, var(--div-base) 240deg 360deg); }
+
+        .etapa-circle-inner {
+            width: 92px;
+            height: 92px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .etapa-title-main {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 28px;
+            letter-spacing: -0.03em;
+            color: var(--text-dark);
+        }
+
+        .etapa-list {
+            list-style: none;
+            margin-bottom: 36px;
+            padding: 0;
+        }
+
+        .etapa-list li {
+            font-size: 1.125rem;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            line-height: 1.6;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .etapa-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background-color: var(--pj-base);
+            border-radius: 50%;
+        }
+
+        .etapa-list li strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .etapa-subtitle-center {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.4;
+            margin: 40px auto 24px;
+            letter-spacing: -0.02em;
+            max-width: 650px;
+        }
+
+        .etapa-img-wrapper {
+            margin: 0 auto;
+            position: relative;
+            max-width: 800px;
+        }
+
+        .etapa-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            display: block;
+        }
+
+        .como-funciona-cta {
+            margin-top: 50px;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE
         ========================================= */
         .mobile-only { display: none !important; }
@@ -525,6 +661,26 @@
                 width: 39.33%; 
                 top: -17.6%; 
                 right: 15.72%; 
+            }
+
+            /* Seção 7 Mobile */
+            #sessao-como-funciona { padding: 60px 0; }
+            
+            .como-funciona-header { margin-bottom: 40px; }
+            .etapa-title-main { font-size: 1.5rem; margin-bottom: 20px; }
+            .etapa-list li { font-size: 1rem; }
+            .etapa-subtitle-center { font-size: 1.1rem; margin: 30px auto 20px; }
+            
+            /* Margem negativa cirúrgica para Imagens "Como Funciona": 
+               O container base tem padding de 24px. Com margem de -12px, a imagem 
+               vai ficar com 12px de distância física da borda real do celular, 
+               deixando-a bem grande, mas com respiro perfeito. */
+            .etapa-img-wrapper {
+                margin-left: -12px;
+                margin-right: -12px;
+            }
+            .etapa-img {
+                border-radius: 12px;
             }
         }
 
@@ -1202,7 +1358,154 @@
             <img src="demo.png" alt="Demonstração do Guia Cash" class="demo-img">
         </div>
     </section>
+    
+    <!-- ==========================================
+         SEÇÃO 6: TESTEMUNHOS
+    =========================================== -->
+    <section id="sessao-testemunhos">
+        <div class="container">
 
+            <div class="testemunhos-header">
+                <h2 class="testemunhos-titulo">Será que o Guia Cash funciona?</h2>
+                <p class="testemunhos-subtitulo">Veja com seus próprios olhos e tire suas conclusões</p>
+            </div>
+
+            <div class="testemunhos-grid">
+
+                <!-- Vídeo — top-right no desktop, primeiro no mobile -->
+                <div class="testemunho-item testemunho-item-video">
+                    <p class="testemunho-label">Antonio Fagnani - Empresário</p>
+                    <div class="testemunho-video-wrapper" id="video-wrapper">
+
+                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
+
+                        <div class="video-mute-overlay" id="video-overlay">
+                            <p class="overlay-text-top">Seu vídeo já começou</p>
+                            <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                                <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                                <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                            </svg>
+                            <p class="overlay-text-bottom">Clique para ouvir</p>
+                        </div>
+
+                        <div class="video-controls" id="video-controls">
+                            <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
+                                <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                                <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                            </button>
+                            <div class="video-progress-bar" id="video-progress-bar">
+                                <div class="video-progress-fill" id="video-progress-fill"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Imagem 1 — top-left no desktop, segunda no mobile -->
+                <div class="testemunho-item testemunho-item-img1">
+                    <p class="testemunho-label">Fernanda Cunha - Loja virtual</p>
+                    <img src="imagem-testemunho-um.jpeg" alt="Testemunho Fernanda Cunha" class="testemunho-img">
+                </div>
+
+                <!-- Imagem 2 — bot-left no desktop, terceira no mobile -->
+                <div class="testemunho-item testemunho-item-img2">
+                    <p class="testemunho-label">Andreia Stankiewicz - Dentista</p>
+                    <img src="imagem-testemunho-dois.jpeg" alt="Testemunho Andreia Stankiewicz" class="testemunho-img">
+                </div>
+
+                <!-- Imagem 3 — bot-right no desktop, quarta no mobile -->
+                <div class="testemunho-item testemunho-item-img3">
+                    <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
+                    <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
+                </div>
+
+            </div>
+
+            <div class="testemunhos-cta-wrapper">
+                <a href="#oferta" class="btn-cta btn-gradient btn-violet">Quero ter controle</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 7: COMO FUNCIONA
+    =========================================== -->
+    <section id="sessao-como-funciona">
+        <div class="container">
+            
+            <div class="como-funciona-header">
+                <h2>Como funciona o método Círculo Mestre do Guia Cash?</h2>
+                <p class="como-funciona-subtitulo"><span class="text-gradient-cyan-violet">3 Etapas</span> que transformam 3 áreas financeiras</p>
+            </div>
+
+            <!-- ETAPA 1 -->
+            <div class="etapa-block">
+                <div class="etapa-circle-container circle-1">
+                    <div class="etapa-circle-inner">Etapa 1</div>
+                </div>
+                <h3 class="etapa-title-main">Controle Global</h3>
+                
+                <ul class="etapa-list">
+                    <li><strong>Objetivo:</strong> Saber exatamente quanto você ganha, gasta, usa em dívidas e para onde o dinheiro está indo na (PF, família) e (PJ) separadamente.</li>
+                    <li><strong>Como:</strong> Organizando todas as 3 áreas das finanças em um só lugar automaticamente</li>
+                    <li><strong>Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
+                </ul>
+
+                <p class="etapa-subtitle-center">Uma usina tecnológica hipereficiente trabalhando para você</p>
+                
+                <div class="etapa-img-wrapper">
+                    <img src="sistema-importações.png" alt="Sistema Importações Guia Cash" class="etapa-img">
+                </div>
+                
+                <p class="etapa-subtitle-center">A partir de agora, a velocidade do seu controle financeiro (PJ e PF) vai ser brutal. Não parece IA, não parece sistema. O que demoraria horas para ser feito, você faz em minutos.</p>
+            </div>
+
+            <!-- ETAPA 2 -->
+            <div class="etapa-block">
+                <div class="etapa-circle-container circle-2">
+                    <div class="etapa-circle-inner">Etapa 2</div>
+                </div>
+                <h3 class="etapa-title-main">Inteligência na Gestão</h3>
+                
+                <ul class="etapa-list">
+                    <li><strong>Objetivo:</strong> Usar seu dinheiro de forma estratégica e equilibrada.</li>
+                    <li><strong>Como:</strong> Traçando Objetivos diante dos Insights do Guia Cash. Com a regra 70/20/10, que dá base para você viver bem (70%), quitar dívidas (20%) e investir no futuro (10%) e Se unindo de forma colaborativa aos seus, para usar o cartão de forma inteligente e gerar reserva de emergência</li>
+                    <li><strong>Resultado:</strong> Dinheiro sobrando todo mês</li>
+                </ul>
+                
+                <div class="etapa-img-wrapper">
+                    <img src="sistema-colaborativo.png" alt="Sistema Colaborativo Guia Cash" class="etapa-img">
+                </div>
+            </div>
+
+            <!-- ETAPA 3 -->
+            <div class="etapa-block">
+                <div class="etapa-circle-container circle-3">
+                    <div class="etapa-circle-inner">Etapa 3</div>
+                </div>
+                <h3 class="etapa-title-main">Novo comportamento</h3>
+                
+                <ul class="etapa-list">
+                    <li><strong>Objetivo:</strong> Construir patrimônio e realizar seus sonhos sem comprometer sua segurança financeira.</li>
+                    <li><strong>Como:</strong> gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
+                    <li><strong>Resultado:</strong> Você no volante da sua vida, com liberdade financeira e paz.</li>
+                </ul>
+                
+                <div class="etapa-img-wrapper">
+                    <img src="sistema-progresso.png" alt="Sistema Progresso Guia Cash" class="etapa-img">
+                </div>
+            </div>
+
+            <div class="como-funciona-cta">
+                <a href="#oferta" class="btn-cta btn-gradient text-white" style="color: #FFFFFF !important;">Quero isso para mim</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SCRIPTS -->
     <script>
         const phrases = [
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
@@ -1293,76 +1596,6 @@
 
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
-    
-    <!-- ==========================================
-         SEÇÃO 6: TESTEMUNHOS
-    =========================================== -->
-    <section id="sessao-testemunhos">
-        <div class="container">
-
-            <div class="testemunhos-header">
-                <h2 class="testemunhos-titulo">Será que o Guia Cash funciona?</h2>
-                <p class="testemunhos-subtitulo">Veja com seus próprios olhos e tire suas conclusões</p>
-            </div>
-
-            <div class="testemunhos-grid">
-
-                <!-- Vídeo — top-right no desktop, primeiro no mobile -->
-                <div class="testemunho-item testemunho-item-video">
-                    <p class="testemunho-label">Antonio Fagnani - Empresário</p>
-                    <div class="testemunho-video-wrapper" id="video-wrapper">
-
-                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
-
-                        <div class="video-mute-overlay" id="video-overlay">
-                            <p class="overlay-text-top">Seu vídeo já começou</p>
-                            <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
-                                <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                                <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                            </svg>
-                            <p class="overlay-text-bottom">Clique para ouvir</p>
-                        </div>
-
-                        <div class="video-controls" id="video-controls">
-                            <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
-                                <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-                                <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
-                            </button>
-                            <div class="video-progress-bar" id="video-progress-bar">
-                                <div class="video-progress-fill" id="video-progress-fill"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Imagem 1 — top-left no desktop, segunda no mobile -->
-                <div class="testemunho-item testemunho-item-img1">
-                    <p class="testemunho-label">Fernanda Cunha - Loja virtual</p>
-                    <img src="imagem-testemunho-um.jpeg" alt="Testemunho Fernanda Cunha" class="testemunho-img">
-                </div>
-
-                <!-- Imagem 2 — bot-left no desktop, terceira no mobile -->
-                <div class="testemunho-item testemunho-item-img2">
-                    <p class="testemunho-label">Andreia Stankiewicz - Dentista</p>
-                    <img src="imagem-testemunho-dois.jpeg" alt="Testemunho Andreia Stankiewicz" class="testemunho-img">
-                </div>
-
-                <!-- Imagem 3 — bot-right no desktop, quarta no mobile -->
-                <div class="testemunho-item testemunho-item-img3">
-                    <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
-                    <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
-                </div>
-
-            </div>
-
-            <div class="testemunhos-cta-wrapper">
-                <a href="#oferta" class="btn-cta btn-gradient btn-violet">Quero ter controle</a>
-            </div>
-
-        </div>
-    </section>
 
     <!-- JS GLOBAL DOS VÍDEOS -->
     <script>
@@ -1505,48 +1738,39 @@
                     window.removeEventListener('scroll', tryGlobalUnmute);
                     window.removeEventListener('click', tryGlobalUnmute);
                     window.removeEventListener('touchstart', tryGlobalUnmute);
-                    window.removeEventListener('touchend', tryGlobalUnmute); // Adicionado para Android
+                    window.removeEventListener('touchend', tryGlobalUnmute); 
                     window.removeEventListener('keydown', tryGlobalUnmute);
                 }
 
                 function tryGlobalUnmute(e) {
-                    // Se o overlay já não está visível, já foi desmutado manualmente
                     if (!overlay || overlay.style.display === 'none') {
                         removeGlobalInteractionListeners();
                         return;
                     }
 
-                    // Se for scroll, tenta, mas a chance de falhar no Android é alta.
                     if (e.type === 'scroll' && scrollAttempted) return;
                     if (e.type === 'scroll') scrollAttempted = true;
 
-                    // Tenta liberar o som sem mexer no currentTime ainda (crucial para o Android não travar)
                     vid.muted = false;
                     var p = vid.play();
                     
                     if (p !== undefined) {
                         p.then(function() {
-                            // Sucesso! Navegador permitiu áudio (geralmente via click ou touchend)
-                            vid.currentTime = 0; // Só voltamos o tempo se for aprovado
+                            vid.currentTime = 0; 
                             overlay.style.display = 'none';
                             atualizarInterface(true);
                             removeGlobalInteractionListeners();
                         }).catch(function() {
-                            // Falha! (Navegador bloqueou áudio - quase sempre no scroll do Android)
-                            vid.muted = true; // Devolve o mudo imediatamente para não travar
+                            vid.muted = true; 
                             
-                            // Força um play limpo logo após voltar ao mudo para o vídeo não congelar visualmente
                             setTimeout(function() {
                                 vid.play().catch(function(){});
                             }, 50);
-                            
-                            // Não remove os listeners de click e touchend porque o usuário ainda pode tocar na tela para liberar o som!
                         });
                     }
                 }
 
                 if (config.unmuteOnInteraction) {
-                    // Adicionado 'touchend' que é a interação mais confiável no Android
                     window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
                     window.addEventListener('click', tryGlobalUnmute, { passive: true });
                     window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
@@ -1555,7 +1779,7 @@
                 }
             }
 
-            // Inicializando Vídeo Principal da Hero Section (Com ativação global onInteraction)
+            // Inicializando Vídeo Principal da Hero Section
             setupVideoPlayer({
                 videoId: 'hero-video',
                 overlayId: 'hero-video-overlay',
@@ -1565,10 +1789,10 @@
                 progressBarId: 'hero-progress-bar',
                 iconPauseId: 'hero-icon-pause',
                 iconPlayId: 'hero-icon-play',
-                unmuteOnInteraction: true // <--- Lógica aplicada SOMENTE AQUI
+                unmuteOnInteraction: true 
             });
 
-            // Inicializando Vídeo de Testemunho (Sem ativação global)
+            // Inicializando Vídeo de Testemunho
             setupVideoPlayer({
                 videoId: 'video-testemunho',
                 overlayId: 'video-overlay',
@@ -1578,7 +1802,6 @@
                 progressBarId: 'video-progress-bar',
                 iconPauseId: 'icon-pause',
                 iconPlayId: 'icon-play'
-                // Sem a tag unmuteOnInteraction, então ele ignora.
             });
 
         })();
