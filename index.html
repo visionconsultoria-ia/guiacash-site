@@ -534,15 +534,31 @@
             .como-funciona-header { margin-bottom: 40px; }
             .etapa-title-main { font-size: 1.5rem; margin-bottom: 20px; }
             .etapa-list li { font-size: 1rem; }
-            .etapa-subtitle-center { font-size: 1.1rem; margin: 30px auto 20px; }
             
+            .etapa-subtitle-center { margin: 30px auto 20px; }
+            
+            /* Frase de efeito 1: Reduzida para caber em 2 linhas (iPhone 12) mantendo negrito */
+            .etapa-subtitle-center.frase-efeito-1 {
+                font-size: 1.05rem; 
+                font-weight: 700;
+            }
+            
+            /* Frase de efeito 2: Mesmo tamanho da 1, porém SEM negrito */
+            .etapa-subtitle-center.frase-efeito-2 {
+                font-size: 1.05rem; 
+                font-weight: 400;
+            }
+
+            .como-funciona-subtitulo.mobile-subtitle-size {
+                font-size: 1.375rem; /* Aumentado em 2px para o mobile */
+                line-height: 1.3;
+            }
+
             /* Margem negativa cirúrgica para Imagens "Como Funciona": 
-               O container base tem padding de 24px. Com margem de -12px, a imagem 
-               vai ficar com 12px de distância física da borda real do celular, 
-               deixando-a bem grande, mas com respiro perfeito. */
+               Aumento de 50% na margem lateral para deixar um respiro menor (cerca de 6px) e ampliar a imagem no mobile */
             .etapa-img-wrapper {
-                margin-left: -12px;
-                margin-right: -12px;
+                margin-left: -18px;
+                margin-right: -18px;
             }
             .etapa-img {
                 border-radius: 12px;
@@ -571,6 +587,11 @@
                 margin-bottom: 12px !important;
                 white-space: nowrap !important;
                 max-width: none !important;
+            }
+
+            /* Aumentar em 30% a fonte do subtítulo da Seção 7 apenas no PC */
+            .como-funciona-subtitulo.desktop-only {
+                font-size: 1.625rem;
             }
         }
 
@@ -985,8 +1006,8 @@
             margin-bottom: 60px;
         }
 
+        /* Base para subtítulo (herdado por todos, ajustado via media query se necessário) */
         .como-funciona-subtitulo {
-            font-size: 1.25rem;
             font-weight: 700;
             color: var(--text-gray);
             margin-bottom: 10px;
@@ -1114,6 +1135,7 @@
             font-weight: 800;
         }
 
+        /* Formatação global/PC de Frases de Efeito da Seção 7 */
         .etapa-subtitle-center {
             font-size: 1.3rem;
             font-weight: 700;
@@ -1472,8 +1494,11 @@
         <div class="container">
             
             <div class="como-funciona-header">
-                <h2>Como funciona o método Círculo Mestre do Guia Cash?</h2>
-                <p class="como-funciona-subtitulo"><span class="text-gradient-cyan-violet">3 Etapas</span> que transformam 3 áreas financeiras</p>
+                <h2 class="desktop-only">Como funciona o método Círculo Mestre do Guia Cash?</h2>
+                <h2 class="mobile-only">Como funciona o método<br>Círculo Mestre do<br>Guia Cash?</h2>
+                
+                <p class="como-funciona-subtitulo desktop-only"><span class="text-gradient-cyan-violet">3 Etapas</span> que transformam 3 áreas financeiras</p>
+                <p class="como-funciona-subtitulo mobile-only mobile-subtitle-size"><span class="text-gradient-cyan-violet">3 Etapas que transformam</span><br>3 áreas financeiras</p>
             </div>
 
             <!-- ETAPA 1 -->
@@ -1489,13 +1514,13 @@
                     <li><strong class="title-gradient-1">Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
                 </ul>
 
-                <p class="etapa-subtitle-center">Uma usina tecnológica hipereficiente trabalhando para você</p>
+                <p class="etapa-subtitle-center frase-efeito-1">Uma usina tecnológica hipereficiente trabalhando para você</p>
                 
                 <div class="etapa-img-wrapper">
                     <img src="sistema-importações.jpeg" alt="Sistema Importações Guia Cash" class="etapa-img">
                 </div>
                 
-                <p class="etapa-subtitle-center">A partir de agora, a velocidade do seu controle financeiro (PJ e PF) vai ser brutal. Não parece IA, não parece sistema. O que demoraria horas para ser feito, você faz em minutos.</p>
+                <p class="etapa-subtitle-center frase-efeito-2">A partir de agora, a velocidade do seu controle financeiro (PJ e PF) vai ser brutal. Não parece IA, não parece sistema. O que demoraria horas para ser feito, você faz em minutos.</p>
             </div>
 
             <!-- ETAPA 2 -->
@@ -1543,7 +1568,7 @@
 
     <!-- SCRIPTS -->
     <script>
-        const phrases = [
+        const phrases =[
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
             { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
             { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
