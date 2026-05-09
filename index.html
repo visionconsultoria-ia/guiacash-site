@@ -506,9 +506,17 @@
                 letter-spacing: -0.01em; 
             }
 
+            /* MÁGICA DO ALINHAMENTO RESPONSIVO */
             .secret-image-wrapper {
-                margin-left: -40px; 
-                margin-right: -40px;
+                /* A imagem assume exatamente a largura da tela do celular, menos 24px de respiro (12px de cada lado) */
+                width: calc(100vw - 24px); 
+                max-width: calc(100vw - 24px); 
+                
+                /* Hack para centralizar na tela independente do padding do card branco */
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                
                 margin-top: 85px; 
                 margin-bottom: 35px;
             }
