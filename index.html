@@ -555,10 +555,11 @@
             }
 
             /* Margem negativa cirúrgica para Imagens "Como Funciona": 
-               Aumento de 50% na margem lateral para deixar um respiro menor (cerca de 6px) e ampliar a imagem no mobile */
+               O padding base do container é 24px. Ao usar -21px de margem lateral,
+               puxamos a imagem exatamente até restar um respiro de 3px em relação à borda da tela. */
             .etapa-img-wrapper {
-                margin-left: -18px;
-                margin-right: -18px;
+                margin-left: -21px;
+                margin-right: -21px;
             }
             .etapa-img {
                 border-radius: 12px;
