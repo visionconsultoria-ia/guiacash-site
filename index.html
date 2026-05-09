@@ -1440,7 +1440,12 @@
                             vid.play();
                             overlay.style.display = 'none';
                             atualizarInterface(true);
-                            return; /* Interrompe aqui para não pausar */
+                            
+                            // Se foi ativado pelo clique, não precisa mais monitorar o global
+                            if (config.unmuteOnInteraction) {
+                                removeGlobalInteractionListeners();
+                            }
+                            return; 
                         }
 
                         /* Se o vídeo já estiver desmutado (sem overlay), funciona como play/pause padrão */
@@ -1463,6 +1468,10 @@
                         vid.play();
                         overlay.style.display = 'none';
                         atualizarInterface(true);
+                        
+                        if (config.unmuteOnInteraction) {
+                            removeGlobalInteractionListeners();
+                        }
                     });
                 }
 
@@ -1477,9 +1486,61 @@
                 }, { threshold: 0.2 });
 
                 vObs.observe(vid);
+
+                /* ========================================================
+                   LÓGICA EXCLUSIVA: ATIVAR SOM NA PRIMEIRA INTERAÇÃO GERAL 
+                   (Ex: clique em qualquer lugar da página, scroll, etc)
+                ======================================================== */
+                var scrollAttempted = false;
+
+                function removeGlobalInteractionListeners() {
+                    window.removeEventListener('scroll', tryGlobalUnmute);
+                    window.removeEventListener('click', tryGlobalUnmute);
+                    window.removeEventListener('touchstart', tryGlobalUnmute);
+                    window.removeEventListener('keydown', tryGlobalUnmute);
+                }
+
+                function tryGlobalUnmute(e) {
+                    // Se o overlay já não está visível, já foi desmutado manualmente
+                    if (!overlay || overlay.style.display === 'none') {
+                        removeGlobalInteractionListeners();
+                        return;
+                    }
+
+                    // Se for scroll, tenta apenas uma vez para não travar o vídeo
+                    if (e.type === 'scroll' && scrollAttempted) return;
+                    if (e.type === 'scroll') scrollAttempted = true;
+
+                    var savedTime = vid.currentTime;
+                    vid.muted = false;
+                    vid.currentTime = 0; // Volta para o início do vídeo de vendas
+                    
+                    var p = vid.play();
+                    if (p !== undefined) {
+                        p.then(function() {
+                            // Sucesso! O navegador permitiu áudio via interação
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            removeGlobalInteractionListeners();
+                        }).catch(function() {
+                            // Falha! (ex: navegador bloqueou áudio no scroll)
+                            // Retorna o vídeo pro mudo e continua rodando, deixa o overlay lá pra pessoa clicar
+                            vid.muted = true;
+                            vid.currentTime = savedTime; 
+                            vid.play();
+                        });
+                    }
+                }
+
+                if (config.unmuteOnInteraction) {
+                    window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('click', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
+                }
             }
 
-            // Inicializando Vídeo Principal da Hero Section
+            // Inicializando Vídeo Principal da Hero Section (Com ativação global onInteraction)
             setupVideoPlayer({
                 videoId: 'hero-video',
                 overlayId: 'hero-video-overlay',
@@ -1488,10 +1549,11 @@
                 fillId: 'hero-progress-fill',
                 progressBarId: 'hero-progress-bar',
                 iconPauseId: 'hero-icon-pause',
-                iconPlayId: 'hero-icon-play'
+                iconPlayId: 'hero-icon-play',
+                unmuteOnInteraction: true // <--- Lógica aplicada SOMENTE AQUI
             });
 
-            // Inicializando Vídeo de Testemunho
+            // Inicializando Vídeo de Testemunho (Sem ativação global)
             setupVideoPlayer({
                 videoId: 'video-testemunho',
                 overlayId: 'video-overlay',
@@ -1501,6 +1563,7 @@
                 progressBarId: 'video-progress-bar',
                 iconPauseId: 'icon-pause',
                 iconPlayId: 'icon-play'
+                // Sem a tag unmuteOnInteraction, então ele ignora.
             });
 
         })();
