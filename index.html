@@ -178,7 +178,7 @@
             line-height: 1.3; 
         }
         
-        /* Video Container */
+        /* Video Container Principal */
         .video-container {
             width: 100%; 
             max-width: 1144px; 
@@ -196,11 +196,13 @@
             border: 4px solid #FFF; 
             outline: 1px solid var(--border-light);
         }
-        
-        .unmute-btn {
-            background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
-            font-weight: 700; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+        #hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background-color: transparent;
         }
 
         /* =========================================
@@ -693,7 +695,7 @@
             }
         }
         /* =========================================
-            SEÇÃO 6: TESTEMUNHOS
+            SEÇÃO 6: TESTEMUNHOS & VÍDEOS GLOBAIS
         ========================================= */
         #sessao-testemunhos {
             background-color: #009196;
@@ -772,7 +774,7 @@
             display: block;
         }
 
-        /* ---- Overlay "Seu vídeo já começou" ---- */
+        /* ---- Overlay "Seu vídeo já começou" (Usado tanto na Hero quanto nos Depoimentos) ---- */
         .video-mute-overlay {
             position: absolute;
             top: 50%;
@@ -1014,8 +1016,29 @@
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
-        <div class="video-container">
-            <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Clique para liberar o som</div>
+        <!-- Video Container Principal com Controles Idênticos ao Depoimento -->
+        <div class="video-container" id="hero-video-wrapper">
+            <video id="hero-video" src="video-principal.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
         </div>
 
         <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
@@ -1262,6 +1285,7 @@
 
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
+    
     <!-- ==========================================
          SEÇÃO 6: TESTEMUNHOS
     =========================================== -->
@@ -1282,7 +1306,6 @@
 
                         <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
 
-                        <!-- Overlay: só aparece antes do som ser ativado -->
                         <div class="video-mute-overlay" id="video-overlay">
                             <p class="overlay-text-top">Seu vídeo já começou</p>
                             <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1293,12 +1316,9 @@
                             <p class="overlay-text-bottom">Clique para ouvir</p>
                         </div>
 
-                        <!-- Controles inferiores -->
                         <div class="video-controls" id="video-controls">
                             <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
-                                <!-- Ícone pause (default quando rodando) -->
                                 <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-                                <!-- Ícone play (quando pausado) -->
                                 <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
                             </button>
                             <div class="video-progress-bar" id="video-progress-bar">
@@ -1336,113 +1356,140 @@
         </div>
     </section>
 
-    <!-- JS do vídeo: após o elemento no DOM -->
+    <!-- JS GLOBAL DOS VÍDEOS -->
     <script>
         (function() {
-            var vid         = document.getElementById('video-testemunho');
-            var overlay     = document.getElementById('video-overlay');
-            var wrapper     = document.getElementById('video-wrapper');
-            var playBtn     = document.getElementById('video-play-btn');
-            var fill        = document.getElementById('video-progress-fill');
-            var progressBar = document.getElementById('video-progress-bar');
-            var iconPause   = document.getElementById('icon-pause');
-            var iconPlay    = document.getElementById('icon-play');
+            
+            function setupVideoPlayer(config) {
+                var vid         = document.getElementById(config.videoId);
+                var overlay     = document.getElementById(config.overlayId);
+                var wrapper     = document.getElementById(config.wrapperId);
+                var playBtn     = document.getElementById(config.playBtnId);
+                var fill        = document.getElementById(config.fillId);
+                var progressBar = document.getElementById(config.progressBarId);
+                var iconPause   = document.getElementById(config.iconPauseId);
+                var iconPlay    = document.getElementById(config.iconPlayId);
 
-            if (!vid) return;
+                if (!vid) return;
 
-            /* Mudo absoluto — garante autoplay em iOS */
-            vid.muted = true;
-            vid.defaultMuted = true;
+                /* Mudo absoluto — garante autoplay em iOS */
+                vid.muted = true;
+                vid.defaultMuted = true;
 
-            function atualizarInterface(playing) {
-                if (iconPause && iconPlay) {
-                    iconPause.style.display = playing ? '' : 'none';
-                    iconPlay.style.display  = playing ? 'none' : '';
+                function atualizarInterface(playing) {
+                    if (iconPause && iconPlay) {
+                        iconPause.style.display = playing ? '' : 'none';
+                        iconPlay.style.display  = playing ? 'none' : '';
+                    }
                 }
-            }
 
-            /* Tenta play agressivamente com retry a cada 500ms */
-            function forceAutoplay() {
-                vid.play().then(function() {
-                    atualizarInterface(true);
-                }).catch(function() {
-                    setTimeout(forceAutoplay, 500);
+                /* Tenta play agressivamente com retry a cada 500ms */
+                function forceAutoplay() {
+                    vid.play().then(function() {
+                        atualizarInterface(true);
+                    }).catch(function() {
+                        setTimeout(forceAutoplay, 500);
+                    });
+                }
+
+                /* Inicia carregamento e play */
+                vid.load();
+                forceAutoplay();
+
+                /* ---- Barra de progresso ---- */
+                vid.addEventListener('timeupdate', function() {
+                    if (vid.duration && fill) {
+                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                    }
                 });
+
+                if (progressBar) {
+                    progressBar.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var rect = progressBar.getBoundingClientRect();
+                        var ratio = (e.clientX - rect.left) / rect.width;
+                        if (vid.duration) vid.currentTime = ratio * vid.duration;
+                    });
+                }
+
+                /* ---- Botão play/pause ---- */
+                if (playBtn) {
+                    playBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                /* ---- Clicar em qualquer área do wrapper ---- */
+                if (wrapper) {
+                    wrapper.addEventListener('click', function(e) {
+                        if (overlay && overlay.style.display !== 'none' && overlay.contains(e.target)) return;
+                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                /* ---- Overlay: ativa som ao clicar ---- */
+                if (overlay) {
+                    overlay.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        vid.muted = false;
+                        vid.currentTime = 0;
+                        vid.play();
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    });
+                }
+
+                /* ---- IntersectionObserver: pausa ao sair da tela ---- */
+                var vObs = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        forceAutoplay();
+                    } else {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }, { threshold: 0.2 });
+
+                vObs.observe(vid);
             }
 
-            /* Inicia carregamento e play */
-            vid.load();
-            forceAutoplay();
-
-            /* ---- Barra de progresso ---- */
-            vid.addEventListener('timeupdate', function() {
-                if (vid.duration && fill) {
-                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
-                }
+            // Inicializando Vídeo Principal da Hero Section
+            setupVideoPlayer({
+                videoId: 'hero-video',
+                overlayId: 'hero-video-overlay',
+                wrapperId: 'hero-video-wrapper',
+                playBtnId: 'hero-play-btn',
+                fillId: 'hero-progress-fill',
+                progressBarId: 'hero-progress-bar',
+                iconPauseId: 'hero-icon-pause',
+                iconPlayId: 'hero-icon-play'
             });
 
-            if (progressBar) {
-                progressBar.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    var rect = progressBar.getBoundingClientRect();
-                    var ratio = (e.clientX - rect.left) / rect.width;
-                    if (vid.duration) vid.currentTime = ratio * vid.duration;
-                });
-            }
-
-            /* ---- Botão play/pause ---- */
-            if (playBtn) {
-                playBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (vid.paused) {
-                        vid.play();
-                        atualizarInterface(true);
-                    } else {
-                        vid.pause();
-                        atualizarInterface(false);
-                    }
-                });
-            }
-
-            /* ---- Clicar em qualquer área do wrapper ---- */
-            if (wrapper) {
-                wrapper.addEventListener('click', function(e) {
-                    if (overlay && overlay.style.display !== 'none' && overlay.contains(e.target)) return;
-                    if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
-                    if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
-                    if (vid.paused) {
-                        vid.play();
-                        atualizarInterface(true);
-                    } else {
-                        vid.pause();
-                        atualizarInterface(false);
-                    }
-                });
-            }
-
-            /* ---- Overlay: ativa som ao clicar ---- */
-            if (overlay) {
-                overlay.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    vid.muted = false;
-                    vid.currentTime = 0;
-                    vid.play();
-                    overlay.style.display = 'none';
-                    atualizarInterface(true);
-                });
-            }
-
-            /* ---- IntersectionObserver: pausa ao sair da tela ---- */
-            var vObs = new IntersectionObserver(function(entries) {
-                if (entries[0].isIntersecting) {
-                    forceAutoplay();
-                } else {
-                    vid.pause();
-                    atualizarInterface(false);
-                }
-            }, { threshold: 0.2 });
-
-            vObs.observe(vid);
+            // Inicializando Vídeo de Testemunho
+            setupVideoPlayer({
+                videoId: 'video-testemunho',
+                overlayId: 'video-overlay',
+                wrapperId: 'video-wrapper',
+                playBtnId: 'video-play-btn',
+                fillId: 'video-progress-fill',
+                progressBarId: 'video-progress-bar',
+                iconPauseId: 'icon-pause',
+                iconPlayId: 'icon-play'
+            });
 
         })();
     </script>
