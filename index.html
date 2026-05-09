@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Guia Cash | Controle Financeiro Inteligente</title>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
     
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -32,19 +34,17 @@
             --pf-base: #5c4bdf;
             --pf-light: #8670ff;
 
-            /* Paleta: Amarelo-alaranjado */
-            --div-dark: #d68910; 
+            /* Paleta: Amarelo-alaranjado (Mesclada) */
+            --div-dark: #db941b; 
             --div-base: #f5a722;
             --div-light: #fbbb4f;
             --div-border: #fdb438;
 
-            /* Gradients Globais */
+            /* Gradients Globais e de Seções */
             --pf-pj-gradient: linear-gradient(90deg, var(--pf-base), var(--pj-base));
             --debt-gradient: linear-gradient(90deg, #db941b, #f5a722, #fbbb4f);
             --pj-gradient: linear-gradient(90deg, #006974, #009196, #18b6b5);
             --brand-gradient: linear-gradient(135deg, var(--pj-base), var(--pf-base));
-
-            /* Sessão 3 */
             --bg-sessao-3: linear-gradient(135deg, var(--div-dark), var(--div-base), var(--div-light));
             --text-highlight: linear-gradient(90deg, #d68910, #f5a722, #fbbb4f);
         }
@@ -55,7 +55,9 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
-            overflow-x: clip;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden; 
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
@@ -89,7 +91,7 @@
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
         /* =========================================
-           SEÇÃO 1: HERO SECTION 
+           SEÇÃO 1 E 2: ESTILOS
         ========================================= */
         .top-gradient-line {
             position: absolute;
@@ -101,7 +103,7 @@
             z-index: 1000;
         }
 
-        #sessao-hero { 
+        .hero { 
             text-align: center; 
             padding-top: 40px; 
             padding-bottom: 75px; 
@@ -111,56 +113,52 @@
         }
         
         .hero-logo { 
-            max-width: 113px; 
-            margin-bottom: 9px; 
+            max-width: 98px; 
+            margin-bottom: 24px; 
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
         }
 
         .main-headline { 
-            max-width: 1100px; 
+            max-width: 1000px; 
             margin: 0 auto 24px; 
             color: #363636; 
             letter-spacing: -0.04em;
             font-weight: 800; 
-            line-height: 1.1;
-            font-size: 4.2rem;
+            line-height: 1.2;
+            font-size: 3.2rem;
         }
 
-        /* Puzzle Component */
         .puzzle-wrapper {
             display: inline-flex;
-            align-items: center; 
-            height: 72px; 
+            align-items: flex-start; 
+            height: 56px; 
             background: linear-gradient(90deg, var(--pf-base) 0%, var(--pj-base) 50%, var(--div-base) 100%);
-            border-radius: 14px;
-            overflow: visible; 
-            margin: 0 10px;
+            border-radius: 12px;
+            overflow: hidden; 
+            margin: 0 8px;
             vertical-align: middle;
-            transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .puzzle-text {
             display: flex;
             align-items: center;
             height: 100%; 
-            padding: 0 14px; 
+            padding: 0 12px; 
             color: #FFFFFF;
             font-weight: 900;
-            font-size: 3.5rem;
-            line-height: 1;
+            font-size: 2.8rem;
         }
 
         .puzzle-joint {
-            width: 28px; 
-            height: 72px; 
+            width: 24px; 
+            height: 56px; 
             margin: 0 -4px; 
             flex-shrink: 0;
             z-index: 2;
-            overflow: visible;
         }
 
-        /* Subheadlines e Hook */
         .hero .subheadline { 
             max-width: 900px; 
             margin: 0 auto 32px; 
@@ -178,18 +176,17 @@
             line-height: 1.3; 
         }
         
-        /* Video Container Principal */
+        /* Video Player Wrapper */
         .video-container {
             width: 100%; 
             max-width: 1144px; 
             aspect-ratio: 16/9; 
             margin: 0 auto 40px;
-            background: #0F172A; 
+            background: #000000; 
             border-radius: 16px;
             display: flex; 
             align-items: center; 
             justify-content: center;
-            cursor: pointer; 
             position: relative; 
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -197,17 +194,27 @@
             outline: 1px solid var(--border-light);
         }
 
-        #hero-video {
+        /* Camada clicável que cobre o vídeo inteiro */
+        .video-click-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            display: block;
-            background-color: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            cursor: pointer;
+            background: transparent; 
+        }
+        
+        .unmute-btn {
+            background: var(--bg-white); color: var(--pj-dark); padding: 12px 24px; border-radius: 50px;
+            font-weight: 700; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* =========================================
-            SEÇÃO 2: AUDIÊNCIA
-        ========================================= */
         #sessao-audiencia { padding-top: 90px; padding-bottom: 72px; position: relative; }
 
         .section-title { text-align: center; margin-bottom: 40px; }
@@ -248,12 +255,7 @@
             margin: 0 auto;
         }
 
-        .audience-col {
-            display: flex;
-            flex-direction: column;
-            flex: 1; 
-        }
-        
+        .audience-col { display: flex; flex-direction: column; flex: 1; }
         .audience-col:not(:last-child) { margin-right: 16px; }
 
         .audience-wrapper-mobile {
@@ -280,7 +282,6 @@
         }
         
         .audience-col .role-card:not(:last-child) { margin-bottom: 14px; }
-        
         .audience-wrapper-mobile .role-card { margin-bottom: 10px; width: 90%; }
         .audience-wrapper-mobile .role-card:last-child { margin-bottom: 0; }
 
@@ -290,23 +291,17 @@
             background: rgba(92, 75, 223, 0.1); 
             width: 44px; height: 44px; 
             border-radius: 8px;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            flex-shrink: 0; 
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; 
         }
 
         .role-card i { 
             background: var(--pf-pj-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.25rem; 
-            line-height: 1.5; 
-            padding-top: 2px; 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 1.25rem; line-height: 1.5; padding-top: 2px; 
         }
 
         /* =========================================
-            SEÇÃO 3: VERDADES SECRETAS
+           SEÇÃO 3: ESTILOS (VERDADES SECRETAS)
         ========================================= */
         #sessao-problema {
             background: var(--bg-sessao-3);
@@ -356,7 +351,7 @@
             line-height: 1.6;
         }
 
-        /* Animação Truque de Camadas */
+        /* ANIMAÇÃO TRUQUE DE CAMADAS (Sessão 3) */
         @keyframes tornado-base-motion {
             0% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
             50% { transform: rotate(34deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
@@ -421,7 +416,7 @@
         }
 
         /* =========================================
-            CONTROLE DE RESPONSIVIDADE
+           CONTROLE DE RESPONSIVIDADE CONSOLIDADO
         ========================================= */
         .mobile-only { display: none !important; }
         .desktop-only { display: block !important; }
@@ -435,53 +430,24 @@
             .audience-wrapper-desktop.desktop-only { display: none !important; }
             .audience-wrapper-mobile.mobile-only { display: flex !important; }
             
+            /* Ajustes Hero e Audiência */
             section { padding: 50px 0; }
+            .hero { padding-top: 30px; padding-bottom: 60px; }
+            .main-headline { font-size: 1.95rem; line-height: 1.4; }
             
-            #sessao-audiencia { padding-bottom: 88px !important; } 
-            
-            #sessao-hero { padding-top: 27px !important; padding-bottom: 60px; }
-
-            #sessao-hero .main-headline { 
-                font-size: 2.01rem !important; 
-                line-height: 1.07 !important; 
-                margin-bottom: 32px !important; 
-            }
-            
-            #sessao-hero .hero-logo { 
-                margin-bottom: 15px !important; 
-            }
-            
-            #sessao-hero .puzzle-wrapper { 
-                height: 48px !important; 
-                margin: 6px auto; 
-                transform: none; 
-                border-radius: 12px; 
-            }
-            #sessao-hero .puzzle-text { 
-                font-size: 1.92rem !important; 
-                padding: 0 8px !important; 
-            }
-            #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
+            .puzzle-wrapper { height: 44px; margin: 6px auto; transform: none; }
+            .puzzle-text { font-size: 1.8rem; padding: 0 10px; }
+            .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
 
             .hero .subheadline.mobile-only { 
-                font-size: 1.0rem; 
-                line-height: 1.4;
-                margin-left: -15px; 
-                margin-right: -15px;
-                max-width: none; 
-                margin-bottom: 24px;
+                font-size: 1.0rem; line-height: 1.4; margin-left: -15px; margin-right: -15px;
+                max-width: none; margin-bottom: 24px;
             }
 
-            .hero .video-hook {
-                font-size: 0.85rem; 
-                line-height: 1.25; 
-                padding: 0 10px;
-                margin-bottom: 12px;
-            }
-
+            .hero .video-hook { font-size: 0.85rem; line-height: 1.25; padding: 0 10px; margin-bottom: 12px; }
             .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
 
-            #sessao-audiencia-content { padding-top: 63px; } 
+            #sessao-audiencia { padding-top: 63px; padding-bottom: 48px; } 
             .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
             .typewriter-container { padding: 0 25px; } 
             
@@ -492,7 +458,7 @@
             #typewriter-text { font-size: 1.15rem; }
             h2 { font-size: 1.8rem; }
 
-            /* Seção 3 mobile */
+            /* Ajustes Seção 3 */
             .secret-card {
                 padding: 35px 20px; 
                 border-radius: 20px;
@@ -501,474 +467,43 @@
             }
 
             .headline { font-size: 1.6rem; }
-            .normal-text { 
-                font-size: 1rem; 
-                letter-spacing: -0.01em; 
-            }
+            .normal-text { font-size: 1rem; letter-spacing: -0.01em; }
 
             .secret-image-wrapper {
-                margin-left: -40px; 
-                margin-right: -40px;
-                margin-top: 85px; 
-                margin-bottom: 35px;
+                margin-left: -40px; margin-right: -40px; margin-top: 85px; margin-bottom: 35px;
             }
 
-            .tornado-overlay {
-                width: 39.33%; 
-                top: -17.6%; 
-                right: 15.72%; 
-            }
+            .tornado-overlay { width: 39.33%; top: -17.6%; right: 15.72%; }
         }
-
-        /* AJUSTES EXCLUSIVOS PARA DESKTOP */
-        @media (min-width: 769px) {
-            #sessao-audiencia { padding-bottom: 120px !important; } 
-            
-            .hero-logo { 
-                max-width: 150px !important; 
-                margin-bottom: 32px !important;
-            }
-
-            .hero .main-headline { 
-                margin-bottom: 40px !important;
-            }
-            .hero .subheadline.desktop-only { 
-                font-size: 1.5rem !important;
-                margin-bottom: 32px !important;
-                max-width: 1050px !important;
-            }
-            .hero .video-hook { 
-                font-size: 1.33rem !important;
-                margin-bottom: 12px !important;
-                white-space: nowrap !important;
-                max-width: none !important;
-            }
-        }
-
-        /* =========================================
-            SEÇÃO 4: COMPARATIVO
-        ========================================= */
-        #sessao-comparativo {
-            background-color: var(--bg-white);
-            padding-top: 120px;
-            padding-bottom: 80px;
-        }
-
-        .comparativo-headline {
-            text-align: center;
-            font-size: 2.4rem;
-            font-weight: 800;
-            line-height: 1.3;
-            letter-spacing: -0.03em;
-            color: var(--text-dark);
-            max-width: 100%;
-            margin: 0 auto 48px;
-        }
-
-        /* grid full-width dentro do container */
-        .comparativo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
-        .comp-card {
-            border-radius: 24px;
-            padding: 36px 36px 40px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .comp-card-gray { background-color: #A5A5A5; }
-
-        .comp-card-brand {
-            background: linear-gradient(145deg, #5c4bdf 0%, #009196 100%);
-        }
-
-        .comp-card-title {
-            font-size: 1.45rem;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.02em;
-            text-align: center;
-            margin-bottom: 28px;
-            color: #FFFFFF;
-        }
-
-        .comp-item {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.22);
-        }
-
-        .comp-item:last-child { border-bottom: none; padding-bottom: 0; }
-        .comp-item:first-of-type { padding-top: 0; }
-
-        .comp-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            background-color: rgba(255,255,255,0.18);
-        }
-
-        .comp-icon i {
-            font-size: 0.8rem;
-            color: #FFFFFF !important;
-            -webkit-text-fill-color: #FFFFFF !important;
-            background: none !important;
-            -webkit-background-clip: unset !important;
-        }
-
-        .comp-item-text {
-            font-size: 0.95rem;
-            font-weight: 600;
-            line-height: 1.5;
-            color: #FFFFFF;
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            #sessao-comparativo { padding-top: 70px; padding-bottom: 50px; }
-            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; white-space: normal; }
-            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; margin-left: -2px; margin-right: -2px; }
-            .comp-card { padding: 30px 24px 34px; }
-            .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
-            .comp-item-text { font-size: 0.96rem; }
-            .comp-item { padding: 16px 0; gap: 8px; }
-        }
-
-        @media (min-width: 769px) {
-            .comparativo-headline .comp-headline-line1 { white-space: nowrap; }
-        }
-
-        /* =========================================
-            SEÇÃO 4: CTA FINAL + SEÇÃO 5
-        ========================================= */
-        .comparativo-cta-wrapper {
-            margin-top: 32px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Seção 5: base (mobile-first) */
-        #sessao-teste-imagem {
-            background-color: #FFFFFF;
-            padding-top: 20px;
-            padding-bottom: 60px;
-        }
-
-        #sessao-teste-imagem .container {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        #sessao-teste-imagem .demo-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Seção 5: overrides exclusivos desktop */
-        @media (min-width: 769px) {
-            #sessao-teste-imagem {
-                padding: 80px 0;
-            }
-            #sessao-teste-imagem .container {
-                padding-left: 24px;
-                padding-right: 24px;
-            }
-            #sessao-teste-imagem .demo-img {
-                display: block;
-                margin: 0 auto;
-                max-width: 640px;
-                width: 90%;
-                height: auto;
-            }
-        }
-        /* =========================================
-            SEÇÃO 6: TESTEMUNHOS & VÍDEOS GLOBAIS
-        ========================================= */
-        #sessao-testemunhos {
-            background-color: #009196;
-            padding: 80px 0 60px;
-        }
-
-        .testemunhos-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .testemunhos-titulo {
-            font-size: 2.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.03em;
-            color: #FFFFFF;
-            margin-bottom: 12px;
-        }
-
-        .testemunhos-subtitulo {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 0;
-        }
-
-        /* Label acima de cada item — traço vertical + sombra esfumada + fonte 20% maior */
-        .testemunho-label {
-            font-size: 1.14rem; /* +20% de 0.95rem */
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 10px;
-            padding-left: 14px;
-            position: relative;
-            display: inline-block;
-            text-shadow: 2px 2px 12px rgba(0,0,0,0.18), 0 0 32px rgba(0,0,0,0.10);
-        }
-
-        .testemunho-label::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            border-radius: 2px;
-            background: linear-gradient(to bottom, #FFFFFF 60%, rgba(255,255,255,0));
-        }
-
-        /* Imagens — border-radius 30% mais arredondado: 16px → ~21px */
-        .testemunho-img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 21px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-        }
-
-        /* Wrapper do vídeo */
-        .testemunho-video-wrapper {
-            position: relative;
-            width: 100%;
-            border-radius: 21px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-            background: #000;
-            aspect-ratio: 9/16;
-            cursor: pointer;
-        }
-
-        .testemunho-video-wrapper video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ---- Overlay "Seu vídeo já começou" (Usado tanto na Hero quanto nos Depoimentos) ---- */
-        .video-mute-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 210px;
-            max-width: 270px;
-            width: 70%;
-            padding: 18px 22px 20px;
-            background: rgba(0, 145, 150, 0.42);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            z-index: 20;
-            pointer-events: auto;
-            transition: opacity 0.3s ease;
-        }
-
-        .video-mute-overlay.hidden { display: none; }
-
-        /* Vídeo sem fundo preto enquanto carrega */
-        #video-testemunho {
-            object-fit: cover;
-            background-color: transparent;
-        }
-
-        .overlay-text-top {
-            color: #FFFFFF;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.2;
-            margin: 0;
-        }
-
-        .overlay-text-bottom {
-            color: #FFFFFF;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.2;
-            margin: 0;
-        }
-
-        .mute-icon {
-            width: 52px;
-            height: 52px;
-        }
-
-        /* ---- Controles inferiores do vídeo ---- */
-        .video-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            z-index: 15;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        /* Botão play/pause */
-        .video-play-btn {
-            width: 32px;
-            height: 32px;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 12px;
-            flex-shrink: 0;
-        }
-
-        .video-play-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: #FFFFFF;
-        }
-
-        /* Barra de progresso — só o fill aparece, sem track visível */
-        .video-progress-bar {
-            width: 100%;
-            height: 12px;
-            background: transparent;
-            border-radius: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            left: 0;
-            bottom: 0;
-        }
-
-        .video-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: #18b6b5;
-            border-radius: 0;
-            transition: width 0.25s linear;
-        }
-
-        /* ---- GRID MOBILE (1 coluna) ---- */
-        .testemunhos-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        .testemunho-item { width: 100%; }
-
-        /* CTA seção 6 — degradê violeta invertido: claro → escuro */
-        .btn-violet {
-            background: linear-gradient(90deg, #8670ff, #5c4bdf, #5242d7) !important;
-            box-shadow: 0 10px 25px rgba(82, 66, 215, 0.35) !important;
-        }
-        .btn-violet:hover {
-            box-shadow: 0 15px 35px rgba(134, 112, 255, 0.45) !important;
-        }
-
-        /* CTA wrapper — espaçamento fixo em relação à última imagem */
-        .testemunhos-cta-wrapper {
-            margin-top: 48px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* ---- GRID DESKTOP (2x2) ---- */
-        @media (min-width: 769px) {
-            #sessao-testemunhos { padding: 90px 0 80px; }
-
-            .testemunhos-titulo { font-size: 2.6rem; }
-
-            .testemunhos-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-                max-width: 100%;
-            }
-
-            /* Reordenação desktop via order */
-            .testemunho-item-video  { order: 2; }
-            .testemunho-item-img1   { order: 1; }
-            .testemunho-item-img2   { order: 3; }
-            .testemunho-item-img3   { order: 4; }
-
-            /* Redução 40% — só no desktop, sem afetar mobile */
-            .testemunho-item {
-                max-width: 60%;
-                margin: 0 auto;
-            }
-        }
-
     </style>
 </head>
 <body>
 
+    <!-- LINHA DE TOPO -->
     <div class="top-gradient-line"></div>
 
-    <!-- ==========================================
-         SEÇÃO 1: HERO
-    =========================================== -->
-    <section id="sessao-hero" class="hero container">
+    <!-- =========================================
+         SEÇÃO 1 E 2: HERO E AUDIÊNCIA
+    ========================================= -->
+
+    <section class="hero container">
         
         <img src="guia-cash-logo.png" alt="Guia Cash" class="hero-logo">
         
         <h1 class="main-headline">
+            <!-- VERSÃO DESKTOP -->
             <span class="desktop-only">
                 Assuma o controle total das suas <br>
                 finanças 
                 
                 <span class="puzzle-wrapper">
                     <span class="puzzle-text">PF</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none">
-                        <path d="M 12,0 L 12,26 A 10,10 0 1 1 12,46 L 12,72" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">PJ</span>
-                    <svg class="puzzle-joint" viewBox="0 0 24 72" fill="none">
-                        <path d="M 12,0 L 12,26 A 10,10 0 1 1 12,46 L 12,72" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="butt"/>
+                    <svg class="puzzle-joint" viewBox="0 0 24 56" fill="none">
+                        <path d="M 12,-5 L 12,18 A 10,10 0 1 1 12,38 L 12,61" stroke="#FFFFFF" stroke-width="3" stroke-linecap="butt"/>
                     </svg>
                     <span class="puzzle-text">Dívidas</span>
                 </span> 
@@ -977,6 +512,7 @@
                 dinheiro sobrando todo mês
             </span>
 
+            <!-- VERSÃO MOBILE -->
             <span class="mobile-only">
                 Assuma o controle <br>
                 total das suas finanças <br>
@@ -998,55 +534,46 @@
             </span>
         </h1>
         
+        <!-- SUBHEADLINE DESKTOP -->
         <p class="subheadline desktop-only">
-            Organização que se adapta à vida corrida e<br>
-            <span style="white-space: nowrap;">Certeza frente oscilações do negócio e família num só lugar, automático e simples</span><br>
+            Organização que se adapta à vida corrida e clareza em meio às oscilações<br>
+            Com família e negócio separados, num só lugar, automático e simples<br>
             Antes que mais uma decisão no escuro te prenda ao banco por anos
         </p>
 
+        <!-- SUBHEADLINE MOBILE -->
         <p class="subheadline mobile-only">
             Organização que se adapta à vida corrida e<br>
-            certeza frente oscilações do negócio e família<br>
-            num só lugar, automático e simples<br> 
-            Antes que mais uma decisão no escuro<br> 
-            te prenda ao banco por anos 
+            clareza em meio às oscilações. Com família e<br>
+            negócio separados, num só lugar, automático<br>
+            e simples. Antes que mais uma decisão no<br>
+            <span style="white-space: nowrap;">escuro te prenda ao banco por anos</span>
         </p>
         
+        <!-- VIDEO HOOK -->
         <p class="video-hook">
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
-        <!-- Video Container Principal com Controles Idênticos ao Depoimento -->
-        <div class="video-container" id="hero-video-wrapper">
-            <video id="hero-video" src="video-principal.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+        <!-- VIDEO CONTAINER ATUALIZADO (100% Clicável) -->
+        <div class="video-container" id="vsl-wrapper">
             
-            <div class="video-mute-overlay" id="hero-video-overlay">
-                <p class="overlay-text-top">Seu vídeo já começou</p>
-                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
-                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                </svg>
-                <p class="overlay-text-bottom">Clique para ouvir</p>
+            <!-- Video Player Base - (Pode substituir pelo src do seu vídeo .mp4) -->
+            <video id="main-video" autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                <source src="" type="video/mp4">
+            </video>
+
+            <!-- Camada Invisível Clicável (Cobre o vídeo 100%) -->
+            <div class="video-click-overlay" id="video-overlay">
+                <div class="unmute-btn"><i class="fa-solid fa-volume-xmark"></i> Seu vídeo já começou... Clique para liberar o som</div>
             </div>
 
-            <div class="video-controls" id="hero-video-controls">
-                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
-                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
-                </button>
-                <div class="video-progress-bar" id="hero-progress-bar">
-                    <div class="video-progress-fill" id="hero-progress-fill"></div>
-                </div>
-            </div>
         </div>
 
         <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
-    <!-- ==========================================
-         SEÇÃO 2: AUDIÊNCIA
-    =========================================== -->
+    <!-- SESSÃO: AUDIÊNCIA -->
     <section id="sessao-audiencia" class="bg-light">
         <div class="container">
             <h2 class="section-title">O Guia Cash é para quem?</h2>
@@ -1089,9 +616,10 @@
         </div>
     </section>
 
-    <!-- ==========================================
+    <!-- =========================================
          SEÇÃO 3: VERDADES SECRETAS
-    =========================================== -->
+    ========================================= -->
+
     <section id="sessao-problema">
         <div class="container">
             <div class="secret-card">
@@ -1100,103 +628,47 @@
                     Cada dia que passa sua situação financeira está mais desafiadora… <br> 
                     e você sabe disso
                 </h2>
-                <p class="normal-text">Toda semana você diz para si mesmo: "vou me organizar financeiramente", até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
+                <p class="normal-text">Toda semana você diz para si mesmo: “vou me organizar financeiramente”, até começa a notar alguns gastos, baixa uma planilha nova, vê vídeos de coaches motivacionais, jura que vai cortar o desnecessário.</p>
 
                 <div class="secret-image-wrapper">
                     <img src="tornado.png" alt="Sombra do Tornado" class="tornado-overlay tornado-base">
                     <img src="tornado.png" alt="Núcleo do Tornado" class="tornado-overlay tornado-core">
                     
+                    <!-- Lembre-se de renomear a imagem no GitHub para minúsculo/traços -->
                     <img src="verdades-secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
 
-                <p class="normal-text">Mas aí chega no final da semana, você está cansado, focado no próximo trabalho e dinheiro para entrar e pensa: "vou dar um jeito, semana que vem vai" E o ciclo vicioso se repete. Semana pós-semana, mês após mês.</p>
+                <p class="normal-text">Mas aí chega no final da semana, você está cansado, focado no próximo trabalho e dinheiro para entrar e pensa: “vou dar um jeito, semana que vem vai” E o ciclo vicioso se repete. Semana pós-semana, mês após mês.</p>
                 <p class="highlight-text">Se todo mês termina igual, o problema não é só o dinheiro, não?!</p>
                 <p class="normal-text">Viver com a sensação constante de que está perdendo o controle. De que, apesar de todo o esforço no trabalho, nunca consegue sair do lugar financeiramente, deve ser angustiante.</p>
             </div>
         </div>
     </section>
 
-    <!-- ==========================================
-         SEÇÃO 4: COMPARATIVO
-    =========================================== -->
-    <section id="sessao-comparativo">
-        <div class="container">
-            <h2 class="comparativo-headline"><span class="comp-headline-line1">Porque você ainda não tem controle financeiro real</span><br>(vida pessoal e negócio)</h2>
-
-            <div class="comparativo-grid">
-
-                <!-- Card Cinza: Métodos Tradicionais -->
-                <div class="comp-card comp-card-gray">
-                    <h3 class="comp-card-title">Métodos tradicionais</h3>
-
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
-                        <p class="comp-item-text">Começa perdido, com tantas funções, números e desperdiça tempo</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
-                        <p class="comp-item-text">Exige outros meios que não se comunicam para gerir as finanças do negócio, contábil, pessoal e dívidas.</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
-                        <p class="comp-item-text">Chance de dar errado assustadoramente alta. Se não for todo dia, não gera resultado, se não for 1h por semana, não funciona.</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
-                        <p class="comp-item-text">Genérico para qualquer pessoa que quer melhorar as finanças</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
-                        <p class="comp-item-text">Discurso de mentalidade ótimo, mas apoio ferramental de execução ruim.</p>
-                    </div>
-                </div>
-
-                <!-- Card Brand: Método Guia Cash -->
-                <div class="comp-card comp-card-brand">
-                    <h3 class="comp-card-title">Método Guia Cash</h3>
-
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Videografia do todo, com tradução dos números via imagens e escrita descontraída e marcante com IA</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Controle global automático - pessoal, negócio e dívidas - numa visão única integrada que conversa com o sistema do contábil e dá diagnóstico.</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Se adapta à vida de profissionais ocupados, não o contrário. Controle em 15min por semana e gestão colaborativa</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Focado à realidade de empreendedores que têm uma PJ (negócio) e PF (família)</p>
-                    </div>
-                    <div class="comp-item">
-                        <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
-                        <p class="comp-item-text">Sua capacidade de execução e uso duradouro é o que prezamos</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="comparativo-cta-wrapper">
-                <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- ==========================================
-         SEÇÃO 5: DEMONSTRAÇÃO
-    =========================================== -->
-    <section id="sessao-teste-imagem">
-        <div class="container">
-            <img src="demo.png" alt="Demonstração do Guia Cash" class="demo-img">
-        </div>
-    </section>
-
+    <!-- =========================================
+         SCRIPTS FUNCIONAIS
+    ========================================= -->
     <script>
-        const phrases = [
+        // 1. SCRIPT DE CONTROLE DO VÍDEO (CLIQUE EM QUALQUER LUGAR)
+        const videoOverlay = document.getElementById('video-overlay');
+        const mainVideo = document.getElementById('main-video');
+
+        if (videoOverlay) {
+            videoOverlay.addEventListener('click', function() {
+                // Esconde todo o botão/overlay liberando o click no video original
+                this.style.display = 'none';
+                
+                // Remove o mudo e recomeça (Se for tag nativa <video>)
+                if (mainVideo) {
+                    mainVideo.muted = false;
+                    mainVideo.currentTime = 0; 
+                    mainVideo.play();
+                }
+            });
+        }
+
+        // 2. SCRIPT DO SLIDER DA AUDIÊNCIA
+        const phrases =[
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
             { text: "Tem medo de olhar o extrato/fatura e sente vergonha da situação financeira", color: "color-pf-only" },
             { text: "O dinheiro está afetando o relacionamento", color: "color-pf-only" },
@@ -1285,214 +757,5 @@
 
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
-    
-    <!-- ==========================================
-         SEÇÃO 6: TESTEMUNHOS
-    =========================================== -->
-    <section id="sessao-testemunhos">
-        <div class="container">
-
-            <div class="testemunhos-header">
-                <h2 class="testemunhos-titulo">Será que o Guia Cash funciona?</h2>
-                <p class="testemunhos-subtitulo">Veja com seus próprios olhos e tire suas conclusões</p>
-            </div>
-
-            <div class="testemunhos-grid">
-
-                <!-- Vídeo — top-right no desktop, primeiro no mobile -->
-                <div class="testemunho-item testemunho-item-video">
-                    <p class="testemunho-label">Antonio Fagnani - Empresário</p>
-                    <div class="testemunho-video-wrapper" id="video-wrapper">
-
-                        <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
-
-                        <div class="video-mute-overlay" id="video-overlay">
-                            <p class="overlay-text-top">Seu vídeo já começou</p>
-                            <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
-                                <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                                <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
-                            </svg>
-                            <p class="overlay-text-bottom">Clique para ouvir</p>
-                        </div>
-
-                        <div class="video-controls" id="video-controls">
-                            <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
-                                <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-                                <svg id="icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
-                            </button>
-                            <div class="video-progress-bar" id="video-progress-bar">
-                                <div class="video-progress-fill" id="video-progress-fill"></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Imagem 1 — top-left no desktop, segunda no mobile -->
-                <div class="testemunho-item testemunho-item-img1">
-                    <p class="testemunho-label">Fernanda Cunha - Loja virtual</p>
-                    <img src="imagem-testemunho-um.jpeg" alt="Testemunho Fernanda Cunha" class="testemunho-img">
-                </div>
-
-                <!-- Imagem 2 — bot-left no desktop, terceira no mobile -->
-                <div class="testemunho-item testemunho-item-img2">
-                    <p class="testemunho-label">Andreia Stankiewicz - Dentista</p>
-                    <img src="imagem-testemunho-dois.jpeg" alt="Testemunho Andreia Stankiewicz" class="testemunho-img">
-                </div>
-
-                <!-- Imagem 3 — bot-right no desktop, quarta no mobile -->
-                <div class="testemunho-item testemunho-item-img3">
-                    <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
-                    <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
-                </div>
-
-            </div>
-
-            <div class="testemunhos-cta-wrapper">
-                <a href="#oferta" class="btn-cta btn-gradient btn-violet">Quero ter controle</a>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- JS GLOBAL DOS VÍDEOS -->
-    <script>
-        (function() {
-            
-            function setupVideoPlayer(config) {
-                var vid         = document.getElementById(config.videoId);
-                var overlay     = document.getElementById(config.overlayId);
-                var wrapper     = document.getElementById(config.wrapperId);
-                var playBtn     = document.getElementById(config.playBtnId);
-                var fill        = document.getElementById(config.fillId);
-                var progressBar = document.getElementById(config.progressBarId);
-                var iconPause   = document.getElementById(config.iconPauseId);
-                var iconPlay    = document.getElementById(config.iconPlayId);
-
-                if (!vid) return;
-
-                /* Mudo absoluto — garante autoplay em iOS */
-                vid.muted = true;
-                vid.defaultMuted = true;
-
-                function atualizarInterface(playing) {
-                    if (iconPause && iconPlay) {
-                        iconPause.style.display = playing ? '' : 'none';
-                        iconPlay.style.display  = playing ? 'none' : '';
-                    }
-                }
-
-                /* Tenta play agressivamente com retry a cada 500ms */
-                function forceAutoplay() {
-                    vid.play().then(function() {
-                        atualizarInterface(true);
-                    }).catch(function() {
-                        setTimeout(forceAutoplay, 500);
-                    });
-                }
-
-                /* Inicia carregamento e play */
-                vid.load();
-                forceAutoplay();
-
-                /* ---- Barra de progresso ---- */
-                vid.addEventListener('timeupdate', function() {
-                    if (vid.duration && fill) {
-                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
-                    }
-                });
-
-                if (progressBar) {
-                    progressBar.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        var rect = progressBar.getBoundingClientRect();
-                        var ratio = (e.clientX - rect.left) / rect.width;
-                        if (vid.duration) vid.currentTime = ratio * vid.duration;
-                    });
-                }
-
-                /* ---- Botão play/pause ---- */
-                if (playBtn) {
-                    playBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        if (vid.paused) {
-                            vid.play();
-                            atualizarInterface(true);
-                        } else {
-                            vid.pause();
-                            atualizarInterface(false);
-                        }
-                    });
-                }
-
-                /* ---- Clicar em qualquer área do wrapper ---- */
-                if (wrapper) {
-                    wrapper.addEventListener('click', function(e) {
-                        if (overlay && overlay.style.display !== 'none' && overlay.contains(e.target)) return;
-                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
-                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
-                        if (vid.paused) {
-                            vid.play();
-                            atualizarInterface(true);
-                        } else {
-                            vid.pause();
-                            atualizarInterface(false);
-                        }
-                    });
-                }
-
-                /* ---- Overlay: ativa som ao clicar ---- */
-                if (overlay) {
-                    overlay.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        vid.muted = false;
-                        vid.currentTime = 0;
-                        vid.play();
-                        overlay.style.display = 'none';
-                        atualizarInterface(true);
-                    });
-                }
-
-                /* ---- IntersectionObserver: pausa ao sair da tela ---- */
-                var vObs = new IntersectionObserver(function(entries) {
-                    if (entries[0].isIntersecting) {
-                        forceAutoplay();
-                    } else {
-                        vid.pause();
-                        atualizarInterface(false);
-                    }
-                }, { threshold: 0.2 });
-
-                vObs.observe(vid);
-            }
-
-            // Inicializando Vídeo Principal da Hero Section
-            setupVideoPlayer({
-                videoId: 'hero-video',
-                overlayId: 'hero-video-overlay',
-                wrapperId: 'hero-video-wrapper',
-                playBtnId: 'hero-play-btn',
-                fillId: 'hero-progress-fill',
-                progressBarId: 'hero-progress-bar',
-                iconPauseId: 'hero-icon-pause',
-                iconPlayId: 'hero-icon-play'
-            });
-
-            // Inicializando Vídeo de Testemunho
-            setupVideoPlayer({
-                videoId: 'video-testemunho',
-                overlayId: 'video-overlay',
-                wrapperId: 'video-wrapper',
-                playBtnId: 'video-play-btn',
-                fillId: 'video-progress-fill',
-                progressBarId: 'video-progress-bar',
-                iconPauseId: 'icon-pause',
-                iconPlayId: 'icon-play'
-            });
-
-        })();
-    </script>
-
 </body>
 </html>
