@@ -91,7 +91,7 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) */
+        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -811,7 +811,7 @@
 
         .diferencial-title-new {
             color: #FFFFFF;
-            font-size: 3.0rem; /* Fonte Aumentada no PC */
+            font-size: 3.0rem; 
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.03em;
@@ -1039,7 +1039,7 @@
 
         .pacote-wrapper {
             position: relative;
-            max-width: 1200px;
+            max-width: 1200px; /* Aumentado em 20% no Desktop */
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -1055,13 +1055,13 @@
         }
 
         .pacote-img {
-            width: 110%;
+            width: 110%; /* Aumentado no Desktop p/ efeito 3D */
             height: auto;
             max-width: 1200px; 
             display: block;
             margin-left: -5%;
-            margin-top: -100px;
-            margin-bottom: -60px;
+            margin-top: -100px; /* Proporção saltando para fora */
+            margin-bottom: -60px; /* Proporção saltando para fora */
             position: relative;
             z-index: 2;
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
@@ -1230,23 +1230,23 @@
             .bonus-text { font-size: 1.05rem; }
 
             /* Seção 10 (Pacote Total) Mobile */
-            #sessao-pacote { padding: 60px 0 100px; }
-            #sessao-pacote .container { padding: 0; } 
-            .pacote-header { margin-bottom: 75px; padding: 0 24px; }
+            #sessao-pacote { padding: 60px 0 80px; }
+            #sessao-pacote .container { padding: 0; } /* Remove padding p/ usar 100% largura */
+            .pacote-header { margin-bottom: 60px; padding: 0 24px; }
             .pacote-title { font-size: 1.8rem; }
             
             .pacote-wrapper { padding: 0; }
             .pacote-gradient-box { 
-                margin: 0 30px; 
-                padding: 70px 0; 
-                border-radius: 20px; 
+                margin: 0 30px; /* Faixa estreita que fica no fundo */
+                padding: 20px 0; 
+                border-radius: 16px; 
             }
             .pacote-img { 
-                width: 140%; 
+                width: 120%; /* Expande p/ encostar quase na borda do celular */
                 max-width: none !important; 
-                margin-left: -20%; 
-                margin-top: -35%; 
-                margin-bottom: -25%; 
+                margin-left: -10%; 
+                margin-top: -25%; 
+                margin-bottom: -15%; 
             }
         }
 
@@ -1292,12 +1292,12 @@
             <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#277ac0" />
                 <stop offset="50%" stop-color="#009196" />
-                <stop offset="100%" stop-color="#8cdb97" /> 
+                <stop offset="100%" stop-color="#e2c45f" /> 
             </linearGradient>
             
             <!-- Peça Dívidas: Inicia no "Verde-Água/Amarelado" exato, vira amarelo claro aos 10% e termina Ouro Escuro -->
             <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8cdb97" />  
+                <stop offset="0%" stop-color="#e2c45f" />  
                 <stop offset="10%" stop-color="#fbbb4f" /> 
                 <stop offset="100%" stop-color="#d68910" /> 
             </linearGradient>
