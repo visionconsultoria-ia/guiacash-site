@@ -56,7 +56,7 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
-            overflow-x: hidden; /* Correção da listra branca no iPhone */
+            overflow-x: hidden; 
             width: 100%;
             position: relative;
             font-family: 'Inter', sans-serif;
@@ -846,7 +846,7 @@
 
         .diferencial-puzzle-box {
             background: #FFFFFF;
-            /* Margem (Borda) amarela de 3px */
+            /* Margem (Borda) amarela de 3px no Desktop */
             border: 3px solid #f5a722;
             border-radius: 20px;
             padding: 24px 20px;
@@ -1007,12 +1007,22 @@
             /* Seção 8 Mobile */
             .dif-block-1 { padding: 60px 0 90px; }
             .diferencial-title-new { 
-                font-size: 1.65rem; /* Ajustado precisamente para forçar 2 linhas e cobrir bordas */
-                padding: 0 4px; 
-                line-height: 1.15; 
+                font-size: 1.8rem; /* Suficiente para caber em 2 linhas com perfeição */
+                padding: 0 10px; 
+                line-height: 1.2; 
             }
             .diferencial-subtitle-new { font-size: 0.85rem; margin-bottom: 30px; }
-            .diferencial-puzzle-box { padding: 16px 10px; width: 95%; }
+            
+            /* Ajuste preciso para o Container no Mobile (largura e borda gradiente) */
+            .diferencial-puzzle-box { 
+                width: 85%; 
+                max-width: 360px;
+                padding: 16px 10px; 
+                /* Remove a borda sólida e cria uma borda gradiente usando backgrounds combinados */
+                border: 2px solid transparent !important;
+                background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+                            linear-gradient(90deg, #db941b, #fbbb4f) border-box !important;
+            }
 
             .dif-text { font-size: 1.1rem; padding: 0 10px; }
             
@@ -1066,12 +1076,12 @@
             </linearGradient>
             <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#2a6ebd" />
-                <stop offset="70%" stop-color="#009196" />
-                <stop offset="100%" stop-color="#d6b158" />
+                <stop offset="65%" stop-color="#009196" />
+                <stop offset="100%" stop-color="#db941b" />
             </linearGradient>
             <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#fdb438" />
-                <stop offset="100%" stop-color="#f5a722" />
+                <stop offset="0%" stop-color="#db941b" />
+                <stop offset="100%" stop-color="#fbbb4f" />
             </linearGradient>
         </defs>
     </svg>
@@ -1473,10 +1483,10 @@
         <!-- Bloco 1: Degradê Roxo->Cyan -->
         <div class="dif-block-1">
             
-            <h2 class="diferencial-title-new">O que nenhum sistema vai te entregar <br class="mobile-only">e o Guia Cash sim</h2>
+            <h2 class="diferencial-title-new">O que ninguém entrega<br>somente o Guia Cash?</h2>
             <p class="diferencial-subtitle-new">EXAME FINANCEIRO PERSONALIZADO</p>
             
-            <!-- Caixa branca do Quebra-Cabeça (com Borda 3px) -->
+            <!-- Caixa branca do Quebra-Cabeça (com Borda) -->
             <div class="diferencial-puzzle-wrapper">
                 <div class="diferencial-puzzle-box">
                     <div class="puzzle-pieces-container">
@@ -1486,19 +1496,19 @@
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
                         </svg>
                         
-                        <!-- Peça 2 (PJ - Intermediário p/ Cyan/Amarelo) -->
+                        <!-- Peça 2 (PJ - Intermediário p/ Cyan e extremidade Amarela) -->
                         <svg viewBox="0 0 120 100" width="70" height="60" style="flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradPJ)" stroke="#FFFFFF" stroke-width="3"/>
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
                         </svg>
                         
-                        <!-- Espaçamento Leve: Quebra-Cabeça Separado, porém muito mais próximo -->
-                        <div style="width: 6px; flex-shrink: 0;"></div>
+                        <!-- Espaçamento Reduzido (Mais próximo) -->
+                        <div style="width: 3px; flex-shrink: 0;"></div>
                         
-                        <!-- Peça 3 (Dívidas - Amarelo, texto branco) -->
-                        <svg viewBox="0 0 180 100" width="105" height="60" style="flex-shrink: 0; overflow: visible;">
-                            <path d="M0,0 H180 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradDiv)" stroke="#FFFFFF" stroke-width="3" />
-                            <text x="102" y="54" font-family="Inter" font-weight="900" font-size="28" fill="#FFF" text-anchor="middle" dominant-baseline="middle">Dívidas</text>
+                        <!-- Peça 3 (Dívidas - Reduzida em 10%, começando com a mesma cor exata do encaixe PJ) -->
+                        <svg viewBox="0 0 162 100" width="94" height="60" style="flex-shrink: 0; overflow: visible;">
+                            <path d="M0,0 H162 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradDiv)" stroke="#FFFFFF" stroke-width="3" />
+                            <text x="93" y="54" font-family="Inter" font-weight="900" font-size="28" fill="#FFF" text-anchor="middle" dominant-baseline="middle">Dívidas</text>
                         </svg>
                     </div>
                 </div>
@@ -1506,7 +1516,7 @@
 
         </div>
 
-        <!-- Bloco 2: Fundo Branco -->
+        <!-- Bloco 2: Fundo Branco Puro -->
         <div class="dif-block-2">
             <div class="container">
                 <!-- Item 1 -->
