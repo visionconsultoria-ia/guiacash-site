@@ -867,7 +867,6 @@
         }
 
         .dif-block-2 {
-            /* Fundo branco como solicitado */
             background-color: #FFFFFF;
             width: 100%;
             padding: 100px 0 80px;
@@ -1008,15 +1007,15 @@
             .dif-block-1 { padding: 60px 0 90px; }
             
             .diferencial-title-new { 
-                font-size: 2.05rem; /* Fonte Aumentada, configurada para manter em 2 linhas */
-                padding: 0 4px; /* Margem minúscula para expandir limites do texto sem encostar nas extremidades do celular */
+                font-size: 2.05rem; /* Fonte Aumentada e configurada para 2 linhas */
+                padding: 0 4px; /* Margem minúscula para expandir limites do texto e evitar quebra para a 3ª linha */
                 line-height: 1.15; 
                 letter-spacing: -0.04em;
             }
             
             .diferencial-subtitle-new { font-size: 0.85rem; margin-bottom: 30px; }
             
-            /* Ajuste preciso para o Container no Mobile (largura reduzida e borda gradiente 2px) */
+            /* Ajuste preciso para o Container no Mobile */
             .diferencial-puzzle-box { 
                 width: 85%; 
                 max-width: 360px;
@@ -1027,7 +1026,14 @@
                             linear-gradient(90deg, #db941b, #fbbb4f) border-box !important;
             }
 
-            .dif-text { font-size: 1.1rem; padding: 0 10px; }
+            .dif-text { 
+                font-size: 1.15rem; 
+                padding: 0;
+                /* Margens negativas puxam o texto para mais perto da borda do celular, fora do limite do padding do container (24px) */
+                margin-left: -12px; 
+                margin-right: -12px;
+                margin-bottom: 24px;
+            }
             
             .dif-img-wrapper {
                 margin-left: -21px; /* Exatos 3px de respiro lateral (24px de padding geral - 21px margem = 3px) */
@@ -1036,7 +1042,7 @@
             }
             .dif-img {
                 max-height: none; 
-                width: 100% !important; /* Corrige a quebra e expansão do fundo branco limitando imagem ao espaço projetado */
+                width: 100% !important; /* Corrige a quebra e mantém a foto restrita ao box perfeitamente */
                 max-width: none !important;
                 border-radius: 12px;
             }
@@ -1493,11 +1499,10 @@
         <!-- Bloco 1: Degradê Roxo->Cyan -->
         <div class="dif-block-1">
             
-            <!-- Título modificado e com fonte aumentada -->
             <h2 class="diferencial-title-new">O que ninguém entrega<br>somente o Guia Cash?</h2>
             <p class="diferencial-subtitle-new">EXAME FINANCEIRO PERSONALIZADO</p>
             
-            <!-- Caixa branca do Quebra-Cabeça (com Borda) -->
+            <!-- Caixa branca do Quebra-Cabeça -->
             <div class="diferencial-puzzle-wrapper">
                 <div class="diferencial-puzzle-box">
                     <div class="puzzle-pieces-container">
@@ -1530,9 +1535,11 @@
         <!-- Bloco 2: Fundo Branco Puro -->
         <div class="dif-block-2">
             <div class="container">
-                <!-- Item 1 -->
+                <!-- Item 1 (Introdução não alterada pelo prompt) -->
                 <div class="dif-item">
-                    <p class="dif-text">Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</p>
+                    <p class="dif-text">
+                        <strong>Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</strong>
+                    </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro- 3-areas.jpeg" alt="Exame Financeiro 3 Áreas" class="dif-img">
                     </div>
@@ -1540,7 +1547,9 @@
 
                 <!-- Item 2 -->
                 <div class="dif-item">
-                    <p class="dif-text">Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento nas suas dívidas de forma personalizada e automática</p>
+                    <p class="dif-text">
+                        <strong>1) Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento</strong><span style="font-weight: 400;"> nas suas dívidas de forma personalizada e automática</span>
+                    </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro-bacen.jpeg" alt="Exame Financeiro Bacen" class="dif-img">
                     </div>
@@ -1548,7 +1557,9 @@
 
                 <!-- Item 3 -->
                 <div class="dif-item">
-                    <p class="dif-text">Categorizador automático de perfil de dívida, que mostra qual é o tipo de resolução e o benefício possível para ela.</p>
+                    <p class="dif-text">
+                        <strong>2) Categorizador automático de perfil de dívida,</strong><span style="font-weight: 400;"> que mostra qual é o tipo de resolução e o benefício possível para ela</span>
+                    </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro-categorizador.jpeg" alt="Exame Financeiro Categorizador" class="dif-img">
                     </div>
@@ -1556,11 +1567,10 @@
 
                 <!-- Item 4 -->
                 <div class="dif-item">
-                    <div class="dif-text">
-                        Mapa Inteligente das dívidas<br>
-                        Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN<br>
-                        <span class="dif-subtext">a) Visão de todos os tipos de dívidas PF e PJ.</span>
-                    </div>
+                    <p class="dif-text">
+                        <strong>3) Mapa Inteligente das dívidas,</strong><span style="font-weight: 400;"> visão de todos os tipos de dívidas PF e PJ</span><br><br>
+                        <strong>4) Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN</strong>
+                    </p>
                     <div class="dif-img-wrapper">
                         <img src="mapa-das-dividas.jpeg" alt="Mapa das dívidas" class="dif-img">
                     </div>
@@ -1568,10 +1578,10 @@
 
                 <!-- Item 5 -->
                 <div class="dif-item">
-                    <div class="dif-text">
-                        Tutoriais práticos em vídeo do sistema<br>
-                        <span class="dif-subtext">a) Direto ao ponto, exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
-                    </div>
+                    <p class="dif-text">
+                        <strong>5) Tutoriais práticos do sistema em vídeo</strong><br>
+                        <span class="dif-subtext" style="font-weight: 400; margin-top: 4px;">Exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
+                    </p>
                     <div class="dif-img-wrapper">
                         <img src="video- aula.jpeg" alt="Tutoriais práticos" class="dif-img">
                     </div>
