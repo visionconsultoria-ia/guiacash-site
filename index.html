@@ -56,7 +56,7 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
-            overflow-x: hidden; /* Correção da listra branca no iPhone */
+            overflow-x: hidden; 
             width: 100%;
             position: relative;
             font-family: 'Inter', sans-serif;
@@ -91,7 +91,7 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) */
+        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -800,7 +800,6 @@
         }
 
         .dif-block-1 {
-            /* Degradê invertido: Roxo para Cyan */
             background: linear-gradient(135deg, #5c4bdf, #009196);
             padding: 80px 0 110px;
             width: 100%;
@@ -812,7 +811,7 @@
 
         .diferencial-title-new {
             color: #FFFFFF;
-            font-size: 3.0rem; /* Fonte Aumentada no PC */
+            font-size: 3.0rem; 
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.03em;
@@ -837,7 +836,6 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            /* Fica 1/3 para fora (abaixo da linha do bloco) e 2/3 para dentro */
             transform: translateY(33.33%);
             display: flex;
             justify-content: center;
@@ -846,7 +844,6 @@
 
         .diferencial-puzzle-box {
             background: #FFFFFF;
-            /* Margem (Borda) amarela de 3px no Desktop */
             border: 3px solid #f5a722;
             border-radius: 20px;
             padding: 24px 20px;
@@ -938,7 +935,6 @@
             font-size: 2.8rem;
             font-weight: 800;
             margin-bottom: 70px;
-            text-transform: uppercase;
             letter-spacing: -0.02em;
         }
 
@@ -1016,6 +1012,58 @@
             font-size: 1.1rem;
             font-weight: 400;
             line-height: 1.5;
+        }
+
+        /* =========================================
+           SEÇÃO 10: PACOTE TOTAL
+        ========================================= */
+        #sessao-pacote {
+            background-color: #FFFFFF;
+            padding: 120px 0 100px;
+        }
+
+        .pacote-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .pacote-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pacote-wrapper {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .pacote-gradient-box {
+            background: linear-gradient(90deg, #5c4bdf, #009196);
+            border-radius: 24px;
+            padding: 40px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .pacote-img {
+            width: 100%;
+            height: auto;
+            max-width: 1000px; 
+            display: block;
+            margin-top: -80px; /* Faz a imagem saltar para fora por cima */
+            margin-bottom: -50px; /* Faz a imagem saltar para fora por baixo */
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
         }
 
         /* =========================================
@@ -1102,20 +1150,18 @@
             .dif-block-1 { padding: 60px 0 90px; }
             
             .diferencial-title-new { 
-                font-size: 2.05rem; /* Fonte Aumentada e configurada para 2 linhas */
-                padding: 0 4px; /* Margem minúscula para expandir limites do texto e evitar quebra para a 3ª linha */
+                font-size: 2.05rem;
+                padding: 0 4px; 
                 line-height: 1.15; 
                 letter-spacing: -0.04em;
             }
             
             .diferencial-subtitle-new { font-size: 0.85rem; margin-bottom: 30px; }
             
-            /* Ajuste preciso para o Container no Mobile */
             .diferencial-puzzle-box { 
                 width: 85%; 
                 max-width: 360px;
                 padding: 16px 10px; 
-                /* Borda gradiente de 2px via sobreposição de Backgrounds */
                 border: 2px solid transparent !important;
                 background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
                             linear-gradient(90deg, #db941b, #fbbb4f) border-box !important;
@@ -1124,20 +1170,19 @@
             .dif-text { 
                 font-size: 1.15rem; 
                 padding: 0;
-                /* Margens negativas puxam o texto para mais perto da borda do celular, fora do limite do padding do container (24px) */
                 margin-left: -12px; 
                 margin-right: -12px;
                 margin-bottom: 24px;
             }
             
             .dif-img-wrapper {
-                margin-left: -21px; /* Exatos 3px de respiro lateral (24px de padding geral - 21px margem = 3px) */
+                margin-left: -21px; 
                 margin-right: -21px;
                 width: auto;
             }
             .dif-img {
                 max-height: none; 
-                width: 100% !important; /* Corrige a quebra e mantém a foto restrita ao box perfeitamente */
+                width: 100% !important; 
                 max-width: none !important;
                 border-radius: 12px;
             }
@@ -1182,6 +1227,13 @@
             
             .bonus-subtitle { font-size: 1.35rem; margin-top: 4px; }
             .bonus-text { font-size: 1.05rem; }
+
+            /* Seção 10 (Pacote Total) Mobile */
+            #sessao-pacote { padding: 60px 0 80px; }
+            .pacote-header { margin-bottom: 50px; }
+            .pacote-title { font-size: 1.8rem; }
+            .pacote-gradient-box { border-radius: 16px; padding: 20px 10px; }
+            .pacote-img { margin-top: -40px; margin-bottom: -30px; }
         }
 
         @media (min-width: 769px) {
@@ -1671,7 +1723,7 @@
         <!-- Bloco 2: Fundo Branco Puro -->
         <div class="dif-block-2">
             <div class="container">
-                <!-- Item 1 -->
+                <!-- Item 1 (Introdução não alterada pelo prompt) -->
                 <div class="dif-item">
                     <p class="dif-text">
                        <strong>1) Diagnóstico das 3 áreas financeiras</strong><span style="font-weight: 400;"> o que está acontecendo com a PF, PJ e Dívidas de forma interligada</span>
@@ -1684,7 +1736,7 @@
                 <!-- Item 2 -->
                 <div class="dif-item">
                     <p class="dif-text">
-                        <strong>2) Diagnóstico de descumprimento de normativas do Banco Central e superendividamento</strong><span style="font-weight: 400;"> nas suas dívidas de forma personalizada e automática</span>
+                        <strong>1) Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento</strong><span style="font-weight: 400;"> nas suas dívidas de forma personalizada e automática</span>
                     </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro-bacen.jpeg" alt="Exame Financeiro Bacen" class="dif-img">
@@ -1694,7 +1746,7 @@
                 <!-- Item 3 -->
                 <div class="dif-item">
                     <p class="dif-text">
-                        <strong>3) Categorizador automático de perfil de dívida,</strong><span style="font-weight: 400;"> que mostra qual é o tipo de resolução e o benefício possível para ela</span>
+                        <strong>2) Categorizador automático de perfil de dívida,</strong><span style="font-weight: 400;"> que mostra qual é o tipo de resolução e o benefício possível para ela</span>
                     </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro-categorizador.jpeg" alt="Exame Financeiro Categorizador" class="dif-img">
@@ -1704,8 +1756,8 @@
                 <!-- Item 4 -->
                 <div class="dif-item">
                     <p class="dif-text">
-                        <strong>4) Mapa Inteligente das dívidas,</strong><span style="font-weight: 400;"> visão de todos os tipos de dívidas PF e PJ</span><br><br>
-                        <strong>5) Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN</strong>
+                        <strong>3) Mapa Inteligente das dívidas,</strong><span style="font-weight: 400;"> visão de todos os tipos de dívidas PF e PJ</span><br><br>
+                        <strong>4) Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN</strong>
                     </p>
                     <div class="dif-img-wrapper">
                         <img src="mapa-das-dividas.jpeg" alt="Mapa das dívidas" class="dif-img">
@@ -1715,7 +1767,8 @@
                 <!-- Item 5 -->
                 <div class="dif-item">
                     <p class="dif-text">
-                        <strong>6) Tutoriais práticos do sistema em vídeo, </strong><span style="font-weight: 400;"> exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
+                        <strong>5) Tutoriais práticos do sistema em vídeo</strong><br>
+                        <span class="dif-subtext" style="font-weight: 400; margin-top: 4px;">Exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
                     </p>
                     <div class="dif-img-wrapper">
                         <img src="video- aula.jpeg" alt="Tutoriais práticos" class="dif-img">
@@ -1734,7 +1787,7 @@
     =========================================== -->
     <section id="sessao-bonus">
         <div class="container">
-            <h2 class="bonus-title">Bônus Especiais</h2>
+            <h2 class="bonus-title">Bônus exclusivos</h2>
             
             <div class="timeline-container">
                 <div class="timeline-line"></div>
@@ -1744,8 +1797,7 @@
                     <div class="timeline-content">
                         <p class="bonus-subtitle">🎁 Curso enxuto</p>
                         <p class="bonus-text">
-                            Do método “Com dinheiro e sem dívida”<br>
-                            Comece a resolvê-las e liberte-se destas amarras
+                            Do método “Com dinheiro e sem dívida”. Comece a resolvê-las e liberte-se destas amarras
                         </p>
                     </div>
                     <div class="timeline-icon">
@@ -1766,6 +1818,23 @@
                             Material para execução prática dos ensinamentos e Script de pareceres ao banco
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 10: PACOTE TOTAL
+    =========================================== -->
+    <section id="sessao-pacote">
+        <div class="container">
+            <div class="pacote-header">
+                <h2 class="pacote-title">Você recebe o que mais ninguém<br class="desktop-only"> no mercado oferece</h2>
+            </div>
+            
+            <div class="pacote-wrapper">
+                <div class="pacote-gradient-box">
+                    <img src="pacote-total.png" alt="Pacote Total Guia Cash" class="pacote-img">
                 </div>
             </div>
         </div>
