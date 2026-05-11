@@ -1166,6 +1166,123 @@
             margin-top: 50px;
         }
 
+        /* =========================================
+           SEÇÃO 8: DIFERENCIAL
+        ========================================= */
+        #sessao-diferencial {
+            background: linear-gradient(135deg, #db941b, #f5a722, #fbbb4f);
+            padding: 100px 0 80px;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .diferencial-puzzle-wrapper {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -33.33%);
+            z-index: 10;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .diferencial-puzzle-box {
+            background: #FFFFFF;
+            border: 3px solid #fdb438;
+            border-radius: 20px;
+            padding: 14px 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(214, 137, 16, 0.25);
+        }
+
+        .puzzle-pieces-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .diferencial-header {
+            text-align: center;
+            margin-bottom: 50px;
+            margin-top: 20px;
+        }
+
+        .diferencial-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        .diferencial-subtitle {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #006974;
+            margin-bottom: 0;
+        }
+
+        .dif-item {
+            margin-bottom: 60px;
+        }
+
+        .dif-item:last-of-type {
+            margin-bottom: 40px;
+        }
+
+        .dif-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto 24px;
+            line-height: 1.5;
+        }
+
+        .dif-subtext {
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: rgba(54,54,54,0.9);
+            display: block;
+            margin-top: 8px;
+        }
+
+        .dif-img-wrapper {
+            margin: 0 auto;
+            position: relative;
+            text-align: center;
+        }
+
+        .dif-img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            display: block;
+        }
+
+        .diferencial-cta {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Variável de CTA customizado (Cyan -> Violeta) */
+        .btn-cyan-violet {
+            background: linear-gradient(90deg, #009196, #5c4bdf) !important;
+            box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
+            color: #FFFFFF !important;
+        }
+        .btn-cyan-violet:hover {
+            box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1564,6 +1681,104 @@
                 <a href="#oferta" class="btn-cta btn-gradient text-white" style="color: #FFFFFF !important;">Quero isso para mim</a>
             </div>
 
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 8: DIFERENCIAL (Nova Seção)
+    =========================================== -->
+    <section id="sessao-diferencial">
+        
+        <!-- Container Branco Flutuante c/ Quebra Cabeça -->
+        <div class="diferencial-puzzle-wrapper">
+            <div class="diferencial-puzzle-box">
+                <div class="puzzle-pieces-container">
+                    <!-- Peça 1 (PF) -->
+                    <svg viewBox="0 0 120 100" width="84" height="70" style="margin-right: -14px;">
+                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="3"/>
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="34" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
+                    </svg>
+                    <!-- Peça 2 (PJ) -->
+                    <svg viewBox="0 0 120 100" width="84" height="70">
+                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="3"/>
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="34" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
+                    </svg>
+                    
+                    <!-- Espaçamento que demonstra desencaixe parcial -->
+                    <div class="puzzle-gap" style="width: 12px;"></div>
+                    
+                    <!-- Peça 3 (D) -->
+                    <svg viewBox="0 0 100 100" width="70" height="70">
+                        <defs>
+                            <linearGradient id="yellowDGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#db941b" />
+                                <stop offset="100%" stop-color="#f5a722" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M0,0 H100 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#FFFFFF" stroke="#f5a722" stroke-width="3" />
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="44" fill="url(#yellowDGrad)" text-anchor="middle" dominant-baseline="middle">D</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="diferencial-header">
+                <h2 class="diferencial-title">O que nenhum sistema vai te entregar e o Guia Cash sim</h2>
+                <p class="diferencial-subtitle">Exame financeiro personalizado</p>
+            </div>
+
+            <!-- Item 1 -->
+            <div class="dif-item">
+                <p class="dif-text">Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</p>
+                <div class="dif-img-wrapper">
+                    <img src="exame-financeiro- 3-areas.jpeg" alt="Exame Financeiro 3 Áreas" class="dif-img">
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="dif-item">
+                <p class="dif-text">Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento nas suas dívidas de forma personalizada e automática</p>
+                <div class="dif-img-wrapper">
+                    <img src="exame-financeiro-bacen.jpeg" alt="Exame Financeiro Bacen" class="dif-img">
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="dif-item">
+                <p class="dif-text">Categorizador automático de perfil de dívida, que mostra qual é o tipo de resolução e o benefício possível para ela.</p>
+                <div class="dif-img-wrapper">
+                    <img src="exame-financeiro-categorizador.jpeg" alt="Exame Financeiro Categorizador" class="dif-img">
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="dif-item">
+                <div class="dif-text">
+                    Mapa Inteligente das dívidas<br>
+                    Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN<br>
+                    <span class="dif-subtext">a) Visão de todos os tipos de dívidas PF e PJ.</span>
+                </div>
+                <div class="dif-img-wrapper">
+                    <img src="mapa-das-dividas.jpeg" alt="Mapa das dívidas" class="dif-img">
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="dif-item">
+                <div class="dif-text">
+                    Tutoriais práticos em vídeo do sistema<br>
+                    <span class="dif-subtext">a) Direto ao ponto, exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
+                </div>
+                <div class="dif-img-wrapper">
+                    <img src="video- aula.jpeg" alt="Tutoriais práticos" class="dif-img">
+                </div>
+            </div>
+
+            <div class="diferencial-cta">
+                <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
+            </div>
+            
         </div>
     </section>
 
