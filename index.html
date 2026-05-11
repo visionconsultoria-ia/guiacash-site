@@ -56,7 +56,9 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
-            overflow-x: clip;
+            overflow-x: hidden; /* Correção da listra branca no iPhone */
+            width: 100%;
+            position: relative;
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-white);
             color: var(--text-dark);
@@ -88,6 +90,16 @@
         }
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
+
+        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
+        .btn-cyan-violet {
+            background: linear-gradient(90deg, #009196, #5c4bdf) !important;
+            box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
+            color: #FFFFFF !important;
+        }
+        .btn-cyan-violet:hover {
+            box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
+        }
 
         /* =========================================
            SEÇÃO 1: HERO SECTION 
@@ -422,181 +434,6 @@
         }
 
         /* =========================================
-            CONTROLE DE RESPONSIVIDADE
-        ========================================= */
-        .mobile-only { display: none !important; }
-        .desktop-only { display: block !important; }
-        
-        .audience-wrapper-desktop.desktop-only { display: flex !important; }
-
-        @media (max-width: 768px) {
-            .mobile-only { display: block !important; }
-            .desktop-only { display: none !important; }
-            
-            .audience-wrapper-desktop.desktop-only { display: none !important; }
-            .audience-wrapper-mobile.mobile-only { display: flex !important; }
-            
-            section { padding: 50px 0; }
-            
-            #sessao-audiencia { padding-bottom: 88px !important; } 
-            
-            #sessao-hero { padding-top: 27px !important; padding-bottom: 60px; }
-
-            #sessao-hero .main-headline { 
-                font-size: 2.01rem !important; 
-                line-height: 1.07 !important; 
-                margin-bottom: 32px !important; 
-            }
-            
-            #sessao-hero .hero-logo { 
-                margin-bottom: 15px !important; 
-            }
-            
-            #sessao-hero .puzzle-wrapper { 
-                height: 48px !important; 
-                margin: 6px auto; 
-                transform: none; 
-                border-radius: 12px; 
-            }
-            #sessao-hero .puzzle-text { 
-                font-size: 1.92rem !important; 
-                padding: 0 8px !important; 
-            }
-            #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
-
-            .hero .subheadline.mobile-only { 
-                font-size: 1.0rem; 
-                line-height: 1.4;
-                margin-left: -15px; 
-                margin-right: -15px;
-                max-width: none; 
-                margin-bottom: 24px;
-            }
-
-            .hero .video-hook {
-                font-size: 0.85rem; 
-                line-height: 1.25; 
-                padding: 0 10px;
-                margin-bottom: 12px;
-            }
-
-            .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
-
-            #sessao-audiencia-content { padding-top: 63px; } 
-            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
-            .typewriter-container { padding: 0 25px; } 
-            
-            .slider-btn { font-size: 1.4rem; padding: 5px; }
-            .slider-btn.prev { left: -10px; } 
-            .slider-btn.next { right: -10px; } 
-            
-            #typewriter-text { font-size: 1.15rem; }
-            h2 { font-size: 1.8rem; }
-
-            /* Seção 3 mobile */
-            .secret-card {
-                padding: 35px 20px; 
-                border-radius: 20px;
-                margin-top: -60px;
-                margin-bottom: -60px;
-            }
-
-            .headline { font-size: 1.6rem; }
-            .normal-text { 
-                font-size: 1rem; 
-                letter-spacing: -0.01em; 
-            }
-
-            /* MÁGICA DO ALINHAMENTO RESPONSIVO */
-            .secret-image-wrapper {
-                /* A imagem assume exatamente a largura da tela do celular, menos 24px de respiro (12px de cada lado) */
-                width: calc(100vw - 24px); 
-                max-width: calc(100vw - 24px); 
-                
-                /* Hack para centralizar na tela independente do padding do card branco */
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
-                
-                margin-top: 85px; 
-                margin-bottom: 35px;
-            }
-
-            .tornado-overlay {
-                width: 39.33%; 
-                top: -17.6%; 
-                right: 15.72%; 
-            }
-
-            /* Seção 7 Mobile */
-            #sessao-como-funciona { padding: 60px 0; }
-            
-            .como-funciona-header { margin-bottom: 40px; }
-            .etapa-title-main { font-size: 1.5rem; margin-bottom: 20px; }
-            .etapa-list li { font-size: 1rem; }
-            
-            .etapa-subtitle-center { margin: 30px auto 20px; }
-            
-            /* Frase de efeito 1: Reduzida para caber em 2 linhas (iPhone 12) mantendo negrito */
-            .etapa-subtitle-center.frase-efeito-1 {
-                font-size: 1.05rem; 
-                font-weight: 700;
-            }
-            
-            /* Frase de efeito 2: Mesmo tamanho da 1, porém SEM negrito */
-            .etapa-subtitle-center.frase-efeito-2 {
-                font-size: 1.05rem; 
-                font-weight: 400;
-            }
-
-            .como-funciona-subtitulo.mobile-subtitle-size {
-                font-size: 1.375rem; /* Aumentado em 2px para o mobile */
-                line-height: 1.3;
-            }
-
-            /* Margem negativa cirúrgica para Imagens "Como Funciona": 
-               O padding base do container é 24px. Ao usar -21px de margem lateral,
-               puxamos a imagem exatamente até restar um respiro de 3px em relação à borda da tela. */
-            .etapa-img-wrapper {
-                margin-left: -21px;
-                margin-right: -21px;
-            }
-            .etapa-img {
-                border-radius: 12px;
-            }
-        }
-
-        /* AJUSTES EXCLUSIVOS PARA DESKTOP */
-        @media (min-width: 769px) {
-            #sessao-audiencia { padding-bottom: 120px !important; } 
-            
-            .hero-logo { 
-                max-width: 150px !important; 
-                margin-bottom: 32px !important;
-            }
-
-            .hero .main-headline { 
-                margin-bottom: 40px !important;
-            }
-            .hero .subheadline.desktop-only { 
-                font-size: 1.5rem !important;
-                margin-bottom: 32px !important;
-                max-width: 1050px !important;
-            }
-            .hero .video-hook { 
-                font-size: 1.33rem !important;
-                margin-bottom: 12px !important;
-                white-space: nowrap !important;
-                max-width: none !important;
-            }
-
-            /* Aumentar em 30% a fonte do subtítulo da Seção 7 apenas no PC */
-            .como-funciona-subtitulo.desktop-only {
-                font-size: 1.625rem;
-            }
-        }
-
-        /* =========================================
             SEÇÃO 4: COMPARATIVO
         ========================================= */
         #sessao-comparativo {
@@ -687,22 +524,8 @@
             margin-bottom: 0;
         }
 
-        @media (max-width: 768px) {
-            #sessao-comparativo { padding-top: 70px; padding-bottom: 50px; }
-            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; white-space: normal; }
-            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; margin-left: -2px; margin-right: -2px; }
-            .comp-card { padding: 30px 24px 34px; }
-            .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
-            .comp-item-text { font-size: 0.96rem; }
-            .comp-item { padding: 16px 0; gap: 8px; }
-        }
-
-        @media (min-width: 769px) {
-            .comparativo-headline .comp-headline-line1 { white-space: nowrap; }
-        }
-
         /* =========================================
-            SEÇÃO 4: CTA FINAL + SEÇÃO 5
+            SEÇÃO 5: DEMONSTRAÇÃO E CTA FINAL
         ========================================= */
         .comparativo-cta-wrapper {
             margin-top: 32px;
@@ -710,7 +533,6 @@
             justify-content: center;
         }
 
-        /* Seção 5: base (mobile-first) */
         #sessao-teste-imagem {
             background-color: #FFFFFF;
             padding-top: 20px;
@@ -728,23 +550,6 @@
             display: block;
         }
 
-        /* Seção 5: overrides exclusivos desktop */
-        @media (min-width: 769px) {
-            #sessao-teste-imagem {
-                padding: 80px 0;
-            }
-            #sessao-teste-imagem .container {
-                padding-left: 24px;
-                padding-right: 24px;
-            }
-            #sessao-teste-imagem .demo-img {
-                display: block;
-                margin: 0 auto;
-                max-width: 640px;
-                width: 90%;
-                height: auto;
-            }
-        }
         /* =========================================
             SEÇÃO 6: TESTEMUNHOS & VÍDEOS GLOBAIS
         ========================================= */
@@ -774,9 +579,8 @@
             margin-bottom: 0;
         }
 
-        /* Label acima de cada item — traço vertical + sombra esfumada + fonte 20% maior */
         .testemunho-label {
-            font-size: 1.14rem; /* +20% de 0.95rem */
+            font-size: 1.14rem;
             font-weight: 700;
             color: #FFFFFF;
             margin-bottom: 10px;
@@ -797,7 +601,6 @@
             background: linear-gradient(to bottom, #FFFFFF 60%, rgba(255,255,255,0));
         }
 
-        /* Imagens — border-radius 30% mais arredondado: 16px → ~21px */
         .testemunho-img {
             width: 100%;
             height: auto;
@@ -806,7 +609,6 @@
             box-shadow: 0 8px 24px rgba(0,0,0,0.18);
         }
 
-        /* Wrapper do vídeo */
         .testemunho-video-wrapper {
             position: relative;
             width: 100%;
@@ -825,7 +627,6 @@
             display: block;
         }
 
-        /* ---- Overlay "Seu vídeo já começou" (Usado tanto na Hero quanto nos Depoimentos) ---- */
         .video-mute-overlay {
             position: absolute;
             top: 50%;
@@ -851,13 +652,12 @@
 
         .video-mute-overlay.hidden { display: none; }
 
-        /* Vídeo sem fundo preto enquanto carrega */
         #video-testemunho {
             object-fit: cover;
             background-color: transparent;
         }
 
-        .overlay-text-top {
+        .overlay-text-top, .overlay-text-bottom {
             color: #FFFFFF;
             font-family: 'Inter', sans-serif;
             font-weight: 700;
@@ -867,22 +667,8 @@
             margin: 0;
         }
 
-        .overlay-text-bottom {
-            color: #FFFFFF;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            line-height: 1.2;
-            margin: 0;
-        }
+        .mute-icon { width: 52px; height: 52px; }
 
-        .mute-icon {
-            width: 52px;
-            height: 52px;
-        }
-
-        /* ---- Controles inferiores do vídeo ---- */
         .video-controls {
             position: absolute;
             bottom: 0;
@@ -896,104 +682,41 @@
             gap: 10px;
         }
 
-        /* Botão play/pause */
         .video-play-btn {
-            width: 32px;
-            height: 32px;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 12px;
-            flex-shrink: 0;
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
         }
 
-        .video-play-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: #FFFFFF;
-        }
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
 
-        /* Barra de progresso — só o fill aparece, sem track visível */
         .video-progress-bar {
-            width: 100%;
-            height: 12px;
-            background: transparent;
-            border-radius: 0;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            left: 0;
-            bottom: 0;
+            width: 100%; height: 12px; background: transparent; border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
         }
 
         .video-progress-fill {
-            height: 100%;
-            width: 0%;
-            background: #18b6b5;
-            border-radius: 0;
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
             transition: width 0.25s linear;
         }
 
-        /* ---- GRID MOBILE (1 coluna) ---- */
         .testemunhos-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 36px;
-            max-width: 480px;
-            margin: 0 auto;
+            display: flex; flex-direction: column; gap: 36px; max-width: 480px; margin: 0 auto;
         }
 
         .testemunho-item { width: 100%; }
 
-        /* CTA seção 6 — degradê violeta invertido: claro → escuro */
         .btn-violet {
             background: linear-gradient(90deg, #8670ff, #5c4bdf, #5242d7) !important;
             box-shadow: 0 10px 25px rgba(82, 66, 215, 0.35) !important;
         }
-        .btn-violet:hover {
-            box-shadow: 0 15px 35px rgba(134, 112, 255, 0.45) !important;
-        }
+        .btn-violet:hover { box-shadow: 0 15px 35px rgba(134, 112, 255, 0.45) !important; }
 
-        /* CTA wrapper — espaçamento fixo em relação à última imagem */
         .testemunhos-cta-wrapper {
-            margin-top: 48px;
-            display: flex;
-            justify-content: center;
+            margin-top: 48px; display: flex; justify-content: center;
         }
 
-        /* ---- GRID DESKTOP (2x2) ---- */
-        @media (min-width: 769px) {
-            #sessao-testemunhos { padding: 90px 0 80px; }
-
-            .testemunhos-titulo { font-size: 2.6rem; }
-
-            .testemunhos-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 24px;
-                max-width: 100%;
-            }
-
-            /* Reordenação desktop via order */
-            .testemunho-item-video  { order: 2; }
-            .testemunho-item-img1   { order: 1; }
-            .testemunho-item-img2   { order: 3; }
-            .testemunho-item-img3   { order: 4; }
-
-            /* Redução 40% — só no desktop, sem afetar mobile */
-            .testemunho-item {
-                max-width: 60%;
-                margin: 0 auto;
-            }
-        }
-        
         /* =========================================
             SEÇÃO 7: COMO FUNCIONA
         ========================================= */
@@ -1002,241 +725,140 @@
             padding: 90px 0;
         }
 
-        .como-funciona-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+        .como-funciona-header { text-align: center; margin-bottom: 60px; }
 
-        /* Base para subtítulo (herdado por todos, ajustado via media query se necessário) */
-        .como-funciona-subtitulo {
-            font-weight: 700;
-            color: var(--text-gray);
-            margin-bottom: 10px;
-        }
+        .como-funciona-subtitulo { font-weight: 700; color: var(--text-gray); margin-bottom: 10px; }
 
         .text-gradient-cyan-violet {
             background: linear-gradient(90deg, var(--pj-base), var(--pf-base));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            background-clip: text;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-weight: 800; background-clip: text;
         }
 
-        .etapa-block {
-            max-width: 800px;
-            margin: 0 auto 70px;
-        }
+        .etapa-block { max-width: 800px; margin: 0 auto 70px; }
+        .etapa-block:last-of-type { margin-bottom: 40px; }
 
-        .etapa-block:last-of-type {
-            margin-bottom: 40px;
-        }
+        .title-gradient-1 { background: var(--pj-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .title-gradient-2 { background: var(--pf-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .title-gradient-3 { background: var(--debt-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        /* Títulos e Textos em Degradê Customizados */
-        .title-gradient-1 {
-            background: var(--pj-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .title-gradient-2 {
-            background: var(--pf-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .title-gradient-3 {
-            background: var(--debt-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Círculos de Progresso com Gradients em Transição Exata (Matemática: 1/3 = 120deg, 2/3 = 240deg) */
         .etapa-circle-container {
-            width: 104px;
-            height: 104px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            width: 104px; height: 104px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
 
-        /* Etapa 1: 1/3 Cyan, 2/3 Cinza */
-        .circle-1 { 
-            background: conic-gradient(var(--pj-light) 0deg, var(--pj-dark) 120deg, #E2E8F0 120deg, #E2E8F0 360deg); 
-        }
-        
-        /* Etapa 2: 2/3 Cyan para Violeta, 1/3 Cinza */
-        .circle-2 { 
-            background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 240deg, #E2E8F0 240deg, #E2E8F0 360deg); 
-        }
-        
-        /* Etapa 3: 3/3 (Completo) Cyan -> Violeta -> Amarelo (dominando lado esquerdo) -> Cyan */
-        .circle-3 { 
-            background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 100deg, var(--div-base) 180deg, var(--div-base) 330deg, var(--pj-base) 360deg); 
-        }
+        .circle-1 { background: conic-gradient(var(--pj-light) 0deg, var(--pj-dark) 120deg, #E2E8F0 120deg, #E2E8F0 360deg); }
+        .circle-2 { background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 240deg, #E2E8F0 240deg, #E2E8F0 360deg); }
+        .circle-3 { background: conic-gradient(var(--pj-base) 0deg, var(--pf-base) 100deg, var(--div-base) 180deg, var(--div-base) 330deg, var(--pj-base) 360deg); }
 
         .etapa-circle-inner {
-            width: 92px;
-            height: 92px;
-            background: #FFFFFF;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
+            width: 92px; height: 92px; background: #FFFFFF; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: -0.02em;
         }
 
         .etapa-title-main {
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 28px;
-            letter-spacing: -0.03em;
+            font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 28px; letter-spacing: -0.03em;
         }
 
-        .etapa-list {
-            list-style: none;
-            margin-bottom: 36px;
-            padding: 0;
-        }
-
+        .etapa-list { list-style: none; margin-bottom: 36px; padding: 0; }
         .etapa-list li {
-            font-size: 1.125rem;
-            color: var(--text-gray);
-            margin-bottom: 16px;
-            line-height: 1.6;
-            padding-left: 20px;
-            position: relative;
+            font-size: 1.125rem; color: var(--text-gray); margin-bottom: 16px; line-height: 1.6;
+            padding-left: 20px; position: relative;
         }
-
-        /* Bullets customizados combinando com os títulos */
         .etapa-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            content: ''; position: absolute; left: 0; top: 10px; width: 8px; height: 8px; border-radius: 50%;
         }
-        
         .list-1 li::before { background: var(--pj-gradient); }
         .list-2 li::before { background: var(--pf-gradient); }
         .list-3 li::before { background: var(--debt-gradient); }
+        .etapa-list li strong { font-weight: 800; }
 
-        .etapa-list li strong {
-            font-weight: 800;
-        }
-
-        /* Formatação global/PC de Frases de Efeito da Seção 7 */
         .etapa-subtitle-center {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            text-align: center;
-            line-height: 1.4;
-            margin: 40px auto 24px;
-            letter-spacing: -0.02em;
-            max-width: 650px;
+            font-size: 1.3rem; font-weight: 700; color: var(--text-dark); text-align: center;
+            line-height: 1.4; margin: 40px auto 24px; letter-spacing: -0.02em; max-width: 650px;
         }
 
-        .etapa-img-wrapper {
-            margin: 0 auto;
-            position: relative;
-            max-width: 800px;
-        }
-
-        .etapa-img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            display: block;
-        }
-
-        .como-funciona-cta {
-            margin-top: 50px;
-        }
+        .etapa-img-wrapper { margin: 0 auto; position: relative; max-width: 800px; }
+        .etapa-img { width: 100%; height: auto; border-radius: 16px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: block; }
+        .como-funciona-cta { margin-top: 50px; }
 
         /* =========================================
            SEÇÃO 8: DIFERENCIAL
         ========================================= */
         #sessao-diferencial {
-            background: linear-gradient(135deg, #db941b, #f5a722, #fbbb4f);
-            padding: 100px 0 80px;
-            position: relative;
+            padding: 0;
             margin-top: 0;
+            width: 100%;
         }
 
-        .diferencial-puzzle-wrapper {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -33.33%);
-            z-index: 10;
+        .dif-block-1 {
+            background: linear-gradient(135deg, #009196, #5c4bdf);
+            padding: 80px 20px 100px;
             width: 100%;
-            text-align: center;
             display: flex;
             justify-content: center;
+            position: relative;
         }
 
         .diferencial-puzzle-box {
             background: #FFFFFF;
-            border: 3px solid #fdb438;
+            border: 1px solid #f5a722;
             border-radius: 20px;
-            padding: 14px 24px;
-            display: inline-flex;
+            padding: 24px 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 640px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(214, 137, 16, 0.25);
         }
 
         .puzzle-pieces-container {
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .diferencial-header {
-            text-align: center;
-            margin-bottom: 50px;
-            margin-top: 20px;
+            margin-bottom: 24px;
         }
 
         .diferencial-title {
-            font-size: 2.2rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            color: var(--text-dark);
+            color: #363636;
             margin-bottom: 12px;
-            line-height: 1.2;
-            letter-spacing: -0.03em;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            max-width: 95%;
         }
 
         .diferencial-subtitle {
-            font-size: 1.4rem;
+            font-size: 0.9rem;
             font-weight: 800;
-            color: #006974;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 0;
         }
 
-        .dif-item {
-            margin-bottom: 60px;
+        .dif-block-2 {
+            background-color: #eeefef;
+            width: 100%;
+            padding: 80px 0;
         }
 
+        .dif-item {
+            margin-bottom: 70px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .dif-item:last-of-type {
             margin-bottom: 40px;
         }
 
         .dif-text {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             text-align: center;
             color: var(--text-dark);
@@ -1262,9 +884,12 @@
         .dif-img {
             width: 100%;
             height: auto;
+            max-height: 80vh;
+            object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             display: block;
+            margin: 0 auto;
         }
 
         .diferencial-cta {
@@ -1273,14 +898,125 @@
             justify-content: center;
         }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) */
-        .btn-cyan-violet {
-            background: linear-gradient(90deg, #009196, #5c4bdf) !important;
-            box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
-            color: #FFFFFF !important;
+        /* =========================================
+            CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
+        ========================================= */
+        .mobile-only { display: none !important; }
+        .desktop-only { display: block !important; }
+        .audience-wrapper-desktop.desktop-only { display: flex !important; }
+
+        @media (max-width: 768px) {
+            .mobile-only { display: block !important; }
+            .desktop-only { display: none !important; }
+            .audience-wrapper-desktop.desktop-only { display: none !important; }
+            .audience-wrapper-mobile.mobile-only { display: flex !important; }
+            
+            section { padding: 50px 0; }
+            #sessao-diferencial { padding: 0; }
+            
+            #sessao-audiencia { padding-bottom: 88px !important; } 
+            #sessao-hero { padding-top: 27px !important; padding-bottom: 60px; }
+
+            #sessao-hero .main-headline { 
+                font-size: 2.01rem !important; line-height: 1.07 !important; margin-bottom: 32px !important; 
+            }
+            #sessao-hero .hero-logo { margin-bottom: 15px !important; }
+            
+            #sessao-hero .puzzle-wrapper { height: 48px !important; margin: 6px auto; transform: none; border-radius: 12px; }
+            #sessao-hero .puzzle-text { font-size: 1.92rem !important; padding: 0 8px !important; }
+            #sessao-hero .puzzle-joint { width: 20px; height: 44px; margin: 0 -3px; }
+
+            .hero .subheadline.mobile-only { 
+                font-size: 1.0rem; line-height: 1.4; margin-left: -15px; margin-right: -15px;
+                max-width: none; margin-bottom: 24px;
+            }
+            .hero .video-hook { font-size: 0.85rem; line-height: 1.25; padding: 0 10px; margin-bottom: 12px; }
+
+            .video-container { aspect-ratio: 9/16; max-width: 418px; border-radius: 24px; }
+
+            #sessao-audiencia-content { padding-top: 63px; } 
+            .slider-wrapper { min-height: 100px; margin-bottom: 30px; }
+            .typewriter-container { padding: 0 25px; } 
+            .slider-btn { font-size: 1.4rem; padding: 5px; }
+            .slider-btn.prev { left: -10px; } 
+            .slider-btn.next { right: -10px; } 
+            #typewriter-text { font-size: 1.15rem; }
+            h2 { font-size: 1.8rem; }
+
+            /* Seção 3 mobile */
+            .secret-card { padding: 35px 20px; border-radius: 20px; margin-top: -60px; margin-bottom: -60px; }
+            .headline { font-size: 1.6rem; }
+            .normal-text { font-size: 1rem; letter-spacing: -0.01em; }
+            .secret-image-wrapper {
+                width: calc(100vw - 24px); max-width: calc(100vw - 24px); 
+                position: relative; left: 50%; transform: translateX(-50%);
+                margin-top: 85px; margin-bottom: 35px;
+            }
+            .tornado-overlay { width: 39.33%; top: -17.6%; right: 15.72%; }
+
+            /* Seção 4 e 5 mobile */
+            #sessao-comparativo { padding-top: 70px; padding-bottom: 50px; }
+            .comparativo-headline { font-size: 1.6rem; margin-bottom: 36px; white-space: normal; }
+            .comparativo-grid { grid-template-columns: 1fr; gap: 16px; margin-left: -2px; margin-right: -2px; }
+            .comp-card { padding: 30px 24px 34px; }
+            .comp-card-title { font-size: 1.25rem; margin-bottom: 24px; }
+            .comp-item-text { font-size: 0.96rem; }
+            .comp-item { padding: 16px 0; gap: 8px; }
+
+            /* Seção 7 Mobile */
+            #sessao-como-funciona { padding: 60px 0; }
+            .como-funciona-header { margin-bottom: 40px; }
+            .etapa-title-main { font-size: 1.5rem; margin-bottom: 20px; }
+            .etapa-list li { font-size: 1rem; }
+            .etapa-subtitle-center { margin: 30px auto 20px; }
+            
+            .etapa-subtitle-center.frase-efeito-1 { font-size: 1.05rem; font-weight: 700; }
+            .etapa-subtitle-center.frase-efeito-2 { font-size: 1.05rem; font-weight: 400; }
+
+            .como-funciona-subtitulo.mobile-subtitle-size { font-size: 1.375rem; line-height: 1.3; }
+
+            .etapa-img-wrapper { margin-left: -21px; margin-right: -21px; }
+            .etapa-img { border-radius: 12px; }
+
+            /* Seção 8 Mobile */
+            .dif-block-1 { padding: 50px 20px 60px; }
+            .diferencial-title { font-size: 1.35rem; }
+            .diferencial-subtitle { font-size: 0.75rem; white-space: nowrap; }
+            .dif-text { font-size: 1.1rem; padding: 0 10px; }
+            
+            .dif-img-wrapper {
+                margin-left: -21px; /* 21px margem negativa = exatos 3px de respiro lateral */
+                margin-right: -21px;
+            }
+            .dif-img {
+                max-height: none; 
+                width: calc(100% + 42px) !important;
+                max-width: none !important;
+                border-radius: 12px;
+            }
         }
-        .btn-cyan-violet:hover {
-            box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
+
+        @media (min-width: 769px) {
+            #sessao-audiencia { padding-bottom: 120px !important; } 
+            .hero-logo { max-width: 150px !important; margin-bottom: 32px !important; }
+            .hero .main-headline { margin-bottom: 40px !important; }
+            .hero .subheadline.desktop-only { font-size: 1.5rem !important; margin-bottom: 32px !important; max-width: 1050px !important; }
+            .hero .video-hook { font-size: 1.33rem !important; margin-bottom: 12px !important; white-space: nowrap !important; max-width: none !important; }
+            .como-funciona-subtitulo.desktop-only { font-size: 1.625rem; }
+            .comparativo-headline .comp-headline-line1 { white-space: nowrap; }
+
+            #sessao-teste-imagem { padding: 80px 0; }
+            #sessao-teste-imagem .container { padding-left: 24px; padding-right: 24px; }
+            #sessao-teste-imagem .demo-img { display: block; margin: 0 auto; max-width: 640px; width: 90%; height: auto; }
+
+            #sessao-testemunhos { padding: 90px 0 80px; }
+            .testemunhos-titulo { font-size: 2.6rem; }
+            .testemunhos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 100%; }
+            .testemunho-item-video  { order: 2; }
+            .testemunho-item-img1   { order: 1; }
+            .testemunho-item-img2   { order: 3; }
+            .testemunho-item-img3   { order: 4; }
+            .testemunho-item { max-width: 60%; margin: 0 auto; }
         }
 
     </style>
@@ -1356,7 +1092,6 @@
             Assista o método mais absurdamente fácil para gerir estas 3 áreas financeiras
         </p>
         
-        <!-- Video Container Principal com Controles Idênticos ao Depoimento -->
         <div class="video-container" id="hero-video-wrapper">
             <video id="hero-video" src="video-principal.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
             
@@ -1465,7 +1200,7 @@
 
             <div class="comparativo-grid">
 
-                <!-- Card Cinza: Métodos Tradicionais -->
+                <!-- Card Cinza -->
                 <div class="comp-card comp-card-gray">
                     <h3 class="comp-card-title">Métodos tradicionais</h3>
 
@@ -1491,7 +1226,7 @@
                     </div>
                 </div>
 
-                <!-- Card Brand: Método Guia Cash -->
+                <!-- Card Brand -->
                 <div class="comp-card comp-card-brand">
                     <h3 class="comp-card-title">Método Guia Cash</h3>
 
@@ -1548,7 +1283,6 @@
 
             <div class="testemunhos-grid">
 
-                <!-- Vídeo — top-right no desktop, primeiro no mobile -->
                 <div class="testemunho-item testemunho-item-video">
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
                     <div class="testemunho-video-wrapper" id="video-wrapper">
@@ -1578,19 +1312,16 @@
                     </div>
                 </div>
 
-                <!-- Imagem 1 — top-left no desktop, segunda no mobile -->
                 <div class="testemunho-item testemunho-item-img1">
                     <p class="testemunho-label">Fernanda Cunha - Loja virtual</p>
                     <img src="imagem-testemunho-um.jpeg" alt="Testemunho Fernanda Cunha" class="testemunho-img">
                 </div>
 
-                <!-- Imagem 2 — bot-left no desktop, terceira no mobile -->
                 <div class="testemunho-item testemunho-item-img2">
                     <p class="testemunho-label">Andreia Stankiewicz - Dentista</p>
                     <img src="imagem-testemunho-dois.jpeg" alt="Testemunho Andreia Stankiewicz" class="testemunho-img">
                 </div>
 
-                <!-- Imagem 3 — bot-right no desktop, quarta no mobile -->
                 <div class="testemunho-item testemunho-item-img3">
                     <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
                     <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
@@ -1688,97 +1419,96 @@
          SEÇÃO 8: DIFERENCIAL (Nova Seção)
     =========================================== -->
     <section id="sessao-diferencial">
-        
-        <!-- Container Branco Flutuante c/ Quebra Cabeça -->
-        <div class="diferencial-puzzle-wrapper">
+        <!-- Bloco 1: Degradê Cyan-Violeta -->
+        <div class="dif-block-1">
             <div class="diferencial-puzzle-box">
                 <div class="puzzle-pieces-container">
                     <!-- Peça 1 (PF) -->
-                    <svg viewBox="0 0 120 100" width="84" height="70" style="margin-right: -14px;">
-                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="3"/>
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="34" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
+                    <svg viewBox="0 0 120 100" width="70" height="60" style="margin-right: -10px;">
+                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
                     </svg>
                     <!-- Peça 2 (PJ) -->
-                    <svg viewBox="0 0 120 100" width="84" height="70">
-                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="3"/>
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="34" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
+                    <svg viewBox="0 0 120 100" width="70" height="60">
+                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="2"/>
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
                     </svg>
                     
                     <!-- Espaçamento que demonstra desencaixe parcial -->
-                    <div class="puzzle-gap" style="width: 12px;"></div>
+                    <div style="width: 12px;"></div>
                     
                     <!-- Peça 3 (D) -->
-                    <svg viewBox="0 0 100 100" width="70" height="70">
+                    <svg viewBox="0 0 100 100" width="60" height="60">
                         <defs>
                             <linearGradient id="yellowDGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#db941b" />
                                 <stop offset="100%" stop-color="#f5a722" />
                             </linearGradient>
                         </defs>
-                        <path d="M0,0 H100 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#FFFFFF" stroke="#f5a722" stroke-width="3" />
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="44" fill="url(#yellowDGrad)" text-anchor="middle" dominant-baseline="middle">D</text>
+                        <path d="M0,0 H100 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#FFFFFF" stroke="#f5a722" stroke-width="2" />
+                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="40" fill="url(#yellowDGrad)" text-anchor="middle" dominant-baseline="middle">D</text>
                     </svg>
                 </div>
+                
+                <h2 class="diferencial-title">O que nenhum sistema vai te entregar e o Guia Cash sim</h2>
+                <p class="diferencial-subtitle">EXAME FINANCEIRO PERSONALIZADO</p>
             </div>
         </div>
 
-        <div class="container">
-            <div class="diferencial-header">
-                <h2 class="diferencial-title">O que nenhum sistema vai te entregar e o Guia Cash sim</h2>
-                <p class="diferencial-subtitle">Exame financeiro personalizado</p>
-            </div>
+        <!-- Bloco 2: Fundo Cinza Claro -->
+        <div class="dif-block-2">
+            <div class="container">
+                <!-- Item 1 -->
+                <div class="dif-item">
+                    <p class="dif-text">Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</p>
+                    <div class="dif-img-wrapper">
+                        <img src="exame-financeiro- 3-areas.jpeg" alt="Exame Financeiro 3 Áreas" class="dif-img">
+                    </div>
+                </div>
 
-            <!-- Item 1 -->
-            <div class="dif-item">
-                <p class="dif-text">Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</p>
-                <div class="dif-img-wrapper">
-                    <img src="exame-financeiro- 3-areas.jpeg" alt="Exame Financeiro 3 Áreas" class="dif-img">
+                <!-- Item 2 -->
+                <div class="dif-item">
+                    <p class="dif-text">Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento nas suas dívidas de forma personalizada e automática</p>
+                    <div class="dif-img-wrapper">
+                        <img src="exame-financeiro-bacen.jpeg" alt="Exame Financeiro Bacen" class="dif-img">
+                    </div>
                 </div>
-            </div>
 
-            <!-- Item 2 -->
-            <div class="dif-item">
-                <p class="dif-text">Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento nas suas dívidas de forma personalizada e automática</p>
-                <div class="dif-img-wrapper">
-                    <img src="exame-financeiro-bacen.jpeg" alt="Exame Financeiro Bacen" class="dif-img">
+                <!-- Item 3 -->
+                <div class="dif-item">
+                    <p class="dif-text">Categorizador automático de perfil de dívida, que mostra qual é o tipo de resolução e o benefício possível para ela.</p>
+                    <div class="dif-img-wrapper">
+                        <img src="exame-financeiro-categorizador.jpeg" alt="Exame Financeiro Categorizador" class="dif-img">
+                    </div>
                 </div>
-            </div>
 
-            <!-- Item 3 -->
-            <div class="dif-item">
-                <p class="dif-text">Categorizador automático de perfil de dívida, que mostra qual é o tipo de resolução e o benefício possível para ela.</p>
-                <div class="dif-img-wrapper">
-                    <img src="exame-financeiro-categorizador.jpeg" alt="Exame Financeiro Categorizador" class="dif-img">
+                <!-- Item 4 -->
+                <div class="dif-item">
+                    <div class="dif-text">
+                        Mapa Inteligente das dívidas<br>
+                        Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN<br>
+                        <span class="dif-subtext">a) Visão de todos os tipos de dívidas PF e PJ.</span>
+                    </div>
+                    <div class="dif-img-wrapper">
+                        <img src="mapa-das-dividas.jpeg" alt="Mapa das dívidas" class="dif-img">
+                    </div>
                 </div>
-            </div>
 
-            <!-- Item 4 -->
-            <div class="dif-item">
-                <div class="dif-text">
-                    Mapa Inteligente das dívidas<br>
-                    Simulador de empréstimos e erros contratuais, conforme a calculadora do BACEN<br>
-                    <span class="dif-subtext">a) Visão de todos os tipos de dívidas PF e PJ.</span>
+                <!-- Item 5 -->
+                <div class="dif-item">
+                    <div class="dif-text">
+                        Tutoriais práticos em vídeo do sistema<br>
+                        <span class="dif-subtext">a) Direto ao ponto, exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
+                    </div>
+                    <div class="dif-img-wrapper">
+                        <img src="video- aula.jpeg" alt="Tutoriais práticos" class="dif-img">
+                    </div>
                 </div>
-                <div class="dif-img-wrapper">
-                    <img src="mapa-das-dividas.jpeg" alt="Mapa das dívidas" class="dif-img">
-                </div>
-            </div>
 
-            <!-- Item 5 -->
-            <div class="dif-item">
-                <div class="dif-text">
-                    Tutoriais práticos em vídeo do sistema<br>
-                    <span class="dif-subtext">a) Direto ao ponto, exemplos de casos reais para aplicar no seu perfil e desafio prático de implementação rápida</span>
-                </div>
-                <div class="dif-img-wrapper">
-                    <img src="video- aula.jpeg" alt="Tutoriais práticos" class="dif-img">
+                <div class="diferencial-cta">
+                    <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
                 </div>
             </div>
-
-            <div class="diferencial-cta">
-                <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
-            </div>
-            
         </div>
     </section>
 
@@ -1877,7 +1607,6 @@
     <!-- JS GLOBAL DOS VÍDEOS -->
     <script>
         (function() {
-            
             function setupVideoPlayer(config) {
                 var vid         = document.getElementById(config.videoId);
                 var overlay     = document.getElementById(config.overlayId);
@@ -1890,7 +1619,6 @@
 
                 if (!vid) return;
 
-                /* Mudo absoluto — garante autoplay em iOS e Android */
                 vid.muted = true;
                 vid.defaultMuted = true;
 
@@ -1901,7 +1629,6 @@
                     }
                 }
 
-                /* Tenta play agressivamente com retry a cada 500ms */
                 function forceAutoplay() {
                     vid.play().then(function() {
                         atualizarInterface(true);
@@ -1910,11 +1637,9 @@
                     });
                 }
 
-                /* Inicia carregamento e play */
                 vid.load();
                 forceAutoplay();
 
-                /* ---- Barra de progresso ---- */
                 vid.addEventListener('timeupdate', function() {
                     if (vid.duration && fill) {
                         fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
@@ -1930,7 +1655,6 @@
                     });
                 }
 
-                /* ---- Botão play/pause ---- */
                 if (playBtn) {
                     playBtn.addEventListener('click', function(e) {
                         e.stopPropagation();
@@ -1944,29 +1668,21 @@
                     });
                 }
 
-                /* ---- Clicar em qualquer área do wrapper ---- */
                 if (wrapper) {
                     wrapper.addEventListener('click', function(e) {
-                        /* Ignora clique nos controles de baixo */
                         if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
                         if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
                         
-                        /* SE O OVERLAY AINDA ESTIVER VISÍVEL, qualquer clique no vídeo vai desmutar */
                         if (overlay && overlay.style.display !== 'none') {
                             vid.muted = false;
                             vid.currentTime = 0;
-                            vid.play().catch(function(){}); // Catch para evitar erros no console do Android
+                            vid.play().catch(function(){});
                             overlay.style.display = 'none';
                             atualizarInterface(true);
-                            
-                            // Se foi ativado pelo clique, não precisa mais monitorar o global
-                            if (config.unmuteOnInteraction) {
-                                removeGlobalInteractionListeners();
-                            }
+                            if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
                             return; 
                         }
 
-                        /* Se o vídeo já estiver desmutado (sem overlay), funciona como play/pause padrão */
                         if (vid.paused) {
                             vid.play();
                             atualizarInterface(true);
@@ -1977,23 +1693,18 @@
                     });
                 }
 
-                /* ---- Overlay direto: ativa som ao clicar (mantido por segurança) ---- */
                 if (overlay) {
                     overlay.addEventListener('click', function(e) {
                         e.stopPropagation();
                         vid.muted = false;
                         vid.currentTime = 0;
-                        vid.play().catch(function(){}); // Evita erro se o click vier muito rápido
+                        vid.play().catch(function(){});
                         overlay.style.display = 'none';
                         atualizarInterface(true);
-                        
-                        if (config.unmuteOnInteraction) {
-                            removeGlobalInteractionListeners();
-                        }
+                        if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
                     });
                 }
 
-                /* ---- IntersectionObserver: pausa ao sair da tela ---- */
                 var vObs = new IntersectionObserver(function(entries) {
                     if (entries[0].isIntersecting) {
                         forceAutoplay();
@@ -2005,10 +1716,6 @@
 
                 vObs.observe(vid);
 
-                /* ========================================================
-                   LÓGICA EXCLUSIVA: ATIVAR SOM NA PRIMEIRA INTERAÇÃO GERAL 
-                   Otimizado para o Android Chrome.
-                ======================================================== */
                 var scrollAttempted = false;
 
                 function removeGlobalInteractionListeners() {
@@ -2024,7 +1731,6 @@
                         removeGlobalInteractionListeners();
                         return;
                     }
-
                     if (e.type === 'scroll' && scrollAttempted) return;
                     if (e.type === 'scroll') scrollAttempted = true;
 
@@ -2039,7 +1745,6 @@
                             removeGlobalInteractionListeners();
                         }).catch(function() {
                             vid.muted = true; 
-                            
                             setTimeout(function() {
                                 vid.play().catch(function(){});
                             }, 50);
@@ -2056,7 +1761,6 @@
                 }
             }
 
-            // Inicializando Vídeo Principal da Hero Section
             setupVideoPlayer({
                 videoId: 'hero-video',
                 overlayId: 'hero-video-overlay',
@@ -2069,7 +1773,6 @@
                 unmuteOnInteraction: true 
             });
 
-            // Inicializando Vídeo de Testemunho
             setupVideoPlayer({
                 videoId: 'video-testemunho',
                 overlayId: 'video-overlay',
@@ -2083,6 +1786,5 @@
 
         })();
     </script>
-
 </body>
 </html>
