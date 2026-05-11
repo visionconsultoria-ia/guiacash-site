@@ -56,7 +56,7 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Correção da listra branca no iPhone */
             width: 100%;
             position: relative;
             font-family: 'Inter', sans-serif;
@@ -812,13 +812,13 @@
 
         .diferencial-title-new {
             color: #FFFFFF;
-            font-size: 2.3rem;
+            font-size: 3rem; /* Fonte Aumentada no PC */
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.03em;
             text-align: center;
             margin: 0 auto 12px;
-            max-width: 900px;
+            max-width: 1050px;
             width: 100%;
         }
 
@@ -1006,19 +1006,22 @@
 
             /* Seção 8 Mobile */
             .dif-block-1 { padding: 60px 0 90px; }
+            
             .diferencial-title-new { 
-                font-size: 1.8rem; /* Suficiente para caber em 2 linhas com perfeição */
-                padding: 0 10px; 
-                line-height: 1.2; 
+                font-size: 2.05rem; /* Fonte Aumentada, configurada para manter em 2 linhas */
+                padding: 0 2px; /* Margem minúscula para expandir limites do texto */
+                line-height: 1.15; 
+                letter-spacing: -0.04em;
             }
+            
             .diferencial-subtitle-new { font-size: 0.85rem; margin-bottom: 30px; }
             
-            /* Ajuste preciso para o Container no Mobile (largura e borda gradiente) */
+            /* Ajuste preciso para o Container no Mobile (largura reduzida e borda gradiente 2px) */
             .diferencial-puzzle-box { 
                 width: 85%; 
                 max-width: 360px;
                 padding: 16px 10px; 
-                /* Remove a borda sólida e cria uma borda gradiente usando backgrounds combinados */
+                /* Borda gradiente de 2px via sobreposição de Backgrounds */
                 border: 2px solid transparent !important;
                 background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
                             linear-gradient(90deg, #db941b, #fbbb4f) border-box !important;
@@ -1027,12 +1030,13 @@
             .dif-text { font-size: 1.1rem; padding: 0 10px; }
             
             .dif-img-wrapper {
-                margin-left: -21px; /* Exatos 3px de respiro lateral */
+                margin-left: -21px; /* Exatos 3px de respiro lateral (24px de padding geral - 21px margem = 3px) */
                 margin-right: -21px;
+                width: auto;
             }
             .dif-img {
                 max-height: none; 
-                width: calc(100% + 42px) !important;
+                width: 100% !important; /* Corrige a quebra e expansão do fundo branco limitando imagem ao espaço projetado */
                 max-width: none !important;
                 border-radius: 12px;
             }
@@ -1067,21 +1071,26 @@
 
     <div class="top-gradient-line"></div>
 
-    <!-- Definição global de Gradients para os SVGs de Quebra-cabeça -->
+    <!-- Definição global de Gradients para os SVGs de Quebra-cabeça da Seção 8 -->
     <svg class="svg-defs">
         <defs>
             <linearGradient id="gradPF" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#5c4bdf" />
                 <stop offset="100%" stop-color="#2a6ebd" />
             </linearGradient>
+            
             <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#2a6ebd" />
                 <stop offset="65%" stop-color="#009196" />
-                <stop offset="100%" stop-color="#db941b" />
+                <!-- Mistura final Cyan + Amarelo que vai conectar com a próxima peça -->
+                <stop offset="100%" stop-color="#8cdb97" /> 
             </linearGradient>
+            
+            <!-- Início Verde-água/Cyan invertendo o amarelo (Amarelo Claro > Amarelo Ouro) -->
             <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#db941b" />
-                <stop offset="100%" stop-color="#fbbb4f" />
+                <stop offset="0%" stop-color="#8cdb97" />  <!-- Começa com a cor do final da PJ -->
+                <stop offset="10%" stop-color="#fbbb4f" /> <!-- Logo vai p/ Amarelo Claro -->
+                <stop offset="100%" stop-color="#d68910" /> <!-- Termina Amarelo Ouro Escuro -->
             </linearGradient>
         </defs>
     </svg>
