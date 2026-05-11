@@ -1039,7 +1039,7 @@
 
         .pacote-wrapper {
             position: relative;
-            max-width: 1000px;
+            max-width: 1200px; /* Aumentado em 20% no Desktop */
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -1047,7 +1047,7 @@
         .pacote-gradient-box {
             background: linear-gradient(90deg, #5c4bdf, #009196);
             border-radius: 24px;
-            padding: 40px; 
+            padding: 50px; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -1055,12 +1055,13 @@
         }
 
         .pacote-img {
-            width: 100%;
+            width: 110%; /* Aumentado no Desktop p/ efeito 3D */
             height: auto;
-            max-width: 1000px; 
+            max-width: 1200px; 
             display: block;
-            margin-top: -80px; /* Faz a imagem saltar para fora por cima */
-            margin-bottom: -50px; /* Faz a imagem saltar para fora por baixo */
+            margin-left: -5%;
+            margin-top: -100px; /* Proporção saltando para fora */
+            margin-bottom: -60px; /* Proporção saltando para fora */
             position: relative;
             z-index: 2;
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
@@ -1150,7 +1151,7 @@
             .dif-block-1 { padding: 60px 0 90px; }
             
             .diferencial-title-new { 
-                font-size: 2.05rem;
+                font-size: 2.05rem; 
                 padding: 0 4px; 
                 line-height: 1.15; 
                 letter-spacing: -0.04em;
@@ -1230,10 +1231,23 @@
 
             /* Seção 10 (Pacote Total) Mobile */
             #sessao-pacote { padding: 60px 0 80px; }
-            .pacote-header { margin-bottom: 50px; }
+            #sessao-pacote .container { padding: 0; } /* Remove padding p/ usar 100% largura */
+            .pacote-header { margin-bottom: 60px; padding: 0 24px; }
             .pacote-title { font-size: 1.8rem; }
-            .pacote-gradient-box { border-radius: 16px; padding: 20px 10px; }
-            .pacote-img { margin-top: -40px; margin-bottom: -30px; }
+            
+            .pacote-wrapper { padding: 0; }
+            .pacote-gradient-box { 
+                margin: 0 30px; /* Faixa estreita que fica no fundo */
+                padding: 20px 0; 
+                border-radius: 16px; 
+            }
+            .pacote-img { 
+                width: 120%; /* Expande p/ encostar quase na borda do celular */
+                max-width: none !important; 
+                margin-left: -10%; 
+                margin-top: -25%; 
+                margin-bottom: -15%; 
+            }
         }
 
         @media (min-width: 769px) {
@@ -1726,7 +1740,7 @@
                 <!-- Item 1 (Introdução não alterada pelo prompt) -->
                 <div class="dif-item">
                     <p class="dif-text">
-                       <strong>1) Diagnóstico das 3 áreas financeiras</strong><span style="font-weight: 400;"> o que está acontecendo com a PF, PJ e Dívidas de forma interligada</span>
+                       <strong>Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</strong>
                     </p>
                     <div class="dif-img-wrapper">
                         <img src="exame-financeiro- 3-areas.jpeg" alt="Exame Financeiro 3 Áreas" class="dif-img">
