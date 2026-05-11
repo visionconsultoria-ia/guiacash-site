@@ -1231,22 +1231,29 @@
 
             /* Seção 10 (Pacote Total) Mobile */
             #sessao-pacote { padding: 60px 0 80px; }
-            #sessao-pacote .container { padding: 0; } /* Remove padding p/ usar 100% largura */
+            #sessao-pacote .container { padding: 0; } 
             .pacote-header { margin-bottom: 60px; padding: 0 24px; }
             .pacote-title { font-size: 1.8rem; }
             
             .pacote-wrapper { padding: 0; }
             .pacote-gradient-box { 
-                margin: 0 30px; /* Faixa estreita que fica no fundo */
-                padding: 20px 0; 
+                margin: 0 30px; /* Eixo horizontal inalterado conforme solicitado */
+                padding: 10px 0; 
                 border-radius: 16px; 
             }
             .pacote-img { 
-                width: 120%; /* Expande p/ encostar quase na borda do celular */
+                width: calc(100vw - 12px) !important; /* Garante exatamente 6px de margem em cada lado da tela */
                 max-width: none !important; 
-                margin-left: -10%; 
-                margin-top: -25%; 
-                margin-bottom: -15%; 
+                
+                /* Centraliza a imagem no eixo X em relação à tela do Viewport Mobile */
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                
+                /* Margens reduzidas cirurgicamente para que a caixa de degradê acompanhe a imagem no eixo vertical, quase englobando-a */
+                margin-top: -12px; 
+                margin-bottom: -12px; 
+                margin-left: 0; /* Reseta o margin-left antigo */
             }
         }
 
