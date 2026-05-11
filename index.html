@@ -812,7 +812,7 @@
 
         .diferencial-title-new {
             color: #FFFFFF;
-            font-size: 3rem; /* Fonte Aumentada no PC */
+            font-size: 3.0rem; /* Fonte Aumentada no PC */
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.03em;
@@ -1009,7 +1009,7 @@
             
             .diferencial-title-new { 
                 font-size: 2.05rem; /* Fonte Aumentada, configurada para manter em 2 linhas */
-                padding: 0 2px; /* Margem minúscula para expandir limites do texto */
+                padding: 0 4px; /* Margem minúscula para expandir limites do texto sem encostar nas extremidades do celular */
                 line-height: 1.15; 
                 letter-spacing: -0.04em;
             }
@@ -1074,23 +1074,24 @@
     <!-- Definição global de Gradients para os SVGs de Quebra-cabeça da Seção 8 -->
     <svg class="svg-defs">
         <defs>
+            <!-- Peça PF: Roxo para Azulado -->
             <linearGradient id="gradPF" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#5c4bdf" />
-                <stop offset="100%" stop-color="#2a6ebd" />
+                <stop offset="100%" stop-color="#277ac0" />
             </linearGradient>
             
+            <!-- Peça PJ: Azulado para Cyan, finalizando com o tom suave "Verde-Água/Amarelado" -->
             <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#2a6ebd" />
-                <stop offset="65%" stop-color="#009196" />
-                <!-- Mistura final Cyan + Amarelo que vai conectar com a próxima peça -->
-                <stop offset="100%" stop-color="#8cdb97" /> 
+                <stop offset="0%" stop-color="#277ac0" />
+                <stop offset="50%" stop-color="#009196" />
+                <stop offset="100%" stop-color="#e2c45f" /> 
             </linearGradient>
             
-            <!-- Início Verde-água/Cyan invertendo o amarelo (Amarelo Claro > Amarelo Ouro) -->
+            <!-- Peça Dívidas: Inicia no "Verde-Água/Amarelado" exato, vira amarelo claro aos 10% e termina Ouro Escuro -->
             <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#8cdb97" />  <!-- Começa com a cor do final da PJ -->
-                <stop offset="10%" stop-color="#fbbb4f" /> <!-- Logo vai p/ Amarelo Claro -->
-                <stop offset="100%" stop-color="#d68910" /> <!-- Termina Amarelo Ouro Escuro -->
+                <stop offset="0%" stop-color="#e2c45f" />  
+                <stop offset="10%" stop-color="#fbbb4f" /> 
+                <stop offset="100%" stop-color="#d68910" /> 
             </linearGradient>
         </defs>
     </svg>
@@ -1492,6 +1493,7 @@
         <!-- Bloco 1: Degradê Roxo->Cyan -->
         <div class="dif-block-1">
             
+            <!-- Título modificado e com fonte aumentada -->
             <h2 class="diferencial-title-new">O que ninguém entrega<br>somente o Guia Cash?</h2>
             <p class="diferencial-subtitle-new">EXAME FINANCEIRO PERSONALIZADO</p>
             
@@ -1505,16 +1507,16 @@
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
                         </svg>
                         
-                        <!-- Peça 2 (PJ - Intermediário p/ Cyan e extremidade Amarela) -->
+                        <!-- Peça 2 (PJ - Intermediário p/ Cyan e extremidade Verde-Água/Amarelado) -->
                         <svg viewBox="0 0 120 100" width="70" height="60" style="flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradPJ)" stroke="#FFFFFF" stroke-width="3"/>
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
                         </svg>
                         
-                        <!-- Espaçamento Reduzido (Mais próximo) -->
-                        <div style="width: 3px; flex-shrink: 0;"></div>
+                        <!-- Espaçamento Reduzido (Mais próximo e natural) -->
+                        <div class="desktop-gap" style="flex-shrink: 0;"></div>
                         
-                        <!-- Peça 3 (Dívidas - Reduzida em 10%, começando com a mesma cor exata do encaixe PJ) -->
+                        <!-- Peça 3 (Dívidas - Reduzida em 10%, começa Verde-Água/Amarelado > Amarelo Claro > Amarelo Escuro) -->
                         <svg viewBox="0 0 162 100" width="94" height="60" style="flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H162 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradDiv)" stroke="#FFFFFF" stroke-width="3" />
                             <text x="93" y="54" font-family="Inter" font-weight="900" font-size="28" fill="#FFF" text-anchor="middle" dominant-baseline="middle">Dívidas</text>
