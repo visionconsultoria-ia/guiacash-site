@@ -1242,19 +1242,26 @@
             .pacote-wrapper { 
                 padding: 0; 
                 width: 100%;
+                /* Movendo 10% para cima container e imagem ao mesmo tempo (eixo vertical) */
+                transform: translateY(-10%); 
             }
             
             .pacote-gradient-box { 
-                width: calc(100% - 24px); /* Maior no eixo horizontal (era calc(100% - 60px)) */
-                height: 65%; /* Diminuído em 10% no eixo vertical (era 75%) */
+                width: calc(100% - 24px); 
+                height: 65%; 
                 border-radius: 16px; 
             }
             
             .pacote-img { 
-                /* Garante matematicamente e perfeitamente exatos 6px em cada margem em qualquer aparelho móvel */
-                width: calc(100% - 12px) !important; 
+                /* Aumentando a imagem em 10% em relação ao código anterior */
+                width: 110% !important; 
                 max-width: none !important; 
-                margin: 0 auto !important; 
+                
+                /* Garantindo que ela fique matematicamente centralizada mesmo sendo maior que a tela */
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0 !important; 
             }
         }
 
