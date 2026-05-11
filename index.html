@@ -91,7 +91,7 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
+        /* Variável de CTA customizado (Cyan -> Violeta) */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -924,6 +924,101 @@
         }
 
         /* =========================================
+           SEÇÃO 9: BÔNUS ESPECIAIS
+        ========================================= */
+        #sessao-bonus {
+            background: linear-gradient(90deg, #5c4bdf, #009196);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .bonus-title {
+            text-align: center;
+            color: #FFFFFF !important;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 70px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 70px;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-spacer,
+        .timeline-content {
+            width: calc(50% - 40px);
+        }
+
+        .left-side .timeline-content {
+            text-align: right;
+        }
+
+        .right-side .timeline-content {
+            text-align: left;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 56px;
+            height: 56px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            color: #006974;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .bonus-subtitle {
+            color: #FFFFFF;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .bonus-text {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
         ========================================= */
         .mobile-only { display: none !important; }
@@ -1046,6 +1141,47 @@
                 max-width: none !important;
                 border-radius: 12px;
             }
+
+            /* Seção 9 (Bônus) Mobile */
+            #sessao-bonus { padding: 60px 0; }
+            .bonus-title { font-size: 2rem; margin-bottom: 50px; }
+            .timeline-container { padding: 0; }
+            
+            .timeline-line { 
+                left: 28px; 
+                transform: none; 
+            }
+            
+            .timeline-item { 
+                flex-direction: column !important; 
+                align-items: flex-start !important; 
+                margin-bottom: 50px; 
+            }
+            
+            .timeline-spacer { display: none !important; }
+            
+            .timeline-content {
+                width: 100% !important;
+                padding-left: 80px; 
+                text-align: left !important;
+            }
+            
+            .left-side .timeline-content, 
+            .right-side .timeline-content {
+                text-align: left !important;
+            }
+            
+            .timeline-icon {
+                left: 28px;
+                top: 0;
+                transform: translate(-50%, 0);
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
+            
+            .bonus-subtitle { font-size: 1.35rem; margin-top: 4px; }
+            .bonus-text { font-size: 1.05rem; }
         }
 
         @media (min-width: 769px) {
@@ -1493,7 +1629,7 @@
     </section>
 
     <!-- ==========================================
-         SEÇÃO 8: DIFERENCIAL (Nova Seção)
+         SEÇÃO 8: DIFERENCIAL
     =========================================== -->
     <section id="sessao-diferencial">
         <!-- Bloco 1: Degradê Roxo->Cyan -->
@@ -1535,7 +1671,7 @@
         <!-- Bloco 2: Fundo Branco Puro -->
         <div class="dif-block-2">
             <div class="container">
-                <!-- Item 1 (Introdução não alterada pelo prompt) -->
+                <!-- Item 1 -->
                 <div class="dif-item">
                     <p class="dif-text">
                        <strong>1) Diagnóstico das 3 áreas financeiras</strong><span style="font-weight: 400;"> o que está acontecendo com a PF, PJ e Dívidas de forma interligada</span>
@@ -1588,6 +1724,48 @@
 
                 <div class="diferencial-cta">
                     <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 9: BÔNUS ESPECIAIS
+    =========================================== -->
+    <section id="sessao-bonus">
+        <div class="container">
+            <h2 class="bonus-title">Bônus Especiais</h2>
+            
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                
+                <!-- Bônus 1 -->
+                <div class="timeline-item left-side">
+                    <div class="timeline-content">
+                        <p class="bonus-subtitle">🎁 Curso enxuto</p>
+                        <p class="bonus-text">
+                            Do método “Com dinheiro e sem dívida”<br>
+                            Comece a resolvê-las e liberte-se destas amarras
+                        </p>
+                    </div>
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <div class="timeline-spacer"></div>
+                </div>
+
+                <!-- Bônus 2 -->
+                <div class="timeline-item right-side">
+                    <div class="timeline-spacer"></div>
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-gift"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <p class="bonus-subtitle">🎁 Check-up minhas dívidas</p>
+                        <p class="bonus-text">
+                            Material para execução prática dos ensinamentos e Script de pareceres ao banco
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
