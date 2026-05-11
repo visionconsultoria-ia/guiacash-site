@@ -792,59 +792,85 @@
             width: 100%;
         }
 
+        /* Definições SVG Gradiente Global para Quebra-cabeças */
+        .svg-defs {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
         .dif-block-1 {
-            background: linear-gradient(135deg, #009196, #5c4bdf);
-            padding: 80px 20px 100px;
+            /* Degradê invertido: Roxo para Cyan */
+            background: linear-gradient(135deg, #5c4bdf, #009196);
+            padding: 80px 0 110px;
             width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             position: relative;
+        }
+
+        .diferencial-title-new {
+            color: #FFFFFF;
+            font-size: 2.3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            text-align: center;
+            margin: 0 auto 12px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .diferencial-subtitle-new {
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: center;
+            margin: 0 auto 40px;
+        }
+
+        .diferencial-puzzle-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            /* Fica 1/3 para fora (abaixo da linha do bloco) e 2/3 para dentro */
+            transform: translateY(33.33%);
+            display: flex;
+            justify-content: center;
+            z-index: 10;
         }
 
         .diferencial-puzzle-box {
             background: #FFFFFF;
-            border: 1px solid #f5a722;
+            /* Margem (Borda) amarela de 3px */
+            border: 3px solid #f5a722;
             border-radius: 20px;
             padding: 24px 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            width: 100%;
-            max-width: 640px;
-            text-align: center;
             display: flex;
-            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 500px;
         }
 
         .puzzle-pieces-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-        }
-
-        .diferencial-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #363636;
-            margin-bottom: 12px;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            max-width: 95%;
-        }
-
-        .diferencial-subtitle {
-            font-size: 0.9rem;
-            font-weight: 800;
-            color: #888888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0;
+            width: 100%;
+            margin: 0;
         }
 
         .dif-block-2 {
-            background-color: #eeefef;
+            /* Fundo branco como solicitado */
+            background-color: #FFFFFF;
             width: 100%;
-            padding: 80px 0;
+            padding: 100px 0 80px;
         }
 
         .dif-item {
@@ -979,13 +1005,19 @@
             .etapa-img { border-radius: 12px; }
 
             /* Seção 8 Mobile */
-            .dif-block-1 { padding: 50px 20px 60px; }
-            .diferencial-title { font-size: 1.35rem; }
-            .diferencial-subtitle { font-size: 0.75rem; white-space: nowrap; }
+            .dif-block-1 { padding: 60px 0 90px; }
+            .diferencial-title-new { 
+                font-size: 1.65rem; /* Ajustado precisamente para forçar 2 linhas e cobrir bordas */
+                padding: 0 4px; 
+                line-height: 1.15; 
+            }
+            .diferencial-subtitle-new { font-size: 0.85rem; margin-bottom: 30px; }
+            .diferencial-puzzle-box { padding: 16px 10px; width: 95%; }
+
             .dif-text { font-size: 1.1rem; padding: 0 10px; }
             
             .dif-img-wrapper {
-                margin-left: -21px; /* 21px margem negativa = exatos 3px de respiro lateral */
+                margin-left: -21px; /* Exatos 3px de respiro lateral */
                 margin-right: -21px;
             }
             .dif-img {
@@ -1024,6 +1056,25 @@
 <body>
 
     <div class="top-gradient-line"></div>
+
+    <!-- Definição global de Gradients para os SVGs de Quebra-cabeça -->
+    <svg class="svg-defs">
+        <defs>
+            <linearGradient id="gradPF" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#5c4bdf" />
+                <stop offset="100%" stop-color="#2a6ebd" />
+            </linearGradient>
+            <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#2a6ebd" />
+                <stop offset="70%" stop-color="#009196" />
+                <stop offset="100%" stop-color="#d6b158" />
+            </linearGradient>
+            <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#fdb438" />
+                <stop offset="100%" stop-color="#f5a722" />
+            </linearGradient>
+        </defs>
+    </svg>
 
     <!-- ==========================================
          SEÇÃO 1: HERO
@@ -1419,43 +1470,43 @@
          SEÇÃO 8: DIFERENCIAL (Nova Seção)
     =========================================== -->
     <section id="sessao-diferencial">
-        <!-- Bloco 1: Degradê Cyan-Violeta -->
+        <!-- Bloco 1: Degradê Roxo->Cyan -->
         <div class="dif-block-1">
-            <div class="diferencial-puzzle-box">
-                <div class="puzzle-pieces-container">
-                    <!-- Peça 1 (PF) -->
-                    <svg viewBox="0 0 120 100" width="70" height="60" style="margin-right: -10px;">
-                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="2"/>
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
-                    </svg>
-                    <!-- Peça 2 (PJ) -->
-                    <svg viewBox="0 0 120 100" width="70" height="60">
-                        <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#71717A" stroke="#FFFFFF" stroke-width="2"/>
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
-                    </svg>
-                    
-                    <!-- Espaçamento que demonstra desencaixe parcial -->
-                    <div style="width: 12px;"></div>
-                    
-                    <!-- Peça 3 (D) -->
-                    <svg viewBox="0 0 100 100" width="60" height="60">
-                        <defs>
-                            <linearGradient id="yellowDGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#db941b" />
-                                <stop offset="100%" stop-color="#f5a722" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M0,0 H100 V100 H0 V65 C25,65 25,35 0,35 Z" fill="#FFFFFF" stroke="#f5a722" stroke-width="2" />
-                        <text x="50" y="54" font-family="Inter" font-weight="900" font-size="40" fill="url(#yellowDGrad)" text-anchor="middle" dominant-baseline="middle">D</text>
-                    </svg>
+            
+            <h2 class="diferencial-title-new">O que nenhum sistema vai te entregar <br class="mobile-only">e o Guia Cash sim</h2>
+            <p class="diferencial-subtitle-new">EXAME FINANCEIRO PERSONALIZADO</p>
+            
+            <!-- Caixa branca do Quebra-Cabeça (com Borda 3px) -->
+            <div class="diferencial-puzzle-wrapper">
+                <div class="diferencial-puzzle-box">
+                    <div class="puzzle-pieces-container">
+                        <!-- Peça 1 (PF - Roxo p/ intermediário) -->
+                        <svg viewBox="0 0 120 100" width="70" height="60" style="margin-right: -10px; flex-shrink: 0; overflow: visible;">
+                            <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="url(#gradPF)" stroke="#FFFFFF" stroke-width="3"/>
+                            <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
+                        </svg>
+                        
+                        <!-- Peça 2 (PJ - Intermediário p/ Cyan/Amarelo) -->
+                        <svg viewBox="0 0 120 100" width="70" height="60" style="flex-shrink: 0; overflow: visible;">
+                            <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradPJ)" stroke="#FFFFFF" stroke-width="3"/>
+                            <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
+                        </svg>
+                        
+                        <!-- Espaçamento Leve: Quebra-Cabeça Separado, porém muito mais próximo -->
+                        <div style="width: 6px; flex-shrink: 0;"></div>
+                        
+                        <!-- Peça 3 (Dívidas - Amarelo, texto branco) -->
+                        <svg viewBox="0 0 180 100" width="105" height="60" style="flex-shrink: 0; overflow: visible;">
+                            <path d="M0,0 H180 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradDiv)" stroke="#FFFFFF" stroke-width="3" />
+                            <text x="102" y="54" font-family="Inter" font-weight="900" font-size="28" fill="#FFF" text-anchor="middle" dominant-baseline="middle">Dívidas</text>
+                        </svg>
+                    </div>
                 </div>
-                
-                <h2 class="diferencial-title">O que nenhum sistema vai te entregar e o Guia Cash sim</h2>
-                <p class="diferencial-subtitle">EXAME FINANCEIRO PERSONALIZADO</p>
             </div>
+
         </div>
 
-        <!-- Bloco 2: Fundo Cinza Claro -->
+        <!-- Bloco 2: Fundo Branco -->
         <div class="dif-block-2">
             <div class="container">
                 <!-- Item 1 -->
