@@ -91,7 +91,7 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 original */
+        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -99,27 +99,6 @@
         }
         .btn-cyan-violet:hover {
             box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
-        }
-
-        /* Nova Variável de CTA customizado (Violeta -> Cyan) e texto "Compra segura" */
-        .btn-violet-cyan {
-            background: linear-gradient(90deg, #5c4bdf, #009196) !important;
-            box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
-            color: #FFFFFF !important;
-        }
-        .btn-violet-cyan:hover {
-            box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
-        }
-
-        .safe-buy-text {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 3px;
-            font-size: 0.85rem;
-            color: #777777; /* Cinza médio */
-            font-weight: 500;
         }
 
         /* =========================================
@@ -575,7 +554,7 @@
             SEÇÃO 6: TESTEMUNHOS & VÍDEOS GLOBAIS
         ========================================= */
         #sessao-testemunhos {
-            background: linear-gradient(135deg, #009196, #006974);
+            background-color: #009196;
             padding: 80px 0 60px;
         }
 
@@ -1015,17 +994,9 @@
             align-items: center;
             justify-content: center;
             z-index: 2;
+            color: #006974;
             font-size: 1.5rem;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-
-        /* Degradê para os presentes do Bônus */
-        .timeline-icon i {
-            background: linear-gradient(135deg, #5c4bdf, #009196);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
         }
 
         .bonus-subtitle {
@@ -1272,22 +1243,18 @@
                 padding: 0; 
                 width: 100%;
                 display: block !important; /* Desativa o flexbox no mobile que estava jogando a imagem pro lado */
-                /* Movendo 10% para cima container e imagem ao mesmo tempo (eixo vertical) */
                 transform: translateY(-10%); 
             }
             
             .pacote-gradient-box { 
-                width: calc(100% - 24px); /* Maior no eixo horizontal (era calc(100% - 60px)) */
-                height: 65%; /* Diminuído em 10% no eixo vertical (era 75%) */
+                width: calc(100% - 24px); 
+                height: 65%; 
                 border-radius: 16px; 
             }
             
             .pacote-img { 
-                /* Aumentando a imagem em 10% em relação ao código anterior */
                 width: 110% !important; 
                 max-width: none !important; 
-                
-                /* Garantindo que ela fique matematicamente centralizada mesmo sendo maior que a tela */
                 position: relative !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
@@ -1440,13 +1407,7 @@
             </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
-            <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
-            <div class="safe-buy-text">
-                <svg style="width: 0.9em; height: 0.9em; margin-bottom: -2px;" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M144 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48H144v-48zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64v192c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64h16zM64 256v192h320V256H64z"/></svg>
-                Compra segura
-            </div>
-        </div>
+        <a href="#oferta" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
     </section>
 
     <!-- ==========================================
@@ -1585,13 +1546,7 @@
             </div>
 
             <div class="comparativo-cta-wrapper">
-                <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
-                    <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
-                    <div class="safe-buy-text">
-                        <svg style="width: 0.9em; height: 0.9em; margin-bottom: -2px;" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M144 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48H144v-48zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64v192c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64h16zM64 256v192h320V256H64z"/></svg>
-                        Compra segura
-                    </div>
-                </div>
+                <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
 
         </div>
@@ -1745,13 +1700,7 @@
             </div>
 
             <div class="como-funciona-cta">
-                <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
-                    <a href="#oferta" class="btn-cta btn-violet-cyan">Quero isso para mim</a>
-                    <div class="safe-buy-text">
-                        <svg style="width: 0.9em; height: 0.9em; margin-bottom: -2px;" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M144 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48H144v-48zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64v192c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64h16zM64 256v192h320V256H64z"/></svg>
-                        Compra segura
-                    </div>
-                </div>
+                <a href="#oferta" class="btn-cta btn-gradient text-white" style="color: #FFFFFF !important;">Quero isso para mim</a>
             </div>
 
         </div>
@@ -1853,13 +1802,7 @@
                 </div>
 
                 <div class="diferencial-cta">
-                    <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
-                        <a href="#oferta" class="btn-cta btn-violet-cyan">Quero resolver as finanças</a>
-                        <div class="safe-buy-text">
-                            <svg style="width: 0.9em; height: 0.9em; margin-bottom: -2px;" viewBox="0 0 448 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M144 144c0-44.2 35.8-80 80-80s80 35.8 80 80v48H144v-48zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64v192c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64h16zM64 256v192h320V256H64z"/></svg>
-                            Compra segura
-                        </div>
-                    </div>
+                    <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
                 </div>
             </div>
         </div>
