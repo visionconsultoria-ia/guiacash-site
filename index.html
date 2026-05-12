@@ -1242,7 +1242,7 @@
             .pacote-wrapper { 
                 padding: 0; 
                 width: 100%;
-                /* Movendo 10% para cima container e imagem ao mesmo tempo (eixo vertical) */
+                display: block !important; /* Desativa o flexbox no mobile que estava jogando a imagem pro lado */
                 transform: translateY(-10%); 
             }
             
@@ -1253,14 +1253,11 @@
             }
             
             .pacote-img { 
-                /* Aumentando a imagem em 10% em relação ao código anterior */
                 width: 110% !important; 
                 max-width: none !important; 
-                
-                /* Garantindo que ela fique matematicamente centralizada mesmo sendo maior que a tela */
-                position: relative;
-                left: 50%;
-                transform: translateX(-50%);
+                position: relative !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
                 margin: 0 !important; 
             }
         }
