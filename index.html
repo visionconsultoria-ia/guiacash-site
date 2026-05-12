@@ -121,12 +121,12 @@
             z-index: 10;
             line-height: 0;
         }
-        .svg-desktop { display: none; }
-        .svg-mobile { display: block; width: 100%; height: 100%; }
+        .svg-desktop { display: none !important; }
+        .svg-mobile { display: block !important; width: 100%; height: 100%; }
 
         .bonus-curve-icon {
             position: absolute;
-            bottom: 16px; /* Aumentado o espaço entre curva e botão no mobile */
+            bottom: 16px; 
             left: 50%;
             transform: translateX(-50%);
             width: 32px; 
@@ -1250,7 +1250,7 @@
             }
 
             /* Seção 9 (Bônus) Mobile */
-            #sessao-bonus { padding: 60px 0 100px; } /* Adicionado 40px de padding inferior no Mobile */
+            #sessao-bonus { padding: 60px 0 100px; } 
             .bonus-title { font-size: 2rem; margin-bottom: 50px; }
             .timeline-container { padding: 0; }
             
@@ -1289,6 +1289,10 @@
             
             .bonus-subtitle { font-size: 1.35rem; margin-top: 4px; }
             .bonus-text { font-size: 1.05rem; }
+            
+            /* Curva Bônus Mobile isolada */
+            .svg-desktop { display: none !important; }
+            .svg-mobile { display: block !important; width: 100%; height: 100%; }
 
             /* Seção 10 (Pacote Total) Mobile */
             #sessao-pacote { padding: 60px 0 80px; }
@@ -1341,12 +1345,15 @@
             .testemunho-item-img3   { order: 4; }
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
-            /* Curva Bônus Desktop */
-            .bonus-bottom-curve { height: 80px; } /* Deixando a curva mais profunda no computador */
+            /* Curva Bônus Desktop isolada */
+            .svg-mobile { display: none !important; }
+            .svg-desktop { display: block !important; width: 100%; height: 100%; }
+            
+            .bonus-bottom-curve { height: 80px; } /* Profundidade vertical maior para computador */
             .bonus-curve-icon {
                 width: 36px; /* 10% maior no computador */
                 height: 36px;
-                bottom: 40px; /* Posicionado 40px para cima do final do movimento circular */
+                bottom: 40px; /* Posicionado 40px acima do final do movimento circular */
             }
             .bonus-curve-icon i { font-size: 1.05rem; }
         }
@@ -1917,10 +1924,12 @@
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <path d="M0,80 L1200,80 L1200,0 L660,0 C630,0 620,78 600,78 C580,78 570,0 540,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Largura reduzida para metade exata (funil apertado), sem mexer na altura 80 -->
+                <path d="M0,80 L1200,80 L1200,0 L630,0 C620,0 610,78 600,78 C590,78 580,0 570,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
-                <path d="M0,40 L1200,40 L1200,0 L760,0 C680,0 680,38 600,38 C520,38 520,0 440,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Largura horizontal aumentada em 10% a mais na abertura, mantendo a altura 40 -->
+                <path d="M0,40 L1200,40 L1200,0 L780,0 C690,0 690,38 600,38 C510,38 510,0 420,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <a href="#sessao-pacote" class="bonus-curve-icon">
                 <i class="fa-solid fa-chevron-down"></i>
