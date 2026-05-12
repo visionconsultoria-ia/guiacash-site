@@ -129,8 +129,8 @@
             bottom: 16px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 35px; /* Aumentado 10% no mobile */
-            height: 35px; /* Aumentado 10% no mobile */
+            width: 35px; 
+            height: 35px; 
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
@@ -142,12 +142,13 @@
         .bonus-curve-icon:hover {
             background-color: rgba(255, 255, 255, 0.35);
         }
-        .bonus-curve-icon i {
-            color: #FFFFFF !important;
-            font-size: 1.05rem; /* Aumentado 10% no mobile */
-            background: none !important;
-            -webkit-background-clip: unset !important;
-            -webkit-text-fill-color: #FFFFFF !important;
+        
+        /* CSS do novo ícone SVG ultra grosso */
+        .bonus-curve-icon svg {
+            font-size: 0.95rem; /* Mantém o tamanho base no mobile */
+            width: 1em;
+            height: 1em;
+            display: block;
         }
 
         /* =========================================
@@ -1250,7 +1251,8 @@
             }
 
             /* Seção 9 (Bônus) Mobile */
-            #sessao-bonus { padding: 60px 0 100px; } 
+            /* Aumentado o padding-bottom de 100px para 140px garantindo respiro total da linha no mobile */
+            #sessao-bonus { padding: 60px 0 140px; } 
             .bonus-title { font-size: 2rem; margin-bottom: 50px; }
             .timeline-container { padding: 0; }
             
@@ -1290,7 +1292,7 @@
             .bonus-subtitle { font-size: 1.35rem; margin-top: 4px; }
             .bonus-text { font-size: 1.05rem; }
             
-            /* Curva Bônus Mobile isolada */
+            /* Curva Bônus Mobile isolada e garantida */
             .svg-desktop { display: none !important; }
             .svg-mobile { display: block !important; width: 100%; height: 100%; }
 
@@ -1345,7 +1347,7 @@
             .testemunho-item-img3   { order: 4; }
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
-            /* Curva Bônus Desktop isolada e corrigida */
+            /* Curva Bônus Desktop isolada e corrigida (Bug do V consertado!) */
             #sessao-bonus { padding-bottom: 150px; } /* Aumenta o respiro e descola o texto da curva */
             .svg-mobile { display: none !important; }
             .svg-desktop { display: block !important; width: 100%; height: 100%; }
@@ -1925,15 +1927,15 @@
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <!-- Largura reduzida para metade exata (funil apertado 50%), sem mexer na altura 80 -->
-                <path d="M0,80 L1200,80 L1200,0 L636,0 C624,0 612,78 600,78 C588,78 576,0 564,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Largura cortada em quase 50% para fechar o funil, criando o "U" de acordo com o pedido, sem perder a profundidade vertical 80 -->
+                <path d="M0,80 L1200,80 L1200,0 L720,0 C660,0 650,78 600,78 C550,78 540,0 480,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
-                <!-- Largura horizontal aumentada em 10% a mais na abertura, mantendo a altura 40 -->
-                <path d="M0,40 L1200,40 L1200,0 L780,0 C690,0 690,38 600,38 C510,38 510,0 420,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Largura aumentada em mais 10%, mantendo a mesma profundidade suave de 40 no mobile -->
+                <path d="M0,40 L1200,40 L1200,0 L800,0 C700,0 700,38 600,38 C500,38 500,0 400,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <a href="#sessao-pacote" class="bonus-curve-icon">
-                <i class="fa-solid fa-chevron-down"></i>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </a>
         </div>
     </section>
