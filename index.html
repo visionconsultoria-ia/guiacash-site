@@ -91,7 +91,7 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 */
+        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 original */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -99,6 +99,27 @@
         }
         .btn-cyan-violet:hover {
             box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
+        }
+
+        /* Nova Variável de CTA customizado (Violeta -> Cyan) e texto "Compra segura" */
+        .btn-violet-cyan {
+            background: linear-gradient(90deg, #5c4bdf, #009196) !important;
+            box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
+            color: #FFFFFF !important;
+        }
+        .btn-violet-cyan:hover {
+            box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
+        }
+
+        .safe-buy-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 3px;
+            font-size: 0.85rem;
+            color: #777777; /* Cinza médio */
+            font-weight: 500;
         }
 
         /* =========================================
@@ -1704,7 +1725,12 @@
             </div>
 
             <div class="como-funciona-cta">
-                <a href="#oferta" class="btn-cta btn-gradient text-white" style="color: #FFFFFF !important;">Quero isso para mim</a>
+                <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
+                    <a href="#oferta" class="btn-cta btn-violet-cyan">Quero isso para mim</a>
+                    <div class="safe-buy-text">
+                        <i class="fa-solid fa-circle-check"></i> Compra segura
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -1806,7 +1832,12 @@
                 </div>
 
                 <div class="diferencial-cta">
-                    <a href="#oferta" class="btn-cta btn-cyan-violet">Quero resolver as finanças</a>
+                    <div style="display: flex; flex-direction: column; width: 100%; max-width: 420px; margin: 0 auto;">
+                        <a href="#oferta" class="btn-cta btn-violet-cyan">Quero resolver as finanças</a>
+                        <div class="safe-buy-text">
+                            <i class="fa-solid fa-circle-check"></i> Compra segura
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
