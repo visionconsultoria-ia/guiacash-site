@@ -554,7 +554,7 @@
             SEÇÃO 6: TESTEMUNHOS & VÍDEOS GLOBAIS
         ========================================= */
         #sessao-testemunhos {
-            background-color: #009196;
+            background: linear-gradient(135deg, #009196, #006974);
             padding: 80px 0 60px;
         }
 
@@ -1243,18 +1243,22 @@
                 padding: 0; 
                 width: 100%;
                 display: block !important; /* Desativa o flexbox no mobile que estava jogando a imagem pro lado */
+                /* Movendo 10% para cima container e imagem ao mesmo tempo (eixo vertical) */
                 transform: translateY(-10%); 
             }
             
             .pacote-gradient-box { 
-                width: calc(100% - 24px); 
-                height: 65%; 
+                width: calc(100% - 24px); /* Maior no eixo horizontal (era calc(100% - 60px)) */
+                height: 65%; /* Diminuído em 10% no eixo vertical (era 75%) */
                 border-radius: 16px; 
             }
             
             .pacote-img { 
+                /* Aumentando a imagem em 10% em relação ao código anterior */
                 width: 110% !important; 
                 max-width: none !important; 
+                
+                /* Garantindo que ela fique matematicamente centralizada mesmo sendo maior que a tela */
                 position: relative !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
