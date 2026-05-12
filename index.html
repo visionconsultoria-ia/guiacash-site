@@ -129,8 +129,8 @@
             bottom: 16px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 32px; 
-            height: 32px; 
+            width: 35px; /* Aumentado 10% no mobile */
+            height: 35px; /* Aumentado 10% no mobile */
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
@@ -144,7 +144,7 @@
         }
         .bonus-curve-icon i {
             color: #FFFFFF !important;
-            font-size: 0.95rem; 
+            font-size: 1.05rem; /* Aumentado 10% no mobile */
             background: none !important;
             -webkit-background-clip: unset !important;
             -webkit-text-fill-color: #FFFFFF !important;
@@ -1345,15 +1345,16 @@
             .testemunho-item-img3   { order: 4; }
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
-            /* Curva Bônus Desktop isolada */
+            /* Curva Bônus Desktop isolada e corrigida */
+            #sessao-bonus { padding-bottom: 150px; } /* Aumenta o respiro e descola o texto da curva */
             .svg-mobile { display: none !important; }
             .svg-desktop { display: block !important; width: 100%; height: 100%; }
             
-            .bonus-bottom-curve { height: 80px; } /* Profundidade vertical maior para computador */
+            .bonus-bottom-curve { height: 80px; } /* Profundidade vertical maior para computador mantida */
             .bonus-curve-icon {
                 width: 36px; /* 10% maior no computador */
                 height: 36px;
-                bottom: 40px; /* Posicionado 40px acima do final do movimento circular */
+                bottom: 40px; /* Posicionado a 40px (dobro da distância) acima do final do movimento circular */
             }
             .bonus-curve-icon i { font-size: 1.05rem; }
         }
@@ -1924,8 +1925,8 @@
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <!-- Largura reduzida para metade exata (funil apertado), sem mexer na altura 80 -->
-                <path d="M0,80 L1200,80 L1200,0 L630,0 C620,0 610,78 600,78 C590,78 580,0 570,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Largura reduzida para metade exata (funil apertado 50%), sem mexer na altura 80 -->
+                <path d="M0,80 L1200,80 L1200,0 L636,0 C624,0 612,78 600,78 C588,78 576,0 564,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
                 <!-- Largura horizontal aumentada em 10% a mais na abertura, mantendo a altura 40 -->
