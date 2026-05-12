@@ -111,6 +111,47 @@
             box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
         }
 
+        /* Elementos Curva Bônus */
+        .bonus-bottom-curve {
+            position: absolute;
+            bottom: -1px; /* Evita fresta subpixel */
+            left: 0;
+            width: 100%;
+            height: 36px;
+            z-index: 10;
+            line-height: 0;
+        }
+        .bonus-curve-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .bonus-curve-icon {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 32px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .bonus-curve-icon:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+        }
+        .bonus-curve-icon i {
+            color: #FFFFFF !important;
+            font-size: 0.95rem;
+            background: none !important;
+            -webkit-background-clip: unset !important;
+            -webkit-text-fill-color: #FFFFFF !important;
+        }
+
         /* =========================================
            SEÇÃO 1: HERO SECTION 
         ========================================= */
@@ -1843,9 +1884,9 @@
                 <!-- Bônus 1 -->
                 <div class="timeline-item left-side">
                     <div class="timeline-content">
-                        <p class="bonus-subtitle">🎁 Curso enxuto</p>
+                        <p class="bonus-subtitle">🎁 Protocolo Resolvo a Dívida</p>
                         <p class="bonus-text">
-                            Do método “Com dinheiro e sem dívida”. Comece a resolvê-las e liberte-se destas amarras
+                            Curso enxuto do método “Com dinheiro e sem dívida”. Comece a resolvê-las e liberte-se destas amarras
                         </p>
                     </div>
                     <div class="timeline-icon">
@@ -1861,13 +1902,23 @@
                         <i class="fa-solid fa-gift"></i>
                     </div>
                     <div class="timeline-content">
-                        <p class="bonus-subtitle">🎁 Check-up minhas dívidas</p>
+                        <p class="bonus-subtitle">🎁 Check-up 360°</p>
                         <p class="bonus-text">
                             Material para execução prática dos ensinamentos e Script de pareceres ao banco
                         </p>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Recorte SVG e botão descendo para a próxima seção -->
+        <div class="bonus-bottom-curve">
+            <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg">
+                <path d="M0,40 L1200,40 L1200,0 L660,0 C635,0 635,38 600,38 C565,38 565,0 540,0 L0,0 Z" fill="#FFFFFF"></path>
+            </svg>
+            <a href="#sessao-pacote" class="bonus-curve-icon">
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
         </div>
     </section>
 
