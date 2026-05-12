@@ -111,29 +111,26 @@
             box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
         }
 
-        /* =========================================
-           ELEMENTOS DA CURVA BÔNUS (SEÇÃO 9)
-        ========================================= */
+        /* Elementos Curva Bônus (Default / Mobile) */
         .bonus-bottom-curve {
             position: absolute;
-            bottom: -1px; /* Evita fresta subpixel no renderizador */
+            bottom: -1px; 
             left: 0;
             width: 100%;
-            height: 40px; /* Profundidade padrão Mobile */
+            height: 40px; 
             z-index: 10;
             line-height: 0;
         }
-        /* Controles de SVG Mobile/Desktop */
         .svg-desktop { display: none; }
         .svg-mobile { display: block; width: 100%; height: 100%; }
 
         .bonus-curve-icon {
             position: absolute;
-            bottom: 6px; /* Posição Mobile */
+            bottom: 16px; /* Aumentado o espaço entre curva e botão no mobile */
             left: 50%;
             transform: translateX(-50%);
-            width: 32px; /* Tamanho Mobile */
-            height: 32px; /* Tamanho Mobile */
+            width: 32px; 
+            height: 32px; 
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
@@ -147,7 +144,7 @@
         }
         .bonus-curve-icon i {
             color: #FFFFFF !important;
-            font-size: 0.95rem; /* Ícone Mobile */
+            font-size: 0.95rem; 
             background: none !important;
             -webkit-background-clip: unset !important;
             -webkit-text-fill-color: #FFFFFF !important;
@@ -1253,7 +1250,7 @@
             }
 
             /* Seção 9 (Bônus) Mobile */
-            #sessao-bonus { padding: 60px 0; }
+            #sessao-bonus { padding: 60px 0 100px; } /* Adicionado 40px de padding inferior no Mobile */
             .bonus-title { font-size: 2rem; margin-bottom: 50px; }
             .timeline-container { padding: 0; }
             
@@ -1302,23 +1299,19 @@
             .pacote-wrapper { 
                 padding: 0; 
                 width: 100%;
-                display: block !important; /* Desativa o flexbox no mobile que estava jogando a imagem pro lado */
-                /* Movendo 10% para cima container e imagem ao mesmo tempo (eixo vertical) */
+                display: block !important; 
                 transform: translateY(-10%); 
             }
             
             .pacote-gradient-box { 
-                width: calc(100% - 24px); /* Maior no eixo horizontal (era calc(100% - 60px)) */
-                height: 65%; /* Diminuído em 10% no eixo vertical (era 75%) */
+                width: calc(100% - 24px); 
+                height: 65%; 
                 border-radius: 16px; 
             }
             
             .pacote-img { 
-                /* Aumentando a imagem em 10% em relação ao código anterior */
                 width: 110% !important; 
                 max-width: none !important; 
-                
-                /* Garantindo que ela fique matematicamente centralizada mesmo sendo maior que a tela */
                 position: relative !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
@@ -1347,6 +1340,15 @@
             .testemunho-item-img2   { order: 3; }
             .testemunho-item-img3   { order: 4; }
             .testemunho-item { max-width: 60%; margin: 0 auto; }
+            
+            /* Curva Bônus Desktop */
+            .bonus-bottom-curve { height: 80px; } /* Deixando a curva mais profunda no computador */
+            .bonus-curve-icon {
+                width: 36px; /* 10% maior no computador */
+                height: 36px;
+                bottom: 40px; /* Posicionado 40px para cima do final do movimento circular */
+            }
+            .bonus-curve-icon i { font-size: 1.05rem; }
         }
 
     </style>
@@ -1914,11 +1916,11 @@
         
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
-            <svg viewBox="0 0 1200 60" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <path d="M0,60 L1200,60 L1200,0 L660,0 C630,0 630,58 600,58 C570,58 570,0 540,0 L0,0 Z" fill="#FFFFFF"></path>
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
+                <path d="M0,80 L1200,80 L1200,0 L660,0 C630,0 620,78 600,78 C580,78 570,0 540,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
-                <path d="M0,40 L1200,40 L1200,0 L740,0 C670,0 670,38 600,38 C530,38 530,0 460,0 L0,0 Z" fill="#FFFFFF"></path>
+                <path d="M0,40 L1200,40 L1200,0 L760,0 C680,0 680,38 600,38 C520,38 520,0 440,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <a href="#sessao-pacote" class="bonus-curve-icon">
                 <i class="fa-solid fa-chevron-down"></i>
