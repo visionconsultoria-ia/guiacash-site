@@ -1267,43 +1267,12 @@
             align-items: center;
         }
 
-        /* Botão Resumo CTA - Com Amarelo no Final */
-        .resumo-btn {
-            max-width: 480px;
-            font-size: 1.05rem;
-            width: 100%;
-            background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%) !important;
-            box-shadow: 0 10px 25px rgba(0, 145, 150, 0.35) !important;
-            border: none;
-            color: #FFFFFF !important;
-        }
-        
-        .resumo-btn:hover {
-            box-shadow: 0 15px 35px rgba(0, 145, 150, 0.5) !important;
-        }
-
-        .resumo-safe {
-            display: flex;
-            gap: 16px;
-            margin-top: 3px; /* Especificação exata: 3px do botão */
-            justify-content: center;
-            color: #888888; /* Cinza médio */
-            font-size: 0.75rem; /* Letra pequena */
-            font-weight: 500;
-        }
-
-        .resumo-safe span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
         /* =========================================
            SEÇÃO 12: OFERTA
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 60px 0 100px;
+            padding: 120px 0 100px; /* Aumentado top padding para a imagem vazar perfeitamente */
         }
 
         .oferta-card {
@@ -1319,16 +1288,22 @@
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -15%; /* Efeito do celular "saindo" do container */
-            margin-bottom: 32px;
+            margin-top: 0; 
+            margin-bottom: 0; 
         }
 
         .oferta-img {
-            width: 70%;
-            max-width: 360px;
+            width: 84%; /* Aumentado 20% em relação aos 70% originais */
+            max-width: 432px; 
             height: auto;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
             display: block;
+            transform: translateY(-15%); /* Empurra exatamente 15% da altura da própria imagem para cima */
+            margin-bottom: -15%; /* Compensa o espaço em branco deixado pelo transform */
+            /* Sombras removidas como solicitado */
+        }
+
+        .oferta-price-content {
+            margin-top: 16px;
         }
 
         .oferta-price-main {
@@ -1365,20 +1340,20 @@
             max-width: 480px;
             font-size: 1.15rem;
             width: 100%;
-            background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%) !important;
-            box-shadow: 0 10px 25px rgba(0, 145, 150, 0.35) !important;
+            background: linear-gradient(90deg, #5c4bdf 0%, #009196 100%) !important; /* Somente Violeta para Cyan */
+            box-shadow: none !important; /* Sem sombra */
             border: none;
             color: #FFFFFF !important;
         }
 
         .oferta-btn:hover {
-            box-shadow: 0 15px 35px rgba(0, 145, 150, 0.5) !important;
+            box-shadow: none !important; /* Sem sombra no hover */
             transform: translateY(-3px);
         }
 
         .oferta-safe {
             display: flex;
-            gap: 16px;
+            gap: 8px; /* Espaço diminuído */
             margin-top: 3px; /* Especificação exata: 3px do botão */
             justify-content: center;
             color: #888888; /* Cinza médio */
@@ -1607,16 +1582,21 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 40px 0 80px; }
+            #oferta { padding: 100px 0 80px; }
             #oferta .container { padding: 0 18px; } /* Mesma margem externa da Seção 11 */
             .oferta-card { padding: 0 20px 40px; }
-            .oferta-img-wrapper { margin-top: -22%; margin-bottom: 24px; } /* Margem negativa ajustada para mobile */
-            .oferta-img { width: 85%; }
+            .oferta-img-wrapper { margin-top: 0; margin-bottom: 0; }
+            .oferta-img { 
+                width: 100%; /* Aumentado para 100% no mobile */
+                max-width: 400px;
+                transform: translateY(-15%); /* Sobreposição mantida perfeitamente proporcional */
+                margin-bottom: -15%;
+            }
             .oferta-price-main { font-size: 2.8rem; }
             .oferta-price-sub { font-size: 1.25rem; margin-bottom: 20px; }
             .oferta-price-daily { font-size: 1.05rem; margin-bottom: 32px; }
             .oferta-btn { font-size: 1.05rem; }
-            .oferta-safe { flex-direction: row; gap: 12px; flex-wrap: wrap; }
+            .oferta-safe { flex-direction: row; gap: 6px; flex-wrap: wrap; } /* Espaçamento reduzido */
         }
 
         @media (min-width: 769px) {
@@ -2379,7 +2359,7 @@
         <div class="container">
             <div class="oferta-card">
                 
-                <!-- Parte 1: Imagem -->
+                <!-- Parte 1: Imagem vazada -->
                 <div class="oferta-img-wrapper">
                     <img src="app-compra-final.png" alt="Guia Cash Compra" class="oferta-img">
                 </div>
@@ -2396,12 +2376,12 @@
                     <button class="btn-cta oferta-btn">Eu quero</button>
                     <div class="oferta-safe">
                         <span>
-                            <!-- SVG Check Círculo -->
+                            <!-- SVG Check Círculo com apenas bordas -->
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 8 12 16 8 12"></polyline></svg>
                             7 dias de garantia
                         </span>
                         <span>
-                            <!-- SVG Cadeado -->
+                            <!-- SVG Cadeado com apenas bordas -->
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             Ambiente seguro e protegido
                         </span>
