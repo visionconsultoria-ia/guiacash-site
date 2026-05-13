@@ -1149,7 +1149,7 @@
             /* Fundo degradê: violeta -> cyan -> amarelo (sendo o amarelo a menor parte, parando aos 85%) */
             background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%);
             padding: 24px 36px;
-            text-align: left;
+            text-align: center; /* Centralizado Globalmente */
         }
 
         .resumo-header h3 {
@@ -1200,12 +1200,22 @@
             padding: 0;
         }
 
-        .resumo-grid-list li, .resumo-list li {
+        .resumo-grid-list li {
             display: flex;
             align-items: flex-start;
             gap: 12px;
             font-size: 0.95rem;
-            font-weight: 500;
+            font-weight: 500; /* Parte 1 mantém um pequeno peso visual */
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .resumo-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 400; /* Partes 2, 3 e 4 sem negrito */
             color: var(--text-dark);
             line-height: 1.5;
         }
@@ -1481,12 +1491,13 @@
 
             /* Seção 11 (Resumo) Mobile */
             #sessao-resumo { padding: 60px 0; }
-            .resumo-header { padding: 20px 24px; }
+            #sessao-resumo .container { padding: 0 10px; } /* Aumento do container (menos margem lateral) */
+            .resumo-header { padding: 20px 10px; }
             .resumo-header h3 { font-size: 1.3rem; }
-            .resumo-body { padding: 30px 24px; }
+            .resumo-body { padding: 30px 12px; } /* Menos tolerância interna: ícones colados mais a esquerda e texto mais a direita */
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
             .resumo-btn { font-size: 0.95rem; }
-            .resumo-safe { flex-direction: column; gap: 8px; align-items: center; }
+            .resumo-safe { flex-direction: row; gap: 12px; align-items: center; justify-content: center; }
         }
 
         @media (min-width: 769px) {
@@ -2130,7 +2141,10 @@
                 
                 <!-- PARTE 1: TÍTULO COM DEGRADÊ -->
                 <div class="resumo-header">
-                    <h3>Acesso completo ao Guia Cash</h3>
+                    <h3>
+                        <span class="desktop-only">Acesso completo ao Guia Cash</span>
+                        <span class="mobile-only">Acesso completo<br>ao Guia Cash</span>
+                    </h3>
                 </div>
                 
                 <div class="resumo-body">
@@ -2138,7 +2152,7 @@
                     <!-- PARTE 2 - BLOCO 1: ACESSO AO SISTEMA E IA -->
                     <div class="resumo-block">
                         <h4 class="resumo-subtitle">Acesso à certeza, clareza e diagnóstico com IA</h4>
-                        <p class="resumo-support">12 dispositivos de controle absurdamente automáticos que se adaptam à vida de excelentes técnicos mas gestores improvisados</p>
+                        <p class="resumo-support"><strong>12 dispositivos de controle absurdamente automáticos que se adaptam à gestores improvisados</strong></p>
                         
                         <ul class="resumo-grid-list">
                             <li>
@@ -2236,10 +2250,18 @@
 
                     <!-- PARTE 4: CTA FINAL -->
                     <div class="resumo-cta-wrapper">
-                        <a href="#oferta" class="btn-cta btn-violet-cyan resumo-btn">Quero ter controle e paz financeira</a>
+                        <a href="#oferta" class="btn-cta btn-violet-cyan resumo-btn">Entrar no Guia Cash</a>
                         <div class="resumo-safe">
-                            <span><i class="fa-solid fa-check"></i> 7 dias de garantia</span>
-                            <span><i class="fa-solid fa-lock"></i> Compra segura</span>
+                            <span>
+                                <!-- SVG Check Círculo com apenas bordas e 100% vazado por dentro -->
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 8 12 16 8 12"></polyline></svg>
+                                7 dias de garantia
+                            </span>
+                            <span>
+                                <!-- SVG Cadeado com apenas bordas e 100% vazado por dentro -->
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                Compra segura
+                            </span>
                         </div>
                     </div>
 
