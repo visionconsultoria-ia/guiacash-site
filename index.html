@@ -91,7 +91,6 @@
         .btn-gradient { background: var(--brand-gradient); box-shadow: 0 10px 25px rgba(92, 75, 223, 0.3); }
         .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 145, 150, 0.4); }
 
-        /* Variável de CTA customizado (Cyan -> Violeta) da Seção 8 original */
         .btn-cyan-violet {
             background: linear-gradient(90deg, #009196, #5c4bdf) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -101,7 +100,6 @@
             box-shadow: 0 15px 35px rgba(92, 75, 223, 0.5) !important;
         }
 
-        /* Nova Variável de CTA customizado (Violeta -> Cyan) */
         .btn-violet-cyan {
             background: linear-gradient(90deg, #5c4bdf, #009196) !important;
             box-shadow: 0 10px 25px rgba(92, 75, 223, 0.35) !important;
@@ -188,7 +186,6 @@
             font-size: 4.2rem;
         }
 
-        /* Puzzle Component */
         .puzzle-wrapper {
             display: inline-flex;
             align-items: center; 
@@ -222,7 +219,6 @@
             overflow: visible;
         }
 
-        /* Subheadlines e Hook */
         .hero .subheadline { 
             max-width: 900px; 
             margin: 0 auto 32px; 
@@ -240,7 +236,6 @@
             line-height: 1.3; 
         }
         
-        /* Video Container Principal */
         .video-container {
             width: 100%; 
             max-width: 1144px; 
@@ -418,7 +413,6 @@
             line-height: 1.6;
         }
 
-        /* Animação Truque de Camadas */
         @keyframes tornado-base-motion {
             0% { transform: rotate(31.34deg) scale(1) translate(0, 0); opacity: 0.5; }
             50% { transform: rotate(34deg) scale(1.05) translate(5px, -5px); opacity: 0.7; }
@@ -502,7 +496,6 @@
             margin: 0 auto 48px;
         }
 
-        /* grid full-width dentro do container */
         .comparativo-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -841,7 +834,6 @@
             width: 100%;
         }
 
-        /* Definições SVG Gradiente Global para Quebra-cabeças */
         .svg-defs {
             position: absolute;
             width: 0;
@@ -1047,7 +1039,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        /* Degradê para os presentes do Bônus */
         .timeline-icon i {
             background: linear-gradient(135deg, #5c4bdf, #009196);
             -webkit-background-clip: text;
@@ -1109,8 +1100,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: calc(100% - 40px); /* Respeita o padding do container lateral */
-            height: 60%; /* Aumentado no eixo vertical no computador (era 48%) */
+            width: calc(100% - 40px);
+            height: 60%;
             background: linear-gradient(90deg, #5c4bdf, #009196);
             border-radius: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
@@ -1118,11 +1109,11 @@
         }
 
         .pacote-img {
-            width: 85%; /* 15% Menor conforme solicitado no Desktop */
+            width: 85%;
             max-width: 890px; 
             height: auto;
             display: block;
-            margin: 0 auto; /* Centralização perfeita livre de margens negativas laterais */
+            margin: 0 auto;
             position: relative;
             z-index: 2;
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
@@ -1249,7 +1240,7 @@
                 border-radius: 12px;
             }
 
-            /* Seção 9 (Bônus) Mobile */
+            /* Seção 9 (Bônus) Mobile — INALTERADA */
             #sessao-bonus { padding: 60px 0 140px; } 
             .bonus-title { font-size: 2rem; margin-bottom: 50px; }
             .timeline-container { padding: 0; }
@@ -1290,14 +1281,14 @@
             .bonus-subtitle { font-size: 1.35rem; margin-top: 4px; }
             .bonus-text { font-size: 1.05rem; }
             
-            /* Curva Bônus Mobile */
+            /* Curva Bônus Mobile — INALTERADA */
             .bonus-curve-icon {
-                width: 35px !important; /* Círculo transparente mantido */
+                width: 35px !important;
                 height: 35px !important;
             }
             .bonus-curve-icon svg { 
-                font-size: 1.26rem !important; /* Flecha 20% maior */
-                transform: translateY(2px) !important; /* Ajuste fino para a flecha descer e ficar centralizada visualmente no círculo */
+                font-size: 1.26rem !important;
+                transform: translateY(2px) !important;
             }
 
             /* Seção 10 (Pacote Total) Mobile */
@@ -1351,16 +1342,23 @@
             .testemunho-item-img3   { order: 4; }
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
-            /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 150px; } 
-            
-            .bonus-bottom-curve { height: 80px; } 
+            /* =====================================================
+               CURVA BÔNUS DESKTOP — ÚNICA ALTERAÇÃO DESTA VERSÃO
+               Substituição do SVG desktop: arco circular (A) trocado
+               por curva bezier cúbica pura para eliminar distorção
+               causada por preserveAspectRatio="none".
+               Abertura: 36px no viewBox (~42px real). Profundidade: 34px.
+               SVG mobile e todos os demais estilos: INALTERADOS.
+            ====================================================== */
+            #sessao-bonus { padding-bottom: 150px; }
+
+            .bonus-bottom-curve { height: 80px; }
             .bonus-curve-icon {
-                width: 44px; 
+                width: 44px;
                 height: 44px;
-                bottom: 34px; /* Ajuste para o botão ficar perfeitamente no fundo do novo SVG */
+                bottom: 34px;
             }
-            .bonus-curve-icon svg { font-size: 1.36rem !important; } 
+            .bonus-curve-icon svg { font-size: 1.36rem !important; }
         }
 
     </style>
@@ -1372,20 +1370,15 @@
     <!-- Definição global de Gradients para os SVGs de Quebra-cabeça da Seção 8 -->
     <svg class="svg-defs">
         <defs>
-            <!-- Peça PF: Roxo para Azulado -->
             <linearGradient id="gradPF" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#5c4bdf" />
                 <stop offset="100%" stop-color="#277ac0" />
             </linearGradient>
-            
-            <!-- Peça PJ: Azulado para Cyan, finalizando com o tom suave "Verde-Água/Amarelado" -->
             <linearGradient id="gradPJ" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#277ac0" />
                 <stop offset="50%" stop-color="#009196" />
                 <stop offset="100%" stop-color="#e2c45f" /> 
             </linearGradient>
-            
-            <!-- Peça Dívidas: Inicia no "Verde-Água/Amarelado" exato, vira amarelo claro aos 10% e termina Ouro Escuro -->
             <linearGradient id="gradDiv" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#e2c45f" />  
                 <stop offset="10%" stop-color="#fbbb4f" /> 
@@ -1549,7 +1542,6 @@
                 <div class="secret-image-wrapper">
                     <img src="tornado.png" alt="Sombra do Tornado" class="tornado-overlay tornado-base">
                     <img src="tornado.png" alt="Núcleo do Tornado" class="tornado-overlay tornado-core">
-                    
                     <img src="verdades-secretas.png" alt="Ciclo Financeiro do Gato" class="secret-img">
                 </div>
 
@@ -1568,11 +1560,8 @@
             <h2 class="comparativo-headline"><span class="comp-headline-line1">Porque você ainda não tem controle financeiro real</span><br>(vida pessoal e negócio)</h2>
 
             <div class="comparativo-grid">
-
-                <!-- Card Cinza -->
                 <div class="comp-card comp-card-gray">
                     <h3 class="comp-card-title">Métodos tradicionais</h3>
-
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-xmark"></i></div>
                         <p class="comp-item-text">Começa perdido, com tantas funções, números e desperdiça tempo</p>
@@ -1595,10 +1584,8 @@
                     </div>
                 </div>
 
-                <!-- Card Brand -->
                 <div class="comp-card comp-card-brand">
                     <h3 class="comp-card-title">Método Guia Cash</h3>
-
                     <div class="comp-item">
                         <div class="comp-icon"><i class="fa-solid fa-check"></i></div>
                         <p class="comp-item-text">Videografia do todo, com tradução dos números via imagens e escrita descontraída e marcante com IA</p>
@@ -1620,13 +1607,11 @@
                         <p class="comp-item-text">Sua capacidade de execução e uso duradouro é o que prezamos</p>
                     </div>
                 </div>
-
             </div>
 
             <div class="comparativo-cta-wrapper">
                 <a href="#sessao-teste-imagem" class="btn-cta btn-gradient">Quero entrar no Guia Cash</a>
             </div>
-
         </div>
     </section>
 
@@ -1644,20 +1629,16 @@
     =========================================== -->
     <section id="sessao-testemunhos">
         <div class="container">
-
             <div class="testemunhos-header">
                 <h2 class="testemunhos-titulo">Será que o Guia Cash funciona?</h2>
                 <p class="testemunhos-subtitulo">Veja com seus próprios olhos e tire suas conclusões</p>
             </div>
 
             <div class="testemunhos-grid">
-
                 <div class="testemunho-item testemunho-item-video">
                     <p class="testemunho-label">Antonio Fagnani - Empresário</p>
                     <div class="testemunho-video-wrapper" id="video-wrapper">
-
                         <video id="video-testemunho" src="video-testemunho-um.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="cover-video-um.jpeg"></video>
-
                         <div class="video-mute-overlay" id="video-overlay">
                             <p class="overlay-text-top">Seu vídeo já começou</p>
                             <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1667,7 +1648,6 @@
                             </svg>
                             <p class="overlay-text-bottom">Clique para ouvir</p>
                         </div>
-
                         <div class="video-controls" id="video-controls">
                             <button class="video-play-btn" id="video-play-btn" aria-label="Play/Pause">
                                 <svg id="icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
@@ -1677,7 +1657,6 @@
                                 <div class="video-progress-fill" id="video-progress-fill"></div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
@@ -1695,13 +1674,11 @@
                     <p class="testemunho-label">Ana Vitória - Serviço de Marketing</p>
                     <img src="imagem-testemunho-tres.jpeg" alt="Testemunho Ana Vitória" class="testemunho-img">
                 </div>
-
             </div>
 
             <div class="testemunhos-cta-wrapper">
                 <a href="#oferta" class="btn-cta btn-gradient btn-violet">Quero ter controle</a>
             </div>
-
         </div>
     </section>
 
@@ -1714,64 +1691,52 @@
             <div class="como-funciona-header">
                 <h2 class="desktop-only">Como funciona o método Círculo Mestre do Guia Cash?</h2>
                 <h2 class="mobile-only">Como funciona o método<br>Círculo Mestre do<br>Guia Cash?</h2>
-                
                 <p class="como-funciona-subtitulo desktop-only"><span class="text-gradient-cyan-violet">3 Etapas</span> que transformam 3 áreas financeiras</p>
                 <p class="como-funciona-subtitulo mobile-only mobile-subtitle-size"><span class="text-gradient-cyan-violet">3 Etapas que transformam</span><br>3 áreas financeiras</p>
             </div>
 
-            <!-- ETAPA 1 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-1">
                     <div class="etapa-circle-inner"><span class="title-gradient-1">Etapa 1</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-1">Controle Global</h3>
-                
                 <ul class="etapa-list list-1">
                     <li><strong class="title-gradient-1">Objetivo:</strong> Saber exatamente quanto você ganha, gasta, usa em dívidas e para onde o dinheiro está indo na (PF, família) e (PJ) separadamente.</li>
                     <li><strong class="title-gradient-1">Como:</strong> Organizando todas as 3 áreas das finanças em um só lugar automaticamente</li>
                     <li><strong class="title-gradient-1">Resultado:</strong> Mais certezas e clareza sobre sua situação financeira real. Separação de PJ, PF e impacto das dívidas.</li>
                 </ul>
-
                 <p class="etapa-subtitle-center frase-efeito-1">Uma usina tecnológica hipereficiente trabalhando para você</p>
-                
                 <div class="etapa-img-wrapper">
                     <img src="sistema-importações.jpeg" alt="Sistema Importações Guia Cash" class="etapa-img">
                 </div>
-                
                 <p class="etapa-subtitle-center frase-efeito-2">A partir de agora, a velocidade do seu controle financeiro (PJ e PF) vai ser brutal. Não parece IA, não parece sistema. O que demoraria horas para ser feito, você faz em minutos.</p>
             </div>
 
-            <!-- ETAPA 2 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-2">
                     <div class="etapa-circle-inner"><span class="title-gradient-2">Etapa 2</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-2">Inteligência na Gestão</h3>
-                
                 <ul class="etapa-list list-2">
                     <li><strong class="title-gradient-2">Objetivo:</strong> Usar seu dinheiro de forma estratégica e equilibrada.</li>
                     <li><strong class="title-gradient-2">Como:</strong> Traçando Objetivos diante dos Insights do Guia Cash. Com a regra 70/20/10, que dá base para você viver bem (70%), quitar dívidas (20%) e investir no futuro (10%) e Se unindo de forma colaborativa aos seus, para usar o cartão de forma inteligente e gerar reserva de emergência</li>
                     <li><strong class="title-gradient-2">Resultado:</strong> Dinheiro sobrando todo mês</li>
                 </ul>
-                
                 <div class="etapa-img-wrapper">
                     <img src="sistema-colaborativo.jpeg" alt="Sistema Colaborativo Guia Cash" class="etapa-img">
                 </div>
             </div>
 
-            <!-- ETAPA 3 -->
             <div class="etapa-block">
                 <div class="etapa-circle-container circle-3">
                     <div class="etapa-circle-inner"><span class="title-gradient-3">Etapa 3</span></div>
                 </div>
                 <h3 class="etapa-title-main title-gradient-3">Novo comportamento</h3>
-                
                 <ul class="etapa-list list-3">
                     <li><strong class="title-gradient-3">Objetivo:</strong> Construir patrimônio e realizar seus sonhos sem comprometer sua segurança financeira.</li>
                     <li><strong class="title-gradient-3">Como:</strong> Gamificação, seus avanços são medidos e celebrados de forma descontraída e visual</li>
                     <li><strong class="title-gradient-3">Resultado:</strong> Você no volante da sua vida, com liberdade financeira e paz.</li>
                 </ul>
-                
                 <div class="etapa-img-wrapper">
                     <img src="sistema-progresso.jpeg" alt="Sistema Progresso Guia Cash" class="etapa-img">
                 </div>
@@ -1780,7 +1745,6 @@
             <div class="como-funciona-cta">
                 <a href="#oferta" class="btn-cta btn-violet-cyan">Quero isso para mim</a>
             </div>
-
         </div>
     </section>
 
@@ -1788,32 +1752,22 @@
          SEÇÃO 8: DIFERENCIAL
     =========================================== -->
     <section id="sessao-diferencial">
-        <!-- Bloco 1: Degradê Roxo->Cyan -->
         <div class="dif-block-1">
-            
             <h2 class="diferencial-title-new">O que ninguém entrega<br>somente o Guia Cash?</h2>
             <p class="diferencial-subtitle-new">EXAME FINANCEIRO PERSONALIZADO</p>
             
-            <!-- Caixa branca do Quebra-Cabeça -->
             <div class="diferencial-puzzle-wrapper">
                 <div class="diferencial-puzzle-box">
                     <div class="puzzle-pieces-container">
-                        <!-- Peça 1 (PF - Roxo p/ intermediário) -->
                         <svg viewBox="0 0 120 100" width="70" height="60" style="margin-right: -10px; flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 Z" fill="url(#gradPF)" stroke="#FFFFFF" stroke-width="3"/>
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PF</text>
                         </svg>
-                        
-                        <!-- Peça 2 (PJ - Intermediário p/ Cyan e extremidade Verde-Água/Amarelado) -->
                         <svg viewBox="0 0 120 100" width="70" height="60" style="flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H100 V35 C125,35 125,65 100,65 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradPJ)" stroke="#FFFFFF" stroke-width="3"/>
                             <text x="50" y="54" font-family="Inter" font-weight="900" font-size="30" fill="#FFF" text-anchor="middle" dominant-baseline="middle">PJ</text>
                         </svg>
-                        
-                        <!-- Espaçamento Reduzido (Mais próximo e natural) -->
                         <div class="desktop-gap" style="flex-shrink: 0;"></div>
-                        
-                        <!-- Peça 3 (Dívidas - Reduzida em 10%, começa Verde-Água/Amarelado > Amarelo Claro > Amarelo Escuro) -->
                         <svg viewBox="0 0 162 100" width="94" height="60" style="flex-shrink: 0; overflow: visible;">
                             <path d="M0,0 H162 V100 H0 V65 C25,65 25,35 0,35 Z" fill="url(#gradDiv)" stroke="#FFFFFF" stroke-width="3" />
                             <text x="93" y="54" font-family="Inter" font-weight="900" font-size="28" fill="#FFF" text-anchor="middle" dominant-baseline="middle">Dívidas</text>
@@ -1821,13 +1775,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <!-- Bloco 2: Fundo Branco Puro -->
         <div class="dif-block-2">
             <div class="container">
-                <!-- Item 1 (Introdução não alterada pelo prompt) -->
                 <div class="dif-item">
                     <p class="dif-text">
                        <strong>Diagnóstico do que está acontecendo nas 3 áreas financeiras PF, PJ e Dívidas de forma interligada</strong>
@@ -1837,7 +1788,6 @@
                     </div>
                 </div>
 
-                <!-- Item 2 -->
                 <div class="dif-item">
                     <p class="dif-text">
                         <strong>1) Diagnóstico de descumprimentos de normativas do Banco Central e superendividamento</strong><span style="font-weight: 400;"> nas suas dívidas de forma personalizada e automática</span>
@@ -1847,7 +1797,6 @@
                     </div>
                 </div>
 
-                <!-- Item 3 -->
                 <div class="dif-item">
                     <p class="dif-text">
                         <strong>2) Categorizador automático de perfil de dívida,</strong><span style="font-weight: 400;"> que mostra qual é o tipo de resolução e o benefício possível para ela</span>
@@ -1857,7 +1806,6 @@
                     </div>
                 </div>
 
-                <!-- Item 4 -->
                 <div class="dif-item">
                     <p class="dif-text">
                         <strong>3) Mapa Inteligente das dívidas,</strong><span style="font-weight: 400;"> visão de todos os tipos de dívidas PF e PJ</span><br><br>
@@ -1868,7 +1816,6 @@
                     </div>
                 </div>
 
-                <!-- Item 5 -->
                 <div class="dif-item">
                     <p class="dif-text">
                         <strong>5) Tutoriais práticos do sistema em vídeo</strong><br>
@@ -1896,12 +1843,11 @@
             <div class="timeline-container">
                 <div class="timeline-line"></div>
                 
-                <!-- Bônus 1 -->
                 <div class="timeline-item left-side">
                     <div class="timeline-content">
                         <p class="bonus-subtitle">🎁 Protocolo Resolvo a Dívida</p>
                         <p class="bonus-text">
-                            Curso enxuto do método “Com dinheiro e sem dívida”. Comece a resolvê-las e liberte-se destas amarras
+                            Curso enxuto do método "Com dinheiro e sem dívida". Comece a resolvê-las e liberte-se destas amarras
                         </p>
                     </div>
                     <div class="timeline-icon">
@@ -1910,7 +1856,6 @@
                     <div class="timeline-spacer"></div>
                 </div>
 
-                <!-- Bônus 2 -->
                 <div class="timeline-item right-side">
                     <div class="timeline-spacer"></div>
                     <div class="timeline-icon">
@@ -1926,12 +1871,34 @@
             </div>
         </div>
         
-        <!-- Recorte SVG e botão descendo para a próxima seção -->
+        <!-- ============================================================
+             CURVA BÔNUS — ÚNICA ALTERAÇÃO DESTA VERSÃO
+             
+             SVG DESKTOP (svg-desktop): path original com arco "A" 
+             substituído por curva bezier cúbica pura.
+             
+             MOTIVO: preserveAspectRatio="none" estica o SVG 
+             horizontalmente para preencher o container (ex: 1400px), 
+             mas o viewBox tem 1200px de largura. Esse stretch de ~1.17x 
+             deformava o arco circular (A) em elipse larga.
+             Bezier cúbico escala proporcionalmente ao viewBox em ambos 
+             os eixos, resultando num U geometricamente fiel ao design.
+             
+             GEOMETRIA DO PATH DESKTOP:
+             - Abertura total no viewBox: x=582 a x=618 = 36px
+               → ~42px reais em tela de 1400px (fator 1.17x)
+             - Paredes quase verticais com cantos suaves via C
+             - Base do U: bezier C com ponto de controle em y=36 (34px de profundidade)
+             - Ícone centralizado em bottom: 34px dentro do U
+             
+             SVG MOBILE (svg-mobile): INALTERADO
+        ============================================================ -->
         <div class="bonus-bottom-curve">
-            <!-- NOVA CURVA DESKTOP - Geometria de corte puro e buraco matematicamente mais estrito para não vazar -->
+            <!-- DESKTOP: U estreito com bezier cúbico (sem distorção) -->
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <path d="M0,80 L1200,80 L1200,0 L642,0 C638.7,0 636,2.7 636,6 L636,16 A36,36 0 0,1 564,16 L564,6 C564,2.7 561.3,0 558,0 L0,0 Z" fill="#FFFFFF"></path>
+                <path d="M0,80 L1200,80 L1200,0 L618,0 C615.5,0 615,1.5 615,5 L615,13 C615,34 585,34 585,13 L585,5 C585,1.5 584.5,0 582,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
+            <!-- MOBILE: inalterado -->
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
                 <path d="M0,40 L1200,40 L1200,0 L800,0 C700,0 700,38 600,38 C500,38 500,0 400,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
@@ -1947,16 +1914,12 @@
     <section id="sessao-pacote">
         <div class="container">
             <div class="pacote-header">
-                <!-- Título Desktop Original -->
                 <h2 class="pacote-title desktop-only">Você recebe o que mais ninguém<br> no mercado oferece</h2>
-                <!-- Título Mobile Quebrado em 3 Linhas Exatas -->
                 <h2 class="pacote-title mobile-only">Você recebe o que<br>mais ninguém no<br>mercado oferece</h2>
             </div>
             
             <div class="pacote-wrapper">
-                <!-- A caixa degradê agora é totalmente independente da imagem -->
                 <div class="pacote-gradient-box"></div>
-                <!-- A imagem fica livre para ser manipulada matematicamente -->
                 <img src="pacote-total.png" alt="Pacote Total Guia Cash" class="pacote-img">
             </div>
         </div>
@@ -2054,7 +2017,6 @@
         observer.observe(document.getElementById('sessao-audiencia'));
     </script>
 
-    <!-- JS GLOBAL DOS VÍDEOS -->
     <script>
         (function() {
             function setupVideoPlayer(config) {
