@@ -1352,15 +1352,15 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 150px; } 
+            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 44px; 
-                height: 44px;
-                bottom: 34px; /* Ajuste para o botão ficar perfeitamente no fundo do novo SVG */
+                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
+                height: 56px;
+                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
             }
-            .bonus-curve-icon svg { font-size: 1.36rem !important; } 
+            .bonus-curve-icon svg { font-size: 1.65rem !important; } 
         }
 
     </style>
@@ -1928,7 +1928,6 @@
         
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
-            <!-- NOVA CURVA DESKTOP - Geometria de corte puro e buraco matematicamente mais estrito para não vazar -->
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
                 <path d="M0,80 L1200,80 L1200,0 L642,0 C638.7,0 636,2.7 636,6 L636,16 A36,36 0 0,1 564,16 L564,6 C564,2.7 561.3,0 558,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
