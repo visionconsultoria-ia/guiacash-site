@@ -1929,11 +1929,10 @@
         <!-- Recorte SVG e botão descendo para a próxima seção -->
         <div class="bonus-bottom-curve">
             <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <!-- Abertura do U menor, com descida vertical reta e fundo mais estreito (60px de profundidade) -->
-                <path d="M0,80 L1200,80 L1200,0 L654,0 C642,0 642,10 642,25 C642,45 625,60 600,60 C575,60 558,45 558,25 C558,10 558,0 546,0 L0,0 Z" fill="#FFFFFF"></path>
+                <!-- Geometria Arqueada Perfeita: Uso do arco real (A) para garantir o "U" vertical estrito abraçando o icone -->
+                <path d="M0,80 L1200,80 L1200,0 L650,0 C635,0 632,10 632,24 A 32 32 0 0 1 568 24 C568,10 565,0 550,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
-                <!-- Largura aumentada em 10% na abertura (suavizando), mantendo a profundidade vertical -->
                 <path d="M0,40 L1200,40 L1200,0 L800,0 C700,0 700,38 600,38 C500,38 500,0 400,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <a href="#sessao-pacote" class="bonus-curve-icon">
