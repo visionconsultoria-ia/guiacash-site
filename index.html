@@ -1299,6 +1299,100 @@
         }
 
         /* =========================================
+           SEÇÃO 12: OFERTA
+        ========================================= */
+        #oferta {
+            background-color: #f8f8f8;
+            padding: 60px 0 100px;
+        }
+
+        .oferta-card {
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 48px 48px;
+            text-align: center;
+        }
+
+        .oferta-img-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: -15%; /* Efeito do celular "saindo" do container */
+            margin-bottom: 32px;
+        }
+
+        .oferta-img {
+            width: 70%;
+            max-width: 360px;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15));
+            display: block;
+        }
+
+        .oferta-price-main {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #009196;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+
+        .oferta-price-sub {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+        }
+
+        .oferta-price-daily {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+        }
+
+        /* Reutilização de classes para a Oferta (CTA) */
+        .oferta-cta-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .oferta-btn {
+            max-width: 480px;
+            font-size: 1.15rem;
+            width: 100%;
+            background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%) !important;
+            box-shadow: 0 10px 25px rgba(0, 145, 150, 0.35) !important;
+            border: none;
+            color: #FFFFFF !important;
+        }
+
+        .oferta-btn:hover {
+            box-shadow: 0 15px 35px rgba(0, 145, 150, 0.5) !important;
+            transform: translateY(-3px);
+        }
+
+        .oferta-safe {
+            display: flex;
+            gap: 16px;
+            margin-top: 3px; /* Especificação exata: 3px do botão */
+            justify-content: center;
+            color: #888888; /* Cinza médio */
+            font-size: 0.75rem; /* Letra pequena */
+            font-weight: 500;
+        }
+
+        .oferta-safe span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
         ========================================= */
         .mobile-only { display: none !important; }
@@ -1511,8 +1605,18 @@
             .resumo-body { padding: 30px 12px 30px 24px; } 
             
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
-            .resumo-btn { font-size: 0.95rem; }
-            .resumo-safe { flex-direction: row; gap: 12px; align-items: center; justify-content: center; }
+
+            /* Seção 12 (Oferta) Mobile */
+            #oferta { padding: 40px 0 80px; }
+            #oferta .container { padding: 0 18px; } /* Mesma margem externa da Seção 11 */
+            .oferta-card { padding: 0 20px 40px; }
+            .oferta-img-wrapper { margin-top: -22%; margin-bottom: 24px; } /* Margem negativa ajustada para mobile */
+            .oferta-img { width: 85%; }
+            .oferta-price-main { font-size: 2.8rem; }
+            .oferta-price-sub { font-size: 1.25rem; margin-bottom: 20px; }
+            .oferta-price-daily { font-size: 1.05rem; margin-bottom: 32px; }
+            .oferta-btn { font-size: 1.05rem; }
+            .oferta-safe { flex-direction: row; gap: 12px; flex-wrap: wrap; }
         }
 
         @media (min-width: 769px) {
@@ -1538,13 +1642,13 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } 
+            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; 
+                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
                 height: 56px;
-                bottom: 28px; 
+                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
         }
@@ -2264,6 +2368,46 @@
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 12: OFERTA
+    =========================================== -->
+    <section id="oferta">
+        <div class="container">
+            <div class="oferta-card">
+                
+                <!-- Parte 1: Imagem -->
+                <div class="oferta-img-wrapper">
+                    <img src="app-compra-final.png" alt="Guia Cash Compra" class="oferta-img">
+                </div>
+                
+                <!-- Parte 2: Preço -->
+                <div class="oferta-price-content">
+                    <h2 class="oferta-price-main">12x de R$ 9,91</h2>
+                    <p class="oferta-price-sub">Ou R$ 97 à vista</p>
+                    <p class="oferta-price-daily">Menos de R$ 0,50/dia para<br class="mobile-only"> mudar de vida.</p>
+                </div>
+
+                <!-- Parte 3: CTA -->
+                <div class="oferta-cta-wrapper">
+                    <button class="btn-cta oferta-btn">Eu quero</button>
+                    <div class="oferta-safe">
+                        <span>
+                            <!-- SVG Check Círculo -->
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 8 12 16 8 12"></polyline></svg>
+                            7 dias de garantia
+                        </span>
+                        <span>
+                            <!-- SVG Cadeado -->
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Ambiente seguro e protegido
+                        </span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
