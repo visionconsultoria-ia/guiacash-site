@@ -1343,20 +1343,19 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* =====================================================
-               CURVA BÔNUS DESKTOP — ÚNICA ALTERAÇÃO DESTA VERSÃO
-               Substituição do SVG desktop: arco circular (A) trocado
-               por curva bezier cúbica pura para eliminar distorção
-               causada por preserveAspectRatio="none".
-               Abertura: 36px no viewBox (~42px real). Profundidade: 34px.
+               CURVA BÔNUS DESKTOP — ALTERAÇÃO SEÇÃO 9
+               Redução do container de 80px para 48px (tamanho físico real do U).
+               Path com bezier cúbico, abertura 20px viewBox (~24px real),
+               profundidade 24px. Ícone reposicionado para bottom:10px.
                SVG mobile e todos os demais estilos: INALTERADOS.
             ====================================================== */
             #sessao-bonus { padding-bottom: 150px; }
 
-            .bonus-bottom-curve { height: 80px; }
+            .bonus-bottom-curve { height: 48px; }
             .bonus-curve-icon {
-                width: 44px;
-                height: 44px;
-                bottom: 34px;
+                width: 40px;
+                height: 40px;
+                bottom: 10px;
             }
             .bonus-curve-icon svg { font-size: 1.36rem !important; }
         }
@@ -1872,31 +1871,17 @@
         </div>
         
         <!-- ============================================================
-             CURVA BÔNUS — ÚNICA ALTERAÇÃO DESTA VERSÃO
-             
-             SVG DESKTOP (svg-desktop): path original com arco "A" 
-             substituído por curva bezier cúbica pura.
-             
-             MOTIVO: preserveAspectRatio="none" estica o SVG 
-             horizontalmente para preencher o container (ex: 1400px), 
-             mas o viewBox tem 1200px de largura. Esse stretch de ~1.17x 
-             deformava o arco circular (A) em elipse larga.
-             Bezier cúbico escala proporcionalmente ao viewBox em ambos 
-             os eixos, resultando num U geometricamente fiel ao design.
-             
-             GEOMETRIA DO PATH DESKTOP:
-             - Abertura total no viewBox: x=582 a x=618 = 36px
-               → ~42px reais em tela de 1400px (fator 1.17x)
-             - Paredes quase verticais com cantos suaves via C
-             - Base do U: bezier C com ponto de controle em y=36 (34px de profundidade)
-             - Ícone centralizado em bottom: 34px dentro do U
-             
-             SVG MOBILE (svg-mobile): INALTERADO
+             CURVA BÔNUS DESKTOP — ALTERAÇÃO SEÇÃO 9
+             Container: 48px de altura (era 80px).
+             ViewBox: 0 0 1200 48 (proporcional ao container).
+             Abertura do U: 20px no viewBox (~24px real).
+             Profundidade do U: 24px.
+             SVG MOBILE: INALTERADO.
         ============================================================ -->
         <div class="bonus-bottom-curve">
-            <!-- DESKTOP: U estreito com bezier cúbico (sem distorção) -->
-            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
-                <path d="M0,80 L1200,80 L1200,0 L618,0 C615.5,0 615,1.5 615,5 L615,13 C615,34 585,34 585,13 L585,5 C585,1.5 584.5,0 582,0 L0,0 Z" fill="#FFFFFF"></path>
+            <!-- DESKTOP: U pequeno — container 48px, abertura 20px viewBox -->
+            <svg viewBox="0 0 1200 48" preserveAspectRatio="none" class="bonus-curve-svg svg-desktop">
+                <path d="M0,48 L1200,48 L1200,0 L610,0 C608,0 607.5,1 607.5,3 L607.5,8 C607.5,24 592.5,24 592.5,8 L592.5,3 C592.5,1 592,0 590,0 L0,0 Z" fill="#FFFFFF"></path>
             </svg>
             <!-- MOBILE: inalterado -->
             <svg viewBox="0 0 1200 40" preserveAspectRatio="none" class="bonus-curve-svg svg-mobile">
