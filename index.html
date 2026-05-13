@@ -1267,10 +1267,19 @@
             align-items: center;
         }
 
+        /* Botão Resumo CTA - Com Amarelo no Final */
         .resumo-btn {
             max-width: 480px;
             font-size: 1.05rem;
             width: 100%;
+            background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%) !important;
+            box-shadow: 0 10px 25px rgba(0, 145, 150, 0.35) !important;
+            border: none;
+            color: #FFFFFF !important;
+        }
+        
+        .resumo-btn:hover {
+            box-shadow: 0 15px 35px rgba(0, 145, 150, 0.5) !important;
         }
 
         .resumo-safe {
@@ -1491,10 +1500,16 @@
 
             /* Seção 11 (Resumo) Mobile */
             #sessao-resumo { padding: 60px 0; }
-            #sessao-resumo .container { padding: 0 10px; } /* Aumento do container (menos margem lateral) */
-            .resumo-header { padding: 20px 10px; }
+            
+            /* MEIO-TERMO MARGEM EXTERNA (Antes 10px, agora 18px. Diminui a largura da caixa em 5% no celular) */
+            #sessao-resumo .container { padding: 0 18px; } 
+            
+            .resumo-header { padding: 20px 16px; }
             .resumo-header h3 { font-size: 1.3rem; }
-            .resumo-body { padding: 30px 12px; } /* Menos tolerância interna: ícones colados mais a esquerda e texto mais a direita */
+            
+            /* MEIO TERMO MARGEM INTERNA: Esquerda 24px (mais respiro), Direita 12px (mantida) */
+            .resumo-body { padding: 30px 12px 30px 24px; } 
+            
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
             .resumo-btn { font-size: 0.95rem; }
             .resumo-safe { flex-direction: row; gap: 12px; align-items: center; justify-content: center; }
@@ -2152,7 +2167,7 @@
                     <!-- PARTE 2 - BLOCO 1: ACESSO AO SISTEMA E IA -->
                     <div class="resumo-block">
                         <h4 class="resumo-subtitle">Acesso à certeza, clareza e diagnóstico com IA</h4>
-                        <p class="resumo-support"><strong>12 dispositivos de controle absurdamente automáticos moldados à sua realidade</strong></p>
+                        <p class="resumo-support"><strong>12 dispositivos de controle absurdamente automáticos adaptados à sua realidade</strong></p>
                         
                         <ul class="resumo-grid-list">
                             <li>
@@ -2250,7 +2265,7 @@
 
                     <!-- PARTE 4: CTA FINAL -->
                     <div class="resumo-cta-wrapper">
-                        <a href="#oferta" class="btn-cta btn-violet-cyan resumo-btn">Entrar no Guia Cash</a>
+                        <a href="#oferta" class="btn-cta resumo-btn">Entrar no Guia Cash</a>
                         <div class="resumo-safe">
                             <span>
                                 <!-- SVG Check Círculo com apenas bordas e 100% vazado por dentro -->
