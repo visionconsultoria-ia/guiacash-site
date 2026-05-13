@@ -1129,6 +1129,157 @@
         }
 
         /* =========================================
+           SEÇÃO 11: RESUMO DA ENTREGA
+        ========================================= */
+        #sessao-resumo {
+            background-color: #f8f8f8;
+            padding: 100px 0;
+        }
+
+        .resumo-card {
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            max-width: 900px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .resumo-header {
+            /* Fundo degradê: violeta -> cyan -> amarelo (sendo o amarelo a menor parte, parando aos 85%) */
+            background: linear-gradient(90deg, #5c4bdf 0%, #009196 85%, #f5a722 100%);
+            padding: 24px 36px;
+            text-align: left;
+        }
+
+        .resumo-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: #FFFFFF !important;
+        }
+
+        .resumo-body {
+            padding: 40px 48px;
+        }
+
+        .resumo-block {
+            margin-bottom: 0;
+        }
+
+        .resumo-subtitle {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .resumo-support {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .resumo-grid-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 24px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .resumo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .resumo-grid-list li, .resumo-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Estilização Base dos Ícones */
+        .resumo-icon-base {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        .resumo-icon-sq { border-radius: 6px; }
+        .resumo-icon-circle { border-radius: 50%; }
+
+        /* Cores Sólidas */
+        .bg-violet-solid { background-color: #5c4bdf; }
+        .bg-cyan-solid { background-color: #009196; }
+
+        /* 12 Degradês Específicos da Parte 1 */
+        .r-grad-1 { background: linear-gradient(135deg, #8670ff, #5242d7); } /* Violeta */
+        .r-grad-2 { background: linear-gradient(135deg, #18b6b5, #006974); } /* Cyan */
+        .r-grad-3 { background: linear-gradient(135deg, #5c4bdf, #009196); } /* Violeta/Cyan */
+        .r-grad-4 { background: linear-gradient(135deg, #cbd5e1, #94a3b8); } /* Cinza Claro */
+        .r-grad-5 { background: linear-gradient(135deg, #64748b, #334155); } /* Cinza Escuro */
+        .r-grad-6 { background: linear-gradient(135deg, #6b21a8, #3b0764); } /* Roxo Escuro */
+        .r-grad-7 { background: linear-gradient(135deg, #9f1239, #7f1d1d); } /* Vermelho Bordo */
+        .r-grad-8 { background: linear-gradient(135deg, #5c4bdf, #009196, #f5a722); } /* Violeta/Cyan/Amarelo */
+        .r-grad-9 { background: linear-gradient(135deg, #fde047, #eab308); } /* Amarelo Claro */
+        .r-grad-10 { background: linear-gradient(135deg, #ca8a04, #a16207); } /* Amarelo Queimado */
+        .r-grad-11 { background: linear-gradient(135deg, #5c4bdf, #f5a722); } /* Violeta/Amarelo */
+        .r-grad-12 { background: linear-gradient(135deg, #009196, #f5a722); } /* Cyan/Amarelo */
+
+        .resumo-divider {
+            border: none;
+            border-top: 1px solid #E2E8F0;
+            margin: 32px 0;
+        }
+
+        .resumo-cta-wrapper {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resumo-btn {
+            max-width: 480px;
+            font-size: 1.05rem;
+            width: 100%;
+        }
+
+        .resumo-safe {
+            display: flex;
+            gap: 16px;
+            margin-top: 3px; /* Especificação exata: 3px do botão */
+            justify-content: center;
+            color: #888888; /* Cinza médio */
+            font-size: 0.75rem; /* Letra pequena */
+            font-weight: 500;
+        }
+
+        .resumo-safe span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
         ========================================= */
         .mobile-only { display: none !important; }
@@ -1327,6 +1478,15 @@
                 transform: translateX(-50%) !important;
                 margin: 0 !important; 
             }
+
+            /* Seção 11 (Resumo) Mobile */
+            #sessao-resumo { padding: 60px 0; }
+            .resumo-header { padding: 20px 24px; }
+            .resumo-header h3 { font-size: 1.3rem; }
+            .resumo-body { padding: 30px 24px; }
+            .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
+            .resumo-btn { font-size: 0.95rem; }
+            .resumo-safe { flex-direction: column; gap: 8px; align-items: center; }
         }
 
         @media (min-width: 769px) {
@@ -1957,6 +2117,133 @@
                 <div class="pacote-gradient-box"></div>
                 <!-- A imagem fica livre para ser manipulada matematicamente -->
                 <img src="pacote-total.png" alt="Pacote Total Guia Cash" class="pacote-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 11: RESUMO DA ENTREGA
+    =========================================== -->
+    <section id="sessao-resumo">
+        <div class="container">
+            <div class="resumo-card">
+                
+                <!-- PARTE 1: TÍTULO COM DEGRADÊ -->
+                <div class="resumo-header">
+                    <h3>Acesso completo ao Guia Cash</h3>
+                </div>
+                
+                <div class="resumo-body">
+                    
+                    <!-- PARTE 2 - BLOCO 1: ACESSO AO SISTEMA E IA -->
+                    <div class="resumo-block">
+                        <h4 class="resumo-subtitle">Acesso à certeza, clareza e diagnóstico com IA</h4>
+                        <p class="resumo-support">12 dispositivos de controle absurdamente automáticos que se adaptam à vida de excelentes técnicos mas gestores improvisados</p>
+                        
+                        <ul class="resumo-grid-list">
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-1"><i class="fa-solid fa-chart-pie"></i></div>
+                                <span>Resultado da PF (família), após lucro PJ, rendas/despesas da PF</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-2"><i class="fa-solid fa-chart-column"></i></div>
+                                <span>Resultado da PJ resumido e detalhado (DRE)</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-3"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                                <span>Acompanhamento de fluxo de caixa</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-4"><i class="fa-solid fa-bolt"></i></div>
+                                <span>Importação de extratos/faturas (PF e PJ) e relatório de outros sistemas</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-5"><i class="fa-solid fa-robot"></i></div>
+                                <span>Lançamento por foto, áudio e escrita com o Cash IA (200mil créditos)</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-6"><i class="fa-solid fa-users"></i></div>
+                                <span>Gestão colaborativa com adaptação de permissões</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-7"><i class="fa-solid fa-bullseye"></i></div>
+                                <span>Progresso de Metas</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-8"><i class="fa-solid fa-stethoscope"></i></div>
+                                <span>Exame financeiro geral (PF, PJ e Dívidas) por escrito, imagens ou gráfico</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-9"><i class="fa-solid fa-map"></i></div>
+                                <span>Mapa Inteligente das dívidas, de banco, imposto e outras (PF e PJ)</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-10"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <span>Simulador de empréstimos e erros contratuais</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-11"><i class="fa-solid fa-eye"></i></div>
+                                <span>Diagnóstico de descumprimentos normativas do BACEN e superendividamento</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq r-grad-12"><i class="fa-solid fa-layer-group"></i></div>
+                                <span>Categorização automática de perfil de dívidas conforme tipo de resolução</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <hr class="resumo-divider">
+
+                    <!-- PARTE 2 - BLOCO 2: BÔNUS E MATERIAIS -->
+                    <div class="resumo-block">
+                        <h4 class="resumo-subtitle">Acesso imediato aos bônus e materiais complementares</h4>
+                        <ul class="resumo-list">
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq bg-violet-solid"><i class="fa-solid fa-gift"></i></div>
+                                <span>Curso bônus, do método Com dinheiro e sem dívida</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq bg-violet-solid"><i class="fa-solid fa-gift"></i></div>
+                                <span>Documentação, scripts e normativas indispensáveis para resolver as dívidas</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq bg-violet-solid"><i class="fa-solid fa-gift"></i></div>
+                                <span>Tutoriais com exemplos de casos reais para aplicar no seu perfil</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-sq bg-violet-solid"><i class="fa-solid fa-gift"></i></div>
+                                <span>Desafio prático de implementação rápida</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <hr class="resumo-divider">
+
+                    <!-- PARTE 3: SUPORTE -->
+                    <div class="resumo-block">
+                        <h4 class="resumo-subtitle">Acesso a suporte dedicado</h4>
+                        <ul class="resumo-list">
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
+                                <span>1 ano de acesso às atualizações do sistema</span>
+                            </li>
+                            <li>
+                                <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
+                                <span>Garantia de 7 dias</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- PARTE 4: CTA FINAL -->
+                    <div class="resumo-cta-wrapper">
+                        <a href="#oferta" class="btn-cta btn-violet-cyan resumo-btn">Quero ter controle e paz financeira</a>
+                        <div class="resumo-safe">
+                            <span><i class="fa-solid fa-check"></i> 7 dias de garantia</span>
+                            <span><i class="fa-solid fa-lock"></i> Compra segura</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
