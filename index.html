@@ -1272,7 +1272,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 100px 0 100px; /* Padding Superior aumentado para dar espaço ao pop-out */
+            padding: 180px 0 100px; /* Padding Superior aumentado para abrir um respiro fixo de ~60px sobre a imagem */
         }
 
         .oferta-card {
@@ -1282,13 +1282,14 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
+            border-top: 1px solid transparent; /* Essencial: previne margin collapse */
             text-align: center;
         }
 
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -85px; /* Puxa fisicamente a imagem para cima vazando a caixa */
+            margin-top: -120px; /* Puxa fisicamente a imagem (e todo o conteúdo) vazando a caixa */
             margin-bottom: 32px; /* Restaura a harmonia original no desktop com o preço */
         }
 
@@ -1297,7 +1298,6 @@
             max-width: 432px; 
             height: auto;
             display: block;
-            /* Sombras removidas como solicitado */
         }
 
         .oferta-price-content {
@@ -1584,19 +1584,21 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 60px 0 80px; } /* O padding cinza superior diminuiu e acomoda o push up */
+            #oferta { padding: 140px 0 80px; } /* Padding cinza superior acompanha o pop-out mantendo ~60px livres */
             #oferta .container { padding: 0 18px; } /* Mesma margem externa da Seção 11 */
-            .oferta-card { padding: 0 20px 40px; }
+            .oferta-card { 
+                padding: 0 20px 40px; 
+                border-top: 1px solid transparent; 
+            }
             
             .oferta-img-wrapper { 
-                margin-top: -55px; /* Puxa fisicamente a imagem para cima e encolhe o container */
+                margin-top: -85px; /* Puxa fisicamente a imagem para cima e encolhe o container */
                 margin-bottom: 28px; /* Espaço aumentado em 15% como pedido */
             } 
             
             .oferta-img { 
                 width: 100%; /* Aumentado para 100% no mobile */
                 max-width: 400px;
-                /* Transforms e sombras removidas */
             }
             
             .oferta-price-main { font-size: 2.8rem; }
