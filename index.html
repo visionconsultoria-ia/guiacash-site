@@ -1272,7 +1272,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 65px 0 100px; /* Padding Superior ajustado para 125px */
+            padding: 150px 0 100px; /* Padding Superior ajustado para ~60px reais de respiro cinza (150 - 90 da margem negativa) */
         }
 
         .oferta-card {
@@ -1282,15 +1282,15 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
             text-align: center;
         }
 
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -90px; /* Margem ajustada para -90px */
-            margin-bottom: 32px; 
+            margin-top: -90px; /* Margem ajustada fisicamente puxando a imagem para vazar a caixa */
+            margin-bottom: 32px; /* Mantido o espaçamento harmônico original do desktop */
         }
 
         .oferta-img {
@@ -1367,6 +1367,61 @@
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        /* =========================================
+           SEÇÃO 13: GARANTIA
+        ========================================= */
+        #sessao-garantia {
+            background: linear-gradient(135deg, #5c4bdf, #009196);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .garantia-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .garantia-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
+        }
+
+        .garantia-icon-wrapper svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .garantia-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .garantia-title .text-white {
+            color: #FFFFFF;
+        }
+
+        .garantia-title .text-light-yellow {
+            color: #fef08a; /* Amarelo claro da parte mais leve do degradê dourado */
+        }
+
+        .garantia-subtitle {
+            font-size: 1.35rem;
+            font-weight: 400; /* Sem negrito */
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         /* =========================================
@@ -1584,7 +1639,7 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 40px 0 80px; } /* Ajustado topo para 85px */
+            #oferta { padding: 95px 0 80px; } /* Garante o respiro fixo acima do celular */
             #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
@@ -1592,7 +1647,7 @@
             }
             
             .oferta-img-wrapper { 
-                margin-top: -60px; /* Margem ajustada para -60px */
+                margin-top: -60px; /* Puxa fisicamente a imagem para cima vazando a caixa */
                 margin-bottom: 28px; 
             } 
             
@@ -1621,6 +1676,12 @@
             }
             .safe-item-1 { order: 2; } /* Joga o 7 dias para baixo */
             .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
+
+            /* Seção 13 (Garantia) Mobile */
+            #sessao-garantia { padding: 80px 0; }
+            .garantia-icon-wrapper { width: 70px; height: 70px; margin-bottom: 20px; }
+            .garantia-title { font-size: 2.05rem; }
+            .garantia-subtitle { font-size: 1.15rem; }
         }
 
         @media (min-width: 769px) {
@@ -1646,13 +1707,13 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
+            #sessao-bonus { padding-bottom: 230px; } 
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
+                width: 56px; 
                 height: 56px;
-                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
+                bottom: 28px; 
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
         }
@@ -2420,7 +2481,8 @@
             </div>
         </div>
     </section>
-   <!-- ==========================================
+
+    <!-- ==========================================
          SEÇÃO 13: GARANTIA
     =========================================== -->
     <section id="sessao-garantia">
@@ -2446,8 +2508,8 @@
                 
                 <!-- Título -->
                 <h2 class="garantia-title">
-                    <span class="text-white">Sua estabilidade financeira depende</span><br>
-                    <span class="text-gold">das decisões que você toma hoje</span>
+                    <span class="text-white">Sua estabilidade financeira depende</span><br class="desktop-only">
+                    <span class="text-light-yellow">das decisões que você toma hoje</span>
                 </h2>
                 
                 <!-- Subtítulo -->
@@ -2458,7 +2520,8 @@
             </div>
         </div>
     </section>
-  <!-- SCRIPTS -->
+
+    <!-- SCRIPTS -->
     <script>
         const phrases =[
             { text: "É um excelente técnico atarefado. Mas um gestor improvisado", color: "color-pf-pj" },
