@@ -1272,7 +1272,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 150px 0 100px; /* Padding Superior garante ~60px de respiro acima do celular */
+            padding: 125px 0 100px; /* Padding Superior ajustado para 125px */
         }
 
         .oferta-card {
@@ -1282,15 +1282,15 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
             text-align: center;
         }
 
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -105px; /* Puxa fisicamente a imagem para cima vazando a caixa */
-            margin-bottom: 32px; /* Mantido o espaçamento harmônico original do desktop */
+            margin-top: -90px; /* Margem ajustada para -90px */
+            margin-bottom: 32px; 
         }
 
         .oferta-img {
@@ -1584,13 +1584,16 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 95px 0 80px; } /* Garante o respiro fixo de ~30px acima da imagem */
+            #oferta { padding: 85px 0 80px; } /* Ajustado topo para 85px */
             #oferta .container { padding: 0 18px; } 
-            .oferta-card { padding: 0 20px 40px; }
+            .oferta-card { 
+                padding: 0 20px 40px; 
+                border-top: 1px solid transparent; 
+            }
             
             .oferta-img-wrapper { 
-                margin-top: -65px; /* Puxa fisicamente a imagem para cima vazando a caixa */
-                margin-bottom: 28px; /* Espaço aumentado em 15% como pedido na rodada anterior */
+                margin-top: -60px; /* Margem ajustada para -60px */
+                margin-bottom: 28px; 
             } 
             
             .oferta-img { 
@@ -1643,13 +1646,13 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } 
+            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; 
+                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
                 height: 56px;
-                bottom: 28px; 
+                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
         }
