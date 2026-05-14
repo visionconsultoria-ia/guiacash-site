@@ -1198,6 +1198,7 @@
             gap: 16px;
             list-style: none;
             padding: 0;
+            margin-top: 16px; /* Espaço extra adicionado abaixo dos subtítulos 2 e 3 */
         }
 
         .resumo-grid-list li {
@@ -1205,7 +1206,7 @@
             align-items: flex-start;
             gap: 12px;
             font-size: 0.95rem;
-            font-weight: 500; /* Parte 1 mantém um pequeno peso visual */
+            font-weight: 400; /* Removido o negrito dos 12 itens */
             color: var(--text-dark);
             line-height: 1.5;
         }
@@ -1272,7 +1273,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 150px 0 100px; /* Padding Superior ajustado para ~60px reais de respiro cinza (150 - 90 da margem negativa) */
+            padding: 65px 0 100px;
         }
 
         .oferta-card {
@@ -1282,7 +1283,7 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
             text-align: center;
         }
 
@@ -1373,7 +1374,7 @@
            SEÇÃO 13: GARANTIA
         ========================================= */
         #sessao-garantia {
-            background: linear-gradient(135deg, #5c4bdf, #009196);
+            background: linear-gradient(135deg, #5c4bdf 0%, #009196 100%);
             padding: 100px 0;
             text-align: center;
         }
@@ -1417,12 +1418,13 @@
 
         .garantia-subtitle {
             font-size: 1.35rem;
-            font-weight: 400; /* Sem negrito */
+            font-weight: 400; /* Conforme solicitado, não em negrito */
             color: rgba(255, 255, 255, 0.95);
             line-height: 1.5;
             max-width: 700px;
             margin: 0 auto;
         }
+
 
         /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
@@ -1639,7 +1641,7 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 95px 0 80px; } /* Garante o respiro fixo acima do celular */
+            #oferta { padding: 40px 0 80px; }
             #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
@@ -1647,7 +1649,7 @@
             }
             
             .oferta-img-wrapper { 
-                margin-top: -60px; /* Puxa fisicamente a imagem para cima vazando a caixa */
+                margin-top: -60px; /* Margem ajustada para -60px */
                 margin-bottom: 28px; 
             } 
             
@@ -1707,13 +1709,13 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } 
+            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; 
+                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
                 height: 56px;
-                bottom: 28px; 
+                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
         }
