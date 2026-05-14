@@ -1272,7 +1272,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 120px 0 100px; /* Aumentado top padding para a imagem vazar perfeitamente */
+            padding: 30px 0 100px; /* Reduzido em quase 80% (era 120px) */
         }
 
         .oferta-card {
@@ -1288,8 +1288,8 @@
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: 0; 
-            margin-bottom: 0; 
+            margin-top: -12%; /* Faz a imagem "saltar" para fora da caixa branca */
+            margin-bottom: 50px; /* Espaço aumentado enormemente para baixo no Desktop */
         }
 
         .oferta-img {
@@ -1297,8 +1297,6 @@
             max-width: 432px; 
             height: auto;
             display: block;
-            transform: translateY(-15%); /* Empurra exatamente 15% da altura da própria imagem para cima */
-            margin-bottom: -15%; /* Compensa o espaço em branco deixado pelo transform */
             /* Sombras removidas como solicitado */
         }
 
@@ -1316,17 +1314,21 @@
         }
 
         .oferta-price-sub {
-            font-size: 1.6rem;
-            font-weight: 600;
+            font-size: 1.85rem; /* Aumentado */
+            font-weight: 400; /* Negrito removido */
             color: var(--text-gray);
             margin-bottom: 24px;
         }
 
         .oferta-price-daily {
             font-size: 1.25rem;
-            font-weight: 500;
+            font-weight: 400; /* Base normal, negrito isolado nas tags strong */
             color: var(--text-dark);
             margin-bottom: 40px;
+        }
+
+        .oferta-price-daily strong {
+            font-weight: 800; /* Reforça o negrito nas palavras chave */
         }
 
         /* Reutilização de classes para a Oferta (CTA) */
@@ -1353,7 +1355,7 @@
 
         .oferta-safe {
             display: flex;
-            gap: 8px; /* Espaço diminuído */
+            gap: 8px; /* Espaço diminuído (antes era 16px) */
             margin-top: 3px; /* Especificação exata: 3px do botão */
             justify-content: center;
             color: #888888; /* Cinza médio */
@@ -1582,21 +1584,37 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 100px 0 80px; }
+            #oferta { padding: 25px 0 80px; } /* Reduzido o padding top em ~80% como pedido */
             #oferta .container { padding: 0 18px; } /* Mesma margem externa da Seção 11 */
             .oferta-card { padding: 0 20px 40px; }
-            .oferta-img-wrapper { margin-top: 0; margin-bottom: 0; }
+            .oferta-img-wrapper { 
+                margin-top: -18%; /* Puxa para fora */
+                margin-bottom: 28px; /* Espaço de 15% a mais adicionado aqui abaixo da imagem */
+            } 
             .oferta-img { 
                 width: 100%; /* Aumentado para 100% no mobile */
                 max-width: 400px;
-                transform: translateY(-15%); /* Sobreposição mantida perfeitamente proporcional */
-                margin-bottom: -15%;
+                /* sem transforms ou margens ruins */
             }
             .oferta-price-main { font-size: 2.8rem; }
-            .oferta-price-sub { font-size: 1.25rem; margin-bottom: 20px; }
+            
+            .oferta-price-sub { 
+                font-size: 1.4rem; /* Aumentado */
+                font-weight: 400; /* Removido negrito */
+                margin-bottom: 20px; 
+            }
+            
             .oferta-price-daily { font-size: 1.05rem; margin-bottom: 32px; }
             .oferta-btn { font-size: 1.05rem; }
-            .oferta-safe { flex-direction: row; gap: 6px; flex-wrap: wrap; } /* Espaçamento reduzido */
+            
+            /* Alinhamento exclusivo mobile: Seguro acima do 7 dias */
+            .oferta-safe { 
+                flex-direction: column; 
+                gap: 3px; /* 3px de distância entre eles */
+                align-items: center; 
+            }
+            .safe-item-1 { order: 2; } /* Joga o 7 dias para baixo */
+            .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
         }
 
         @media (min-width: 769px) {
@@ -2368,19 +2386,19 @@
                 <div class="oferta-price-content">
                     <h2 class="oferta-price-main">12x de R$ 9,91</h2>
                     <p class="oferta-price-sub">Ou R$ 97 à vista</p>
-                    <p class="oferta-price-daily">Menos de R$ 0,50/dia para<br class="mobile-only"> mudar de vida.</p>
+                    <p class="oferta-price-daily">Menos de <strong>R$ 0,50/dia</strong> para<br class="mobile-only"> <strong>mudar de vida</strong></p>
                 </div>
 
                 <!-- Parte 3: CTA -->
                 <div class="oferta-cta-wrapper">
                     <button class="btn-cta oferta-btn">Eu quero</button>
                     <div class="oferta-safe">
-                        <span>
+                        <span class="safe-item-1">
                             <!-- SVG Check Círculo com apenas bordas -->
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="16 8 12 16 8 12"></polyline></svg>
                             7 dias de garantia
                         </span>
-                        <span>
+                        <span class="safe-item-2">
                             <!-- SVG Cadeado com apenas bordas -->
                             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                             Ambiente seguro e protegido
