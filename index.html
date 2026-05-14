@@ -1272,7 +1272,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 180px 0 100px; /* Padding Superior garante ~60px de respiro acima do celular */
+            padding: 65px 0 100px; /* Padding Superior ajustado para 125px */
         }
 
         .oferta-card {
@@ -1282,15 +1282,15 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
             text-align: center;
         }
 
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -120px; /* Puxa fisicamente a imagem (e todo o conteúdo) vazando a caixa */
-            margin-bottom: 32px; /* Restaura a harmonia original no desktop com o preço */
+            margin-top: -90px; /* Margem ajustada para -90px */
+            margin-bottom: 32px; 
         }
 
         .oferta-img {
@@ -1368,65 +1368,6 @@
             align-items: center;
             gap: 6px;
         }
-
-        /* =========================================
-           SEÇÃO 13: GARANTIA
-        ========================================= */
-        #sessao-garantia {
-            background: linear-gradient(135deg, #5c4bdf 0%, #009196 100%);
-            padding: 100px 0;
-        }
-
-        .garantia-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .garantia-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 24px;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
-        }
-
-        .garantia-icon-wrapper svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .garantia-title {
-            font-size: 3.2rem;
-            font-weight: 800;
-            line-height: 1.2;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-        }
-
-        .garantia-title .text-white {
-            color: #FFFFFF;
-        }
-
-        .garantia-title .text-gold {
-            background: linear-gradient(90deg, #fdf08a, #f5a623, #d68910);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .garantia-subtitle {
-            font-size: 1.35rem;
-            font-weight: 400; /* Conforme solicitado, não em negrito */
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.5;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
 
         /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
@@ -1643,20 +1584,20 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 95px 0 80px; } /* Garante o respiro fixo de ~30px acima da imagem */
-            #oferta .container { padding: 0 18px; } /* Mesma margem externa da Seção 11 */
+            #oferta { padding: 40px 0 80px; } /* Ajustado topo para 85px */
+            #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
                 border-top: 1px solid transparent; 
             }
             
             .oferta-img-wrapper { 
-                margin-top: -85px; /* Puxa fisicamente a imagem para cima vazando a caixa */
-                margin-bottom: 28px; /* Espaço aumentado em 15% como pedido na rodada anterior */
+                margin-top: -60px; /* Margem ajustada para -60px */
+                margin-bottom: 28px; 
             } 
             
             .oferta-img { 
-                width: 100%; /* Aumentado para 100% no mobile */
+                width: 100%; 
                 max-width: 400px;
             }
             
@@ -1680,12 +1621,6 @@
             }
             .safe-item-1 { order: 2; } /* Joga o 7 dias para baixo */
             .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
-
-            /* Seção 13 (Garantia) Mobile */
-            #sessao-garantia { padding: 80px 0; }
-            .garantia-icon-wrapper { width: 70px; height: 70px; margin-bottom: 20px; }
-            .garantia-title { font-size: 2.05rem; }
-            .garantia-subtitle { font-size: 1.15rem; }
         }
 
         @media (min-width: 769px) {
@@ -2432,10 +2367,11 @@
                             <li>
                                 <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
                                 <span>Garantia de 7 dias</span>
-                             <li>
-                                <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
+                                 </li>
+                            <li>
+                                 <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
                                 <span>Espaço de memória, sem instalação obrigatória de aplicativo</span>
-                            </li>
+</li>
                             <li>
                         </ul>
                     </div>
@@ -2480,45 +2416,6 @@
                         </span>
                     </div>
                 </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ==========================================
-         SEÇÃO 13: GARANTIA
-    =========================================== -->
-    <section id="sessao-garantia">
-        <div class="container">
-            <div class="garantia-wrapper">
-                
-                <!-- Ícone Brasão com Check -->
-                <div class="garantia-icon-wrapper">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="goldGradBadge" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#fef08a" />
-                                <stop offset="50%" stop-color="#f5a623" />
-                                <stop offset="100%" stop-color="#b46a06" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Shield shape -->
-                        <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" fill="url(#goldGradBadge)"/>
-                        <!-- White Check cutout -->
-                        <path d="M10.6 14.6l-3.3-3.3 1.4-1.4 1.9 1.9 4.9-4.9 1.4 1.4-6.3 6.3z" fill="#FFF"/>
-                    </svg>
-                </div>
-                
-                <!-- Título -->
-                <h2 class="garantia-title">
-                    <span class="text-white">Sua estabilidade financeira depende</span><br>
-                    <span class="text-gold">das decisões que você toma hoje</span>
-                </h2>
-                
-                <!-- Subtítulo -->
-                <p class="garantia-subtitle">
-                    Rolar a fatura ou empréstimo para frente custa muito mais que investir no Guia Cash
-                </p>
 
             </div>
         </div>
