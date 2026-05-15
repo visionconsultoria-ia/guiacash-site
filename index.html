@@ -1533,6 +1533,113 @@
         }
 
         /* =========================================
+           SEÇÃO 15: FAQ
+        ========================================= */
+        #sessao-faq {
+            background-color: #f8f8f8;
+            padding: 100px 0 120px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.03em;
+            margin-bottom: 10px;
+        }
+
+        .faq-wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #FFFFFF;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+
+        .faq-question {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-right: 20px;
+            background: linear-gradient(135deg, #5c4bdf, #009196);
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .faq-answer p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.6;
+            padding: 0 24px 0 76px; /* 24px + 32px(icon) + 20px(margin) = 76px to align with text */
+        }
+
+        /* Active State FAQ */
+        .faq-item.active .faq-icon {
+            background: #E2E8F0;
+            color: #363636;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 800px;
+            opacity: 1;
+            padding-bottom: 24px;
+        }
+
+        .icon-minus { display: none; }
+        .faq-item.active .icon-plus { display: none; }
+        .faq-item.active .icon-minus { display: block; }
+        
+        .faq-cta-wrapper {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
         ========================================= */
         .mobile-only { display: none !important; }
@@ -1830,21 +1937,23 @@
             
             /* Título com proporção perfeita para preencher a tela em 1 linha com respiro 5% */
             .gabriela-header.mobile-only .gabriela-title {
-                font-size: 8.5vw; 
+                font-size: 8.8vw; /* Aumentado levemente */
                 max-font-size: 2.2rem;
-                padding-left: 5%;
+                padding-left: 5%; /* Alinha com os 5% de margem da imagem */
                 padding-right: 5%;
                 margin-bottom: 16px !important;
                 white-space: nowrap;
                 letter-spacing: -0.05em; 
             }
 
-            /* Badges travados na mesma linha, agora centralizados (justify-content: center) */
+            /* Badges travados na mesma linha, puxados para a esquerda sem descentralizar demais */
             .gabriela-badges {
                 display: flex;
                 flex-wrap: nowrap; 
-                justify-content: center; /* CENTRALIZADO CONFORME PEDIDO */
-                gap: 8px; 
+                justify-content: flex-start; /* Alinhado à esquerda */
+                padding-left: 3%; /* Deslocado sutilmente para a esquerda */
+                padding-right: 3%;
+                gap: 6px; 
                 margin-bottom: 24px; 
             }
             
@@ -1858,12 +1967,12 @@
                 font-size: 0.65rem; 
             }
 
-            /* Premiação alinhada com o limite esquerdo (5%) */
+            /* Premiação movida para a esquerda seguindo o alinhamento das pílulas */
             .gabriela-awards {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 8px; 
-                padding: 0 8%; 
+                padding: 0 3%; /* Deslocado para a esquerda */
             }
 
             .g-award-item {
@@ -1889,8 +1998,17 @@
             /* Respiros ajustados */
             .gabriela-p {
                 margin-left: 26px; 
-                margin-right: 17px; /* MARGEM DIREITA VOLTOU A SER 18PX COMO SOLICITADO */
+                margin-right: 18px; /* MARGEM DIREITA VOLTOU A SER 18PX COMO SOLICITADO */
             }
+
+            /* Seção FAQ Mobile */
+            #sessao-faq { padding: 60px 0; }
+            .faq-title-main { font-size: 2.2rem; }
+            .faq-question { padding: 16px 20px; }
+            .faq-icon { margin-right: 16px; width: 28px; height: 28px; font-size: 0.8rem; }
+            .faq-title { font-size: 1.05rem; }
+            .faq-answer p { padding: 0 20px 0 64px; font-size: 0.95rem; }
+            .faq-item.active .faq-answer { padding-bottom: 20px; }
         }
 
         @media (min-width: 769px) {
@@ -1934,12 +2052,12 @@
             .gabriela-grid {
                 flex-direction: row;
                 align-items: center; 
-                gap: 40px;
+                gap: 48px; 
                 max-width: 1020px; /* Limita o conteúdo para que a margem automática empurre o bloco inteiro mais para a esquerda do container (centralizando visualmente a "massa") */
                 margin: 0 auto;
             }
             .gabriela-img-col {
-                flex: 0 0 42%; /* Ajuste matemático proporcional: 15% menor que os 43.5% que estavam na última versão (43.5 * 0.85 = ~37) */
+                flex: 0 0 37%; /* Ajuste matemático proporcional: 15% menor que os 43.5% que estavam na última versão (43.5 * 0.85 = ~37) */
             }
             .gabriela-text-col {
                 flex: 1; 
@@ -2875,12 +2993,172 @@
                         </div>
                     </div>            
                     
-                    <p class="gabriela-p">Começou a empreender aos 20. Certo dia descobriu que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família treinados. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias.</p>
+                    <p class="gabriela-p">Começou a empreender aos 20. E certo dia descobriu que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família foram treinados a mantê-lo. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias.</p>
                     
-                    <p class="gabriela-p">De fato, ela quer ver pessoas despertando para o poder de tomar posse da sua vida financeira. Acredita que falar sobre dinheiro pode ser mais simples e divertido. Ela quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
+                    <p class="gabriela-p">De fato, ela quer ver pessoas despertando para o poder de tomar posse da sua vida financeira. Acredita que falar sobre dinheiro pode ser mais simples e por que não divertido. E quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
                 </div>
             </div>
             
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 15: FAQ
+    =========================================== -->
+    <section id="sessao-faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title-main">Perguntas Frequentes</h2>
+            </div>
+            
+            <div class="faq-wrapper">
+                
+                <!-- Item 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Preciso saber mexer em sistemas?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não o Guia Cash é direto e simples, muito intuitivo como o seu app do despertador ou a Netflix no computador</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">E se eu não tiver tempo?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>São 15 min por semana, e não precisa ser alimentado todo dia, só se você quiser.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Já tentei outras coisas, e se eu não conseguir aplicar?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Esse método foi feito pra funcionar até pra quem odeia finanças ou tem TDAH, como eu.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Esse sistema é pra quem está endividado ou em superendividamento?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, é a ferramenta mais equipada do mercado para ser um apoio na sua jornada de libertação das dívidas.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Meu sócio vai ver minhas finanças pessoais?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não, você pode dar permissão a ele somente da área PJ. Cada um recebe acesso com login e senha individuais e o administrador controla permissões de acesso, isso permite colaboração e evita mal-entendidos indesejados.</p>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Meu cônjuge, namorido(a), vai ver minhas dívidas?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não, você pode restringir a permissão de visualização da área de dívidas. Cada um recebe acesso com login e senha individuais e o administrador controla permissões de acesso, isso permite colaboração e evita mal-entendidos indesejados.</p>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Meu filho vai saber o resultado da família?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Não, você pode dar permissão para ele(a) ver somente o que ele(a) lançou. Cada um recebe acesso com login e senha individuais e o administrador controla permissões de acesso, isso permite colaboração e evita mal-entendidos indesejados.</p>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Em quanto tempo verei resultados?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Desde o início, você já vai sentir a mudança acontecendo. Por assistir e executar os desafios dos tutoriais, que leva 30 min. Com o uso recorrente da ferramenta em 7 a 15 dias, os resultados ficam ainda mais visíveis.</p>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Você ensina a usar?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Temos tutoriais. São vídeos curtos para você tirar suas dúvidas mais essenciais sobre o funcionamento de cada ferramenta. Com desafios práticos, exemplos de casos reais para aplicar no seu perfil</p>
+                    </div>
+                </div>
+
+                <!-- Item 10 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <div class="faq-icon">
+                            <i class="fa-solid fa-plus icon-plus"></i>
+                            <i class="fa-solid fa-minus icon-minus"></i>
+                        </div>
+                        <h4 class="faq-title">Por quanto tempo acesso?</h4>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O acesso ao Guia Cash é por 1 ano. Você paga uma única vez e poderá ter o controle das finanças durante 1 ano com ele e ver todos os dados do período que você usou de forma vitalícia. Ah fique tranquilo, você não terá nenhuma renovação automática, isso não é legal.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-cta-wrapper">
+                <a href="#oferta" class="btn-cta btn-violet-cyan">Entrar no Guia Cash</a>
+            </div>
+
         </div>
     </section>
 
@@ -2974,6 +3252,31 @@
         }, { threshold: 0.3 }); 
 
         observer.observe(document.getElementById('sessao-audiencia'));
+
+        /* ==========================================
+           SCRIPT DA SEÇÃO FAQ
+        ========================================== */
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                const isActive = item.classList.contains('active');
+                
+                // Opção de acordeão independente (permite abrir vários). 
+                // Se quiser que abra um e feche os outros, descomente o bloco abaixo:
+                /*
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                */
+
+                if (!isActive) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+
     </script>
 
     <!-- JS GLOBAL DOS VÍDEOS -->
