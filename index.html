@@ -1830,23 +1830,21 @@
             
             /* Título com proporção perfeita para preencher a tela em 1 linha com respiro 5% */
             .gabriela-header.mobile-only .gabriela-title {
-                font-size: 8.8vw; /* Aumentado levemente */
+                font-size: 8.5vw; 
                 max-font-size: 2.2rem;
-                padding-left: 5%; /* Alinha com os 5% de margem da imagem */
+                padding-left: 5%;
                 padding-right: 5%;
                 margin-bottom: 16px !important;
                 white-space: nowrap;
                 letter-spacing: -0.05em; 
             }
 
-            /* Badges travados na mesma linha, puxados para a esquerda sem descentralizar demais */
+            /* Badges travados na mesma linha, agora centralizados (justify-content: center) */
             .gabriela-badges {
                 display: flex;
                 flex-wrap: nowrap; 
-                justify-content: flex-start; /* Alinhado à esquerda */
-                padding-left: 3%; /* Deslocado sutilmente para a esquerda */
-                padding-right: 3%;
-                gap: 6px; 
+                justify-content: center; /* CENTRALIZADO CONFORME PEDIDO */
+                gap: 8px; 
                 margin-bottom: 24px; 
             }
             
@@ -1860,12 +1858,12 @@
                 font-size: 0.65rem; 
             }
 
-            /* Premiação movida para a esquerda seguindo o alinhamento das pílulas */
+            /* Premiação alinhada com o limite esquerdo (5%) */
             .gabriela-awards {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 8px; 
-                padding: 0 3%; /* Deslocado para a esquerda */
+                padding: 0 8%; 
             }
 
             .g-award-item {
@@ -1936,12 +1934,12 @@
             .gabriela-grid {
                 flex-direction: row;
                 align-items: center; 
-                gap: 48px; 
-                max-width: 100%; /* Permitir expansão total horizontal no container */
+                gap: 40px;
+                max-width: 1020px; /* Limita o conteúdo para que a margem automática empurre o bloco inteiro mais para a esquerda do container (centralizando visualmente a "massa") */
                 margin: 0 auto;
             }
             .gabriela-img-col {
-                flex: 0 0 45%; /* Aumento da imagem exigido na última revisão (para igualar altura do texto) */
+                flex: 0 0 37%; /* Ajuste matemático proporcional: 15% menor que os 43.5% que estavam na última versão (43.5 * 0.85 = ~37) */
             }
             .gabriela-text-col {
                 flex: 1; 
@@ -2877,7 +2875,7 @@
                         </div>
                     </div>            
                     
-                    <p class="gabriela-p">Começou a empreender aos 20. E certo dia descobriu que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família treinados. Hoje, eles têm liberdade financeira e a Gabriela capacita centenas de outras famílias.</p>
+                    <p class="gabriela-p">Começou a empreender aos 20. E certo dia descobriu que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família treinados. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias.</p>
                     
                     <p class="gabriela-p">De fato, ela quer ver pessoas despertando para o poder de tomar posse da sua vida financeira. Acredita que falar sobre dinheiro pode ser mais simples e por que não divertido. E quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
                 </div>
