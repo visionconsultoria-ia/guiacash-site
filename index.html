@@ -1786,6 +1786,13 @@
             /* Diminui padding container para título caber melhor em 1 linha */
             #sessao-gabriela .container { padding: 0 10px; }
             
+            /* 1) Diminuir imagem 10% com respiro */
+            .gabriela-img { 
+                width: 90%; 
+                margin: 0 auto; 
+                display: block; 
+            }
+
             .gabriela-header.mobile-only {
                 text-align: center;
                 margin-bottom: 24px;
@@ -1813,31 +1820,45 @@
                 font-size: 0.64rem; /* -20% */
             }
             
-            /* Força o terceiro elemento (Especialista) a ocupar 100% da linha e quebrar para baixo sozinho */
+            /* 2) Remove o flex 100% para não estourar na margem, deixando o botão rente à escrita */
             .g-badge:nth-child(3) {
-                flex: 1 1 100%;
+                flex: 0 0 auto;
             }
 
+            /* 3 e 5) Premiação levemente mais centralizada (com padding), gap menor e mantendo 2 linhas */
             .gabriela-awards {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-                padding: 0;
+                align-items: center;
+                gap: 8px; /* 5) Menor espaço */
+                padding: 0 8%; /* 3) Margens reduzidas (respiro de 8% de cada lado) */
             }
 
             .g-award-item {
                 width: 100%;
+                align-items: center;
+                justify-content: flex-start;
             }
 
+            /* 4) Diminuição de 10% nos ícones do troféu */
+            .g-award-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            /* 6) Remover negrito do texto da premiação */
+            .g-award-item p {
+                font-weight: 400;
+                text-align: left;
+            }
+
+            /* 5) Remover a linha cinza divisória */
             .g-award-divider {
-                width: 100%;
-                height: 1px;
-                margin: 4px 0;
+                display: none;
             }
 
-            /* Respiro esquerdo nos parágrafos mobile */
+            /* 7) Respiro esquerdo nos parágrafos mobile aumentado levemente */
             .gabriela-p {
-                margin-left: 18px; 
+                margin-left: 26px; 
             }
         }
 
@@ -1885,7 +1906,7 @@
                 gap: 60px;
             }
             .gabriela-img-col {
-                flex: 0 0 35%; /* Menos espaço para imagem */
+                flex: 0 0 38.5%; /* 1) Desktop: Flex basis ajustado de 35% para 38.5% (Aumento exato de 10% no tamanho da imagem) */
             }
             .gabriela-text-col {
                 flex: 1; /* Mais espaço para texto para não parecer longo */
