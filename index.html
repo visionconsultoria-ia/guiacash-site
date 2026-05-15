@@ -1273,7 +1273,7 @@
         ========================================= */
         #oferta {
             background-color: #f8f8f8;
-            padding: 65px 0 100px; /* Rigorosamente ajustado para o desktop */
+            padding: 65px 0 100px;
         }
 
         .oferta-card {
@@ -1291,11 +1291,11 @@
             display: flex;
             justify-content: center;
             margin-top: -90px; /* Margem ajustada fisicamente puxando a imagem para vazar a caixa */
-            margin-bottom: 32px; /* Mantido o espaçamento harmônico original do desktop */
+            margin-bottom: 32px; 
         }
 
         .oferta-img {
-            width: 84%; /* Aumentado 20% em relação aos 70% originais */
+            width: 84%; 
             max-width: 432px; 
             height: auto;
             display: block;
@@ -1315,21 +1315,21 @@
         }
 
         .oferta-price-sub {
-            font-size: 1.95rem; /* Fonte Aumentada */
-            font-weight: 400; /* Negrito removido */
-            color: #A3A3A3; /* Cinza claro suave */
+            font-size: 1.95rem; 
+            font-weight: 400; 
+            color: #A3A3A3; 
             margin-bottom: 24px;
         }
 
         .oferta-price-daily {
             font-size: 1.25rem;
-            font-weight: 400; /* Base normal, negrito isolado nas tags strong */
+            font-weight: 400; 
             color: var(--text-dark);
             margin-bottom: 40px;
         }
 
         .oferta-price-daily strong {
-            font-weight: 800; /* Reforça o negrito nas palavras chave */
+            font-weight: 800; 
         }
 
         /* Reutilização de classes para a Oferta (CTA) */
@@ -1343,24 +1343,24 @@
             max-width: 480px;
             font-size: 1.15rem;
             width: 100%;
-            background: linear-gradient(90deg, #5c4bdf 0%, #009196 100%) !important; /* Somente Violeta para Cyan */
-            box-shadow: none !important; /* Sem sombra */
+            background: linear-gradient(90deg, #5c4bdf 0%, #009196 100%) !important; 
+            box-shadow: none !important; 
             border: none;
             color: #FFFFFF !important;
         }
 
         .oferta-btn:hover {
-            box-shadow: none !important; /* Sem sombra no hover */
+            box-shadow: none !important; 
             transform: translateY(-3px);
         }
 
         .oferta-safe {
             display: flex;
-            gap: 8px; /* Espaço diminuído */
-            margin-top: 3px; /* Especificação exata: 3px do botão */
+            gap: 8px; 
+            margin-top: 3px; 
             justify-content: center;
-            color: #888888; /* Cinza médio */
-            font-size: 0.75rem; /* Letra pequena */
+            color: #888888; 
+            font-size: 0.75rem; 
             font-weight: 500;
         }
 
@@ -1400,12 +1400,12 @@
         }
 
         .garantia-title .text-light-yellow {
-            color: #fef08a; /* Amarelo claro da parte mais leve do degradê dourado */
+            color: #fef08a; 
         }
 
         .garantia-subtitle {
             font-size: 1.35rem;
-            font-weight: 400; /* Sem negrito */
+            font-weight: 400; 
             color: rgba(255, 255, 255, 0.95);
             line-height: 1.5;
             max-width: 700px;
@@ -1436,15 +1436,79 @@
 
         .gabriela-title {
             color: var(--text-dark);
-            margin-bottom: 8px;
+            margin-bottom: 20px;
         }
 
-        .gabriela-subtitle {
-            color: #888888; /* Cinza claro */
+        /* Estilos dos 3 Elementos/Badges do Subtítulo */
+        .gabriela-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .g-badge {
+            background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
+                        linear-gradient(90deg, #5c4bdf, #009196) border-box;
+            border: 1.5px solid transparent;
+            border-radius: 999px;
+            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .g-badge span {
+            background: linear-gradient(90deg, #5c4bdf, #009196);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Estilos dos Prêmios com Troféu */
+        .gabriela-awards {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .g-award-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .g-award-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+
+        .g-award-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .g-award-item p {
             font-size: 0.95rem;
-            font-weight: 400; /* Sem negrito */
-            line-height: 1.4;
-            margin-bottom: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin: 0;
+            text-align: left;
+        }
+
+        .g-award-divider {
+            width: 1px;
+            height: 45px;
+            background-color: var(--border-light);
+            flex-shrink: 0;
         }
 
         .gabriela-p {
@@ -1673,7 +1737,7 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 40px 0 65px; } /* Mantido estritamente como pedido (redução 10% bottom) */
+            #oferta { padding: 40px 0 80px; } 
             #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
@@ -1702,17 +1766,16 @@
             .oferta-price-daily { font-size: 1.05rem; margin-bottom: 32px; }
             .oferta-btn { font-size: 1.05rem; }
             
-            /* Alinhamento exclusivo mobile: Seguro acima do 7 dias */
             .oferta-safe { 
                 flex-direction: column; 
                 gap: 3px; 
                 align-items: center; 
             }
-            .safe-item-1 { order: 2; } /* Joga o 7 dias para baixo */
-            .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
+            .safe-item-1 { order: 2; } 
+            .safe-item-2 { order: 1; } 
 
             /* Seção 13 (Garantia) Mobile */
-            #sessao-garantia { padding: 55px 0 55px; } /* Padding top reduzido exatamente em 10% */
+            #sessao-garantia { padding: 72px 0; }
             .garantia-title { font-size: 2.05rem; }
             .garantia-subtitle { font-size: 1.15rem; }
 
@@ -1722,10 +1785,46 @@
                 text-align: center;
                 margin-bottom: 24px;
             }
+            
             .gabriela-title {
-                font-size: 1.6rem; /* Garante que fique em 1 linha */
+                font-size: 1.6rem; /* Garante que fique em 1 linha no celular */
                 white-space: nowrap; /* Trava em uma linha */
                 letter-spacing: -0.04em;
+            }
+
+            .gabriela-badges {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Centralizado no mobile */
+                gap: 8px;
+            }
+            
+            .g-badge {
+                flex: 0 0 auto;
+                font-size: 0.8rem; 
+                padding: 6px 12px;
+            }
+            
+            /* Força o terceiro elemento (Especialista) a ocupar 100% da linha e quebrar para baixo sozinho */
+            .g-badge:nth-child(3) {
+                flex: 1 1 100%;
+            }
+
+            .gabriela-awards {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 0;
+            }
+
+            .g-award-item {
+                width: 100%;
+            }
+
+            .g-award-divider {
+                width: 100%;
+                height: 1px;
+                margin: 4px 0;
             }
         }
 
@@ -1752,38 +1851,34 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
+            #sessao-bonus { padding-bottom: 230px; } 
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
+                width: 56px; 
                 height: 56px;
-                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
+                bottom: 28px; 
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
 
             /* Seção 13 Garantia Desktop Exclusivos */
             #sessao-garantia .garantia-wrapper { max-width: 1100px; } 
-            .garantia-title .text-white { white-space: nowrap; display: inline-block; } /* Força a não quebrar o "depende" */
+            .garantia-title .text-white { white-space: nowrap; display: inline-block; } 
 
             /* Seção 14 Gabriela Desktop Exclusivos */
             .gabriela-grid {
                 flex-direction: row;
-                align-items: center;
+                align-items: center; /* Alinha o conteúdo verticalmente com a imagem */
                 gap: 60px;
             }
             .gabriela-img-col {
-                flex: 0 0 35%; /* Menos espaço para imagem */
+                flex: 0 0 35%; /* Ocupa apenas 35% do espaço */
             }
             .gabriela-text-col {
-                flex: 1; /* Mais espaço para texto para não parecer longo */
+                flex: 1; /* Ocupa o espaço restante (65%), impedindo que pareça muito longo */
             }
             .gabriela-title {
                 font-size: 2.5rem;
-            }
-            .gabriela-subtitle {
-                font-size: 1.05rem;
-                margin-bottom: 32px;
             }
         }
 
@@ -1814,6 +1909,12 @@
                 <stop offset="0%" stop-color="#e2c45f" />  
                 <stop offset="10%" stop-color="#fbbb4f" /> 
                 <stop offset="100%" stop-color="#d68910" /> 
+            </linearGradient>
+
+            <!-- Trophée Gradient Seção 14 -->
+            <linearGradient id="trophyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#5c4bdf" />
+                <stop offset="100%" stop-color="#009196" />
             </linearGradient>
         </defs>
     </svg>
@@ -2492,7 +2593,7 @@
                         <ul class="resumo-list">
                             <li>
                                 <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
-                                <span>1 ano de acesso às atualizações</span>
+                                <span>1 ano de acesso às atualizações do sistema</span>
                             </li>
                             <li>
                                 <div class="resumo-icon-base resumo-icon-circle bg-cyan-solid"><i class="fa-solid fa-check"></i></div>
@@ -2583,7 +2684,34 @@
             <!-- Mobile Header (Title and Subtitle Top) -->
             <div class="gabriela-header mobile-only">
                 <h2 class="gabriela-title">Quem é Gabriela Vieira</h2>
-                <p class="gabriela-subtitle">Economista, especialista em educação financeira e criadora do método Círculo Méstre</p>
+                
+                <div class="gabriela-badges">
+                    <div class="g-badge"><span>Economista</span></div>
+                    <div class="g-badge"><span>9 anos de experiência</span></div>
+                    <div class="g-badge"><span>Especialista em educação financeira</span></div>
+                </div>
+
+                <div class="gabriela-awards">
+                    <div class="g-award-item">
+                        <div class="g-award-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19,2h-2V1h-2v1H9V1H7v1H5C3.9,2,3,2.9,3,4v2c0,2.55,1.92,4.63,4.39,4.94C8.08,12.12,9.9,13,12,13s3.92-0.88,4.61-2.06 C19.08,10.63,21,8.55,21,6V4C21,2.9,20.1,2,19,2z M5,6V4h2v3.82C5.84,7.4,5,6.78,5,6z M19,6c0,0.78-0.84,1.4-2,1.82V4h2V6z M12,14 c-2.67,0-4.96,1.89-5.7,4H5v2h14v-2h-1.3C16.96,15.89,14.67,14,12,14z" fill="url(#trophyGrad)"/>
+                                <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+                        <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil projeto inovador</p>
+                    </div>
+                    <div class="g-award-divider"></div>
+                    <div class="g-award-item">
+                        <div class="g-award-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19,2h-2V1h-2v1H9V1H7v1H5C3.9,2,3,2.9,3,4v2c0,2.55,1.92,4.63,4.39,4.94C8.08,12.12,9.9,13,12,13s3.92-0.88,4.61-2.06 C19.08,10.63,21,8.55,21,6V4C21,2.9,20.1,2,19,2z M5,6V4h2v3.82C5.84,7.4,5,6.78,5,6z M19,6c0,0.78-0.84,1.4-2,1.82V4h2V6z M12,14 c-2.67,0-4.96,1.89-5.7,4H5v2h14v-2h-1.3C16.96,15.89,14.67,14,12,14z" fill="url(#trophyGrad)"/>
+                                <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+                        <p class="g-award-text">Destaque no International Business Model Competition, EUA</p>
+                    </div>
+                </div>
             </div>
 
             <div class="gabriela-grid">
@@ -2598,8 +2726,36 @@
                     <!-- Desktop Header (Title and Subtitle next to text) -->
                     <div class="gabriela-header desktop-only">
                         <h2 class="gabriela-title">Quem é Gabriela Vieira</h2>
-                        <p class="gabriela-subtitle">Economista, especialista em educação financeira e criadora do método Círculo Méstre</p>
+                        
+                        <div class="gabriela-badges">
+                            <div class="g-badge"><span>Economista</span></div>
+                            <div class="g-badge"><span>9 anos de experiência</span></div>
+                            <div class="g-badge"><span>Especialista em educação financeira</span></div>
+                        </div>
+
+                        <div class="gabriela-awards">
+                            <div class="g-award-item">
+                                <div class="g-award-icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19,2h-2V1h-2v1H9V1H7v1H5C3.9,2,3,2.9,3,4v2c0,2.55,1.92,4.63,4.39,4.94C8.08,12.12,9.9,13,12,13s3.92-0.88,4.61-2.06 C19.08,10.63,21,8.55,21,6V4C21,2.9,20.1,2,19,2z M5,6V4h2v3.82C5.84,7.4,5,6.78,5,6z M19,6c0,0.78-0.84,1.4-2,1.82V4h2V6z M12,14 c-2.67,0-4.96,1.89-5.7,4H5v2h14v-2h-1.3C16.96,15.89,14.67,14,12,14z" fill="url(#trophyGrad)"/>
+                                        <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
+                                    </svg>
+                                </div>
+                                <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil projeto inovador</p>
+                            </div>
+                            <div class="g-award-divider"></div>
+                            <div class="g-award-item">
+                                <div class="g-award-icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19,2h-2V1h-2v1H9V1H7v1H5C3.9,2,3,2.9,3,4v2c0,2.55,1.92,4.63,4.39,4.94C8.08,12.12,9.9,13,12,13s3.92-0.88,4.61-2.06 C19.08,10.63,21,8.55,21,6V4C21,2.9,20.1,2,19,2z M5,6V4h2v3.82C5.84,7.4,5,6.78,5,6z M19,6c0,0.78-0.84,1.4-2,1.82V4h2V6z M12,14 c-2.67,0-4.96,1.89-5.7,4H5v2h14v-2h-1.3C16.96,15.89,14.67,14,12,14z" fill="url(#trophyGrad)"/>
+                                        <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
+                                    </svg>
+                                </div>
+                                <p class="g-award-text">Destaque no International Business Model Competition, EUA</p>
+                            </div>
+                        </div>
                     </div>            
+                    
                     <p class="gabriela-p">Começou a empreender aos 20. Certo dia descobriu que a empresa da família tinha 1milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família foram treinados. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias a isso.</p>
                     
                     <p class="gabriela-p">De fato, ela quer ver pessoas despertando para o poder de tomar posse da sua vida financeira. Acredita que falar sobre dinheiro pode ser mais simples e por que não divertido. E quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
