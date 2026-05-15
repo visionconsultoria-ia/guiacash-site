@@ -1468,6 +1468,14 @@
             font-weight: 700;
             font-size: 0.72rem;
         }
+        
+        /* Nova tag centralizada debaixo da imagem */
+        .img-badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+            width: 100%;
+        }
 
         /* Estilos dos Prêmios com Troféu */
         .gabriela-awards {
@@ -1804,25 +1812,22 @@
                 letter-spacing: -0.05em; /* Ajuda a caber na tela do celular */
             }
 
+            /* Container e Elementos travados na mesma linha com flex-wrap: nowrap */
             .gabriela-badges {
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center; /* Centralizado no mobile */
-                gap: 8px;
+                flex-wrap: nowrap; /* Garante que fiquem na mesma linha */
+                justify-content: center;
+                gap: 8px; /* Espaçamento ideal para iPhone 12 */
             }
             
             .g-badge {
-                flex: 0 0 auto;
-                padding: 4.8px 9.6px; /* -20% */
+                flex: 0 1 auto;
+                padding: 4px 10px; /* Paddings laterais bem dosados */
+                white-space: nowrap; /* Trava o texto em 1 linha internamente */
             }
             
             .g-badge span {
-                font-size: 0.64rem; /* -20% */
-            }
-            
-            /* 2) Remove o flex 100% para não estourar na margem, deixando o botão rente à escrita */
-            .g-badge:nth-child(3) {
-                flex: 0 0 auto;
+                font-size: 0.65rem; /* ~10.5px: perfeito para caber sem perder leiturabilidade */
             }
 
             /* 3 e 5) Premiação levemente mais centralizada (com padding), gap menor e mantendo 2 linhas */
@@ -1843,12 +1848,6 @@
             .g-award-icon {
                 width: 32px;
                 height: 32px;
-            }
-
-            /* 6) Remover negrito do texto da premiação */
-            .g-award-item p {
-                font-weight: 400;
-                text-align: left;
             }
 
             /* 5) Remover a linha cinza divisória */
@@ -1906,7 +1905,7 @@
                 gap: 60px;
             }
             .gabriela-img-col {
-                flex: 0 0 38.5%; /* 1) Desktop: Flex basis ajustado de 35% para 38.5% (Aumento exato de 10% no tamanho da imagem) */
+                flex: 0 0 38.5%; /* Desktop: Flex basis ajustado de 35% para 38.5% (Aumento exato de 10% no tamanho da imagem) */
             }
             .gabriela-text-col {
                 flex: 1; /* Mais espaço para texto para não parecer longo */
@@ -1917,6 +1916,9 @@
             .gabriela-subtitle {
                 font-size: 1.05rem;
                 margin-bottom: 32px;
+            }
+            .img-badge-wrapper {
+                justify-content: center; /* Centraliza a badge embaixo da imagem no desktop também */
             }
         }
 
@@ -2725,7 +2727,6 @@
                 
                 <div class="gabriela-badges">
                     <div class="g-badge"><span>Economista</span></div>
-                    <div class="g-badge"><span>9 anos de experiência</span></div>
                     <div class="g-badge"><span>Especialista em educação financeira</span></div>
                 </div>
 
@@ -2737,7 +2738,7 @@
                                 <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                             </svg>
                         </div>
-                        <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil projeto inovador</p>
+                        <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil, projeto inovador</p>
                     </div>
                     <div class="g-award-divider"></div>
                     <div class="g-award-item">
@@ -2756,6 +2757,11 @@
                 <!-- Coluna Imagem -->
                 <div class="gabriela-img-col">
                     <img src="gabriela.png" alt="Gabriela Vieira" class="gabriela-img">
+                    
+                    <!-- Nova Tag debaixo da imagem -->
+                    <div class="img-badge-wrapper">
+                        <div class="g-badge"><span>Criadora do método circulo mestre e CDSC</span></div>
+                    </div>
                 </div>
                 
                 <!-- Coluna Textos -->
@@ -2767,7 +2773,6 @@
                         
                         <div class="gabriela-badges">
                             <div class="g-badge"><span>Economista</span></div>
-                            <div class="g-badge"><span>9 anos de experiência</span></div>
                             <div class="g-badge"><span>Especialista em educação financeira</span></div>
                         </div>
 
@@ -2779,7 +2784,7 @@
                                         <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                                     </svg>
                                 </div>
-                                <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil projeto inovador</p>
+                                <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil, projeto inovador</p>
                             </div>
                             <div class="g-award-divider"></div>
                             <div class="g-award-item">
