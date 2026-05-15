@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* =========================================
@@ -1943,7 +1943,8 @@
                 flex: 1; 
             }
             .gabriela-title {
-                font-size: 3.0rem; 
+                font-size: 3.5rem; /* Aumentado em relação ao setup anterior */
+                letter-spacing: -0.04em;
             }
             .gabriela-subtitle {
                 font-size: 1.05rem;
@@ -1955,15 +1956,34 @@
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: flex-start;
-                gap: 8px; /* Tensão correta entre elas */
+                gap: 10px; /* Tensão correta entre elas */
+                margin-bottom: 36px;
             }
             .gabriela-header.desktop-only .g-badge {
-                padding: 4px 10px;
-                flex-shrink: 1; 
+                padding: 5.5px 14px; /* Aumento nos paddings de ~10% */
+                flex-shrink: 0; /* Impede que se amassem horizontalmente */
             }
             .gabriela-header.desktop-only .g-badge span {
-                font-size: 0.68rem; /* Fit perfeito para a área reservada */
+                font-size: 0.75rem; /* Aumento de ~10% (era 0.68rem) */
                 white-space: nowrap;
+            }
+
+            /* Trava 2 linhas exatas nos prêmios */
+            .nowrap-desktop {
+                white-space: nowrap;
+            }
+            
+            .gabriela-awards {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 20px; 
+            }
+            .g-award-item {
+                flex: 0 0 auto; 
+            }
+            .g-award-item p {
+                font-size: 0.95rem; 
+                line-height: 1.4;
             }
         }
 
@@ -2832,7 +2852,10 @@
                                         <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                                     </svg>
                                 </div>
-                                <p class="g-award-text">Premiada pelo Ideation Brasil e<br class="desktop-only">Everis Brasil, projeto inovador</p>
+                                <p class="g-award-text">
+                                    <span class="nowrap-desktop">Premiada pelo Ideation Brasil e</span><br class="desktop-only">
+                                    <span class="nowrap-desktop">Everis Brasil, projeto inovador</span>
+                                </p>
                             </div>
                             <div class="g-award-divider"></div>
                             <div class="g-award-item">
@@ -2842,7 +2865,10 @@
                                         <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                                     </svg>
                                 </div>
-                                <p class="g-award-text">Destaque no International<br class="desktop-only">Business Model Competition, EUA</p>
+                                <p class="g-award-text">
+                                    <span class="nowrap-desktop">Destaque no International</span><br class="desktop-only">
+                                    <span class="nowrap-desktop">Business Model Competition, EUA</span>
+                                </p>
                             </div>
                         </div>
                     </div>            
