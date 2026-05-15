@@ -1469,15 +1469,6 @@
             font-size: 0.72rem;
         }
         
-        /* Tag centralizada debaixo da imagem no Mobile */
-        .img-badge-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-top: 16px;
-            margin-bottom: 0;
-            width: 100%;
-        }
-
         /* Estilos dos Prêmios com Troféu */
         .gabriela-awards {
             display: flex;
@@ -1795,9 +1786,8 @@
             /* Diminui padding container para título caber melhor em 1 linha */
             #sessao-gabriela .container { padding: 0 10px; }
             
-            /* 1) Ajuste fino no Grid (Puxando a imagem e o texto juntos para compensar e equilibrar as áreas) */
             .gabriela-grid {
-                gap: 16px; /* Redução para alinhar perfeitamente com a margem superior da badge */
+                gap: 16px; /* Puxa texto e imagem mais próximos proporcionalmente */
             }
 
             /* Diminuir imagem 10% com respiro */
@@ -1807,43 +1797,65 @@
                 display: block; 
             }
 
-            .gabriela-header.mobile-only {
-                text-align: center;
-                margin-bottom: 16px; /* Redução suave global (Puxa tudo para cima proporcinalmente) */
+            /* Tag mobile centralizada absoluamente debaixo da imagem */
+            .img-badge-wrapper.mobile-only {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin: 16px auto 0;
             }
-            
-            .gabriela-title {
-                font-size: 1.92rem;
-                white-space: nowrap;
-                letter-spacing: -0.05em; 
-                margin-bottom: 12px !important; /* Puxa o subtítulo para mais perto do título */
+            .gabriela-img-col {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
 
-            /* Container e Elementos travados na mesma linha com flex-wrap: nowrap */
+            /* Cabeçalho alinhado globalmente à esquerda, puxado suavemente para cima */
+            .gabriela-header.mobile-only {
+                text-align: left;
+                margin-bottom: 16px; 
+            }
+            
+            /* Título com proporção perfeita para preencher a tela em 1 linha com respiro 5% */
+            .gabriela-header.mobile-only .gabriela-title {
+                font-size: 8.5vw; 
+                max-font-size: 2.2rem;
+                padding-left: 5%;
+                padding-right: 5%;
+                margin-bottom: 16px !important;
+                white-space: nowrap;
+                letter-spacing: -0.05em; 
+            }
+
+            /* Badges alinhados com o limite esquerdo do título (5%) */
             .gabriela-badges {
                 display: flex;
-                flex-wrap: nowrap; /* Garante que fiquem na mesma linha */
-                justify-content: center;
-                gap: 8px; /* Espaçamento ideal para iPhone 12 */
-                margin-bottom: 24px; /* Puxa o painel de prêmios para cima */
+                flex-wrap: nowrap; 
+                justify-content: flex-start;
+                padding-left: 5%;
+                padding-right: 5%;
+                gap: 8px; 
+                margin-bottom: 24px; 
             }
             
             .g-badge {
                 flex: 0 1 auto;
-                padding: 4px 10px; /* Paddings laterais bem dosados */
-                white-space: nowrap; /* Trava o texto em 1 linha internamente */
+                padding: 4px 10px; 
+                white-space: nowrap; 
             }
             
             .g-badge span {
-                font-size: 0.65rem; /* ~10.5px: perfeito para caber sem perder leiturabilidade */
+                font-size: 0.65rem; 
             }
 
-            /* Premiação levemente mais centralizada, gap menor */
+            /* Premiação alinhada com o limite esquerdo (5%) */
             .gabriela-awards {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
                 gap: 8px; 
-                padding: 0 8%; 
+                padding: 0 5%; 
             }
 
             .g-award-item {
@@ -1853,25 +1865,23 @@
             }
 
             .g-award-item p {
-                font-weight: 700; /* Restaurado o Negrito */
+                font-weight: 700; 
                 text-align: left;
             }
 
-            /* Diminuição de 10% nos ícones do troféu */
             .g-award-icon {
                 width: 32px;
                 height: 32px;
             }
 
-            /* Remover a linha cinza divisória */
             .g-award-divider {
                 display: none;
             }
 
-            /* Respiros esquerdo e direito controlados */
+            /* Respiros direito aumentado levemente */
             .gabriela-p {
                 margin-left: 26px; 
-                margin-right: 18px; /* Adicionado um respiro direito levemente menor que o esquerdo */
+                margin-right: 22px; 
             }
         }
 
@@ -1898,13 +1908,13 @@
             .testemunho-item { max-width: 60%; margin: 0 auto; }
             
             /* Curva Bônus Desktop */
-            #sessao-bonus { padding-bottom: 230px; } /* Respiro aumentado entre texto/presentes e curva */
+            #sessao-bonus { padding-bottom: 230px; } 
             
             .bonus-bottom-curve { height: 80px; } 
             .bonus-curve-icon {
-                width: 56px; /* Tamanho exato do ícone de presente (Check-up 360) */
+                width: 56px; 
                 height: 56px;
-                bottom: 28px; /* Movido mais para baixo, tocando perfeitamente a base do U */
+                bottom: 28px; 
             }
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
 
@@ -1915,21 +1925,37 @@
             /* Seção 14 Gabriela Desktop Exclusivos */
             .gabriela-grid {
                 flex-direction: row;
-                align-items: center; /* Alinha o conteúdo verticalmente com a imagem */
-                gap: 60px;
+                align-items: center; 
+                gap: 40px; /* Redução para dar mais espaço confortável à linha dos badges */
             }
             .gabriela-img-col {
-                flex: 0 0 43.5%; /* Desktop: Imagem aumentada 5% em relação ao setup anterior (era 38.5%) */
+                flex: 0 0 43.5%; /* Aumento de 5% sobre a base anterior exigido */
             }
             .gabriela-text-col {
-                flex: 1; /* Mais espaço para texto para não parecer longo */
+                flex: 1; 
             }
             .gabriela-title {
-                font-size: 3.0rem; /* Aumentado 20% em relação a 2.5rem */
+                font-size: 3.0rem; 
             }
             .gabriela-subtitle {
                 font-size: 1.05rem;
                 margin-bottom: 32px;
+            }
+
+            /* Forçar as 3 pílulas em uma única linha matematicamente controlada */
+            .gabriela-header.desktop-only .gabriela-badges {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                gap: 8px; /* Tensão correta entre elas */
+            }
+            .gabriela-header.desktop-only .g-badge {
+                padding: 4px 10px;
+                flex-shrink: 1; 
+            }
+            .gabriela-header.desktop-only .g-badge span {
+                font-size: 0.68rem; /* Fit perfeito para a área reservada */
+                white-space: nowrap;
             }
         }
 
@@ -2782,12 +2808,14 @@
                     <div class="gabriela-header desktop-only">
                         <h2 class="gabriela-title">Quem é Gabriela Vieira</h2>
                         
+                        <!-- Desktop: 3 Pílulas numa linha -->
                         <div class="gabriela-badges">
                             <div class="g-badge"><span>Economista</span></div>
                             <div class="g-badge"><span>Especialista em educação financeira</span></div>
                             <div class="g-badge"><span>Criadora do método círculo mestre e CDSD</span></div>
                         </div>
 
+                        <!-- Desktop: Prêmios formatados rigorosamente em 2 linhas -->
                         <div class="gabriela-awards">
                             <div class="g-award-item">
                                 <div class="g-award-icon">
@@ -2796,7 +2824,7 @@
                                         <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                                     </svg>
                                 </div>
-                                <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil, projeto inovador</p>
+                                <p class="g-award-text">Premiada pelo Ideation Brasil e<br class="desktop-only">Everis Brasil, projeto inovador</p>
                             </div>
                             <div class="g-award-divider"></div>
                             <div class="g-award-item">
@@ -2806,7 +2834,7 @@
                                         <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                                     </svg>
                                 </div>
-                                <p class="g-award-text">Destaque no International Business Model Competition, EUA</p>
+                                <p class="g-award-text">Destaque no International<br class="desktop-only">Business Model Competition, EUA</p>
                             </div>
                         </div>
                     </div>            
