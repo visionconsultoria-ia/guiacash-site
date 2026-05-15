@@ -1283,7 +1283,7 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
             text-align: center;
         }
 
@@ -1291,7 +1291,7 @@
             display: flex;
             justify-content: center;
             margin-top: -90px; /* Margem negativa real */
-            margin-bottom: 32px; 
+            margin-bottom: 32px; /* Mantido o espaçamento harmônico original do desktop */
         }
 
         .oferta-img {
@@ -1385,19 +1385,6 @@
             align-items: center;
             max-width: 850px;
             margin: 0 auto;
-        }
-
-        .garantia-icon-wrapper {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 24px;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.2));
-        }
-
-        .garantia-icon-wrapper svg {
-            width: 100%;
-            height: 100%;
-            display: block;
         }
 
         .garantia-title {
@@ -1640,7 +1627,7 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 40px 0 72px; } /* Ajuste estrito do Mobile conforme pedido */
+            #oferta { padding: 40px 0 80px; } /* Mantido estritamente como pedido */
             #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
@@ -1679,7 +1666,7 @@
             .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
 
             /* Seção 13 (Garantia) Mobile */
-            #sessao-garantia { padding: 72px 0; } /* Padding reduzido 10% (de 80 para 72) */
+            #sessao-garantia { padding: 72px 0 80px; } /* Padding top reduzido exatamente em 10% (de 80 para 72) */
             .garantia-title { font-size: 2.05rem; }
             .garantia-subtitle { font-size: 1.15rem; }
         }
@@ -1718,7 +1705,7 @@
             .bonus-curve-icon svg { font-size: 1.65rem !important; } 
 
             /* Seção 13 Garantia Desktop Exclusivos */
-            #sessao-garantia .garantia-wrapper { max-width: 1100px; } /* Alargado para o título caber numa linha só */
+            #sessao-garantia .garantia-wrapper { max-width: 1100px; } 
             .garantia-title .text-white { white-space: nowrap; display: inline-block; } /* Força a não quebrar o "depende" */
         }
 
@@ -2492,23 +2479,6 @@
     <section id="sessao-garantia">
         <div class="container">
             <div class="garantia-wrapper">
-                
-                <!-- Ícone Brasão com Check - Invisível no Desktop -->
-                <div class="garantia-icon-wrapper mobile-only">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="goldGradBadge" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#fef08a" />
-                                <stop offset="50%" stop-color="#f5a623" />
-                                <stop offset="100%" stop-color="#b46a06" />
-                            </linearGradient>
-                        </defs>
-                        <!-- Shield shape -->
-                        <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" fill="url(#goldGradBadge)"/>
-                        <!-- White Check cutout -->
-                        <path d="M10.6 14.6l-3.3-3.3 1.4-1.4 1.9 1.9 4.9-4.9 1.4 1.4-6.3 6.3z" fill="#FFF"/>
-                    </svg>
-                </div>
                 
                 <!-- Título -->
                 <h2 class="garantia-title">
