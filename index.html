@@ -1469,6 +1469,15 @@
             font-size: 0.72rem;
         }
         
+        /* Tag centralizada debaixo da imagem no Mobile */
+        .img-badge-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+            margin-bottom: 0;
+            width: 100%;
+        }
+
         /* Estilos dos Prêmios com Troféu */
         .gabriela-awards {
             display: flex;
@@ -1802,6 +1811,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                text-align: center;
                 width: 100%;
                 margin: 16px auto 0;
             }
@@ -1829,13 +1839,11 @@
                 letter-spacing: -0.05em; 
             }
 
-            /* Badges alinhados com o limite esquerdo do título (5%) */
+            /* Badges travados na mesma linha, agora centralizados (justify-content: center) */
             .gabriela-badges {
                 display: flex;
                 flex-wrap: nowrap; 
-                justify-content: flex-start;
-                padding-left: 5%;
-                padding-right: 5%;
+                justify-content: center; /* CENTRALIZADO CONFORME PEDIDO */
                 gap: 8px; 
                 margin-bottom: 24px; 
             }
@@ -1878,10 +1886,10 @@
                 display: none;
             }
 
-            /* Respiros direito aumentado levemente */
+            /* Respiros ajustados */
             .gabriela-p {
                 margin-left: 26px; 
-                margin-right: 22px; 
+                margin-right: 18px; /* MARGEM DIREITA VOLTOU A SER 18PX COMO SOLICITADO */
             }
         }
 
@@ -2775,7 +2783,7 @@
                                 <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                             </svg>
                         </div>
-                        <p class="g-award-text">Premiada pelo Ideation Brasil e Everis Brasil, projeto inovador</p>
+                        <p class="g-award-text">Premiada pelo Ideation Brasil e<br>Everis Brasil, projeto inovador</p>
                     </div>
                     <div class="g-award-divider"></div>
                     <div class="g-award-item">
@@ -2785,7 +2793,7 @@
                                 <polygon points="12,4.5 12.8,6.1 14.5,6.4 13.2,7.7 13.6,9.5 12,8.5 10.4,9.5 10.8,7.7 9.5,6.4 11.2,6.1" fill="#FFFFFF"/>
                             </svg>
                         </div>
-                        <p class="g-award-text">Destaque no International Business Model Competition, EUA</p>
+                        <p class="g-award-text">Destaque no International<br>Business Model Competition, EUA</p>
                     </div>
                 </div>
             </div>
