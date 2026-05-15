@@ -1283,14 +1283,14 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 48px 48px;
-            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE: Obriga a caixa a encolher */
+            border-top: 1px solid transparent; /* PREVINE MARGIN COLLAPSE */
             text-align: center;
         }
 
         .oferta-img-wrapper {
             display: flex;
             justify-content: center;
-            margin-top: -90px; /* Margem negativa real */
+            margin-top: -90px; /* Margem ajustada fisicamente puxando a imagem para vazar a caixa */
             margin-bottom: 32px; /* Mantido o espaçamento harmônico original do desktop */
         }
 
@@ -1410,6 +1410,52 @@
             line-height: 1.5;
             max-width: 700px;
             margin: 0 auto;
+        }
+
+        /* =========================================
+           SEÇÃO 14: GABRIELA VIEIRA
+        ========================================= */
+        #sessao-gabriela {
+            background-color: #FFFFFF;
+            padding: 100px 0;
+        }
+
+        .gabriela-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .gabriela-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            display: block;
+        }
+
+        .gabriela-title {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .gabriela-subtitle {
+            color: #888888; /* Cinza claro */
+            font-size: 0.95rem;
+            font-weight: 400; /* Sem negrito */
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .gabriela-p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .gabriela-p:last-child {
+            margin-bottom: 0;
         }
 
         /* =========================================
@@ -1627,7 +1673,7 @@
             .resumo-grid-list { grid-template-columns: 1fr; gap: 16px; }
 
             /* Seção 12 (Oferta) Mobile */
-            #oferta { padding: 40px 0 80px; } /* Mantido estritamente como pedido */
+            #oferta { padding: 40px 0 72px; } /* Mantido estritamente como pedido (redução 10% bottom) */
             #oferta .container { padding: 0 18px; } 
             .oferta-card { 
                 padding: 0 20px 40px; 
@@ -1666,9 +1712,21 @@
             .safe-item-2 { order: 1; } /* Joga o Ambiente Seguro para cima */
 
             /* Seção 13 (Garantia) Mobile */
-            #sessao-garantia { padding: 72px 0 80px; } /* Padding top reduzido exatamente em 10% (de 80 para 72) */
+            #sessao-garantia { padding: 65px 0 80px; } /* Padding top reduzido exatamente em 10% */
             .garantia-title { font-size: 2.05rem; }
             .garantia-subtitle { font-size: 1.15rem; }
+
+            /* Seção 14 (Gabriela) Mobile */
+            #sessao-gabriela { padding: 60px 0; }
+            .gabriela-header.mobile-only {
+                text-align: center;
+                margin-bottom: 24px;
+            }
+            .gabriela-title {
+                font-size: 1.6rem; /* Garante que fique em 1 linha */
+                white-space: nowrap; /* Trava em uma linha */
+                letter-spacing: -0.04em;
+            }
         }
 
         @media (min-width: 769px) {
@@ -1707,6 +1765,26 @@
             /* Seção 13 Garantia Desktop Exclusivos */
             #sessao-garantia .garantia-wrapper { max-width: 1100px; } 
             .garantia-title .text-white { white-space: nowrap; display: inline-block; } /* Força a não quebrar o "depende" */
+
+            /* Seção 14 Gabriela Desktop Exclusivos */
+            .gabriela-grid {
+                flex-direction: row;
+                align-items: center;
+                gap: 60px;
+            }
+            .gabriela-img-col {
+                flex: 0 0 35%; /* Menos espaço para imagem */
+            }
+            .gabriela-text-col {
+                flex: 1; /* Mais espaço para texto para não parecer longo */
+            }
+            .gabriela-title {
+                font-size: 2.5rem;
+            }
+            .gabriela-subtitle {
+                font-size: 1.05rem;
+                margin-bottom: 32px;
+            }
         }
 
     </style>
@@ -2493,6 +2571,44 @@
                 </p>
 
             </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO 14: GABRIELA VIEIRA
+    =========================================== -->
+    <section id="sessao-gabriela">
+        <div class="container">
+            
+            <!-- Mobile Header (Title and Subtitle Top) -->
+            <div class="gabriela-header mobile-only">
+                <h2 class="gabriela-title">Quem é Gabriela Vieira</h2>
+                <p class="gabriela-subtitle">Economista, especialista em educação financeira e criadora do método Círculo Méstre</p>
+            </div>
+
+            <div class="gabriela-grid">
+                <!-- Coluna Imagem -->
+                <div class="gabriela-img-col">
+                    <img src="quem-eu -sou.png" alt="Gabriela Vieira" class="gabriela-img">
+                </div>
+                
+                <!-- Coluna Textos -->
+                <div class="gabriela-text-col">
+                    
+                    <!-- Desktop Header (Title and Subtitle next to text) -->
+                    <div class="gabriela-header desktop-only">
+                        <h2 class="gabriela-title">Quem é Gabriela Vieira</h2>
+                        <p class="gabriela-subtitle">Economista, especialista em educação financeira e criadora do método Círculo Méstre</p>
+                    </div>
+
+                    <p class="gabriela-p">Com 9 anos de experiência, começou a empreender aos 20 anos, tendo grandes mentores nacionais e internacionais, sendo premiada pelo Ideation Brasil e pela Everis Brasil em projeto inovador e Startup destaque no International Business Model Competition nos EUA.</p>
+                    
+                    <p class="gabriela-p">Ao voltar de lá, soube que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Decidiu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e treinados todos os membros da família a mantê-lo, hoje todos têm liberdade financeira e Gabriela capacita centenas de outras famílias ao mesmo.</p>
+                    
+                    <p class="gabriela-p">De fato, ela quer ver comunidades despertando para o poder de tomar posse da sua vida financeira e cuidar dos seus. Gabriela acredita que falar sobre dinheiro pode ser simples, leve e por que não divertido. E quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
+                </div>
+            </div>
+            
         </div>
     </section>
 
