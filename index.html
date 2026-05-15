@@ -1439,7 +1439,7 @@
             margin-bottom: 20px;
         }
 
-        /* Estilos dos 3 Elementos/Badges do Subtítulo */
+        /* Estilos dos Elementos/Badges do Subtítulo */
         .gabriela-badges {
             display: flex;
             flex-wrap: wrap;
@@ -1447,7 +1447,7 @@
             margin-bottom: 32px;
         }
 
-        /* Os badges reduzidos em 20% */
+        /* Os badges */
         .g-badge {
             background: linear-gradient(#FFFFFF, #FFFFFF) padding-box,
                         linear-gradient(90deg, #5c4bdf, #009196) border-box;
@@ -1469,11 +1469,12 @@
             font-size: 0.72rem;
         }
         
-        /* Nova tag centralizada debaixo da imagem */
+        /* Tag centralizada debaixo da imagem no Mobile */
         .img-badge-wrapper {
             display: flex;
             justify-content: center;
             margin-top: 16px;
+            margin-bottom: 0;
             width: 100%;
         }
 
@@ -1794,7 +1795,12 @@
             /* Diminui padding container para título caber melhor em 1 linha */
             #sessao-gabriela .container { padding: 0 10px; }
             
-            /* 1) Diminuir imagem 10% com respiro */
+            /* 1) Ajuste fino no Grid (Puxando a imagem e o texto juntos para compensar e equilibrar as áreas) */
+            .gabriela-grid {
+                gap: 16px; /* Redução para alinhar perfeitamente com a margem superior da badge */
+            }
+
+            /* Diminuir imagem 10% com respiro */
             .gabriela-img { 
                 width: 90%; 
                 margin: 0 auto; 
@@ -1803,13 +1809,14 @@
 
             .gabriela-header.mobile-only {
                 text-align: center;
-                margin-bottom: 24px;
+                margin-bottom: 16px; /* Redução suave global (Puxa tudo para cima proporcinalmente) */
             }
             
             .gabriela-title {
-                font-size: 1.92rem; /* Aumentado 20% em relação a 1.6rem */
-                white-space: nowrap; /* Trava em uma linha */
-                letter-spacing: -0.05em; /* Ajuda a caber na tela do celular */
+                font-size: 1.92rem;
+                white-space: nowrap;
+                letter-spacing: -0.05em; 
+                margin-bottom: 12px !important; /* Puxa o subtítulo para mais perto do título */
             }
 
             /* Container e Elementos travados na mesma linha com flex-wrap: nowrap */
@@ -1818,6 +1825,7 @@
                 flex-wrap: nowrap; /* Garante que fiquem na mesma linha */
                 justify-content: center;
                 gap: 8px; /* Espaçamento ideal para iPhone 12 */
+                margin-bottom: 24px; /* Puxa o painel de prêmios para cima */
             }
             
             .g-badge {
@@ -1830,12 +1838,12 @@
                 font-size: 0.65rem; /* ~10.5px: perfeito para caber sem perder leiturabilidade */
             }
 
-            /* 3 e 5) Premiação levemente mais centralizada (com padding), gap menor e mantendo 2 linhas */
+            /* Premiação levemente mais centralizada, gap menor */
             .gabriela-awards {
                 flex-direction: column;
                 align-items: center;
-                gap: 8px; /* 5) Menor espaço */
-                padding: 0 8%; /* 3) Margens reduzidas (respiro de 8% de cada lado) */
+                gap: 8px; 
+                padding: 0 8%; 
             }
 
             .g-award-item {
@@ -1844,20 +1852,26 @@
                 justify-content: flex-start;
             }
 
-            /* 4) Diminuição de 10% nos ícones do troféu */
+            .g-award-item p {
+                font-weight: 700; /* Restaurado o Negrito */
+                text-align: left;
+            }
+
+            /* Diminuição de 10% nos ícones do troféu */
             .g-award-icon {
                 width: 32px;
                 height: 32px;
             }
 
-            /* 5) Remover a linha cinza divisória */
+            /* Remover a linha cinza divisória */
             .g-award-divider {
                 display: none;
             }
 
-            /* 7) Respiro esquerdo nos parágrafos mobile aumentado levemente */
+            /* Respiros esquerdo e direito controlados */
             .gabriela-p {
                 margin-left: 26px; 
+                margin-right: 18px; /* Adicionado um respiro direito levemente menor que o esquerdo */
             }
         }
 
@@ -1905,7 +1919,7 @@
                 gap: 60px;
             }
             .gabriela-img-col {
-                flex: 0 0 38.5%; /* Desktop: Flex basis ajustado de 35% para 38.5% (Aumento exato de 10% no tamanho da imagem) */
+                flex: 0 0 43.5%; /* Desktop: Imagem aumentada 5% em relação ao setup anterior (era 38.5%) */
             }
             .gabriela-text-col {
                 flex: 1; /* Mais espaço para texto para não parecer longo */
@@ -1916,9 +1930,6 @@
             .gabriela-subtitle {
                 font-size: 1.05rem;
                 margin-bottom: 32px;
-            }
-            .img-badge-wrapper {
-                justify-content: center; /* Centraliza a badge embaixo da imagem no desktop também */
             }
         }
 
@@ -2758,9 +2769,9 @@
                 <div class="gabriela-img-col">
                     <img src="gabriela.png" alt="Gabriela Vieira" class="gabriela-img">
                     
-                    <!-- Nova Tag debaixo da imagem -->
-                    <div class="img-badge-wrapper">
-                        <div class="g-badge"><span>Criadora do método circulo mestre e CDSC</span></div>
+                    <!-- Tag mobile debaixo da imagem -->
+                    <div class="img-badge-wrapper mobile-only">
+                        <div class="g-badge"><span>Criadora do método círculo mestre e CDSD</span></div>
                     </div>
                 </div>
                 
@@ -2774,6 +2785,7 @@
                         <div class="gabriela-badges">
                             <div class="g-badge"><span>Economista</span></div>
                             <div class="g-badge"><span>Especialista em educação financeira</span></div>
+                            <div class="g-badge"><span>Criadora do método círculo mestre e CDSD</span></div>
                         </div>
 
                         <div class="gabriela-awards">
