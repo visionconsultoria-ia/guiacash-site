@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* =========================================
@@ -1934,10 +1934,12 @@
             .gabriela-grid {
                 flex-direction: row;
                 align-items: center; 
-                gap: 40px; /* Redução para dar mais espaço confortável à linha dos badges */
+                gap: 40px;
+                max-width: 1020px; /* Limita o conteúdo para que a margem automática empurre o bloco inteiro mais para a esquerda do container (centralizando visualmente a "massa") */
+                margin: 0 auto;
             }
             .gabriela-img-col {
-                flex: 0 0 43.5%; /* Aumento de 5% sobre a base anterior exigido */
+                flex: 0 0 37%; /* Ajuste matemático proporcional: 15% menor que os 43.5% que estavam na última versão (43.5 * 0.85 = ~37) */
             }
             .gabriela-text-col {
                 flex: 1; 
@@ -2873,7 +2875,7 @@
                         </div>
                     </div>            
                     
-                    <p class="gabriela-p">Começou a empreender aos 20. Certo dia descobriu que a empresa da família tinha 1milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família foram treinados. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias a isso.</p>
+                    <p class="gabriela-p">Começou a empreender aos 20. E certo dia descobriu que a empresa da família tinha cerca de 1 milhão em dívidas e um negócio totalmente desestruturado. Escolheu se juntar a eles para que não se perdesse tudo o que foi construído e viu enquanto crescia. Percebeu o quão desafiador e frustrante é dominar as finanças em família. Até decidir que viver frustrada com esta situação não era mais uma opção. Se especializou em resolução de dívidas e economia comportamental. Foram quitadas todas as dívidas, gerado capital de investimento e todos os membros da família foram treinados a mantê-lo. Hoje, eles têm liberdade financeira e Gabriela capacita centenas de outras famílias.</p>
                     
                     <p class="gabriela-p">De fato, ela quer ver pessoas despertando para o poder de tomar posse da sua vida financeira. Acredita que falar sobre dinheiro pode ser mais simples e por que não divertido. E quer ver mais do que números em contas bancárias evoluindo, quer ver vidas.</p>
                 </div>
