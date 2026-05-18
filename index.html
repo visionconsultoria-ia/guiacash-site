@@ -1655,7 +1655,6 @@
         }
 
         .footer-logo {
-            max-width: 180px;
             height: auto;
             display: block;
         }
@@ -1663,14 +1662,15 @@
         .footer-right {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            text-align: right;
+            align-items: center;
+            text-align: center;
             gap: 10px;
         }
 
         .footer-links-desktop {
             display: flex;
             flex-direction: column;
+            align-items: center;
             gap: 8px;
         }
 
@@ -2075,11 +2075,9 @@
                 gap: 24px;
             }
             .footer-right {
-                align-items: center;
-                text-align: center;
                 gap: 16px;
             }
-            .footer-logo { margin: 0 auto; }
+            .footer-logo { margin: 0 auto; max-width: 135px; } /* -25% do tamanho base original de 180px */
             .footer-links-desktop { display: none !important; }
             .footer-links-mobile { 
                 display: block !important; 
@@ -2185,6 +2183,9 @@
                 font-size: 0.95rem; 
                 line-height: 1.4;
             }
+
+            /* Seção 16 Dados Finais Desktop Exclusivos */
+            .footer-logo { max-width: 153px; } /* -15% do tamanho base original de 180px */
         }
 
     </style>
