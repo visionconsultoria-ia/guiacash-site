@@ -1637,6 +1637,68 @@
             display: flex;
             justify-content: center;
         }
+
+        /* =========================================
+           SEÇÃO 16: DADOS FINAIS
+        ========================================= */
+        #sessao-dados-finais {
+            background: linear-gradient(135deg, #5c4bdf, #009196);
+            padding: 60px 0;
+            color: #FFFFFF;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .footer-logo {
+            max-width: 180px;
+            height: auto;
+            display: block;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            text-align: right;
+            gap: 10px;
+        }
+
+        .footer-links-desktop {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links-mobile {
+            display: none;
+        }
+
+        .footer-right a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .footer-right a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .footer-copy {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
         /* =========================================
             CONTROLE DE RESPONSIVIDADE (GLOBAL E SEÇÕES)
         ========================================= */
@@ -2004,6 +2066,29 @@
             .faq-title { font-size: 1.05rem; }
             .faq-answer p { padding: 0 20px; font-size: 0.95rem; }
             .faq-item.active .faq-answer { padding-bottom: 20px; }
+
+            /* Seção 16 (Dados Finais) Mobile */
+            #sessao-dados-finais { padding: 40px 0; }
+            .footer-wrapper {
+                flex-direction: column;
+                justify-content: center;
+                gap: 24px;
+            }
+            .footer-right {
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+            }
+            .footer-logo { margin: 0 auto; }
+            .footer-links-desktop { display: none !important; }
+            .footer-links-mobile { 
+                display: block !important; 
+                color: #FFFFFF; 
+                font-size: 1rem; 
+                font-weight: 500; 
+            }
+            .footer-links-mobile a { display: inline; }
+            .footer-links-mobile span { margin: 0 8px; color: #FFFFFF; }
         }
 
         @media (min-width: 769px) {
@@ -3154,6 +3239,40 @@
 
         </div>
     </section>
+
+    <!-- ==========================================
+         SEÇÃO 16: DADOS FINAIS
+    =========================================== -->
+    <footer id="sessao-dados-finais">
+        <div class="container">
+            <div class="footer-wrapper">
+                
+                <!-- Logo -->
+                <div class="footer-left">
+                    <img src="logo-branco.png" alt="Guia Cash Logo Branco" class="footer-logo">
+                </div>
+                
+                <!-- Textos -->
+                <div class="footer-right">
+                    <!-- Desktop Links (Stacked) -->
+                    <div class="footer-links-desktop">
+                        <a href="https://guiacash-app.visioncapacita.com.br/privacidade/" target="_blank">Política de Privacidade</a>
+                        <a href="https://guiacash-app.visioncapacita.com.br/termos/" target="_blank">Termos de Uso</a>
+                    </div>
+                    
+                    <!-- Mobile Links (Side by side with pipe) -->
+                    <div class="footer-links-mobile">
+                        <a href="https://guiacash-app.visioncapacita.com.br/privacidade/" target="_blank">Política de Privacidade</a>
+                        <span>|</span>
+                        <a href="https://guiacash-app.visioncapacita.com.br/termos/" target="_blank">Termos de Uso</a>
+                    </div>
+                    
+                    <p class="footer-copy">© Vision Educação e Capacitação. Todos os direitos reservados.</p>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
 
     <!-- SCRIPTS -->
     <script>
