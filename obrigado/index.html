@@ -30,11 +30,6 @@
     </script>
 
     <style>
-        /* Novo Background Escuro e Elegante (Top to Bottom) */
-        .bg-custom-dark {
-            background: linear-gradient(180deg, #372da5 0%, #3e32b9 40%, #0f525a 80%, #136670 100%);
-        }
-
         /* Degradê no texto do Botão Principal */
         .text-gradient {
             background: linear-gradient(to right, #18b6b5, #5c4bdf);
@@ -84,25 +79,27 @@
 <body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
 
     <!-- SEÇÃO 1: VÍDEO E CTA -->
-    <section class="bg-custom-dark min-h-screen flex flex-col items-center pt-8 pb-16 px-3 relative w-full overflow-hidden">
+    <!-- Fundo totalmente sólido com a cor #0f525a -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-8 pb-16 px-3 relative w-full overflow-hidden">
         
         <!-- Bloco Superior: Textos, Checkbox e Barra -->
         <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-8 mt-4">
             
-            <!-- Título Aguarde (Agora com Ciano #18b6b5) -->
-            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-6 leading-[1.2] drop-shadow-md">
+            <!-- Título Aguarde (Ciano #18b6b5) -->
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
                 <span class="text-[#18b6b5] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash ....
             </h1>
 
-            <!-- Checkbox Interativo -->
-            <label class="checkbox-container flex items-center justify-center space-x-3 cursor-pointer mb-8 group select-none">
+            <!-- Checkbox Interativo (Agora em coluna: quadrado em cima, texto em baixo em negrito) -->
+            <label class="checkbox-container flex flex-col items-center justify-center space-y-3 cursor-pointer mb-8 group select-none">
                 <input type="checkbox" class="hidden">
-                <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 shadow-md flex-shrink-0">
-                    <svg class="w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                <div class="w-8 h-8 md:w-9 md:h-9 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 shadow-md">
+                    <svg class="w-6 h-6 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <span class="text-white text-base md:text-xl font-medium tracking-wide drop-shadow-sm">
+                <!-- Frase em negrito e centralizada -->
+                <span class="text-white text-lg md:text-xl font-bold tracking-wide drop-shadow-sm text-center">
                     Clique aqui para enviar o acesso ao seu celular
                 </span>
             </label>
@@ -110,14 +107,14 @@
             <!-- Barra de Progresso Estática -->
             <div class="w-full relative px-2 max-w-3xl">
                 <!-- Retângulo Externo com borda grossa -->
-                <div class="relative w-full h-12 md:h-16 border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl">
+                <div class="relative w-full h-12 md:h-16 border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
                     
-                    <!-- Preenchimento Fixo: visualmente em 82% para não engolir o timer, mas escrito 90% -->
-                    <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 82%;">
+                    <!-- Preenchimento Fixo em 86% (Mais próximo do timer, mas sem cobri-lo) -->
+                    <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 86%;">
                         <span class="text-[#18b6b5] font-black text-sm md:text-xl pr-3 md:pr-4 tracking-wide">90%</span>
                     </div>
 
-                    <!-- Segundos (Ancorados colados à direita no espaço vazio) -->
+                    <!-- Segundos ancorados na extrema direita -->
                     <div class="absolute right-3 md:right-5 text-white font-black text-xl md:text-3xl italic tracking-tight drop-shadow-md">
                         <span id="countdown">50s</span>
                     </div>
