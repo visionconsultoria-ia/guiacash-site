@@ -296,3 +296,326 @@
     </script>
 </body>
 </html>
+🛠️ Como usar e customizar:
+Testando local: Salve o código acima em um arquivo chamado index.html e abra em qualquer navegador.
+Hospedando no GitHub Pages:
+Crie um repositório no GitHub.
+Faça o upload do arquivo index.html e das duas imagens necessárias (cashia.png e oferta-cashia.png) na raiz do repositório.
+Vá em Settings > Pages e ative a branch main.
+Configurando o Delay (Tempo do Vídeo):
+Vá até o final do código na tag <script>. Procure pela variável const DELAY_TIME_MS = 10000;. Eu deixei 10 segundos para você ver funcionando rápido. Se o seu vídeo dura 5 minutos e você quer mostrar aos 4m30s (270 segundos), mude para 270000.
+Inserindo o Vídeo Real:
+Na Seção 1, procure pela tag <div class="w-full h-full flex... onde está escrito [ Placeholder do Vídeo 16:9 ]. Delete essa tag <div> interna e cole o iframe (código embed) da sua plataforma de vídeos. O CSS que criei usando aspect-video cuidará para que ele fique sempre perfeitamente em 16:9 em telas grandes ou celulares.
+59.6s
+Model 17:54
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Aqui está o código completo e atualizado, pronto para copiar e colar.
+Refiz a Seção 1 inteira para seguir o modelo da imagem: criei uma barra de progresso em formato de pílula (branca, para combinar com o seu fundo), com o timer "50s" em destaque no canto direito e o texto em negrito. Também apliquei as alterações solicitadas no texto de alerta (fonte maior, amarelo, em negrito), mantendo um fundo levemente escuro atrás dele para garantir que o amarelo brilhe e tenha uma excelente leitura (acessibilidade) em cima do degradê.
+Código Completo Atualizado (index.html)
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan1: '#006974',
+                            cyan2: '#009196',
+                            cyan3: '#18b6b5',
+                            violet1: '#5242d7',
+                            violet2: '#5c4bdf',
+                            violet3: '#8670ff',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Background animado da Seção 1 */
+        .bg-gradient-vsl {
+            background: linear-gradient(135deg, #006974, #009196, #18b6b5, #5242d7, #5c4bdf, #8670ff);
+            background-size: 200% 200%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Degradê no texto do Botão Principal */
+        .text-gradient {
+            background: linear-gradient(to right, #18b6b5, #5c4bdf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Barra de Progresso Customizada */
+        .progress-bar-fill {
+            width: 0%;
+            transition: width 50s linear; /* Tempo sincronizado com o timer */
+        }
+
+        /* Animação da seta apontando para baixo */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(15px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Ocultar elementos antes do tempo do vídeo */
+        .delayed-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .delayed-content.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Travar o scroll inicial */
+        body.lock-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-gradient-vsl min-h-screen flex flex-col items-center pt-10 pb-16 px-4 relative">
+        
+        <div class="w-full max-w-3xl flex flex-col items-center text-center z-10 mb-10">
+            
+            <!-- Barra de Progresso Estilo "Pílula" (Baseada na imagem) -->
+            <div class="w-full max-w-md mb-8">
+                <div class="relative w-full h-12 md:h-14 rounded-full border-[3px] border-white p-[3px] shadow-[0_0_20px_rgba(255,255,255,0.3)] bg-white/10 overflow-hidden flex items-center">
+                    
+                    <!-- Preenchimento Branco -->
+                    <div id="progress-bar" class="bg-white h-full rounded-full flex items-center justify-end progress-bar-fill relative z-0">
+                        <!-- O texto 90% viaja junto com a barra -->
+                        <span class="text-brand-violet2 font-bold text-sm md:text-base mr-14 pr-2">90%</span>
+                    </div>
+
+                    <!-- Timer (Fixo à direita) -->
+                    <div class="absolute right-[3px] top-[3px] bottom-[3px] bg-gray-900 text-white rounded-full flex items-center justify-center px-4 md:px-5 font-black text-lg md:text-xl shadow-md z-10 border border-gray-700">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Textos de Alerta -->
+            <h1 class="text-2xl md:text-4xl font-bold text-white mb-4 leading-tight drop-shadow-md">
+                Sua compra está sendo processada com sucesso…
+            </h1>
+            
+            <!-- Texto Atualizado: Negrito, Fonte maior, Amarelo e fundo sutil para dar contraste -->
+            <p class="text-xl md:text-[22px] text-brand-yellow font-black bg-black/30 backdrop-blur-sm inline-block px-8 py-3 rounded-full mt-2 shadow-lg border border-yellow-400/20 uppercase tracking-wide">
+                Seu pedido ainda não está completo
+            </p>
+        </div>
+
+        <!-- Container do Vídeo -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] aspect-video border-[4px] border-white/10 relative z-10">
+            <!-- Substitua o src pelo iframe do seu vídeo -->
+            <div class="w-full h-full flex items-center justify-center text-white/50 bg-gray-900">
+                <p>[ Placeholder do Vídeo 16:9 ]</p>
+                <!-- Exemplo de Iframe real: -->
+                <!-- <iframe class="w-full h-full" src="SEU_LINK_AQUI" frameborder="0" allowfullscreen></iframe> -->
+            </div>
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-12 space-y-4 relative z-10">
+            
+            <button class="w-full bg-white hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_30px_rgba(24,182,181,0.4)] rounded-xl py-5 px-6 font-bold text-[18px] md:text-[22px]">
+                <span class="text-gradient">Adicionar o Cash Assistente ao meu pedido</span>
+            </button>
+            
+            <button class="w-full bg-brand-burgundy hover:bg-red-950 transition-colors duration-300 rounded-xl py-4 px-6 font-semibold text-white/70 text-[15px] md:text-[16px] underline decoration-white/30 hover:text-white">
+                Não, quero perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR (Oculto inicialmente) -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO -->
+        <section class="bg-[#f8f8f8] py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <span class="text-brand-violet2">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <!-- Imagem do Produto -->
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-brand-cyan2 to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                    </div>
+
+                    <!-- Benefícios (Bullet points) -->
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <!-- Imagem da Oferta -->
+                        <div class="bg-gray-50 flex items-center justify-center p-8">
+                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
+                        </div>
+                        <!-- Detalhes da Oferta -->
+                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
+                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                                Adicione agora o seu pedido por apenas
+                            </h3>
+                            
+                            <div class="text-brand-violet2 mb-8">
+                                <span class="text-2xl font-bold">12x</span>
+                                <span class="text-5xl font-extrabold">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium block mt-1">/ ano</span>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet3 hover:from-brand-cyan2 hover:to-brand-violet2 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+                                Quero aproveitar esta oferta
+                            </button>
+
+                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>7 dias de garantia incondicional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- 1. Lógica do Countdown e Barra de Progresso ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+            const progressBar = document.getElementById('progress-bar');
+            
+            // Dispara a animação (O CSS cuidará de fazer durar exatamente 50s até bater nos 90%)
+            setTimeout(() => {
+                progressBar.style.width = '90%';
+            }, 100); 
+
+            // Timer em Segundos "XXs"
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+
+            // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
+            // Configure o tempo em MILISSEGUNDOS que o botão deve aparecer
+            // Deixei em 10 segundos (10000ms) para você testar rapidamente.
+            const DELAY_TIME_MS = 10000; 
+
+            setTimeout(() => {
+                // Libera o Scroll
+                document.body.classList.remove('lock-scroll');
+                
+                // Exibe os botões e o restante do site com um Fade In
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+
+            }, DELAY_TIME_MS);
+        });
+    </script>
+</body>
+</html>
