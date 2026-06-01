@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sua Compra - Passo Final</title>
-    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -25,6 +25,8 @@
                             violet2: '#5c4bdf',
                             violet3: '#8670ff',
                             burgundy: '#5a0c13',
+                            yellow: '#FFEA00',
+                            green: '#00FF66' /* Verde Neon estilo imagem */
                         }
                     }
                 }
@@ -54,13 +56,7 @@
             background-clip: text;
         }
 
-        /* Barra de Progresso */
-        .progress-bar-fill {
-            width: 0%;
-            transition: width 50s linear; /* Tempo sincronizado com o timer */
-        }
-
-        /* Animação da seta apontando para baixo */
+        /* Animação da seta */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(15px); }
@@ -81,60 +77,100 @@
             opacity: 1;
         }
 
-        /* Travar o scroll inicial */
         body.lock-scroll {
             overflow: hidden;
+        }
+        
+        /* Checkbox Customizado */
+        .checkbox-container input:checked + div svg {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+        }
+        .checkbox-container input:checked + div svg {
+            color: #18b6b5; /* Cor do check quando marcado */
         }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
 
     <!-- SEÇÃO 1: VÍDEO E CTA -->
-    <section class="bg-gradient-vsl min-h-screen flex flex-col items-center pt-8 pb-16 px-4 relative">
+    <section class="bg-gradient-vsl min-h-screen flex flex-col items-center pt-8 pb-16 px-3 relative w-full overflow-hidden">
         
-        <!-- Alerta de Sucesso / Processamento -->
-        <div class="w-full max-w-3xl bg-white/10 backdrop-blur-md rounded-xl p-6 mb-8 border border-white/20 text-center shadow-2xl">
-            <!-- Barra de Progresso e Timer -->
-            <div class="flex justify-between items-center mb-3 text-white font-semibold">
-                <span class="text-sm uppercase tracking-wider opacity-90">Processando...</span>
-                <span id="countdown" class="text-xl font-bold bg-white/20 px-3 py-1 rounded-md">00:50</span>
-            </div>
-            <div class="w-full bg-white/20 rounded-full h-3 mb-6 overflow-hidden">
-                <div id="progress-bar" class="bg-gradient-to-r from-brand-cyan3 to-brand-violet3 h-3 rounded-full progress-bar-fill"></div>
+        <!-- Bloco Superior: Textos, Checkbox e Barra -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-8">
+            
+            <!-- Título Aguarde -->
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-6 leading-[1.2] drop-shadow-md">
+                <span class="text-brand-green uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash ....
+            </h1>
+
+            <!-- Checkbox Interativo -->
+            <label class="checkbox-container flex items-center justify-center space-x-3 cursor-pointer mb-8 group select-none">
+                <input type="checkbox" class="hidden">
+                <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 shadow-md flex-shrink-0">
+                    <svg class="w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <span class="text-white text-base md:text-xl font-medium tracking-wide">
+                    Clique aqui para enviar o acesso ao seu celular
+                </span>
+            </label>
+
+            <!-- Barra de Progresso Exata (Margem a Margem no mobile) -->
+            <div class="w-full relative px-2">
+                <!-- Retângulo Externo com borda grossa e padding interno -->
+                <div class="relative w-full h-12 md:h-16 border-[4px] border-white rounded-full p-[4px] flex items-center overflow-hidden bg-black/10 shadow-lg">
+                    
+                    <!-- Preenchimento Interno (Cresce de 0 a 90%) -->
+                    <div id="progress-fill" class="h-full bg-white rounded-full flex items-center justify-end overflow-hidden transition-[width] ease-linear" style="width: 0%; transition-duration: 50s;">
+                        <!-- Texto 90% dentro do preenchimento -->
+                        <span class="text-brand-violet1 font-bold text-sm md:text-xl pr-3 opacity-90">90%</span>
+                    </div>
+
+                    <!-- Segundos (Cravados nos 10% restantes à direita) -->
+                    <div class="absolute right-4 text-white font-black text-xl md:text-3xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- Textos de Alerta -->
-            <h1 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                Sua compra está sendo processada com sucesso…
-            </h1>
-            <p class="text-lg text-brand-cyan3 font-medium bg-white/90 inline-block px-4 py-1 rounded-full mt-2">
-                ⚠️ Seu pedido ainda não está completo
-            </p>
+            <!-- Avisos Pós-Barra -->
+            <div class="mt-8 space-y-2">
+                <p class="text-xl md:text-2xl font-bold text-white drop-shadow-md">
+                    Sua compra foi concluída com sucesso...
+                </p>
+                <!-- Texto Amarelo -->
+                <p class="text-xl md:text-[22px] font-black text-brand-yellow uppercase tracking-wide bg-black/20 px-6 py-2 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    Mas o seu pedido ainda não está completo!
+                </p>
+            </div>
         </div>
 
         <!-- Container do Vídeo -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl aspect-video border-4 border-white/10 relative z-10">
-            <!-- Substitua o src pelo iframe do seu vídeo (YouTube, Vimeo, Vzaar, Panda, etc) -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] aspect-video border-[4px] border-white/10 relative z-10">
+            <!-- Substitua o src pelo iframe do seu vídeo -->
             <div class="w-full h-full flex items-center justify-center text-white/50 bg-gray-900">
                 <p>[ Placeholder do Vídeo 16:9 ]</p>
-                <!-- Exemplo de Iframe real: -->
-                <!-- <iframe class="w-full h-full" src="SEU_LINK_AQUI" frameborder="0" allowfullscreen></iframe> -->
+                <!-- Exemplo: <iframe class="w-full h-full" src="SEU_LINK_AQUI" frameborder="0" allowfullscreen></iframe> -->
             </div>
         </div>
 
         <!-- Botões CTA (Ocultos inicialmente) -->
-        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-12 space-y-4">
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-12 space-y-4 relative z-10 px-2">
             
-            <button class="w-full bg-white hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_30px_rgba(24,182,181,0.4)] rounded-xl py-5 px-6 font-bold text-[18px] md:text-[22px]">
+            <button class="w-full bg-white hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_30px_rgba(24,182,181,0.4)] rounded-xl py-5 px-4 md:px-6 font-bold text-[16px] md:text-[22px] leading-tight">
                 <span class="text-gradient">Adicionar o Cash Assistente ao meu pedido</span>
             </button>
             
-            <button class="w-full bg-brand-burgundy hover:bg-red-950 transition-colors duration-300 rounded-xl py-4 px-6 font-semibold text-white/70 text-[15px] md:text-[16px] underline decoration-white/30 hover:text-white">
+            <button class="w-full bg-brand-burgundy hover:bg-red-950 transition-colors duration-300 rounded-xl py-4 px-6 font-semibold text-white/70 text-[14px] md:text-[16px] underline decoration-white/30 hover:text-white">
                 Não, quero perder esta oportunidade
             </button>
 
             <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
-                <span class="text-sm mb-2">Veja mais detalhes abaixo</span>
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
@@ -160,37 +196,32 @@
                         <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
                     </div>
 
-                    <!-- Benefícios (Bullet points) -->
+                    <!-- Benefícios -->
                     <div class="space-y-6">
-                        <!-- Item 1 -->
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 mt-1">
                                 <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
                         </div>
-                        <!-- Item 2 -->
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 mt-1">
                                 <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
                         </div>
-                        <!-- Item 3 -->
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 mt-1">
                                 <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
                         </div>
-                        <!-- Item 4 -->
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 mt-1">
                                 <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
                         </div>
-                        <!-- Item 5 -->
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0 mt-1">
                                 <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
@@ -251,43 +282,41 @@
 
     </div>
 
-    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA (UX/UI Logic) -->
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // --- 1. Lógica do Countdown e Barra de Progresso ---
-            let timeLeft = 50; // Começa em 50 segundos
-            const countdownEl = document.getElementById('countdown');
-            const progressBar = document.getElementById('progress-bar');
             
-            // Dispara a animação do CSS para 90% (o tempo do transition no CSS já está setado para 50s)
+            // --- 1. Lógica do Countdown e Barra de Progresso ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+            const progressFill = document.getElementById('progress-fill');
+            
+            // Dispara a animação css transition que vai durar 50s
             setTimeout(() => {
-                progressBar.style.width = '90%';
+                progressFill.style.width = '90%';
             }, 100); 
 
+            // Timer em Segundos caindo
             const timerInterval = setInterval(() => {
                 timeLeft--;
-                // Formatação 00:XX
-                const seconds = timeLeft < 10 ? '0' + timeLeft : timeLeft;
-                countdownEl.innerText = `00:${seconds}`;
+                countdownEl.innerText = `${timeLeft}s`;
 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    countdownEl.innerText = "00:00"; // Permanece em zero
+                    countdownEl.innerText = "0s"; 
                 }
             }, 1000);
 
 
-            // --- 2. Lógica do Delay (Delay do pitch de vendas) ---
-            // IMPORTANTE: Configure aqui o tempo em MILISSEGUNDOS em que a página deve liberar o conteúdo.
-            // Por exemplo: Se o seu vídeo diz a oferta aos 2 minutos, coloque 120000.
-            // Para testes agora, deixei em 10 segundos (10000ms).
+            // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
+            // Tempo em milissegundos que o vídeo demora para fazer o pitch e liberar os botões
+            // Deixei em 10 segundos (10000ms) para você conseguir testar sem esperar muito.
             const DELAY_TIME_MS = 10000; 
 
             setTimeout(() => {
-                // Remove a trava de scroll do body
                 document.body.classList.remove('lock-scroll');
                 
-                // Exibe os botões (Seção 1) e o restante do site
+                // Exibe conteúdo atrasado (botões e outras seções)
                 const hiddenElements = document.querySelectorAll('.delayed-content');
                 hiddenElements.forEach(el => el.classList.add('show'));
 
