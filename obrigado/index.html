@@ -92,6 +92,23 @@
         /* =========================================
            ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
         ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; /* Previne que o clique dispare ações nativas da tag video */
+        }
+
         .video-mute-overlay {
             position: absolute;
             top: 50%;
@@ -159,14 +176,6 @@
             height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
             transition: width 0.25s linear;
         }
-        
-        #hero-video {
-            object-fit: cover;
-            background-color: transparent;
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
@@ -219,7 +228,7 @@
         </div>
 
         <!-- Container do Vídeo Customizado -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4" id="hero-video-wrapper">
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
             
             <video id="hero-video" src="upsell.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
             
@@ -384,6 +393,7 @@
             }, 1000);
 
             // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
+            // Tempo em MS para liberar os CTAs. Ajuste conforme seu vídeo.
             const DELAY_TIME_MS = 10000; 
             setTimeout(() => {
                 document.body.classList.remove('lock-scroll');
@@ -392,7 +402,7 @@
             }, DELAY_TIME_MS);
         });
 
-        // --- 3. Lógica Avançada do Player Customizado (Importada) ---
+        // --- 3. Lógica Avançada do Player Customizado (Totalmente Blindado) ---
         (function() {
             function setupVideoPlayer(config) {
                 var vid         = document.getElementById(config.videoId);
@@ -406,8 +416,12 @@
 
                 if (!vid) return;
 
+                // Força absoluta dos atributos de Mudo para contornar bloqueios iOS/Android
                 vid.muted = true;
                 vid.defaultMuted = true;
+                vid.setAttribute('muted', '');
+                vid.setAttribute('playsinline', '');
+                vid.setAttribute('webkit-playsinline', '');
 
                 function atualizarInterface(playing) {
                     if (iconPause && iconPlay) {
@@ -416,16 +430,18 @@
                     }
                 }
 
+                // Autoplay persistente com load() explícito
                 function forceAutoplay() {
                     vid.play().then(function() {
                         atualizarInterface(true);
-                    }).catch(function() {
+                    }).catch(function(err) {
                         setTimeout(forceAutoplay, 500);
                     });
                 }
 
                 vid.load();
-                forceAutoplay();
+                // Pequeno delay inicial para a engine de renderização do navegador entender o atributo muted
+                setTimeout(forceAutoplay, 50); 
 
                 vid.addEventListener('timeupdate', function() {
                     if (vid.duration && fill) {
@@ -455,6 +471,7 @@
                     });
                 }
 
+                // Wrapper Click (Clique em qualquer lugar da caixa de vídeo)
                 if (wrapper) {
                     wrapper.addEventListener('click', function(e) {
                         if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
@@ -462,7 +479,7 @@
                         
                         if (overlay && overlay.style.display !== 'none') {
                             vid.muted = false;
-                            vid.currentTime = 0;
+                            vid.currentTime = 0; // Reseta pro início após tirar do mudo
                             vid.play().catch(function(){});
                             overlay.style.display = 'none';
                             atualizarInterface(true);
@@ -480,29 +497,22 @@
                     });
                 }
 
-                if (overlay) {
-                    overlay.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        vid.muted = false;
-                        vid.currentTime = 0;
-                        vid.play().catch(function(){});
-                        overlay.style.display = 'none';
-                        atualizarInterface(true);
-                        if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
-                    });
-                }
-
+                // Proteção do Intersection Observer para não travar o carregamento inicial
+                var isFirstIntersection = true;
                 var vObs = new IntersectionObserver(function(entries) {
                     if (entries[0].isIntersecting) {
                         forceAutoplay();
                     } else {
-                        vid.pause();
-                        atualizarInterface(false);
+                        if (!isFirstIntersection) {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
                     }
+                    isFirstIntersection = false;
                 }, { threshold: 0.2 });
-
                 vObs.observe(vid);
 
+                // UX Global: Tentar desmutar e resetar o vídeo ao primeiro sinal de interação com a página
                 var scrollAttempted = false;
 
                 function removeGlobalInteractionListeners() {
@@ -526,7 +536,7 @@
                     
                     if (p !== undefined) {
                         p.then(function() {
-                            vid.currentTime = 0; 
+                            vid.currentTime = 0; // Volta para o segundo zero
                             overlay.style.display = 'none';
                             atualizarInterface(true);
                             removeGlobalInteractionListeners();
@@ -548,7 +558,7 @@
                 }
             }
 
-            // Inicializando o player do VSL Hero Video
+            // Iniciar o Player no Upsell
             setupVideoPlayer({
                 videoId: 'hero-video',
                 overlayId: 'hero-video-overlay',
