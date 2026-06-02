@@ -51,13 +51,13 @@
         /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
         @keyframes hand-click-horizontal {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(0.95); } /* Movimenta pra frente na direção do dedo */
+            50% { transform: translateY(-5px) scale(0.95); }
         }
         .animate-hand-horizontal {
             animation: hand-click-horizontal 1.5s infinite ease-in-out;
         }
 
-        /* Lógica para exibir o CTA sem quebrar a centralização (Flexbox) */
+        /* Lógica para exibir o CTA sem quebrar a centralização */
         .delayed-content:not(.show) {
             display: none !important;
         }
@@ -69,7 +69,6 @@
             to { opacity: 1; }
         }
 
-        /* Bloqueio de scroll inicial */
         body.lock-scroll {
             overflow: hidden;
         }
@@ -80,15 +79,93 @@
         }
         .checkbox-container input:checked + div {
             background-color: white;
-            animation: none !important; /* Para o zoom quando clicado */
+            animation: none !important;
             transform: scale(1) !important;
         }
         .checkbox-container input:checked + div svg.check-icon {
-            color: #18b6b5; /* Check na cor Ciano */
+            color: #18b6b5;
         }
-        /* Esconde a mãozinha após clicar */
         .checkbox-container input:checked ~ .hand-wrapper {
             display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 270px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
         }
     </style>
 </head>
@@ -100,18 +177,15 @@
         <!-- Bloco Superior -->
         <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
             
-            <!-- Título Aguarde -->
             <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
                 <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
             </h1>
 
-            <!-- Barra de Progresso Responsiva (85% Mobile / 88% Desktop) -->
             <div class="w-full relative px-2 max-w-3xl mb-2">
                 <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
                     <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
                         <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
                     </div>
-                    <!-- Timer colado na direita (right-2) para evitar corte -->
                     <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
                         <span id="countdown">50s</span>
                     </div>
@@ -120,58 +194,68 @@
 
             <!-- Avisos Pós-Barra e Botão Check -->
             <div class="flex flex-col items-center space-y-3">
-                
-                <!-- Frase Subtítulo -->
                 <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
                     Enviar acesso ao meu email e whastapp
                 </p>
 
-                <!-- Checkbox Interativo com Mão Mágica -->
                 <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
                     <input type="checkbox" class="hidden">
                     
-                    <!-- Quadrado Check -->
                     <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
                         <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
                     
-                    <!-- Imagem do Mouse PNG (Substituindo o SVG) -->
                     <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
                         <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
                     </div>
                 </label>
 
-                <!-- Texto Amarelo -->
                 <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
                     O seu pedido ainda não está completo!
                 </p>
             </div>
         </div>
 
-        <!-- Container do Vídeo -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4">
-            <!-- Cole aqui o iFrame do seu vídeo -->
-            <div class="w-full h-full flex items-center justify-center text-white/50 bg-gray-900">
-                <p>[ Placeholder do Vídeo 16:9 ]</p>
+        <!-- Container do Vídeo Customizado -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4" id="hero-video-wrapper">
+            
+            <video id="hero-video" src="upsell.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
             </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
         </div>
 
         <!-- Botões CTA (Ocultos inicialmente) -->
         <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
             
-            <!-- Botão 1 - Formato Pílula, Cor #21b6c8, Texto Grande e Efeito 3D -->
             <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
                 Adicionar o Cash Assistente ao meu pedido
             </button>
             
-            <!-- Botão 2 - Rejeição (Vermelho), Menor que o principal -->
             <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
                 Perder esta oportunidade
             </button>
 
-            <!-- Setinha -->
             <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
                 <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -194,7 +278,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="relative">
-                        <div class="absolute -inset-4 bg-gradient-to-r from-[#0e5158] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
                         <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
                     </div>
 
@@ -281,11 +365,11 @@
 
     </div>
 
-    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA -->
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. Lógica do Timer de Contagem Regressiva ---
+            // --- 1. Lógica do Timer de Contagem Regressiva Estático (Top) ---
             let timeLeft = 50; 
             const countdownEl = document.getElementById('countdown');
 
@@ -299,18 +383,185 @@
                 }
             }, 1000);
 
-
             // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
             const DELAY_TIME_MS = 10000; 
-
             setTimeout(() => {
                 document.body.classList.remove('lock-scroll');
-                
                 const hiddenElements = document.querySelectorAll('.delayed-content');
                 hiddenElements.forEach(el => el.classList.add('show'));
-
             }, DELAY_TIME_MS);
         });
+
+        // --- 3. Lógica Avançada do Player Customizado (Importada) ---
+        (function() {
+            function setupVideoPlayer(config) {
+                var vid         = document.getElementById(config.videoId);
+                var overlay     = document.getElementById(config.overlayId);
+                var wrapper     = document.getElementById(config.wrapperId);
+                var playBtn     = document.getElementById(config.playBtnId);
+                var fill        = document.getElementById(config.fillId);
+                var progressBar = document.getElementById(config.progressBarId);
+                var iconPause   = document.getElementById(config.iconPauseId);
+                var iconPlay    = document.getElementById(config.iconPlayId);
+
+                if (!vid) return;
+
+                vid.muted = true;
+                vid.defaultMuted = true;
+
+                function atualizarInterface(playing) {
+                    if (iconPause && iconPlay) {
+                        iconPause.style.display = playing ? '' : 'none';
+                        iconPlay.style.display  = playing ? 'none' : '';
+                    }
+                }
+
+                function forceAutoplay() {
+                    vid.play().then(function() {
+                        atualizarInterface(true);
+                    }).catch(function() {
+                        setTimeout(forceAutoplay, 500);
+                    });
+                }
+
+                vid.load();
+                forceAutoplay();
+
+                vid.addEventListener('timeupdate', function() {
+                    if (vid.duration && fill) {
+                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                    }
+                });
+
+                if (progressBar) {
+                    progressBar.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var rect = progressBar.getBoundingClientRect();
+                        var ratio = (e.clientX - rect.left) / rect.width;
+                        if (vid.duration) vid.currentTime = ratio * vid.duration;
+                    });
+                }
+
+                if (playBtn) {
+                    playBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                if (wrapper) {
+                    wrapper.addEventListener('click', function(e) {
+                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
+                        
+                        if (overlay && overlay.style.display !== 'none') {
+                            vid.muted = false;
+                            vid.currentTime = 0;
+                            vid.play().catch(function(){});
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
+                            return; 
+                        }
+
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                if (overlay) {
+                    overlay.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        vid.muted = false;
+                        vid.currentTime = 0;
+                        vid.play().catch(function(){});
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                        if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
+                    });
+                }
+
+                var vObs = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        forceAutoplay();
+                    } else {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }, { threshold: 0.2 });
+
+                vObs.observe(vid);
+
+                var scrollAttempted = false;
+
+                function removeGlobalInteractionListeners() {
+                    window.removeEventListener('scroll', tryGlobalUnmute);
+                    window.removeEventListener('click', tryGlobalUnmute);
+                    window.removeEventListener('touchstart', tryGlobalUnmute);
+                    window.removeEventListener('touchend', tryGlobalUnmute); 
+                    window.removeEventListener('keydown', tryGlobalUnmute);
+                }
+
+                function tryGlobalUnmute(e) {
+                    if (!overlay || overlay.style.display === 'none') {
+                        removeGlobalInteractionListeners();
+                        return;
+                    }
+                    if (e.type === 'scroll' && scrollAttempted) return;
+                    if (e.type === 'scroll') scrollAttempted = true;
+
+                    vid.muted = false;
+                    var p = vid.play();
+                    
+                    if (p !== undefined) {
+                        p.then(function() {
+                            vid.currentTime = 0; 
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            removeGlobalInteractionListeners();
+                        }).catch(function() {
+                            vid.muted = true; 
+                            setTimeout(function() {
+                                vid.play().catch(function(){});
+                            }, 50);
+                        });
+                    }
+                }
+
+                if (config.unmuteOnInteraction) {
+                    window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('click', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchend', tryGlobalUnmute, { passive: true }); 
+                    window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
+                }
+            }
+
+            // Inicializando o player do VSL Hero Video
+            setupVideoPlayer({
+                videoId: 'hero-video',
+                overlayId: 'hero-video-overlay',
+                wrapperId: 'hero-video-wrapper',
+                playBtnId: 'hero-play-btn',
+                fillId: 'hero-progress-fill',
+                progressBarId: 'hero-progress-bar',
+                iconPauseId: 'hero-icon-pause',
+                iconPlayId: 'hero-icon-play',
+                unmuteOnInteraction: true 
+            });
+
+        })();
     </script>
 </body>
 </html>
