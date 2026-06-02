@@ -41,7 +41,7 @@
         /* Animação da seta apontando para os detalhes */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(15px); }
+            50% { transform: translateY(8px); }
         }
         .animate-bounce-slow {
             animation: bounce 2s infinite;
@@ -58,8 +58,8 @@
 
         /* Animação da mãozinha do mouse */
         @keyframes hand-click {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-4px, -4px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-3px, -3px) scale(0.95); }
         }
         .animate-hand {
             animation: hand-click 1.5s infinite ease-in-out;
@@ -102,79 +102,92 @@
 <body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
 
     <!-- SEÇÃO 1: VÍDEO E CTA -->
-    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-8 pb-16 px-3 relative w-full overflow-hidden">
+    <!-- Reduzi o padding top (pt-4) e bottom (pb-8) para economizar espaço -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-4 pb-8 px-3 relative w-full overflow-hidden">
         
-        <!-- Bloco Superior -->
-        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-8 mt-4">
+        <!-- Bloco Superior Mais Compacto -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
             
-            <!-- Título Aguarde -->
-            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+            <!-- Título Aguarde (Tamanho levemente reduzido para caber melhor na tela) -->
+            <h1 class="text-2xl md:text-[34px] font-bold text-white mb-3 leading-tight drop-shadow-md">
                 <span class="text-[#18b6b5] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
             </h1>
 
-            <!-- Barra de Progresso (Movida para cá) -->
-            <div class="w-full relative px-2 max-w-3xl mb-10">
-                <div class="relative w-full h-12 md:h-16 border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+            <!-- Barra de Progresso (Altura reduzida e margem inferior ajustada) -->
+            <div class="w-full relative px-2 max-w-2xl mb-4">
+                <div class="relative w-full h-10 md:h-12 border-[3px] border-white rounded-full p-[3px] flex items-center bg-black/20 shadow-xl overflow-hidden">
                     <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 86%;">
-                        <span class="text-[#18b6b5] font-black text-sm md:text-xl pr-3 md:pr-4 tracking-wide">90%</span>
+                        <span class="text-[#18b6b5] font-black text-sm md:text-lg pr-3 tracking-wide">90%</span>
                     </div>
-                    <div class="absolute right-3 md:right-5 text-white font-black text-xl md:text-3xl italic tracking-tight drop-shadow-md">
+                    <div class="absolute right-3 text-white font-black text-lg md:text-2xl italic tracking-tight drop-shadow-md">
                         <span id="countdown">50s</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Avisos Pós-Barra e Botão Check -->
-            <div class="flex flex-col items-center space-y-5">
+            <!-- Avisos Pós-Barra e Botão Check (Espaçamentos reduzidos) -->
+            <div class="flex flex-col items-center space-y-3">
                 
-                <!-- Frase alterada por você -->
-                <p class="text-xl md:text-2xl font-bold text-white drop-shadow-md max-w-2xl">
-                    Clique aqui para a compra ser concluída com sucesso e enviada ao seu email e whastapp 
+                <!-- Nova Frase -->
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md">
+                    Enviar acesso ao meu email e whastapp
                 </p>
 
-                <!-- Checkbox Interativo (Com Mãozinha e Zoom) -->
-                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-2 mb-4">
+                <!-- Checkbox Interativo com Novo Ícone de Mão -->
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
                     <input type="checkbox" class="hidden">
-                    <!-- Quadrado menor com animação de pulsação -->
+                    
+                    <!-- Quadrado Check -->
                     <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
-                        <svg class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <!-- Ícone de mão de mouse -->
-                    <svg class="hand-icon w-8 h-8 md:w-10 md:h-10 absolute -bottom-5 -right-5 md:-bottom-6 md:-right-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] pointer-events-none z-10 animate-hand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-                        <path fill="currentColor" stroke="#18b6b5" stroke-width="8" stroke-linejoin="round" d="M142,20A38.05,38.05,0,0,0,104,58V108.32L93.75,98.07A38,38,0,0,0,40,151.8l43.51,43.51A78,78,0,0,0,138.67,218H172a62.07,62.07,0,0,0,62-62V110a38,38,0,0,0-76,0v18H142Z"/>
+                    
+                    <!-- Novo Ícone de Mão Mágica (Idêntico ao enviado) -->
+                    <svg class="hand-icon w-10 h-10 md:w-12 md:h-12 absolute -bottom-6 -right-6 md:-bottom-7 md:-right-7 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.6)] pointer-events-none z-10 animate-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Mão -->
+                        <path d="M10 11V5a2 2 0 0 1 4 0v9.5" />
+                        <path d="M14 10.5V9a2 2 0 0 1 4 0v10a5 5 0 0 1-10 0V11" />
+                        <path d="M8 11v1" />
+                        <path d="M18 10.5v1.5a4.5 4.5 0 0 1-9 0V14" />
+                        <path d="M14 14.5a2.5 2.5 0 0 0-5 0" />
+                        <!-- Traços do Toque (Click) -->
+                        <path d="M12 1v1.5" />
+                        <path d="M16.5 2.5l-1 1" />
+                        <path d="M7.5 2.5l1 1" />
                     </svg>
                 </label>
 
-                <!-- Frase alterada por você -->
-                <p class="text-xl md:text-[22px] font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-6 py-2 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                <!-- Texto Amarelo Reduzido (Tamanho Menor) -->
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
                     O seu pedido ainda não está completo!
                 </p>
             </div>
         </div>
 
-        <!-- Container do Vídeo -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4">
+        <!-- Container do Vídeo (Agora mais evidente na primeira dobra) -->
+        <div class="w-full max-w-3xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-2">
+            <!-- Cole aqui o iFrame do seu vídeo -->
             <div class="w-full h-full flex items-center justify-center text-white/50 bg-gray-900">
                 <p>[ Placeholder do Vídeo 16:9 ]</p>
             </div>
         </div>
 
         <!-- Botões CTA (Ocultos inicialmente) -->
-        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-12 space-y-4 relative z-10 px-2">
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-8 space-y-3 relative z-10 px-2">
             
-            <button class="w-full bg-white hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_30px_rgba(24,182,181,0.4)] rounded-xl py-5 px-4 md:px-6 font-bold text-[16px] md:text-[22px] leading-tight">
+            <button class="w-full bg-white hover:scale-[1.02] transition-transform duration-300 shadow-[0_0_30px_rgba(24,182,181,0.4)] rounded-xl py-4 px-4 md:px-6 font-bold text-[16px] md:text-[20px] leading-tight">
                 <span class="text-gradient">Adicionar o Cash Assistente ao meu pedido</span>
             </button>
             
-            <button class="w-full bg-brand-burgundy hover:bg-red-950 transition-colors duration-300 rounded-xl py-4 px-6 font-semibold text-white/70 text-[14px] md:text-[16px] underline decoration-white/30 hover:text-white">
+            <button class="w-full bg-brand-burgundy hover:bg-red-950 transition-colors duration-300 rounded-xl py-3 px-6 font-semibold text-white/70 text-[14px] md:text-[15px] underline decoration-white/30 hover:text-white">
                 Não, quero perder esta oportunidade
             </button>
 
-            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
-                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="mt-4 text-white/70 animate-bounce-slow flex flex-col items-center pt-4">
+                <span class="text-sm mb-1 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
             </div>
@@ -301,14 +314,11 @@
 
 
             // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
-            // Tempo em milissegundos que a página deve travar antes de mostrar a oferta
             const DELAY_TIME_MS = 10000; 
 
             setTimeout(() => {
-                // Remove trava da tela
                 document.body.classList.remove('lock-scroll');
                 
-                // Exibe as ofertas e rodapé
                 const hiddenElements = document.querySelectorAll('.delayed-content');
                 hiddenElements.forEach(el => el.classList.add('show'));
 
