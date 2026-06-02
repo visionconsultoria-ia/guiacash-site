@@ -1,3 +1,2868 @@
+We have updated our Terms of Service
+Desenvolvimento de Landing Page Conversiva
+339.537 tokens
+
+Model 10:02
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Com certeza! Implementei toda a engenharia e arquitetura avançada de player de VSL do código de referência dentro da Landing Page que estamos construindo.
+Mantive as proporções, a borda branca e a sombra exatas do contêiner da página atual, mas injetei o video com o caminho upsell.mp4, o overlay de desmutar, a barra de progresso do vídeo, o botão de play/pause e, principalmente, o Javascript de Interação Global e AutoPlay resiliente.
+Aqui está o código completo, pronto para subir no GitHub:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 270px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4" id="hero-video-wrapper">
+            
+            <video id="hero-video" src="upsell.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO -->
+        <section class="bg-[#f8f8f8] py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <span class="text-brand-violet2">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="bg-gray-50 flex items-center justify-center p-8">
+                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
+                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                                Adicione agora o seu pedido por apenas
+                            </h3>
+                            
+                            <div class="text-brand-violet2 mb-8">
+                                <span class="text-2xl font-bold">12x</span>
+                                <span class="text-5xl font-extrabold">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium block mt-1">/ ano</span>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+                                Quero aproveitar esta oferta
+                            </button>
+
+                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>7 dias de garantia incondicional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer de Contagem Regressiva Estático (Top) ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
+            const DELAY_TIME_MS = 10000; 
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+        });
+
+        // --- 3. Lógica Avançada do Player Customizado (Importada) ---
+        (function() {
+            function setupVideoPlayer(config) {
+                var vid         = document.getElementById(config.videoId);
+                var overlay     = document.getElementById(config.overlayId);
+                var wrapper     = document.getElementById(config.wrapperId);
+                var playBtn     = document.getElementById(config.playBtnId);
+                var fill        = document.getElementById(config.fillId);
+                var progressBar = document.getElementById(config.progressBarId);
+                var iconPause   = document.getElementById(config.iconPauseId);
+                var iconPlay    = document.getElementById(config.iconPlayId);
+
+                if (!vid) return;
+
+                vid.muted = true;
+                vid.defaultMuted = true;
+
+                function atualizarInterface(playing) {
+                    if (iconPause && iconPlay) {
+                        iconPause.style.display = playing ? '' : 'none';
+                        iconPlay.style.display  = playing ? 'none' : '';
+                    }
+                }
+
+                function forceAutoplay() {
+                    vid.play().then(function() {
+                        atualizarInterface(true);
+                    }).catch(function() {
+                        setTimeout(forceAutoplay, 500);
+                    });
+                }
+
+                vid.load();
+                forceAutoplay();
+
+                vid.addEventListener('timeupdate', function() {
+                    if (vid.duration && fill) {
+                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                    }
+                });
+
+                if (progressBar) {
+                    progressBar.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var rect = progressBar.getBoundingClientRect();
+                        var ratio = (e.clientX - rect.left) / rect.width;
+                        if (vid.duration) vid.currentTime = ratio * vid.duration;
+                    });
+                }
+
+                if (playBtn) {
+                    playBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                if (wrapper) {
+                    wrapper.addEventListener('click', function(e) {
+                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
+                        
+                        if (overlay && overlay.style.display !== 'none') {
+                            vid.muted = false;
+                            vid.currentTime = 0;
+                            vid.play().catch(function(){});
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
+                            return; 
+                        }
+
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                if (overlay) {
+                    overlay.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        vid.muted = false;
+                        vid.currentTime = 0;
+                        vid.play().catch(function(){});
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                        if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
+                    });
+                }
+
+                var vObs = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        forceAutoplay();
+                    } else {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }, { threshold: 0.2 });
+
+                vObs.observe(vid);
+
+                var scrollAttempted = false;
+
+                function removeGlobalInteractionListeners() {
+                    window.removeEventListener('scroll', tryGlobalUnmute);
+                    window.removeEventListener('click', tryGlobalUnmute);
+                    window.removeEventListener('touchstart', tryGlobalUnmute);
+                    window.removeEventListener('touchend', tryGlobalUnmute); 
+                    window.removeEventListener('keydown', tryGlobalUnmute);
+                }
+
+                function tryGlobalUnmute(e) {
+                    if (!overlay || overlay.style.display === 'none') {
+                        removeGlobalInteractionListeners();
+                        return;
+                    }
+                    if (e.type === 'scroll' && scrollAttempted) return;
+                    if (e.type === 'scroll') scrollAttempted = true;
+
+                    vid.muted = false;
+                    var p = vid.play();
+                    
+                    if (p !== undefined) {
+                        p.then(function() {
+                            vid.currentTime = 0; 
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            removeGlobalInteractionListeners();
+                        }).catch(function() {
+                            vid.muted = true; 
+                            setTimeout(function() {
+                                vid.play().catch(function(){});
+                            }, 50);
+                        });
+                    }
+                }
+
+                if (config.unmuteOnInteraction) {
+                    window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('click', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchend', tryGlobalUnmute, { passive: true }); 
+                    window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
+                }
+            }
+
+            // Inicializando o player do VSL Hero Video
+            setupVideoPlayer({
+                videoId: 'hero-video',
+                overlayId: 'hero-video-overlay',
+                wrapperId: 'hero-video-wrapper',
+                playBtnId: 'hero-play-btn',
+                fillId: 'hero-progress-fill',
+                progressBarId: 'hero-progress-bar',
+                iconPauseId: 'hero-icon-pause',
+                iconPlayId: 'hero-icon-play',
+                unmuteOnInteraction: true 
+            });
+
+        })();
+    </script>
+</body>
+</html>
+Model 10:25
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Análise perfeita. Como Desenvolvedor Sênior, lido com esse comportamento com frequência. O que você está vendo (o vídeo travado com um "player" nativo aparecendo por trás do nosso overlay) é o sistema de bloqueio de autoplay do navegador (especialmente Safari/iOS e Chrome Mobile) entrando em ação defensiva.
+Mesmo o código de referência sendo muito bom, os navegadores atualizam suas políticas de bateria e dados constantemente. Quando ele detecta uma anomalia mínima no carregamento, ele trava o vídeo no frame 0 e injeta o botão de play nativo do sistema operacional por cima do vídeo, ignorando o fato de não termos colocado o atributo controls.
+Aqui está o diagnóstico exato do que faltou e como vamos melhorar/blindar esses efeitos na próxima etapa (sem gerar o HTML ainda, conforme você pediu):
+1. Oclusão Forçada dos Controles Nativos (CSS)
+O código de referência não tinha uma trava CSS contra a interface do próprio celular. Precisamos adicionar "CSS Hacks" (Pseudo-elementos webkit) para garantir que, mesmo que o navegador trave o vídeo por um milissegundo, ele nunca exiba aquele botão de play gigante nativo na tela.
+O que adicionaremos no CSS:
+code
+CSS
+video::-webkit-media-controls { display: none !important; }
+video::-webkit-media-controls-start-playback-button { display: none !important; }
+2. Reforço de Atributos via Javascript (JS)
+Apenas colocar muted e playsinline no HTML (<video>) às vezes não é suficiente no iOS moderno. O Safari lê o HTML antes do vídeo carregar e "esquece" a regra.
+O que melhoraremos no JS:
+Antes de chamar o vid.play(), forçaremos a reescrita dos atributos direto no DOM:
+code
+JavaScript
+vid.muted = true;
+vid.defaultMuted = true;
+vid.setAttribute('muted', ''); // O iOS exige o atributo vazio injetado no DOM
+vid.setAttribute('playsinline', '');
+vid.setAttribute('webkit-playsinline', '');
+3. Conflito entre Intersection Observer e o First Play
+No script de referência, logo que a página carrega, ele chama forceAutoplay(). Porém, frações de segundo depois, o IntersectionObserver (que pausa o vídeo se ele estiver fora da tela) é ativado. Se houver um micro-delay de renderização na página, o Observer acha que o vídeo está "invisível" e manda um vid.pause(), travando o início automático.
+A Melhoria:
+Vamos colocar uma pequena trava de segurança. O Observer só começará a pausar o vídeo se o usuário realmente rolar a tela, garantindo que o primeiro milissegundo do vídeo seja focado exclusivamente em dar o play() mudo com sucesso.
+4. Gestão do Estado da Promise (JS)
+A função forceAutoplay() usa um setTimeout a cada 500ms se falhar. Vamos melhorar isso garantindo que o vídeo dê um leve "empurrão" carregando o primeiro frame explicitamente (vid.load()) associado a um pequeno atraso de 50ms antes do play. Isso dá tempo para a engine de mídia do navegador reconhecer que o vídeo é 100% mudo e liberar a reprodução automática.
+Resumo do Diagnóstico: O código anterior estava estruturalmente correto, mas carecia de "blindagem" contra as defesas nativas do iOS/Android (CSS Webkit e injeção forçada de atributos).
+Me avise se posso prosseguir e gerar o HTML atualizado com esta armadura definitiva no player de vídeo!
+Model 10:28
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Conforme diagnosticado, apliquei a "blindagem" completa no player de vídeo.
+Adicionei as travas de CSS (::-webkit-media-controls) para extinguir qualquer chance do celular mostrar o botão nativo, forcei a injeção dos atributos muted e playsinline direto no DOM via Javascript, e criei o atraso inteligente no Intersection Observer para que o primeiro play ocorra de forma lisa e contínua no background.
+Além disso, mantive rigorosamente todos os seus ajustes de design (textos, cores, alinhamentos, barra de 88% e o cursor do mouse PNG em animação lateral).
+Aqui está o código HTML final e definitivo da página:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; /* Previne que o clique dispare ações nativas da tag video */
+        }
+
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 270px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+            
+            <video id="hero-video" src="upsell.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO -->
+        <section class="bg-[#f8f8f8] py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <span class="text-brand-violet2">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="bg-gray-50 flex items-center justify-center p-8">
+                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
+                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                                Adicione agora o seu pedido por apenas
+                            </h3>
+                            
+                            <div class="text-brand-violet2 mb-8">
+                                <span class="text-2xl font-bold">12x</span>
+                                <span class="text-5xl font-extrabold">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium block mt-1">/ ano</span>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+                                Quero aproveitar esta oferta
+                            </button>
+
+                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>7 dias de garantia incondicional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer de Contagem Regressiva Estático (Top) ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
+            // Tempo em MS para liberar os CTAs. Ajuste conforme seu vídeo.
+            const DELAY_TIME_MS = 10000; 
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+        });
+
+        // --- 3. Lógica Avançada do Player Customizado (Totalmente Blindado) ---
+        (function() {
+            function setupVideoPlayer(config) {
+                var vid         = document.getElementById(config.videoId);
+                var overlay     = document.getElementById(config.overlayId);
+                var wrapper     = document.getElementById(config.wrapperId);
+                var playBtn     = document.getElementById(config.playBtnId);
+                var fill        = document.getElementById(config.fillId);
+                var progressBar = document.getElementById(config.progressBarId);
+                var iconPause   = document.getElementById(config.iconPauseId);
+                var iconPlay    = document.getElementById(config.iconPlayId);
+
+                if (!vid) return;
+
+                // Força absoluta dos atributos de Mudo para contornar bloqueios iOS/Android
+                vid.muted = true;
+                vid.defaultMuted = true;
+                vid.setAttribute('muted', '');
+                vid.setAttribute('playsinline', '');
+                vid.setAttribute('webkit-playsinline', '');
+
+                function atualizarInterface(playing) {
+                    if (iconPause && iconPlay) {
+                        iconPause.style.display = playing ? '' : 'none';
+                        iconPlay.style.display  = playing ? 'none' : '';
+                    }
+                }
+
+                // Autoplay persistente com load() explícito
+                function forceAutoplay() {
+                    vid.play().then(function() {
+                        atualizarInterface(true);
+                    }).catch(function(err) {
+                        setTimeout(forceAutoplay, 500);
+                    });
+                }
+
+                vid.load();
+                // Pequeno delay inicial para a engine de renderização do navegador entender o atributo muted
+                setTimeout(forceAutoplay, 50); 
+
+                vid.addEventListener('timeupdate', function() {
+                    if (vid.duration && fill) {
+                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                    }
+                });
+
+                if (progressBar) {
+                    progressBar.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var rect = progressBar.getBoundingClientRect();
+                        var ratio = (e.clientX - rect.left) / rect.width;
+                        if (vid.duration) vid.currentTime = ratio * vid.duration;
+                    });
+                }
+
+                if (playBtn) {
+                    playBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                // Wrapper Click (Clique em qualquer lugar da caixa de vídeo)
+                if (wrapper) {
+                    wrapper.addEventListener('click', function(e) {
+                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
+                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
+                        
+                        if (overlay && overlay.style.display !== 'none') {
+                            vid.muted = false;
+                            vid.currentTime = 0; // Reseta pro início após tirar do mudo
+                            vid.play().catch(function(){});
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
+                            return; 
+                        }
+
+                        if (vid.paused) {
+                            vid.play();
+                            atualizarInterface(true);
+                        } else {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    });
+                }
+
+                // Proteção do Intersection Observer para não travar o carregamento inicial
+                var isFirstIntersection = true;
+                var vObs = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        forceAutoplay();
+                    } else {
+                        if (!isFirstIntersection) {
+                            vid.pause();
+                            atualizarInterface(false);
+                        }
+                    }
+                    isFirstIntersection = false;
+                }, { threshold: 0.2 });
+                vObs.observe(vid);
+
+                // UX Global: Tentar desmutar e resetar o vídeo ao primeiro sinal de interação com a página
+                var scrollAttempted = false;
+
+                function removeGlobalInteractionListeners() {
+                    window.removeEventListener('scroll', tryGlobalUnmute);
+                    window.removeEventListener('click', tryGlobalUnmute);
+                    window.removeEventListener('touchstart', tryGlobalUnmute);
+                    window.removeEventListener('touchend', tryGlobalUnmute); 
+                    window.removeEventListener('keydown', tryGlobalUnmute);
+                }
+
+                function tryGlobalUnmute(e) {
+                    if (!overlay || overlay.style.display === 'none') {
+                        removeGlobalInteractionListeners();
+                        return;
+                    }
+                    if (e.type === 'scroll' && scrollAttempted) return;
+                    if (e.type === 'scroll') scrollAttempted = true;
+
+                    vid.muted = false;
+                    var p = vid.play();
+                    
+                    if (p !== undefined) {
+                        p.then(function() {
+                            vid.currentTime = 0; // Volta para o segundo zero
+                            overlay.style.display = 'none';
+                            atualizarInterface(true);
+                            removeGlobalInteractionListeners();
+                        }).catch(function() {
+                            vid.muted = true; 
+                            setTimeout(function() {
+                                vid.play().catch(function(){});
+                            }, 50);
+                        });
+                    }
+                }
+
+                if (config.unmuteOnInteraction) {
+                    window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('click', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
+                    window.addEventListener('touchend', tryGlobalUnmute, { passive: true }); 
+                    window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
+                }
+            }
+
+            // Iniciar o Player no Upsell
+            setupVideoPlayer({
+                videoId: 'hero-video',
+                overlayId: 'hero-video-overlay',
+                wrapperId: 'hero-video-wrapper',
+                playBtnId: 'hero-play-btn',
+                fillId: 'hero-progress-fill',
+                progressBarId: 'hero-progress-bar',
+                iconPauseId: 'hero-icon-pause',
+                iconPlayId: 'hero-icon-play',
+                unmuteOnInteraction: true 
+            });
+
+        })();
+    </script>
+</body>
+</html>
+Model 10:41
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Model 10:50
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Aqui está o código final com a arquitetura avançada de VSL.
+Implementei os 4 Pilares da nossa engenharia:
+Tags de blindagem no HTML (playsinline, webkit-playsinline, muted e pointer-events-none no CSS para bloquear a interface nativa).
+AudioContext Hack no Javascript: Ao primeiro sinal de toque ou rolagem (scroll), o JS força a abertura da placa de áudio do dispositivo.
+Reinício Perfeito: Uma vez liberado o áudio, o vídeo zera (vid.currentTime = 0), e a mensagem some perfeitamente.
+Proteção Anti-Low Power Mode: Se o navegador (bateria fraca) bloquear até mesmo o início mudo, o JS detecta a Promise rejeitada, paralisa o vídeo e muda o texto do overlay automaticamente para "Vídeo pausado / Toque para iniciar o vídeo", salvando a conversão e evitando uma tela preta infinita.
+O design, cores, textos, espaçamentos e a barra de 88% permanecem rigorosamente idênticos.
+Copie e cole o código completo no seu arquivo index.html:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
+        }
+
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 280px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+            
+            <!-- Atributos Hardcoded para Bypass de iOS/Android -->
+            <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO -->
+        <section class="bg-[#f8f8f8] py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <span class="text-brand-violet2">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="bg-gray-50 flex items-center justify-center p-8">
+                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
+                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                                Adicione agora o seu pedido por apenas
+                            </h3>
+                            
+                            <div class="text-brand-violet2 mb-8">
+                                <span class="text-2xl font-bold">12x</span>
+                                <span class="text-5xl font-extrabold">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium block mt-1">/ ano</span>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+                                Quero aproveitar esta oferta
+                            </button>
+
+                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>7 dias de garantia incondicional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer Estático ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay dos Botões ---
+            const DELAY_TIME_MS = 10000; // Tempo em MS. Ex: 10s. Mude para o tempo do pitch.
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+            
+            // --- 3. PLAYER AVANÇADO (Anti-Low Power Mode & Interação Global) ---
+            const vid = document.getElementById('hero-video');
+            const overlay = document.getElementById('hero-video-overlay');
+            const wrapper = document.getElementById('hero-video-wrapper');
+            const topText = overlay.querySelector('.overlay-text-top');
+            const botText = overlay.querySelector('.overlay-text-bottom');
+            const playBtn = document.getElementById('hero-play-btn');
+            const iconPause = document.getElementById('hero-icon-pause');
+            const iconPlay = document.getElementById('hero-icon-play');
+            const fill = document.getElementById('hero-progress-fill');
+            const progressBar = document.getElementById('hero-progress-bar');
+            
+            let isAudioUnlocked = false;
+
+            // Injeção forçada de atributos para o DOM Safari/Chrome
+            vid.muted = true;
+            vid.setAttribute('muted', '');
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
+
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
+                }
+            }
+
+            // Tentativa de Autoplay Silencioso
+            const initPlay = vid.play();
+            if (initPlay !== undefined) {
+                initPlay.then(() => {
+                    atualizarInterface(true);
+                }).catch(() => {
+                    // MODO DE POUCA ENERGIA (Low Power Mode) DETECTADO
+                    topText.innerText = "Vídeo pausado";
+                    botText.innerText = "Toque para iniciar o vídeo";
+                    atualizarInterface(false);
+                });
+            }
+
+            // Hack: AudioContext para destravar hardware de som em qualquer navegador
+            const unlockAudio = (e) => {
+                if (isAudioUnlocked) return;
+                
+                // Evita disparo falso de scroll se o overlay já foi fechado
+                if (overlay.style.display === 'none') return;
+
+                isAudioUnlocked = true;
+
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    ctx.resume();
+                }
+
+                vid.muted = false;
+                vid.currentTime = 0; // O SEGREDO: Volta pro início exato.
+                
+                const p = vid.play();
+                if (p !== undefined) {
+                    p.then(() => {
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    }).catch(() => {
+                        // Segurança extra se o unmute falhar
+                        vid.muted = true;
+                        vid.play();
+                    });
+                } else {
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                }
+
+                // Limpeza de cache de eventos
+                window.removeEventListener('scroll', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+            };
+
+            // Escuta qualquer interação na página para destravar o vídeo
+            window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+            window.addEventListener('click', unlockAudio, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+
+            // Lógica Customizada de Botões Inferiores do Vídeo
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (vid.paused) { vid.play(); atualizarInterface(true); } 
+                    else { vid.pause(); atualizarInterface(false); }
+                });
+            }
+
+            vid.addEventListener('timeupdate', () => {
+                if (vid.duration && fill) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
+            });
+
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const rect = progressBar.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                });
+            }
+
+            // Otimização: Pausa o vídeo se não estiver na tela (Evita gasto de dados/bateria)
+            let isFirstIntersection = true;
+            const vObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if(!vid.paused && isAudioUnlocked) vid.play();
+                } else {
+                    if (!isFirstIntersection && isAudioUnlocked) {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }
+                isFirstIntersection = false;
+            }, { threshold: 0.2 });
+            
+            // Pequeno delay para o Observer não atrapalhar a Promise de Autoplay
+            setTimeout(() => { vObs.observe(vid); }, 1000);
+        });
+    </script>
+</body>
+</html>
+Model 11:08
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Como Especialista em UI/UX e Front-end Sênior, apliquei suas pontuações com precisão cirúrgica.
+Remover a borda do vídeo foi uma excelente decisão para maximizar a área útil (o Screen Real Estate) do player, tornando a experiência mais imersiva. Além disso, a unificação das cores de fundo (bege) e do texto (dark cyan) cria uma consistência visual de alto padrão (o que chamamos de Brand Cohesion).
+O que foi implementado:
+Vídeo Maximizado: Removi as classes de borda (border-[4px] border-white/10). Como o contêiner já possui overflow-hidden e o vídeo está com object-fit: cover, o vídeo expandiu automaticamente e engoliu o espaço que era da borda, ficando maior e mais limpo.
+Harmonia de Cores (Seção 2 e 3):
+Mudei o fundo da "Seção 2 - Produto" para o mesmo bege/cinza claro da "Seção 3 - Oferta" (bg-gray-100).
+A frase "3x mais fácil e leve" agora utiliza exatamente o código Hex da primeira seção (text-[#0f525a]).
+Oferta em Linha Única (UX Pricing): Reformulei a div de preço usando Flexbox (flex items-baseline justify-center). Isso garante que "12x", "R$ 29,90" e "/ ano" fiquem perfeitamente alinhados na mesma linha (pela base da fonte), totalmente centralizados na caixa branca. Também apliquei a cor Dark Cyan ao preço para fechar a identidade visual.
+Copie e cole o código atualizado no seu arquivo:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta o player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;
+        }
+
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 280px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado (Sem borda branca) -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+            
+            <!-- Atributos Hardcoded para Bypass de iOS/Android -->
+            <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO (Agora com o fundo bege bg-gray-100) -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <!-- Texto com a cor Dark Cyan (#0f525a) -->
+                    <span class="text-[#0f525a]">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+                    <div class="grid grid-cols-1 md:grid-cols-2">
+                        <div class="bg-gray-50 flex items-center justify-center p-8">
+                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
+                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                                Adicione agora o seu pedido por apenas
+                            </h3>
+                            
+                            <!-- Preço Centralizado em Linha Única -->
+                            <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#0f525a] w-full">
+                                <span class="text-2xl md:text-3xl font-bold">12x</span>
+                                <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
+                            </div>
+
+                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
+                                Quero aproveitar esta oferta
+                            </button>
+
+                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                <span>7 dias de garantia incondicional</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer Estático ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay dos Botões ---
+            const DELAY_TIME_MS = 10000; 
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+            
+            // --- 3. PLAYER AVANÇADO (Anti-Low Power Mode & Interação Global) ---
+            const vid = document.getElementById('hero-video');
+            const overlay = document.getElementById('hero-video-overlay');
+            const wrapper = document.getElementById('hero-video-wrapper');
+            const topText = overlay.querySelector('.overlay-text-top');
+            const botText = overlay.querySelector('.overlay-text-bottom');
+            const playBtn = document.getElementById('hero-play-btn');
+            const iconPause = document.getElementById('hero-icon-pause');
+            const iconPlay = document.getElementById('hero-icon-play');
+            const fill = document.getElementById('hero-progress-fill');
+            const progressBar = document.getElementById('hero-progress-bar');
+            
+            let isAudioUnlocked = false;
+
+            // Injeção forçada de atributos para o DOM Safari/Chrome
+            vid.muted = true;
+            vid.setAttribute('muted', '');
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
+
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
+                }
+            }
+
+            // Tentativa de Autoplay Silencioso
+            const initPlay = vid.play();
+            if (initPlay !== undefined) {
+                initPlay.then(() => {
+                    atualizarInterface(true);
+                }).catch(() => {
+                    // MODO DE POUCA ENERGIA (Low Power Mode) DETECTADO
+                    topText.innerText = "Vídeo pausado";
+                    botText.innerText = "Toque para iniciar o vídeo";
+                    atualizarInterface(false);
+                });
+            }
+
+            // Hack: AudioContext para destravar hardware de som em qualquer navegador
+            const unlockAudio = (e) => {
+                if (isAudioUnlocked) return;
+                
+                // Evita disparo falso de scroll se o overlay já foi fechado
+                if (overlay.style.display === 'none') return;
+
+                isAudioUnlocked = true;
+
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    ctx.resume();
+                }
+
+                vid.muted = false;
+                vid.currentTime = 0; // O SEGREDO: Volta pro início exato.
+                
+                const p = vid.play();
+                if (p !== undefined) {
+                    p.then(() => {
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    }).catch(() => {
+                        // Segurança extra se o unmute falhar
+                        vid.muted = true;
+                        vid.play();
+                    });
+                } else {
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                }
+
+                // Limpeza de cache de eventos
+                window.removeEventListener('scroll', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+            };
+
+            // Escuta qualquer interação na página para destravar o vídeo
+            window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+            window.addEventListener('click', unlockAudio, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+
+            // Lógica Customizada de Botões Inferiores do Vídeo
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (vid.paused) { vid.play(); atualizarInterface(true); } 
+                    else { vid.pause(); atualizarInterface(false); }
+                });
+            }
+
+            vid.addEventListener('timeupdate', () => {
+                if (vid.duration && fill) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
+            });
+
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const rect = progressBar.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                });
+            }
+
+            // Otimização: Pausa o vídeo se não estiver na tela (Evita gasto de dados/bateria)
+            let isFirstIntersection = true;
+            const vObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if(!vid.paused && isAudioUnlocked) vid.play();
+                } else {
+                    if (!isFirstIntersection && isAudioUnlocked) {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }
+                isFirstIntersection = false;
+            }, { threshold: 0.2 });
+            
+            // Pequeno delay para o Observer não atrapalhar a Promise de Autoplay
+            setTimeout(() => { vObs.observe(vid); }, 1000);
+        });
+    </script>
+</body>
+</html>
+Model 11:44
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Notei um pequeno detalhe: o código HTML que você colou na sua mensagem é o da sua Página de Vendas Principal (Guia Cash), e não o da Página de Upsell (Passo Final) em que estamos trabalhando. Por conta disso, não consegui ver as alterações de texto e cor que você fez localmente no nosso arquivo de Upsell. (Lembre-se de repassar seus textos para este novo código abaixo se tiver mudado alguma frase lá).
+No entanto, eu entendi perfeitamente o seu objetivo! Você colou o código da página principal para me mostrar exatamente como você quer o design da Caixa de Oferta.
+Fiz a engenharia reversa do layout que você enviou e apliquei no nosso Upsell. Aqui está o que foi feito:
+Card de Oferta 100% Branco e Vazado: Removi a divisão (grid) da caixa de oferta. Agora ela é um contêiner totalmente branco e centralizado. Usei margens negativas (-mt-20) na imagem para que ela "vaze" para fora da caixa no topo, ficando idêntica à estrutura do seu HTML principal.
+Caminhos de Imagem Atualizados: A imagem principal do produto agora busca por produto-upsell.png e a imagem da oferta agora é oferta-upsell.png.
+Harmonia de Fundo: Tanto a seção do Produto quanto a seção da Oferta continuam com o fundo bege claro (bg-gray-100), destacando a nova caixa branca da oferta.
+Player de Vídeo Intacto: Toda a inteligência avançada de vídeo que construímos no passo anterior está intocada e funcionando 100%.
+Aqui está o HTML final atualizado para o seu GitHub:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
+        }
+
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 280px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado (Sem borda) -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+            
+            <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO (Fundo bege/cinza claro) -->
+        <section class="bg-gray-100 py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <!-- Texto com a cor Dark Cyan (#0f525a) -->
+                    <span class="text-[#0f525a]">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <!-- Imagem do Produto Atualizada -->
+                        <img src="produto-upsell.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=produto-upsell.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA -->
+        <section class="bg-gray-100 pt-28 pb-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Card 100% Branco sem borda colorida -->
+                <div class="bg-white rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
+                    
+                    <!-- Imagem Vazada com margin-top negativa -->
+                    <div class="flex justify-center -mt-20 md:-mt-24 mb-6">
+                        <img src="oferta-upsell.png" alt="Oferta Especial" class="w-[84%] max-w-[432px] h-auto block drop-shadow-xl" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-upsell.png'">
+                    </div>
+                    
+                    <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                        Adicione agora o seu pedido por apenas
+                    </h3>
+                    
+                    <!-- Preço Centralizado em Linha Única -->
+                    <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#0f525a] w-full">
+                        <span class="text-2xl md:text-3xl font-bold">12x</span>
+                        <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
+                        <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
+                    </div>
+
+                    <button class="w-full max-w-lg mx-auto bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1 block">
+                        Quero aproveitar esta oferta
+                    </button>
+
+                    <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span>7 dias de garantia incondicional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer Estático ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay dos Botões ---
+            const DELAY_TIME_MS = 10000; 
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+            
+            // --- 3. PLAYER AVANÇADO (Anti-Low Power Mode & Interação Global) ---
+            const vid = document.getElementById('hero-video');
+            const overlay = document.getElementById('hero-video-overlay');
+            const wrapper = document.getElementById('hero-video-wrapper');
+            const topText = overlay.querySelector('.overlay-text-top');
+            const botText = overlay.querySelector('.overlay-text-bottom');
+            const playBtn = document.getElementById('hero-play-btn');
+            const iconPause = document.getElementById('hero-icon-pause');
+            const iconPlay = document.getElementById('hero-icon-play');
+            const fill = document.getElementById('hero-progress-fill');
+            const progressBar = document.getElementById('hero-progress-bar');
+            
+            let isAudioUnlocked = false;
+
+            // Injeção forçada de atributos para o DOM Safari/Chrome
+            vid.muted = true;
+            vid.setAttribute('muted', '');
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
+
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
+                }
+            }
+
+            // Tentativa de Autoplay Silencioso
+            const initPlay = vid.play();
+            if (initPlay !== undefined) {
+                initPlay.then(() => {
+                    atualizarInterface(true);
+                }).catch(() => {
+                    // MODO DE POUCA ENERGIA (Low Power Mode) DETECTADO
+                    topText.innerText = "Vídeo pausado";
+                    botText.innerText = "Toque para iniciar o vídeo";
+                    atualizarInterface(false);
+                });
+            }
+
+            // Hack: AudioContext para destravar hardware de som em qualquer navegador
+            const unlockAudio = (e) => {
+                if (isAudioUnlocked) return;
+                
+                // Evita disparo falso de scroll se o overlay já foi fechado
+                if (overlay.style.display === 'none') return;
+
+                isAudioUnlocked = true;
+
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    ctx.resume();
+                }
+
+                vid.muted = false;
+                vid.currentTime = 0; // O SEGREDO: Volta pro início exato.
+                
+                const p = vid.play();
+                if (p !== undefined) {
+                    p.then(() => {
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    }).catch(() => {
+                        // Segurança extra se o unmute falhar
+                        vid.muted = true;
+                        vid.play();
+                    });
+                } else {
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                }
+
+                // Limpeza de cache de eventos
+                window.removeEventListener('scroll', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+            };
+
+            // Escuta qualquer interação na página para destravar o vídeo
+            window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+            window.addEventListener('click', unlockAudio, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+
+            // Lógica Customizada de Botões Inferiores do Vídeo
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (vid.paused) { vid.play(); atualizarInterface(true); } 
+                    else { vid.pause(); atualizarInterface(false); }
+                });
+            }
+
+            vid.addEventListener('timeupdate', () => {
+                if (vid.duration && fill) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
+            });
+
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const rect = progressBar.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                });
+            }
+
+            // Otimização: Pausa o vídeo se não estiver na tela (Evita gasto de dados/bateria)
+            let isFirstIntersection = true;
+            const vObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if(!vid.paused && isAudioUnlocked) vid.play();
+                } else {
+                    if (!isFirstIntersection && isAudioUnlocked) {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }
+                isFirstIntersection = false;
+            }, { threshold: 0.2 });
+            
+            // Pequeno delay para o Observer não atrapalhar a Promise de Autoplay
+            setTimeout(() => { vObs.observe(vid); }, 1000);
+        });
+    </script>
+</body>
+</html>
+Model 12:02
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Compreendido perfeitamente! Peço desculpas por ter sobrescrito suas cores personalizadas. Recoloquei a cor #27c8db (ciano mais claro) na frase "3x mais fácil e leve" e a cor #473bca (violeta) no bloco de preço da oferta.
+Em relação às novas alterações de layout, apliquei exatamente o que você pediu:
+Fundos Brancos: A Seção 2 (Produto) e a Seção 3 (Oferta) agora têm o fundo 100% branco (bg-white).
+Container Bege: O Card da Oferta assumiu o tom bege claro (bg-gray-100), criando um excelente contraste com o fundo branco da página.
+Produto Responsivo e Maior (Mobile): Utilizei um truque matemático do Tailwind (w-[calc(100%+2rem)] -ml-4) exclusivo para o mobile. Isso anula o padding da página, fazendo com que a imagem produto-upsell.png encoste perfeitamente nas margens laterais da tela do celular, mantendo-se elegante no desktop.
+Imagem da Oferta +35%: Aumentei consideravelmente o width e o max-width da oferta-upsell.png. Ajustei também as margens negativas (topo) para compensar o novo tamanho, fazendo com que ela continue "vazando" lindamente para fora da caixa bege.
+Aqui está o código HTML final e atualizado para o seu GitHub:
+code
+Html
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
@@ -335,6 +3200,553 @@
             <div class="max-w-4xl mx-auto">
                 <!-- Card Container Bege (bg-gray-100) -->
                 <div class="bg-gray-100 rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
+                    
+                    <!-- Imagem Vazada MAIOR (+35%) com margin-top negativa ajustada -->
+                    <div class="flex justify-center -mt-28 md:-mt-36 mb-6">
+                        <img src="oferta-upsell.png" alt="Oferta Especial" class="w-[115%] max-w-[580px] h-auto block drop-shadow-xl" onerror="this.src='https://via.placeholder.com/600x400?text=oferta-upsell.png'">
+                    </div>
+                    
+                    <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                        Adicione agora o seu pedido por apenas
+                    </h3>
+                    
+                    <!-- Preço Centralizado em Linha Única restaurado com a cor Violeta (#473bca) -->
+                    <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#473bca] w-full">
+                        <span class="text-2xl md:text-3xl font-bold">12x</span>
+                        <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
+                        <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
+                    </div>
+
+                    <button class="w-full max-w-lg mx-auto bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1 block">
+                        Quero aproveitar esta oferta
+                    </button>
+
+                    <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span>7 dias de garantia incondicional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: FOOTER -->
+        <footer class="bg-gray-900 text-gray-400 py-10 px-4 text-center text-sm">
+            <div class="max-w-4xl mx-auto flex flex-col items-center space-y-4">
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                    <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                </div>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> Vision Educação e Capacitação. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE COMPORTAMENTO DA PÁGINA E PLAYER -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Lógica do Timer Estático ---
+            let timeLeft = 50; 
+            const countdownEl = document.getElementById('countdown');
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                countdownEl.innerText = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.innerText = "0s"; 
+                }
+            }, 1000);
+
+            // --- 2. Lógica do Delay dos Botões ---
+            const DELAY_TIME_MS = 10000; 
+            setTimeout(() => {
+                document.body.classList.remove('lock-scroll');
+                const hiddenElements = document.querySelectorAll('.delayed-content');
+                hiddenElements.forEach(el => el.classList.add('show'));
+            }, DELAY_TIME_MS);
+            
+            // --- 3. PLAYER AVANÇADO (Anti-Low Power Mode & Interação Global) ---
+            const vid = document.getElementById('hero-video');
+            const overlay = document.getElementById('hero-video-overlay');
+            const wrapper = document.getElementById('hero-video-wrapper');
+            const topText = overlay.querySelector('.overlay-text-top');
+            const botText = overlay.querySelector('.overlay-text-bottom');
+            const playBtn = document.getElementById('hero-play-btn');
+            const iconPause = document.getElementById('hero-icon-pause');
+            const iconPlay = document.getElementById('hero-icon-play');
+            const fill = document.getElementById('hero-progress-fill');
+            const progressBar = document.getElementById('hero-progress-bar');
+            
+            let isAudioUnlocked = false;
+
+            // Injeção forçada de atributos para o DOM Safari/Chrome
+            vid.muted = true;
+            vid.setAttribute('muted', '');
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
+
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
+                }
+            }
+
+            // Tentativa de Autoplay Silencioso
+            const initPlay = vid.play();
+            if (initPlay !== undefined) {
+                initPlay.then(() => {
+                    atualizarInterface(true);
+                }).catch(() => {
+                    // MODO DE POUCA ENERGIA (Low Power Mode) DETECTADO
+                    topText.innerText = "Vídeo pausado";
+                    botText.innerText = "Toque para iniciar o vídeo";
+                    atualizarInterface(false);
+                });
+            }
+
+            // Hack: AudioContext para destravar hardware de som em qualquer navegador
+            const unlockAudio = (e) => {
+                if (isAudioUnlocked) return;
+                
+                // Evita disparo falso de scroll se o overlay já foi fechado
+                if (overlay.style.display === 'none') return;
+
+                isAudioUnlocked = true;
+
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    ctx.resume();
+                }
+
+                vid.muted = false;
+                vid.currentTime = 0; // O SEGREDO: Volta pro início exato.
+                
+                const p = vid.play();
+                if (p !== undefined) {
+                    p.then(() => {
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    }).catch(() => {
+                        // Segurança extra se o unmute falhar
+                        vid.muted = true;
+                        vid.play();
+                    });
+                } else {
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                }
+
+                // Limpeza de cache de eventos
+                window.removeEventListener('scroll', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+            };
+
+            // Escuta qualquer interação na página para destravar o vídeo
+            window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+            window.addEventListener('click', unlockAudio, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+
+            // Lógica Customizada de Botões Inferiores do Vídeo
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (vid.paused) { vid.play(); atualizarInterface(true); } 
+                    else { vid.pause(); atualizarInterface(false); }
+                });
+            }
+
+            vid.addEventListener('timeupdate', () => {
+                if (vid.duration && fill) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
+            });
+
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const rect = progressBar.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                });
+            }
+
+            // Otimização: Pausa o vídeo se não estiver na tela (Evita gasto de dados/bateria)
+            let isFirstIntersection = true;
+            const vObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if(!vid.paused && isAudioUnlocked) vid.play();
+                } else {
+                    if (!isFirstIntersection && isAudioUnlocked) {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }
+                isFirstIntersection = false;
+            }, { threshold: 0.2 });
+            
+            // Pequeno delay para o Observer não atrapalhar a Promise de Autoplay
+            setTimeout(() => { vObs.observe(vid); }, 1000);
+        });
+    </script>
+</body>
+</html>
+Model 12:12
+ThinkingThoughts
+Expand to view model thoughts
+
+chevron_right
+Feito! Apliquei as exatas alterações solicitadas para refinar o layout da sua página:
+Imagem do Produto Limpa: Removi as classes de borda (border border-gray-200) e de sombra (shadow-xl) da imagem produto-upsell.png. Agora ela fica 100% "flat" e limpa na tela.
+Inversão de Fundo na Oferta:
+Voltei o fundo da Seção de Oferta inteira para o bege (bg-gray-100).
+Coloquei o Card interno (onde fica o preço e o botão) para ficar totalmente branco (bg-white), criando aquele destaque perfeito da caixa saltando do fundo.
+Aqui está o HTML final atualizado. Basta copiar e colar no seu projeto:
+code
+Html
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Compra - Passo Final</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan3: '#18b6b5',
+                            violet2: '#5c4bdf',
+                            burgundy: '#5a0c13',
+                            yellow: '#FFEA00'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animação da seta apontando para os detalhes */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .animate-bounce-slow {
+            animation: bounce 2s infinite;
+        }
+
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse HORIZONTAL */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); }
+        }
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
+        }
+
+        /* Lógica para exibir o CTA sem quebrar a centralização */
+        .delayed-content:not(.show) {
+            display: none !important;
+        }
+        .delayed-content.show {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body.lock-scroll {
+            overflow: hidden;
+        }
+        
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
+            opacity: 1;
+        }
+        .checkbox-container input:checked + div {
+            background-color: white;
+            animation: none !important;
+            transform: scale(1) !important;
+        }
+        .checkbox-container input:checked + div svg.check-icon {
+            color: #18b6b5;
+        }
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
+        }
+
+        /* =========================================
+           ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
+        ========================================= */
+        
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-enclosure { display: none !important; }
+        video::-webkit-media-controls-panel { display: none !important; }
+        video::-webkit-media-controls-play-button { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; }
+        
+        #hero-video {
+            object-fit: cover;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
+        }
+
+        .video-mute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 210px;
+            max-width: 280px;
+            width: 70%;
+            padding: 18px 22px 20px;
+            background: rgba(0, 145, 150, 0.42);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            z-index: 20;
+            pointer-events: auto;
+            transition: opacity 0.3s ease;
+        }
+        .video-mute-overlay.hidden { display: none; }
+
+        .overlay-text-top, .overlay-text-bottom {
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .mute-icon { width: 52px; height: 52px; }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-play-btn {
+            width: 32px; height: 32px; background: transparent; border: none; border-radius: 0;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            padding: 0; margin-left: 12px; flex-shrink: 0;
+        }
+
+        .video-play-btn svg { width: 16px; height: 16px; fill: #FFFFFF; }
+
+        .video-progress-bar {
+            width: 100%; height: 12px; background: rgba(255,255,255,0.2); border-radius: 0;
+            margin: 0; padding: 0; overflow: hidden; cursor: pointer; position: relative;
+            left: 0; bottom: 0;
+        }
+
+        .video-progress-fill {
+            height: 100%; width: 0%; background: #18b6b5; border-radius: 0;
+            transition: width 0.25s linear;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-white">
+
+    <!-- SEÇÃO 1: VÍDEO E CTA -->
+    <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
+        
+        <!-- Bloco Superior -->
+        <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-4 mt-2">
+            
+            <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
+                <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
+            </h1>
+
+            <div class="w-full relative px-2 max-w-3xl mb-2">
+                <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
+                        <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
+                    </div>
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                        <span id="countdown">50s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-3">
+                <p class="text-lg md:text-xl font-bold text-white drop-shadow-md mt-2">
+                    Enviar acesso ao meu email e whastapp
+                </p>
+
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-1 mb-2">
+                    <input type="checkbox" class="hidden">
+                    
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
+                    </div>
+                </label>
+
+                <p class="text-sm md:text-base font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-5 py-1.5 rounded-full inline-block shadow-lg border border-yellow-400/20">
+                    O seu pedido ainda não está completo!
+                </p>
+            </div>
+        </div>
+
+        <!-- Container do Vídeo Customizado (Sem borda) -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+            
+            <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
+            
+            <div class="video-mute-overlay" id="hero-video-overlay">
+                <p class="overlay-text-top">Seu vídeo já começou</p>
+                <svg class="mute-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M36 14L20 26H8v20h12l16 12V14z" fill="white"/>
+                    <line x1="52" y1="22" x2="68" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                    <line x1="68" y1="22" x2="52" y2="50" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <p class="overlay-text-bottom">Clique para ouvir</p>
+            </div>
+
+            <div class="video-controls" id="hero-video-controls">
+                <button class="video-play-btn" id="hero-play-btn" aria-label="Play/Pause">
+                    <svg id="hero-icon-pause" viewBox="0 0 24 24"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
+                    <svg id="hero-icon-play" viewBox="0 0 24 24" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                </button>
+                <div class="video-progress-bar" id="hero-progress-bar">
+                    <div class="video-progress-fill" id="hero-progress-fill"></div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Botões CTA (Ocultos inicialmente) -->
+        <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
+            
+            <button class="w-[95%] md:w-auto bg-[#21b6c8] border-b-[6px] border-[#006974] hover:bg-[#007b80] hover:border-[#005159] hover:translate-y-[2px] transition-all duration-200 shadow-xl rounded-full py-4 md:py-5 px-6 md:px-12 font-extrabold text-[22px] md:text-[30px] leading-tight text-white text-center">
+                Adicionar o Cash Assistente ao meu pedido
+            </button>
+            
+            <button class="w-[90%] md:w-auto bg-[#cc0000] border-b-[5px] border-[#8b0000] hover:bg-[#a30000] hover:border-[#660000] hover:translate-y-[2px] transition-all duration-200 shadow-lg rounded-full py-3 md:py-4 px-6 md:px-10 font-bold text-[18px] md:text-[22px] leading-tight text-white text-center mt-2">
+                Perder esta oportunidade
+            </button>
+
+            <div class="mt-8 text-white/70 animate-bounce-slow flex flex-col items-center pt-6">
+                <span class="text-sm mb-2 font-medium">Veja mais detalhes abaixo</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
+    <div id="bottom-content" class="delayed-content">
+        
+        <!-- SEÇÃO 2: PRODUTO (FUNDO BRANCO) -->
+        <section class="bg-white py-20 px-4">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
+                    Mantenha o controle de forma <br class="hidden md:block"/>
+                    <!-- Texto com a cor Ciano mais clara restaurada -->
+                    <span class="text-[#27c8db]">3x mais fácil e leve</span>
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- IMAGEM RESPONSIVA MAIOR NO MOBILE (Sem borda e sombra) -->
+                    <div class="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0">
+                        <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
+                        <img src="produto-upsell.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl" onerror="this.src='https://via.placeholder.com/600x400?text=produto-upsell.png'">
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Resumo Diário e semanal com todas as despesas, receitas PJ e PF</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Lançamento de novas receitas ou despesas PF e PJ com 1 única mensagem em (texto, áudio, foto)</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Efetivação rápida de pagamentos e recebimentos</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Clareza e previsibilidade do seu dinheiro</p>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-brand-cyan3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <p class="text-lg text-gray-700 font-medium">Paz de espírito mesmo em semanas corridas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: OFERTA (FUNDO BEGE bg-gray-100) -->
+        <section class="bg-gray-100 pt-36 pb-20 px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Card 100% Branco -->
+                <div class="bg-white rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
                     
                     <!-- Imagem Vazada MAIOR (+35%) com margin-top negativa ajustada -->
                     <div class="flex justify-center -mt-28 md:-mt-36 mb-6">
