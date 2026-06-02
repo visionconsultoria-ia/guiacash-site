@@ -48,13 +48,13 @@
             animation: pulse-zoom 1.5s infinite ease-in-out;
         }
 
-        /* Animação da mãozinha do mouse (Movimento de clique) */
-        @keyframes hand-click {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-3px, -3px) scale(0.95); }
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        @keyframes hand-click-horizontal {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(0.95); } /* Movimenta pra frente na direção do dedo */
         }
-        .animate-hand {
-            animation: hand-click 1.5s infinite ease-in-out;
+        .animate-hand-horizontal {
+            animation: hand-click-horizontal 1.5s infinite ease-in-out;
         }
 
         /* Lógica corrigida para exibir o CTA sem quebrar a centralização (Flexbox) */
@@ -86,8 +86,9 @@
         .checkbox-container input:checked + div svg.check-icon {
             color: #18b6b5; /* Check na cor Ciano */
         }
-        .checkbox-container input:checked ~ svg.hand-icon {
-            display: none; /* Esconde a mãozinha após clicar */
+        /* Esconde a mãozinha após clicar */
+        .checkbox-container input:checked ~ .hand-wrapper {
+            display: none; 
         }
     </style>
 </head>
@@ -104,14 +105,14 @@
                 <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
             </h1>
 
-            <!-- Barra de Progresso (Segundos realocados mais para a direita e preenchimento reduzido para 78% para não cobrir) -->
+            <!-- Barra de Progresso (Visual em 88%, Timer encostado à direita) -->
             <div class="w-full relative px-2 max-w-3xl mb-2">
                 <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
-                    <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 78%;">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 88%;">
                         <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
                     </div>
-                    <!-- Timer colado na direita -->
-                    <div class="absolute right-3 md:right-5 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
+                    <!-- Timer colado na direita (right-2) para evitar corte -->
+                    <div class="absolute right-2 md:right-3 text-white font-black text-2xl md:text-4xl italic tracking-tight drop-shadow-md">
                         <span id="countdown">50s</span>
                     </div>
                 </div>
@@ -136,18 +137,19 @@
                         </svg>
                     </div>
                     
-                    <!-- Ícone de Mouse (Fidedigno Computador) -->
-                    <svg class="hand-icon w-12 h-12 md:w-14 md:h-14 absolute -bottom-8 -right-8 md:-bottom-9 md:-right-9 text-white drop-shadow-[0_4px_6px_rgba(0,0,0,0.8)] pointer-events-none z-10 animate-hand" viewBox="0 0 24 24" fill="white" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Traços do Toque (Click Mágico) -->
-                        <line x1="9.5" y1="2" x2="9.5" y2="4.5" stroke="white" stroke-width="2"/>
-                        <line x1="14" y1="4" x2="12.5" y2="6" stroke="white" stroke-width="2"/>
-                        <line x1="5" y1="4" x2="6.5" y2="6" stroke="white" stroke-width="2"/>
-                        
-                        <!-- Mão de Mouse de Computador (Preenchimento branco, borda preta) -->
-                        <path d="M9.5 13.5V6a2 2 0 0 1 4 0v5"/>
-                        <path d="M13.5 11.5a2 2 0 0 1 4 0v1.5"/>
-                        <path d="M17.5 13a2 2 0 0 1 4 0v3.5a6.5 6.5 0 0 1-6.5 6.5h-2a6.5 6.5 0 0 1-6.15-4.35l-2.1-5.6a1.5 1.5 0 0 1 2.8-1l1.45 3.85V13.5"/>
-                    </svg>
+                    <!-- Ícone de Mouse Horizontal (Totalmente Branco, Rotacionado 90deg, Esquerda -> Direita) -->
+                    <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
+                        <svg class="w-10 h-10 md:w-12 md:h-12 text-white animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Traços do Toque (Click Mágico) -->
+                            <line x1="9.5" y1="2" x2="9.5" y2="4.5" stroke="white" stroke-width="2"/>
+                            <line x1="14" y1="4" x2="12.5" y2="6" stroke="white" stroke-width="2"/>
+                            <line x1="5" y1="4" x2="6.5" y2="6" stroke="white" stroke-width="2"/>
+                            <!-- Mão de Mouse -->
+                            <path d="M9.5 13.5V6a2 2 0 0 1 4 0v5"/>
+                            <path d="M13.5 11.5a2 2 0 0 1 4 0v1.5"/>
+                            <path d="M17.5 13a2 2 0 0 1 4 0v3.5a6.5 6.5 0 0 1-6.5 6.5h-2a6.5 6.5 0 0 1-6.15-4.35l-2.1-5.6a1.5 1.5 0 0 1 2.8-1l1.45 3.85V13.5"/>
+                        </svg>
+                    </div>
                 </label>
 
                 <!-- Texto Amarelo -->
@@ -166,7 +168,6 @@
         </div>
 
         <!-- Botões CTA (Ocultos inicialmente) -->
-        <!-- O bug de não alinhar estava aqui, corrigido através do flex default do Tailwind -->
         <div id="cta-container" class="delayed-content w-full max-w-3xl flex flex-col items-center mt-6 space-y-4 relative z-10 px-2">
             
             <!-- Botão 1 - Formato Pílula, Cor #21b6c8, Texto Grande e Efeito 3D -->
