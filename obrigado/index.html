@@ -48,7 +48,7 @@
             animation: pulse-zoom 1.5s infinite ease-in-out;
         }
 
-        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        /* Animação da mãozinha do mouse HORIZONTAL */
         @keyframes hand-click-horizontal {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(0.95); }
@@ -93,7 +93,7 @@
            ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
         ========================================= */
         
-        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
+        /* HACKS OBRIGATÓRIOS: Oculta o player nativo do iOS/Android */
         video::-webkit-media-controls { display: none !important; }
         video::-webkit-media-controls-enclosure { display: none !important; }
         video::-webkit-media-controls-panel { display: none !important; }
@@ -106,7 +106,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
+            pointer-events: none;
         }
 
         .video-mute-overlay {
@@ -227,8 +227,8 @@
             </div>
         </div>
 
-        <!-- Container do Vídeo Customizado -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
+        <!-- Container do Vídeo Customizado (Sem borda branca) -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
             
             <!-- Atributos Hardcoded para Bypass de iOS/Android -->
             <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
@@ -278,12 +278,13 @@
     <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
     <div id="bottom-content" class="delayed-content">
         
-        <!-- SEÇÃO 2: PRODUTO -->
-        <section class="bg-[#f8f8f8] py-20 px-4">
+        <!-- SEÇÃO 2: PRODUTO (Agora com o fundo bege bg-gray-100) -->
+        <section class="bg-gray-100 py-20 px-4">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
                     Mantenha o controle de forma <br class="hidden md:block"/>
-                    <span class="text-brand-violet2">3x mais fácil e leve</span>
+                    <!-- Texto com a cor Dark Cyan (#0f525a) -->
+                    <span class="text-[#0f525a]">3x mais fácil e leve</span>
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -342,10 +343,11 @@
                                 Adicione agora o seu pedido por apenas
                             </h3>
                             
-                            <div class="text-brand-violet2 mb-8">
-                                <span class="text-2xl font-bold">12x</span>
-                                <span class="text-5xl font-extrabold">R$ 29,90</span>
-                                <span class="text-gray-500 font-medium block mt-1">/ ano</span>
+                            <!-- Preço Centralizado em Linha Única -->
+                            <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#0f525a] w-full">
+                                <span class="text-2xl md:text-3xl font-bold">12x</span>
+                                <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
+                                <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
                             </div>
 
                             <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
@@ -394,7 +396,7 @@
             }, 1000);
 
             // --- 2. Lógica do Delay dos Botões ---
-            const DELAY_TIME_MS = 10000; // Tempo em MS. Ex: 10s. Mude para o tempo do pitch.
+            const DELAY_TIME_MS = 10000; 
             setTimeout(() => {
                 document.body.classList.remove('lock-scroll');
                 const hiddenElements = document.querySelectorAll('.delayed-content');
