@@ -48,7 +48,7 @@
             animation: pulse-zoom 1.5s infinite ease-in-out;
         }
 
-        /* Animação da mãozinha do mouse HORIZONTAL */
+        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
         @keyframes hand-click-horizontal {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(0.95); }
@@ -93,7 +93,7 @@
            ESTILOS DO PLAYER DE VÍDEO CUSTOMIZADO
         ========================================= */
         
-        /* HACKS OBRIGATÓRIOS: Oculta o player nativo do iOS/Android */
+        /* HACKS OBRIGATÓRIOS: Oculta qualquer rastro do player nativo do iOS/Android */
         video::-webkit-media-controls { display: none !important; }
         video::-webkit-media-controls-enclosure { display: none !important; }
         video::-webkit-media-controls-panel { display: none !important; }
@@ -106,7 +106,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            pointer-events: none;
+            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
         }
 
         .video-mute-overlay {
@@ -227,10 +227,9 @@
             </div>
         </div>
 
-        <!-- Container do Vídeo Customizado (Sem borda branca) -->
+        <!-- Container do Vídeo Customizado (Sem borda) -->
         <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
             
-            <!-- Atributos Hardcoded para Bypass de iOS/Android -->
             <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
             
             <div class="video-mute-overlay" id="hero-video-overlay">
@@ -278,19 +277,20 @@
     <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
     <div id="bottom-content" class="delayed-content">
         
-        <!-- SEÇÃO 2: PRODUTO (Agora com o fundo bege bg-gray-100) -->
+        <!-- SEÇÃO 2: PRODUTO (Fundo bege/cinza claro) -->
         <section class="bg-gray-100 py-20 px-4">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
                     Mantenha o controle de forma <br class="hidden md:block"/>
                     <!-- Texto com a cor Dark Cyan (#0f525a) -->
-                    <span class="text-[#21b6c8]">3x mais fácil e leve</span>
+                    <span class="text-[#0f525a]">3x mais fácil e leve</span>
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="relative">
                         <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
-                        <img src="cashia.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem:+cashia.png'">
+                        <!-- Imagem do Produto Atualizada -->
+                        <img src="produto-upsell.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=produto-upsell.png'">
                     </div>
 
                     <div class="space-y-6">
@@ -330,35 +330,35 @@
         </section>
 
         <!-- SEÇÃO 3: OFERTA -->
-        <section class="bg-gray-100 py-20 px-4">
+        <section class="bg-gray-100 pt-28 pb-20 px-4">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
-                    <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="bg-gray-50 flex items-center justify-center p-8">
-                            <img src="oferta-cashia.png" alt="Oferta Especial" class="w-full max-w-sm" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-cashia.png'">
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center items-center text-center">
-                            <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
-                                Adicione agora o seu pedido por apenas
-                            </h3>
-                            
-                            <!-- Preço Centralizado em Linha Única -->
-                            <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#473bca] w-full">
-                                <span class="text-2xl md:text-3xl font-bold">12x</span>
-                                <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
-                                <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
-                            </div>
+                <!-- Card 100% Branco sem borda colorida -->
+                <div class="bg-white rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
+                    
+                    <!-- Imagem Vazada com margin-top negativa -->
+                    <div class="flex justify-center -mt-20 md:-mt-24 mb-6">
+                        <img src="oferta-upsell.png" alt="Oferta Especial" class="w-[84%] max-w-[432px] h-auto block drop-shadow-xl" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-upsell.png'">
+                    </div>
+                    
+                    <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 leading-tight">
+                        Adicione agora o seu pedido por apenas
+                    </h3>
+                    
+                    <!-- Preço Centralizado em Linha Única -->
+                    <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#0f525a] w-full">
+                        <span class="text-2xl md:text-3xl font-bold">12x</span>
+                        <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
+                        <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
+                    </div>
 
-                            <button class="w-full bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1">
-                                Quero aproveitar esta oferta
-                            </button>
+                    <button class="w-full max-w-lg mx-auto bg-gradient-to-r from-brand-cyan3 to-brand-violet2 hover:opacity-90 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transform transition hover:-translate-y-1 block">
+                        Quero aproveitar esta oferta
+                    </button>
 
-                            <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
-                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                <span>7 dias de garantia incondicional</span>
-                            </div>
-                        </div>
+                    <div class="flex items-center justify-center space-x-2 mt-6 text-gray-500 font-medium text-sm">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        <span>7 dias de garantia incondicional</span>
                     </div>
                 </div>
             </div>
