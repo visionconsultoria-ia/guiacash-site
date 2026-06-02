@@ -57,7 +57,7 @@
             animation: hand-click-horizontal 1.5s infinite ease-in-out;
         }
 
-        /* Lógica corrigida para exibir o CTA sem quebrar a centralização (Flexbox) */
+        /* Lógica para exibir o CTA sem quebrar a centralização (Flexbox) */
         .delayed-content:not(.show) {
             display: none !important;
         }
@@ -105,10 +105,10 @@
                 <span class="text-[#27c8db] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
             </h1>
 
-            <!-- Barra de Progresso (Visual em 88%, Timer encostado à direita) -->
+            <!-- Barra de Progresso Responsiva (85% Mobile / 88% Desktop) -->
             <div class="w-full relative px-2 max-w-3xl mb-2">
                 <div class="relative w-full h-[53px] md:h-[70px] border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
-                    <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 88%;">
+                    <div class="h-full bg-white rounded-full flex items-center justify-end w-[85%] md:w-[88%]">
                         <span class="text-[#18b6b5] font-black text-base md:text-2xl pr-3 md:pr-4 tracking-wide">90%</span>
                     </div>
                     <!-- Timer colado na direita (right-2) para evitar corte -->
@@ -137,18 +137,9 @@
                         </svg>
                     </div>
                     
-                    <!-- Ícone de Mouse Horizontal (Totalmente Branco, Rotacionado 90deg, Esquerda -> Direita) -->
+                    <!-- Imagem do Mouse PNG (Substituindo o SVG) -->
                     <div class="hand-wrapper absolute top-1/2 -left-12 md:-left-16 -translate-y-1/2 rotate-90 z-10 pointer-events-none transition-opacity duration-200">
-                        <svg class="w-10 h-10 md:w-12 md:h-12 text-white animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Traços do Toque (Click Mágico) -->
-                            <line x1="9.5" y1="2" x2="9.5" y2="4.5" stroke="white" stroke-width="2"/>
-                            <line x1="14" y1="4" x2="12.5" y2="6" stroke="white" stroke-width="2"/>
-                            <line x1="5" y1="4" x2="6.5" y2="6" stroke="white" stroke-width="2"/>
-                            <!-- Mão de Mouse -->
-                            <path d="M9.5 13.5V6a2 2 0 0 1 4 0v5"/>
-                            <path d="M13.5 11.5a2 2 0 0 1 4 0v1.5"/>
-                            <path d="M17.5 13a2 2 0 0 1 4 0v3.5a6.5 6.5 0 0 1-6.5 6.5h-2a6.5 6.5 0 0 1-6.15-4.35l-2.1-5.6a1.5 1.5 0 0 1 2.8-1l1.45 3.85V13.5"/>
-                        </svg>
+                        <img src="select.png" alt="Cursor de clique" class="w-10 h-10 md:w-12 md:h-12 animate-hand-horizontal drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]" onerror="this.style.display='none'">
                     </div>
                 </label>
 
