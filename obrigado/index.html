@@ -48,7 +48,7 @@
             animation: pulse-zoom 1.5s infinite ease-in-out;
         }
 
-        /* Animação da mãozinha do mouse HORIZONTAL (Esquerda para a Direita) */
+        /* Animação da mãozinha do mouse HORIZONTAL */
         @keyframes hand-click-horizontal {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(0.95); }
@@ -178,7 +178,7 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
+<body class="font-sans antialiased text-gray-800 lock-scroll bg-white">
 
     <!-- SEÇÃO 1: VÍDEO E CTA -->
     <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-6 pb-12 px-3 relative w-full overflow-hidden">
@@ -277,19 +277,20 @@
     <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
     <div id="bottom-content" class="delayed-content">
         
-        <!-- SEÇÃO 2: PRODUTO (Fundo bege/cinza claro) -->
-        <section class="bg-gray-100 py-20 px-4">
+        <!-- SEÇÃO 2: PRODUTO (FUNDO BRANCO) -->
+        <section class="bg-white py-20 px-4">
             <div class="max-w-5xl mx-auto">
                 <h2 class="text-3xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-tight">
                     Mantenha o controle de forma <br class="hidden md:block"/>
-                    <!-- Texto com a cor Dark Cyan (#0f525a) -->
-                    <span class="text-[#0f525a]">3x mais fácil e leve</span>
+                    <!-- Texto com a cor Ciano mais clara restaurada -->
+                    <span class="text-[#27c8db]">3x mais fácil e leve</span>
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div class="relative">
+                    
+                    <!-- IMAGEM RESPONSIVA MAIOR NO MOBILE (Margens Negativas e Width maior) -->
+                    <div class="relative w-[calc(100%+2rem)] -ml-4 md:w-full md:ml-0">
                         <div class="absolute -inset-4 bg-gradient-to-r from-[#18b6b5] to-brand-violet2 opacity-20 blur-xl rounded-full"></div>
-                        <!-- Imagem do Produto Atualizada -->
                         <img src="produto-upsell.png" alt="Dashboard Cash Assistente" class="relative w-full h-auto rounded-2xl shadow-xl border border-gray-200" onerror="this.src='https://via.placeholder.com/600x400?text=produto-upsell.png'">
                     </div>
 
@@ -329,15 +330,15 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 3: OFERTA -->
-        <section class="bg-gray-100 pt-28 pb-20 px-4">
+        <!-- SEÇÃO 3: OFERTA (FUNDO BRANCO) -->
+        <section class="bg-white pt-36 pb-20 px-4">
             <div class="max-w-4xl mx-auto">
-                <!-- Card 100% Branco sem borda colorida -->
-                <div class="bg-white rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
+                <!-- Card Container Bege (bg-gray-100) -->
+                <div class="bg-gray-100 rounded-3xl shadow-2xl px-6 md:px-12 pb-12 text-center border-t border-transparent">
                     
-                    <!-- Imagem Vazada com margin-top negativa -->
-                    <div class="flex justify-center -mt-20 md:-mt-24 mb-6">
-                        <img src="oferta-upsell.png" alt="Oferta Especial" class="w-[84%] max-w-[432px] h-auto block drop-shadow-xl" onerror="this.src='https://via.placeholder.com/400x400?text=oferta-upsell.png'">
+                    <!-- Imagem Vazada MAIOR (+35%) com margin-top negativa ajustada -->
+                    <div class="flex justify-center -mt-28 md:-mt-36 mb-6">
+                        <img src="oferta-upsell.png" alt="Oferta Especial" class="w-[115%] max-w-[580px] h-auto block drop-shadow-xl" onerror="this.src='https://via.placeholder.com/600x400?text=oferta-upsell.png'">
                     </div>
                     
                     <p class="text-gray-500 font-semibold uppercase tracking-wider mb-2">Oferta Exclusiva</p>
@@ -345,8 +346,8 @@
                         Adicione agora o seu pedido por apenas
                     </h3>
                     
-                    <!-- Preço Centralizado em Linha Única -->
-                    <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#0f525a] w-full">
+                    <!-- Preço Centralizado em Linha Única restaurado com a cor Violeta (#473bca) -->
+                    <div class="mb-8 flex items-baseline justify-center space-x-2 text-[#473bca] w-full">
                         <span class="text-2xl md:text-3xl font-bold">12x</span>
                         <span class="text-4xl md:text-5xl font-extrabold tracking-tight">R$ 29,90</span>
                         <span class="text-gray-500 font-medium text-lg md:text-xl">/ ano</span>
