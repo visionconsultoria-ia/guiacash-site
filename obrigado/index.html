@@ -47,6 +47,24 @@
             animation: bounce 2s infinite;
         }
 
+        /* Animação de pulsação do Checkbox */
+        @keyframes pulse-zoom {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+            50% { transform: scale(1.15); box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
+        }
+        .animate-pulse-zoom {
+            animation: pulse-zoom 1.5s infinite ease-in-out;
+        }
+
+        /* Animação da mãozinha do mouse */
+        @keyframes hand-click {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-4px, -4px); }
+        }
+        .animate-hand {
+            animation: hand-click 1.5s infinite ease-in-out;
+        }
+
         /* Ocultar elementos antes do tempo do vídeo */
         .delayed-content {
             display: none;
@@ -64,68 +82,72 @@
             overflow: hidden;
         }
         
-        /* Checkbox Customizado */
-        .checkbox-container input:checked + div svg {
+        /* Checkbox Customizado Lógica */
+        .checkbox-container input:checked + div svg.check-icon {
             opacity: 1;
         }
         .checkbox-container input:checked + div {
             background-color: white;
+            animation: none !important; /* Para o zoom quando clicado */
+            transform: scale(1) !important;
         }
-        .checkbox-container input:checked + div svg {
+        .checkbox-container input:checked + div svg.check-icon {
             color: #18b6b5; /* Check na cor Ciano */
+        }
+        .checkbox-container input:checked ~ svg.hand-icon {
+            display: none; /* Esconde a mãozinha após clicar */
         }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800 lock-scroll bg-[#f8f8f8]">
 
     <!-- SEÇÃO 1: VÍDEO E CTA -->
-    <!-- Fundo totalmente sólido com a cor #0f525a -->
     <section class="bg-[#0f525a] min-h-screen flex flex-col items-center pt-8 pb-16 px-3 relative w-full overflow-hidden">
         
-        <!-- Bloco Superior: Textos, Checkbox e Barra -->
+        <!-- Bloco Superior -->
         <div class="w-full max-w-4xl flex flex-col items-center text-center z-10 mb-8 mt-4">
             
-            <!-- Título Aguarde (Ciano #18b6b5) -->
+            <!-- Título Aguarde -->
             <h1 class="text-3xl md:text-[42px] font-bold text-white mb-8 leading-[1.2] drop-shadow-md">
                 <span class="text-[#18b6b5] uppercase tracking-wide">Aguarde...</span> Já estamos liberando seu acesso ao Guia Cash
             </h1>
 
-            <!-- Checkbox Interativo (Agora em coluna: quadrado em cima, texto em baixo em negrito) -->
-            <label class="checkbox-container flex flex-col items-center justify-center space-y-3 cursor-pointer mb-8 group select-none">
-                <input type="checkbox" class="hidden">
-                <div class="w-8 h-8 md:w-9 md:h-9 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 shadow-md">
-                    <svg class="w-6 h-6 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <!-- Frase em negrito e centralizada -->
-                <span class="text-white text-lg md:text-xl font-bold tracking-wide drop-shadow-sm text-center">
-                    Clique aqui para enviar o acesso ao seu celular
-                </span>
-            </label>
-
-            <!-- Barra de Progresso Estática -->
-            <div class="w-full relative px-2 max-w-3xl">
-                <!-- Retângulo Externo com borda grossa -->
+            <!-- Barra de Progresso (Movida para cá) -->
+            <div class="w-full relative px-2 max-w-3xl mb-10">
                 <div class="relative w-full h-12 md:h-16 border-[4px] border-white rounded-full p-[4px] flex items-center bg-black/20 shadow-xl overflow-hidden">
-                    
-                    <!-- Preenchimento Fixo em 86% (Mais próximo do timer, mas sem cobri-lo) -->
                     <div class="h-full bg-white rounded-full flex items-center justify-end" style="width: 86%;">
                         <span class="text-[#18b6b5] font-black text-sm md:text-xl pr-3 md:pr-4 tracking-wide">90%</span>
                     </div>
-
-                    <!-- Segundos ancorados na extrema direita -->
                     <div class="absolute right-3 md:right-5 text-white font-black text-xl md:text-3xl italic tracking-tight drop-shadow-md">
                         <span id="countdown">50s</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Avisos Pós-Barra -->
-            <div class="mt-8 space-y-2">
-                <p class="text-xl md:text-2xl font-bold text-white drop-shadow-md">
+            <!-- Avisos Pós-Barra e Botão Check -->
+            <div class="flex flex-col items-center space-y-5">
+                
+                <!-- Frase alterada por você -->
+                <p class="text-xl md:text-2xl font-bold text-white drop-shadow-md max-w-2xl">
                     Clique aqui para a compra ser concluída com sucesso e enviada ao seu email e whastapp 
                 </p>
+
+                <!-- Checkbox Interativo (Com Mãozinha e Zoom) -->
+                <label class="checkbox-container relative inline-flex items-center justify-center cursor-pointer group select-none mt-2 mb-4">
+                    <input type="checkbox" class="hidden">
+                    <!-- Quadrado menor com animação de pulsação -->
+                    <div class="w-7 h-7 md:w-8 md:h-8 border-[3px] border-white rounded bg-transparent flex items-center justify-center transition-colors duration-200 animate-pulse-zoom relative z-0">
+                        <svg class="check-icon w-5 h-5 md:w-6 md:h-6 opacity-0 transition-opacity duration-200" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <!-- Ícone de mão de mouse -->
+                    <svg class="hand-icon w-8 h-8 md:w-10 md:h-10 absolute -bottom-5 -right-5 md:-bottom-6 md:-right-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] pointer-events-none z-10 animate-hand" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                        <path fill="currentColor" stroke="#18b6b5" stroke-width="8" stroke-linejoin="round" d="M142,20A38.05,38.05,0,0,0,104,58V108.32L93.75,98.07A38,38,0,0,0,40,151.8l43.51,43.51A78,78,0,0,0,138.67,218H172a62.07,62.07,0,0,0,62-62V110a38,38,0,0,0-76,0v18H142Z"/>
+                    </svg>
+                </label>
+
+                <!-- Frase alterada por você -->
                 <p class="text-xl md:text-[22px] font-black text-brand-yellow uppercase tracking-wide bg-black/30 px-6 py-2 rounded-full inline-block shadow-lg border border-yellow-400/20">
                     O seu pedido ainda não está completo!
                 </p>
@@ -133,8 +155,7 @@
         </div>
 
         <!-- Container do Vídeo -->
-        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10">
-            <!-- Cole aqui o iFrame do seu vídeo -->
+        <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4">
             <div class="w-full h-full flex items-center justify-center text-white/50 bg-gray-900">
                 <p>[ Placeholder do Vídeo 16:9 ]</p>
             </div>
@@ -160,7 +181,7 @@
         </div>
     </section>
 
-    <!-- WRAPPER PARA CONTEÚDO INFERIOR (Oculto inicialmente) -->
+    <!-- WRAPPER PARA CONTEÚDO INFERIOR -->
     <div id="bottom-content" class="delayed-content">
         
         <!-- SEÇÃO 2: PRODUTO -->
@@ -281,7 +302,6 @@
 
             // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
             // Tempo em milissegundos que a página deve travar antes de mostrar a oferta
-            // Para testes está em 10000ms (10 segundos). Ajuste para o tempo do seu vídeo.
             const DELAY_TIME_MS = 10000; 
 
             setTimeout(() => {
