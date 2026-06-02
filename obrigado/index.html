@@ -106,7 +106,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            pointer-events: none; /* Previne que o clique dispare ações nativas da tag video */
+            pointer-events: none; /* Previne que o clique dispare ações nativas de zoom da tag video */
         }
 
         .video-mute-overlay {
@@ -115,7 +115,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             min-width: 210px;
-            max-width: 270px;
+            max-width: 280px;
             width: 70%;
             padding: 18px 22px 20px;
             background: rgba(0, 145, 150, 0.42);
@@ -230,7 +230,8 @@
         <!-- Container do Vídeo Customizado -->
         <div class="w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] aspect-video border-[4px] border-white/10 relative z-10 mt-4 cursor-pointer" id="hero-video-wrapper">
             
-            <video id="hero-video" src="upsell.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>
+            <!-- Atributos Hardcoded para Bypass de iOS/Android -->
+            <video id="hero-video" src="upsell.mp4" autoplay muted defaultMuted playsinline webkit-playsinline loop preload="auto"></video>
             
             <div class="video-mute-overlay" id="hero-video-overlay">
                 <p class="overlay-text-top">Seu vídeo já começou</p>
@@ -378,7 +379,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. Lógica do Timer de Contagem Regressiva Estático (Top) ---
+            // --- 1. Lógica do Timer Estático ---
             let timeLeft = 50; 
             const countdownEl = document.getElementById('countdown');
 
@@ -392,186 +393,139 @@
                 }
             }, 1000);
 
-            // --- 2. Lógica do Delay do Botão (Pitch de Vendas) ---
-            // Tempo em MS para liberar os CTAs. Ajuste conforme seu vídeo.
-            const DELAY_TIME_MS = 10000; 
+            // --- 2. Lógica do Delay dos Botões ---
+            const DELAY_TIME_MS = 10000; // Tempo em MS. Ex: 10s. Mude para o tempo do pitch.
             setTimeout(() => {
                 document.body.classList.remove('lock-scroll');
                 const hiddenElements = document.querySelectorAll('.delayed-content');
                 hiddenElements.forEach(el => el.classList.add('show'));
             }, DELAY_TIME_MS);
-        });
+            
+            // --- 3. PLAYER AVANÇADO (Anti-Low Power Mode & Interação Global) ---
+            const vid = document.getElementById('hero-video');
+            const overlay = document.getElementById('hero-video-overlay');
+            const wrapper = document.getElementById('hero-video-wrapper');
+            const topText = overlay.querySelector('.overlay-text-top');
+            const botText = overlay.querySelector('.overlay-text-bottom');
+            const playBtn = document.getElementById('hero-play-btn');
+            const iconPause = document.getElementById('hero-icon-pause');
+            const iconPlay = document.getElementById('hero-icon-play');
+            const fill = document.getElementById('hero-progress-fill');
+            const progressBar = document.getElementById('hero-progress-bar');
+            
+            let isAudioUnlocked = false;
 
-        // --- 3. Lógica Avançada do Player Customizado (Totalmente Blindado) ---
-        (function() {
-            function setupVideoPlayer(config) {
-                var vid         = document.getElementById(config.videoId);
-                var overlay     = document.getElementById(config.overlayId);
-                var wrapper     = document.getElementById(config.wrapperId);
-                var playBtn     = document.getElementById(config.playBtnId);
-                var fill        = document.getElementById(config.fillId);
-                var progressBar = document.getElementById(config.progressBarId);
-                var iconPause   = document.getElementById(config.iconPauseId);
-                var iconPlay    = document.getElementById(config.iconPlayId);
+            // Injeção forçada de atributos para o DOM Safari/Chrome
+            vid.muted = true;
+            vid.setAttribute('muted', '');
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
 
-                if (!vid) return;
-
-                // Força absoluta dos atributos de Mudo para contornar bloqueios iOS/Android
-                vid.muted = true;
-                vid.defaultMuted = true;
-                vid.setAttribute('muted', '');
-                vid.setAttribute('playsinline', '');
-                vid.setAttribute('webkit-playsinline', '');
-
-                function atualizarInterface(playing) {
-                    if (iconPause && iconPlay) {
-                        iconPause.style.display = playing ? '' : 'none';
-                        iconPlay.style.display  = playing ? 'none' : '';
-                    }
-                }
-
-                // Autoplay persistente com load() explícito
-                function forceAutoplay() {
-                    vid.play().then(function() {
-                        atualizarInterface(true);
-                    }).catch(function(err) {
-                        setTimeout(forceAutoplay, 500);
-                    });
-                }
-
-                vid.load();
-                // Pequeno delay inicial para a engine de renderização do navegador entender o atributo muted
-                setTimeout(forceAutoplay, 50); 
-
-                vid.addEventListener('timeupdate', function() {
-                    if (vid.duration && fill) {
-                        fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
-                    }
-                });
-
-                if (progressBar) {
-                    progressBar.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        var rect = progressBar.getBoundingClientRect();
-                        var ratio = (e.clientX - rect.left) / rect.width;
-                        if (vid.duration) vid.currentTime = ratio * vid.duration;
-                    });
-                }
-
-                if (playBtn) {
-                    playBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        if (vid.paused) {
-                            vid.play();
-                            atualizarInterface(true);
-                        } else {
-                            vid.pause();
-                            atualizarInterface(false);
-                        }
-                    });
-                }
-
-                // Wrapper Click (Clique em qualquer lugar da caixa de vídeo)
-                if (wrapper) {
-                    wrapper.addEventListener('click', function(e) {
-                        if (playBtn && (e.target === playBtn || playBtn.contains(e.target))) return;
-                        if (progressBar && (e.target === progressBar || progressBar.contains(e.target))) return;
-                        
-                        if (overlay && overlay.style.display !== 'none') {
-                            vid.muted = false;
-                            vid.currentTime = 0; // Reseta pro início após tirar do mudo
-                            vid.play().catch(function(){});
-                            overlay.style.display = 'none';
-                            atualizarInterface(true);
-                            if (config.unmuteOnInteraction) removeGlobalInteractionListeners();
-                            return; 
-                        }
-
-                        if (vid.paused) {
-                            vid.play();
-                            atualizarInterface(true);
-                        } else {
-                            vid.pause();
-                            atualizarInterface(false);
-                        }
-                    });
-                }
-
-                // Proteção do Intersection Observer para não travar o carregamento inicial
-                var isFirstIntersection = true;
-                var vObs = new IntersectionObserver(function(entries) {
-                    if (entries[0].isIntersecting) {
-                        forceAutoplay();
-                    } else {
-                        if (!isFirstIntersection) {
-                            vid.pause();
-                            atualizarInterface(false);
-                        }
-                    }
-                    isFirstIntersection = false;
-                }, { threshold: 0.2 });
-                vObs.observe(vid);
-
-                // UX Global: Tentar desmutar e resetar o vídeo ao primeiro sinal de interação com a página
-                var scrollAttempted = false;
-
-                function removeGlobalInteractionListeners() {
-                    window.removeEventListener('scroll', tryGlobalUnmute);
-                    window.removeEventListener('click', tryGlobalUnmute);
-                    window.removeEventListener('touchstart', tryGlobalUnmute);
-                    window.removeEventListener('touchend', tryGlobalUnmute); 
-                    window.removeEventListener('keydown', tryGlobalUnmute);
-                }
-
-                function tryGlobalUnmute(e) {
-                    if (!overlay || overlay.style.display === 'none') {
-                        removeGlobalInteractionListeners();
-                        return;
-                    }
-                    if (e.type === 'scroll' && scrollAttempted) return;
-                    if (e.type === 'scroll') scrollAttempted = true;
-
-                    vid.muted = false;
-                    var p = vid.play();
-                    
-                    if (p !== undefined) {
-                        p.then(function() {
-                            vid.currentTime = 0; // Volta para o segundo zero
-                            overlay.style.display = 'none';
-                            atualizarInterface(true);
-                            removeGlobalInteractionListeners();
-                        }).catch(function() {
-                            vid.muted = true; 
-                            setTimeout(function() {
-                                vid.play().catch(function(){});
-                            }, 50);
-                        });
-                    }
-                }
-
-                if (config.unmuteOnInteraction) {
-                    window.addEventListener('scroll', tryGlobalUnmute, { passive: true });
-                    window.addEventListener('click', tryGlobalUnmute, { passive: true });
-                    window.addEventListener('touchstart', tryGlobalUnmute, { passive: true });
-                    window.addEventListener('touchend', tryGlobalUnmute, { passive: true }); 
-                    window.addEventListener('keydown', tryGlobalUnmute, { passive: true });
+            function atualizarInterface(playing) {
+                if (iconPause && iconPlay) {
+                    iconPause.style.display = playing ? '' : 'none';
+                    iconPlay.style.display  = playing ? 'none' : '';
                 }
             }
 
-            // Iniciar o Player no Upsell
-            setupVideoPlayer({
-                videoId: 'hero-video',
-                overlayId: 'hero-video-overlay',
-                wrapperId: 'hero-video-wrapper',
-                playBtnId: 'hero-play-btn',
-                fillId: 'hero-progress-fill',
-                progressBarId: 'hero-progress-bar',
-                iconPauseId: 'hero-icon-pause',
-                iconPlayId: 'hero-icon-play',
-                unmuteOnInteraction: true 
+            // Tentativa de Autoplay Silencioso
+            const initPlay = vid.play();
+            if (initPlay !== undefined) {
+                initPlay.then(() => {
+                    atualizarInterface(true);
+                }).catch(() => {
+                    // MODO DE POUCA ENERGIA (Low Power Mode) DETECTADO
+                    topText.innerText = "Vídeo pausado";
+                    botText.innerText = "Toque para iniciar o vídeo";
+                    atualizarInterface(false);
+                });
+            }
+
+            // Hack: AudioContext para destravar hardware de som em qualquer navegador
+            const unlockAudio = (e) => {
+                if (isAudioUnlocked) return;
+                
+                // Evita disparo falso de scroll se o overlay já foi fechado
+                if (overlay.style.display === 'none') return;
+
+                isAudioUnlocked = true;
+
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const ctx = new AudioContext();
+                    ctx.resume();
+                }
+
+                vid.muted = false;
+                vid.currentTime = 0; // O SEGREDO: Volta pro início exato.
+                
+                const p = vid.play();
+                if (p !== undefined) {
+                    p.then(() => {
+                        overlay.style.display = 'none';
+                        atualizarInterface(true);
+                    }).catch(() => {
+                        // Segurança extra se o unmute falhar
+                        vid.muted = true;
+                        vid.play();
+                    });
+                } else {
+                    overlay.style.display = 'none';
+                    atualizarInterface(true);
+                }
+
+                // Limpeza de cache de eventos
+                window.removeEventListener('scroll', unlockAudio);
+                window.removeEventListener('click', unlockAudio);
+                window.removeEventListener('touchstart', unlockAudio);
+            };
+
+            // Escuta qualquer interação na página para destravar o vídeo
+            window.addEventListener('scroll', unlockAudio, { once: true, passive: true });
+            window.addEventListener('click', unlockAudio, { once: true, passive: true });
+            window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
+
+            // Lógica Customizada de Botões Inferiores do Vídeo
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (vid.paused) { vid.play(); atualizarInterface(true); } 
+                    else { vid.pause(); atualizarInterface(false); }
+                });
+            }
+
+            vid.addEventListener('timeupdate', () => {
+                if (vid.duration && fill) {
+                    fill.style.width = ((vid.currentTime / vid.duration) * 100) + '%';
+                }
             });
 
-        })();
+            if (progressBar) {
+                progressBar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const rect = progressBar.getBoundingClientRect();
+                    const ratio = (e.clientX - rect.left) / rect.width;
+                    if (vid.duration) vid.currentTime = ratio * vid.duration;
+                });
+            }
+
+            // Otimização: Pausa o vídeo se não estiver na tela (Evita gasto de dados/bateria)
+            let isFirstIntersection = true;
+            const vObs = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    if(!vid.paused && isAudioUnlocked) vid.play();
+                } else {
+                    if (!isFirstIntersection && isAudioUnlocked) {
+                        vid.pause();
+                        atualizarInterface(false);
+                    }
+                }
+                isFirstIntersection = false;
+            }, { threshold: 0.2 });
+            
+            // Pequeno delay para o Observer não atrapalhar a Promise de Autoplay
+            setTimeout(() => { vObs.observe(vid); }, 1000);
+        });
     </script>
 </body>
 </html>
